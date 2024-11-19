@@ -1,0 +1,124 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
+import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
+import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
+import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
+import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/text_field.dart';
+import 'package:crm_system/src/utilities/image_path.dart';
+import 'package:crm_system/src/utilities/strings.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+class SignUpStep4 extends StatefulWidget {
+  const SignUpStep4({super.key});
+
+  @override
+  _SignUpStep4State createState() => _SignUpStep4State();
+}
+
+class _SignUpStep4State extends State<SignUpStep4> {
+  List<Widget> textFields = [
+    const TextInputField(hintText: memberMailHint).py8(),
+  ];
+
+  void _addTextField() {
+    setState(() {
+      textFields.add(const TextInputField(hintText: memberMailHint).py8());
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: VStack(
+        [
+          const AuthTopSide(),
+          
+
+          VStack(
+            [
+              "STEP 4/4"
+                  .text
+                  .bold
+                  .size(14)
+                  .color(AppColors.blue)
+                  .makeCentered(),
+              16.heightBox,
+              invite.text.bold.size(18).makeCentered(),
+              16.heightBox,
+              memberMail.text.bold
+                  .size(14)
+                  .color(AppColors.grey)
+                  .make()
+                  .objectTopLeft(),
+              8.heightBox,
+
+              ...textFields,
+
+              24.heightBox,
+              HStack([
+                SvgPicture.asset(addSvg),
+                SizedBox(width: 8),
+                Text(
+                  addMember,
+                  style: AppTextStyle.semiboldText(size: 16, color: AppColors.blue),
+                ),
+              ]).onTap(() {
+                _addTextField(); // Add a new text field when tapped
+              }),
+
+              16.heightBox,
+            ],
+          )
+              .box
+              .white
+              .rounded
+              .shadowLg
+              .p16
+              .margin(const EdgeInsets.symmetric(horizontal: 24))
+              .make(),
+
+          24.heightBox,
+
+          HStack(
+            [
+              Buttons(
+                ontap: () {
+                  Navigator.pop(context);
+                },
+                label: 'Previous',
+                length: 145,
+                color: AppColors.bgWhite,
+                back: true,
+                textColor: AppColors.blue,
+              ),
+              const Spacer(),
+              Buttons(
+                ontap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const SignIn();
+                    },
+                  ));
+                },
+                label: 'Next Step',
+                length: 145,
+                forward: true,
+                textColor: AppColors.white,
+              ),
+            ],
+          ).px24(),
+          16.heightBox,
+        ],
+      )
+          .scrollVertical()
+          .box
+          .height(double.infinity)
+          .color(AppColors.bgWhite)
+          .make(),
+    );
+  }
+}
