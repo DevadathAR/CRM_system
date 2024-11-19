@@ -100,7 +100,7 @@ class _SignUpStep4State extends State<SignUpStep4> {
                 ontap: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return const SignIn();
+                      return const SuccessPage();
                     },
                   ));
                 },
