@@ -7,6 +7,7 @@ import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
+import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,9 @@ class DashBoard extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.backgroindGrey2,
+      drawer: const AppDrawerWidget(),
+      drawerEnableOpenDragGesture: true, // Disables swipe gesture
+
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
@@ -43,7 +47,7 @@ class DashBoard extends StatelessWidget {
         child: Column(
           children: [
             // AppBar Section
-            const custumAppBar(),
+            const CustumAppBar(),
             // Welcome Text Section
             Expanded(
               child: ListView(

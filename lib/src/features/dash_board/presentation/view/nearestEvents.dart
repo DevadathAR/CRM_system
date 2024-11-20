@@ -32,7 +32,7 @@ class NearesteventsPage extends StatelessWidget {
         child: Column(
           children: [
             // AppBar Section
-            const custumAppBar(),
+            const CustumAppBar(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

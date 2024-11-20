@@ -35,7 +35,7 @@ class _EmployeesState extends State<Employees> {
       body: SafeArea(
         child: VStack(
           [
-            const custumAppBar(),
+            const CustumAppBar(),
             24.heightBox,
             'Employees (28)'
                 .text
@@ -47,7 +47,7 @@ class _EmployeesState extends State<Employees> {
             8.heightBox,
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 24),
-              padding: const EdgeInsets.all( 8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(500),
                 color: AppColors.tabGrey,
@@ -97,18 +97,20 @@ class _EmployeesState extends State<Employees> {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-        Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: size.width*.4,
+        width: size.width * .4,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           color: isSelected ? AppColors.blue : Colors.transparent,
         ),
-        child: title.text.color(isSelected ? AppColors.white : AppColors.black).makeCentered(),
+        child: title.text
+            .color(isSelected ? AppColors.white : AppColors.black)
+            .makeCentered(),
       ).expand(), // Makes tabs equally spaced
     );
   }
