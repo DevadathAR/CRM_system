@@ -16,7 +16,11 @@ class custumAppBar extends StatelessWidget {
         child: AppBar(
           leading: Padding(
             padding: const EdgeInsets.all(8.0), // Add padding to logo
-            child: SvgPicture.asset(logoSvg,width: 30,height: 30,),
+            child: SvgPicture.asset(
+              logoSvg,
+              width: 30,
+              height: 30,
+            ),
           ),
           actions: [
             // SVG icon for search
@@ -33,8 +37,8 @@ class custumAppBar extends StatelessWidget {
             ),
             // SVG icon for more options
             IconButton(
-              icon: const CircleAvatar(
-                child: Icon(Icons.person),
+              icon: CircleAvatar(
+                child: Image.asset(dp1png),
               ),
               onPressed: () {},
             ),

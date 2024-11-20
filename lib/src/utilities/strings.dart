@@ -29,6 +29,10 @@ const smsText = '''SMS was sent to your number
 +1 345 673-56-67 
 It will be valid for 01:25''';
 
+const high = "High";
+const low = "Low";
+const medium = "Medium";
+
 const contrycode = [
   '+1',
   '+7',
