@@ -1,4 +1,5 @@
 import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/common_widget/userInfo.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -11,27 +12,14 @@ class DataBox extends StatelessWidget {
     return VStack(
       crossAlignment: CrossAxisAlignment.stretch,
       [
-        HStack(
+        const HStack(
           [
-            Image.asset(
-              dp1png,
-              scale: 2,
-            ),
-            16.widthBox,
-            VStack(
-              [
-                'Evan Yates'.text.size(16).color(AppColors.black).bold.make(),
-                8.heightBox,
-                'evanyates@gmail.com'
-                    .text
-                    .size(14)
-                    .color(AppColors.grey)
-                    .make(),
-              ],
-              crossAlignment: CrossAxisAlignment.start,
-            ),
-            const Spacer(),
-            const Icon(Icons.more_vert_sharp)
+            UserInfo(
+                name: 'Evan Yates',
+                role: 'evanyates@gmail.com',
+                avatar: dp1png),
+            Spacer(),
+            Icon(Icons.more_vert_sharp)
           ],
           crossAlignment: CrossAxisAlignment.start,
         ),
@@ -46,7 +34,11 @@ class DataBox extends StatelessWidget {
           ],
           alignment: MainAxisAlignment.spaceBetween,
         ),
-        _infoBox(label: 'Position', datum: 'UI/UX Designer',isbox: true, level: 'Middle')
+        _infoBox(
+            label: 'Position',
+            datum: 'UI/UX Designer',
+            isbox: true,
+            level: 'Middle')
       ],
       alignment: MainAxisAlignment.spaceAround,
     )
@@ -58,25 +50,29 @@ class DataBox extends StatelessWidget {
         .margin(const EdgeInsets.symmetric(horizontal: 20, vertical: 12))
         .height(250)
         .make();
-  
   }
-   Widget _infoBox(
-      {required String label, required String datum, String? level,bool isbox =  false}) {
+
+  Widget _infoBox(
+      {required String label,
+      required String datum,
+      String? level,
+      bool isbox = false}) {
     return VStack(
       [
         label.text.size(14).color(AppColors.grey).make(),
         HStack([
           datum.text.size(16).color(AppColors.black).make(),
-          if(isbox)
-          Container(margin: EdgeInsets.symmetric(horizontal: 8),
-              height: 20,
-              width: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                color: AppColors.white,
-                border: Border.all(color: AppColors.grey),
-              ),
-              child: level?.text.color(AppColors.grey).makeCentered())
+          if (isbox)
+            Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                height: 20,
+                width: 50,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  color: AppColors.white,
+                  border: Border.all(color: AppColors.grey),
+                ),
+                child: level?.text.color(AppColors.grey).makeCentered())
         ]),
       ],
       crossAlignment: CrossAxisAlignment.start,

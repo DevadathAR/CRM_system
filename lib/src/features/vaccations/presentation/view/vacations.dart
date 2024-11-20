@@ -1,5 +1,6 @@
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
+import 'package:crm_system/src/utilities/common_widget/userInfo.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:flutter/material.dart';
@@ -30,15 +31,14 @@ class VacationsPage extends StatelessWidget {
             const custumAppBar(),
             24.heightBox,
             vacations.text
-                    .size(36)
-                    .color(AppColors.black)
-                    .bold
-                    .make()
-                    .pSymmetric(h: 24),
-                8.heightBox,
+                .size(36)
+                .color(AppColors.black)
+                .bold
+                .make()
+                .pSymmetric(h: 24),
+            8.heightBox,
             VStack(
               [
-                
                 ...List.generate(8, (_) => _personDataBox()),
               ],
             ).scrollVertical().expand(),
@@ -51,32 +51,19 @@ class VacationsPage extends StatelessWidget {
   Widget _personDataBox() {
     return VStack(
       [
-        HStack(
+        const HStack(
           [
-            Image.asset(
-              dp1png,
-              scale: 2,
-            ),
-            16.widthBox,
-            VStack(
-              [
-                'Evan Yates'.text.size(16).color(AppColors.black).bold.make(),
-                8.heightBox,
-                'evanyates@gmail.com'
-                    .text
-                    .size(14)
-                    .color(AppColors.grey)
-                    .make(),
-              ],
-              crossAlignment: CrossAxisAlignment.start,
-            ),
+            UserInfo(
+                name: 'Evan Yates', role: 'evanyates@gmail.com', avatar: dp1png)
           ],
         ),
         const Divider(),
         HStack(
           [
-            _infoBox(label: 'Vacations', datum: '15'),Spacer(),
-            _infoBox(label: 'Sick Leave', datum: '3'),Spacer(),
+            _infoBox(label: 'Vacations', datum: '15'),
+            const Spacer(),
+            _infoBox(label: 'Sick Leave', datum: '3'),
+            const Spacer(),
             _infoBox(label: 'Work remotely', datum: '50'),
           ],
           alignment: MainAxisAlignment.spaceBetween,

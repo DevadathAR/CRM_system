@@ -1,6 +1,4 @@
-import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
-import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
-import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
+
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +13,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         debugShowCheckedModeBanner: false, 
-        home: Employees());
+        home: VacationsPage());
   }
 }
