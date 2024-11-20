@@ -46,6 +46,7 @@ class custumAppBar extends StatelessWidget {
           .margin(const EdgeInsets.all(16)) // Add margin around the AppBar
           .color(Colors.white) // Background color
           .withRounded(value: 24) // Rounded corners
+          .shadow
           .make(),
     );
   }

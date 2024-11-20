@@ -22,6 +22,7 @@ const members = 'How many people in your team?';
 const validfon = 'Valid your phone';
 const firmname = "Your Company's Name";
 const firmnameHint = "Company's Name";
+const vacations = 'Vacations';
 const businessDir = 'Business Direction';
 const serviceReason = 'Why will you use the service?';
 const smsText = '''SMS was sent to your number

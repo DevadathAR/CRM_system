@@ -8,6 +8,7 @@ class AppColors {
   static Color bluebox = const Color.fromARGB(255, 244, 249, 253);
   static Color grey = const Color.fromARGB(255, 125, 133, 146);
   static Color shadowGrey = const Color.fromARGB(26, 196, 203, 214);
+  static Color tabGrey = const Color.fromARGB(255, 230,237,245);
   static Color check = const Color.fromARGB(255, 218, 233, 7);
   static Color primaryBackGround = const Color(0xFFF4F9FD);
   static Color textGrey1 = const Color(0xFF7D8592);

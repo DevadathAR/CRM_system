@@ -1,5 +1,7 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
+import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
+import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-debugShowCheckedModeBanner: false,      home: DashBoard()
-    );
+        debugShowCheckedModeBanner: false, 
+        home: Employees());
   }
 }
