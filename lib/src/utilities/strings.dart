@@ -29,6 +29,13 @@ const smsText = '''SMS was sent to your number
 +1 345 673-56-67 
 It will be valid for 01:25''';
 
+const backlog = '''Backlog
+Task''';
+const taskProgress = '''Task
+in Progress''';
+const taskReview = '''Task
+in Review''';
+
 const contrycode = [
   '+1',
   '+7',

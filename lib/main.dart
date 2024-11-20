@@ -1,5 +1,6 @@
 
-import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
+import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
+import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +14,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         debugShowCheckedModeBanner: false, 
-        home: VacationsPage());
+        home: EmployessProfile());
   }
 }
