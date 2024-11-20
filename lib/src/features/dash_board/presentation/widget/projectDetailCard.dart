@@ -99,6 +99,7 @@ class ProjectCard extends StatelessWidget {
           10.heightBox,
           // tasks row
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -109,6 +110,7 @@ class ProjectCard extends StatelessWidget {
                       .textStyle(AppTextStyle.regularText(
                           size: 14, color: AppColors.textGrey2))
                       .make(),
+                  10.heightBox,
                   "$allTasks"
                       .text
                       .textStyle(AppTextStyle.boldText(size: 16))
@@ -123,15 +125,19 @@ class ProjectCard extends StatelessWidget {
                       .textStyle(AppTextStyle.regularText(
                           size: 14, color: AppColors.textGrey2))
                       .make(),
+                  10.heightBox,
                   "$activeTasks"
                       .text
                       .textStyle(AppTextStyle.boldText(size: 16))
                       .make(),
                 ],
               ),
-              _buildAssigneeSection(
-                imageUrl: dp1png,
-              )
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _buildAssigneeSection(imageUrl: dp1png),
+                ],
+              ),
             ],
           ),
         ],
@@ -147,8 +153,8 @@ class ProjectCard extends StatelessWidget {
         return Positioned(
           left: left,
           child: SizedBox(
-            width: 24,
-            height: 24,
+            width: 30,
+            height: 30,
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle, // Make it circular
@@ -182,8 +188,8 @@ class ProjectCard extends StatelessWidget {
         10.heightBox,
         // Wrap the Stack with a SizedBox to control the size and prevent infinite size errors
         SizedBox(
-          height: 50, // Control the height of the stack container
-          width: 70, // Ensure there's enough width to hold the images
+          height: 45, // Control the height of the stack container
+          width: 110, // Ensure there's enough width to hold the images
           child: Stack(
             alignment: Alignment.topCenter,
             clipBehavior: Clip.none, // Ensure that images don't get clipped

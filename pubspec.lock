@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.0"
-  args:
-    dependency: transitive
-    description:
-      name: args
-      sha256: bf9f5caeea8d8fe6721a9c358dd8a5c1947b27f1cfaa18b39c301273594919e6
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.0"
   async:
     dependency: transitive
     description:
@@ -25,14 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  auto_size_text_pk:
-    dependency: transitive
-    description:
-      name: auto_size_text_pk
-      sha256: ced55de5336fa7f438c1f5a9aa234e25d7a120c1d40d376a7cdc2af28cdb6995
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   auto_size_text_pk:
     dependency: transitive
     description:
@@ -150,14 +134,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.14"
-  flutter_svg:
-    dependency: "direct main"
-    description:
-      name: flutter_svg
-      sha256: "578bd8c508144fdaffd4f77b8ef2d8c523602275cd697cc3db284dbd762ef4ce"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.14"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -258,35 +234,6 @@ packages:
     version: "0.2.1+1"
   intl:
     dependency: "direct main"
-    description:
-      name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.19.0"
-  flutter_web_plugins:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  http:
-    dependency: transitive
-    description:
-      name: http
-      sha256: b9c29a161230ee03d3ccf545097fccd9b87a5264228c5d348202e0f0c28f9010
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.2"
-  http_parser:
-    dependency: transitive
-    description:
-      name: http_parser
-      sha256: "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.2"
-  intl:
-    dependency: transitive
     description:
       name: intl
       sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
@@ -413,22 +360,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      sha256: "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
-  petitparser:
-    dependency: transitive
-    description:
-      name: petitparser
-      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -514,38 +445,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.15"
-  typed_data:
-    dependency: transitive
-    description:
-      name: typed_data
-      sha256: f9049c039ebfeb4cf7a7104a675823cd72dba8297f264b6637062516699fa006
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
-  vector_graphics:
-    dependency: transitive
-    description:
-      name: vector_graphics
-      sha256: "773c9522d66d523e1c7b25dfb95cc91c26a1e17b107039cfe147285e92de7878"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.14"
-  vector_graphics_codec:
-    dependency: transitive
-    description:
-      name: vector_graphics_codec
-      sha256: "2430b973a4ca3c4dbc9999b62b8c719a160100dcbae5c819bae0cacce32c9cdb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.12"
-  vector_graphics_compiler:
-    dependency: transitive
-    description:
-      name: vector_graphics_compiler
-      sha256: ab9ff38fc771e9ee1139320adbe3d18a60327370c218c60752068ebee4b49ab1
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.15"
   vector_math:
     dependency: transitive
     description:
@@ -566,10 +465,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.4"
+    version: "14.2.5"
   vxstate:
     dependency: transitive
     description:
