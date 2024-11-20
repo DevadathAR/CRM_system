@@ -35,7 +35,7 @@ class _EmployeesState extends State<Employees> {
       body: SafeArea(
         child: VStack(
           [
-            const custumAppBar(),
+            const CustumAppBar(),
             24.heightBox,
             'Employees (28)'
                 .text

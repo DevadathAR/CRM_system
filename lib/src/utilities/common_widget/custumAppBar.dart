@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class custumAppBar extends StatelessWidget {
-  const custumAppBar({
+class CustumAppBar extends StatelessWidget {
+  const CustumAppBar({
     super.key,
   });
 
@@ -15,8 +15,15 @@ class custumAppBar extends StatelessWidget {
       child: VxBox(
         child: AppBar(
           leading: Padding(
-            padding: const EdgeInsets.all(8.0), // Add padding to logo
-            child: SvgPicture.asset(logoSvg,width: 30,height: 30,),
+              padding: const EdgeInsets.all(8.0), // Add padding to logo
+              child: SvgPicture.asset(
+                logoSvg,
+                width: 30,
+                height: 30,
+              )).onTap(
+            () {
+              Scaffold.of(context).openDrawer(); // Open the Drawer
+            },
           ),
           actions: [
             // SVG icon for search
@@ -33,8 +40,8 @@ class custumAppBar extends StatelessWidget {
             ),
             // SVG icon for more options
             IconButton(
-              icon: const CircleAvatar(
-                child: Icon(Icons.person),
+              icon: CircleAvatar(
+                child: Image.asset(dp1png),
               ),
               onPressed: () {},
             ),

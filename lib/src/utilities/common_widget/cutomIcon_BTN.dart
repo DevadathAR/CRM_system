@@ -6,16 +6,17 @@ import 'package:velocity_x/velocity_x.dart';
 class CustumIconButton extends StatelessWidget {
   final String buttonTItle;
   final IconData icon;
+  final VoidCallback onTap;
   const CustumIconButton({
     super.key,
     required this.buttonTItle,
-    required this.icon,
+    required this.icon, required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: onTap,
       icon: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

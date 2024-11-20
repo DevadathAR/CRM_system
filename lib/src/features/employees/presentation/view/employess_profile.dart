@@ -19,7 +19,7 @@ class EmployessProfile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const custumAppBar(),
+            const CustumAppBar(),
             24.heightBox,
             "Employee's Profile"
                 .text

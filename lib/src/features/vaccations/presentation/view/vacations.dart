@@ -28,7 +28,7 @@ class VacationsPage extends StatelessWidget {
       body: SafeArea(
         child: VStack(
           [
-            const custumAppBar(),
+            const CustumAppBar(),
             24.heightBox,
             vacations.text
                 .size(36)

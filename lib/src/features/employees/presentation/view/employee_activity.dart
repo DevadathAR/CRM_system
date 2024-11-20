@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/data_box.dart.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
@@ -33,7 +34,7 @@ class EmployeeActivity extends StatelessWidget {
     return Container(
       height: 320,
       padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.symmetric(horizontal: 24,vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -45,72 +46,8 @@ class EmployeeActivity extends StatelessWidget {
           color: AppColors.white),
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 190,
-            padding: const EdgeInsets.all(8),
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(24)),
-                color: AppColors.bluebox),
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    SizedBox(
-                      width: 85,
-                      height: 85,
-                      child: CircularProgressIndicator(
-                        value: 0.75,
-                        strokeWidth: 3,
-                        valueColor: AlwaysStoppedAnimation(AppColors.blue),
-                        backgroundColor: AppColors.grey.withOpacity(0.2),
-                      ),
-                    ),
-                    ClipOval(
-                      child: Image.asset(
-                        dp1png,
-                        scale: 1.5,
-                        fit: BoxFit.cover,
-                        width: 80,
-                        height: 80,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  'Shawn Stone',
-                  style: AppTextStyle.boldText(size: 16),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  'UI/UX Designer',
-                  style:
-                      AppTextStyle.regularText(size: 14, color: AppColors.grey),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    height: 20,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      color: AppColors.bluebox,
-                      border: Border.all(color: AppColors.grey),
-                    ),
-                    child: 'Middle'.text.color(AppColors.grey).makeCentered())
-              ],
-            ),
-          ),
-          SizedBox(
+          const workloadItem(),
+          const SizedBox(
             height: 16,
           ),
           Row(

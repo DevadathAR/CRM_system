@@ -35,6 +35,9 @@ const taskProgress = '''Task
 in Progress''';
 const taskReview = '''Task
 in Review''';
+const high = "High";
+const low = "Low";
+const medium = "Medium";
 
 const contrycode = [
   '+1',

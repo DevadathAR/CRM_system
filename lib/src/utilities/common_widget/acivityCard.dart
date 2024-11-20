@@ -8,7 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ActivityCard extends StatelessWidget {
-  const ActivityCard({super.key});
+  final VoidCallback onViewMoreTap;
+  const ActivityCard({super.key, required this.onViewMoreTap});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,8 @@ class ActivityCard extends StatelessWidget {
             icon: updateIconSvg,
             description: "Updated the status of Mind Map task to In Progress",
           ),
-          const CustumIconButton(
+           CustumIconButton(
+            onTap: onViewMoreTap,
             buttonTItle: "View more",
             icon: Icons.keyboard_arrow_down,
           )
