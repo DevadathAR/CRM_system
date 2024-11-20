@@ -2,6 +2,7 @@ import 'package:crm_system/src/features/employees/presentation/view/employee_act
 import 'package:crm_system/src/features/employees/presentation/view/employees_list.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
+import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,7 +20,11 @@ class _EmployeesState extends State<Employees> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: scaffoldKey,
+      drawer: const AppDrawerWidget(),
       backgroundColor: AppColors.bgWhite,
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.blue,

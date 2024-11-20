@@ -20,14 +20,19 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     // Get today's date
     final now = DateTime.now();
     final formattedDate =
         DateFormat('MMM dd, yyyy').format(now); // Format the date
 
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: AppColors.backgroindGrey2,
-      drawer: const AppDrawerWidget(),
+      drawer: const AppDrawerWidget(
+          // currentPath: "Dashboard",
+          ),
       drawerEnableOpenDragGesture: true, // Disables swipe gesture
 
       floatingActionButton: Padding(
@@ -174,76 +179,6 @@ class DashBoard extends StatelessWidget {
       ),
     );
   }
-
-  // Widget nearestEventsCard(Map<String, dynamic> event) {
-  //   return Container(
-  //     margin: const EdgeInsets.symmetric(
-  //         horizontal: 4), // Add spacing between cards
-  //     padding: const EdgeInsets.all(15),
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(24),
-  //       color: Colors.white,
-  //     ),
-  //     child: Row(
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Container(
-  //           height: 80,
-  //           width: 5,
-  //           decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(24),
-  //             color: Colors.blue,
-  //           ),
-  //         ),
-  //         10.widthBox,
-  //         Expanded(
-  //           child: Column(
-  //             crossAxisAlignment: CrossAxisAlignment.center,
-  //             children: [
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: [
-  //                   Expanded(
-  //                     child: event['title']
-  //                         .toString()
-  //                         .text
-  //                         .maxLines(2)
-  //                         .overflow(TextOverflow.ellipsis)
-  //                         .textStyle(AppTextStyle.boldText(size: 16))
-  //                         .make(),
-  //                   ),
-  //                   SvgPicture.asset(arrowUpSvg),
-  //                 ],
-  //               ),
-  //               const Spacer(),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: [
-  //                   "${event['date']} | ${event['time']}"
-  //                       .text
-  //                       .textStyle(AppTextStyle.regularText(
-  //                           size: 14, color: AppColors.textGrey2))
-  //                       .make(),
-  //                   Row(
-  //                     children: [
-  //                       SvgPicture.asset(clockSvg),
-  //                       5.widthBox,
-  //                       "${event['duration']}h"
-  //                           .text
-  //                           .textStyle(AppTextStyle.boldText(
-  //                               size: 12, color: AppColors.textGrey1))
-  //                           .make(),
-  //                     ],
-  //                   ).box.p8.rounded.color(AppColors.backgroindGrey2).make(),
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   // Reusable method for Workload title section
   Widget _buildTitle({title, required VoidCallback onTap}) {

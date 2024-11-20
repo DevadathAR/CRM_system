@@ -20,6 +20,11 @@ const buildingSvg = 'assets/svg/building.svg';
 const personsSvg = 'assets/svg/persons.svg';
 const giftSvg = 'assets/svg/gift.svg';
 const movieIconSvg = 'assets/svg/movie.svg';
+const dashboardIconSvg = 'assets/svg/dashboardicon.svg';
+const projectsIconsSvg = 'assets/svg/projectsicon.svg';
+const employeesIconSvg = 'assets/svg/employeesicon.svg';
+const aeroplaneSvg = 'assets/svg/aeroplan.svg';
+const chatIconSvg = 'assets/svg/chaticon.svg';
 
 // Png files
 const dp1png = "assets/svg/image1.png";
