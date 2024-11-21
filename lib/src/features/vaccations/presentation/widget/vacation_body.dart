@@ -13,7 +13,7 @@ class VacationBody extends StatelessWidget {
       [
         ...List.generate(8, (_) => _personDataBox()),
       ],
-    ).expand();
+    );
   }
 
   Widget _personDataBox() {

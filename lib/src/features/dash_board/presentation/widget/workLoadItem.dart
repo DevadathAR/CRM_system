@@ -19,45 +19,37 @@ class workloadItem extends StatelessWidget {
       ),
       child: VStack(
         [
+          10.heightBox,
+          
           Stack(
             alignment: Alignment.center,
             children: [
-              // Outer circular border with gap
-              Container(
-                height: 70, // Outer border size
-                width: 70, // Outer border size
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: SweepGradient(
-                    startAngle: 0.0,
-                    endAngle: 3.14 * 1.9, // Adjust the filled portion (75%)
-                    colors: [
-                      AppColors.blue, // Filled color
-                      AppColors.textGrey1.withOpacity(0.4), // Unfilled part
-                    ],
-                    stops: const [0.75, 0.75], // Transition point
-                  ),
+               SizedBox(
+                width: 70,
+                height: 70,
+                child: CircularProgressIndicator(
+                  value: 0.3,
+                  strokeWidth: 4,
+                  strokeAlign: 0.5,
+                  strokeCap: StrokeCap.round,
+                  valueColor: AlwaysStoppedAnimation(AppColors.blue),
+                  backgroundColor: AppColors.textGrey1.withOpacity(0.4),
                 ),
               ),
-              // Inner circle with gap
               Container(
-                height: 60, // Adjust for gap
-                width: 60, // Adjust for gap
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white, // Background color to create the gap
-                ),
+                height: 60,width: 60,decoration: BoxDecoration(shape: BoxShape.circle,color: AppColors.white),
                 child: ClipOval(
                   child: Image.asset(
                     dp1png,
+                    // scale: 1.5,
                     fit: BoxFit.cover,
-                    height: 50,
                     width: 50,
-                  ).centered(), // Ensure the image is centered
+                    height: 50,
+                  ),
                 ),
-              ).centered(),
+              ),
             ],
-          ),
+          ).centered(),
           10.heightBox,
           "Shawn Stone"
               .text

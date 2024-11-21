@@ -8,9 +8,12 @@ import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep3 extends StatefulWidget {
+     static const route = 'sign-up-step-3';
+
   const SignUpStep3({super.key});
 
   @override
@@ -131,14 +134,9 @@ class _SignUpStep3State extends State<SignUpStep3> {
               const Spacer(),
               Buttons(
                 ontap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const SignUpStep4();
-                      },
-                    ),
-                  );
+                                    context.goNamed(SignUpStep4.route);
+
+ 
                 },
                 label: 'Next Step',
                 length: 145,

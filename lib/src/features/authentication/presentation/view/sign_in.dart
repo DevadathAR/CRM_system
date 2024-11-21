@@ -1,14 +1,17 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
+import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignIn extends StatefulWidget {
+  static const route = 'sign-in';
   const SignIn({super.key});
 
   @override
@@ -25,7 +28,7 @@ class _SignInState extends State<SignIn> {
         [
           // Top Section
           const AuthTopSide(),
-          
+
           // Form Section
           VStack(
             [
@@ -34,15 +37,24 @@ class _SignInState extends State<SignIn> {
               16.heightBox,
 
               // Email Field
-              email.text.bold.size(14).color(AppColors.grey).make().objectTopLeft(),
+              email.text.bold
+                  .size(14)
+                  .color(AppColors.grey)
+                  .make()
+                  .objectTopLeft(),
               8.heightBox,
               const TextInputField(hintText: mailHint).pSymmetric(h: 8),
               16.heightBox,
 
               // Password Field
-              pswd.text.bold.size(14).color(AppColors.grey).make().objectTopLeft(),
+              pswd.text.bold
+                  .size(14)
+                  .color(AppColors.grey)
+                  .make()
+                  .objectTopLeft(),
               8.heightBox,
-              const TextInputField(obscureText: true, hintText: pswdHint).pSymmetric(h: 8),
+              const TextInputField(obscureText: true, hintText: pswdHint)
+                  .pSymmetric(h: 8),
               16.heightBox,
 
               // Remember Me and Forgot Password Row
@@ -65,8 +77,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: forgot.text.size(14).color(AppColors.grey).make(),
                   ),
                 ],
@@ -75,22 +86,22 @@ class _SignInState extends State<SignIn> {
               24.heightBox,
 
               // Sign In Button
-              Buttons(ontap: (){Navigator.pop(context);},
-              textColor: AppColors.white,
-                label: 'Sign In').centered(),
+              Buttons(
+                      ontap: () {
+                        context.goNamed(DashBoard.route);
+                      },
+                      textColor: AppColors.white,
+                      label: 'Sign In')
+                  .centered(),
               16.heightBox,
 
               // Signup Navigation
               TextButton(
-
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const SignupStep1();
-                    },
-                  ));
+                  context.goNamed(SignupStep1.route);
                 },
-                child: noacc.text.semiBold.size(16).color(AppColors.blue).make(),
+                child:
+                    noacc.text.semiBold.size(16).color(AppColors.blue).make(),
               ).centered(),
             ],
           )
@@ -102,7 +113,12 @@ class _SignInState extends State<SignIn> {
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
         ],
-      ).scrollVertical().box.height(double.infinity). color(AppColors.bgWhite).make(),
+      )
+          .scrollVertical()
+          .box
+          .height(double.infinity)
+          .color(AppColors.bgWhite)
+          .make(),
     );
   }
 }

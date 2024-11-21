@@ -2,7 +2,6 @@ import 'package:crm_system/src/features/vaccations/presentation/widget/vacation_
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/drawer.dart';
-import 'package:crm_system/src/utilities/common_widget/userInfo.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class VacationsPage extends StatelessWidget {
+  static const route = 'vacation-page';
   const VacationsPage({super.key});
 
   @override

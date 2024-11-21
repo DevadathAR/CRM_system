@@ -8,9 +8,11 @@ import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignupStep1 extends StatelessWidget {
+  static const route = 'sign-up-step-1';
   const SignupStep1({super.key});
 
   @override
@@ -19,7 +21,7 @@ class SignupStep1 extends StatelessWidget {
       body: VStack(
         [
           const AuthTopSide(),
-          
+
           // Form Container
           VStack(
             [
@@ -115,11 +117,7 @@ class SignupStep1 extends StatelessWidget {
               const Spacer(),
               Buttons(
                   ontap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const SignUpStep2();
-                      },
-                    ));
+                    context.goNamed(SignUpStep2.route);
                   },
                   label: 'Next Step',
                   forward: true,
@@ -129,7 +127,12 @@ class SignupStep1 extends StatelessWidget {
           ).px24(),
           16.heightBox,
         ],
-      ).scrollVertical().box.height(double.infinity).color(AppColors.bgWhite).make(),
+      )
+          .scrollVertical()
+          .box
+          .height(double.infinity)
+          .color(AppColors.bgWhite)
+          .make(),
     );
   }
 }

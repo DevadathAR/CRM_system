@@ -1,8 +1,11 @@
+import 'package:crm_system/main.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
+import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CustumAppBar extends StatelessWidget {
@@ -16,7 +19,7 @@ class CustumAppBar extends StatelessWidget {
       preferredSize: const Size.fromHeight(80), // AppBar height
       child: VxBox(
         child: AppBar(
-             backgroundColor: Colors.transparent, // Transparent background
+          backgroundColor: Colors.transparent, // Transparent background
           elevation: 0, // Remove default shadow
 
           leading: Padding(
@@ -48,10 +51,11 @@ class CustumAppBar extends StatelessWidget {
               icon: CircleAvatar(
                 child: Image.asset(dp1png),
               ),
-              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => EmployessProfile(),));},
+              onPressed: () {
+                context.goNamed(MyProfile.route);
+              },
             ),
           ],
-       
         ),
       )
           .margin(const EdgeInsets.all(16)) // Add margin around the AppBar

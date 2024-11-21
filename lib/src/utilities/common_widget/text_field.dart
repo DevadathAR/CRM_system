@@ -1,6 +1,7 @@
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TextInputField extends StatefulWidget {
   final TextEditingController? controller;
@@ -10,6 +11,8 @@ class TextInputField extends StatefulWidget {
   final TextInputType? keyboardType;
   final ValueChanged<String>? onChanged;
   final bool isDropDown;
+  final bool viewIcon;
+  final String? iconName;
   final List<String>? dropDownOptions;
   const TextInputField({
     Key? key,
@@ -17,7 +20,9 @@ class TextInputField extends StatefulWidget {
     this.hintText,
     this.labelText,
     this.obscureText = false,
+    this.viewIcon = false,
     this.keyboardType,
+    this.iconName,
     this.onChanged,
     this.isDropDown = false,
     this.dropDownOptions,
@@ -36,7 +41,7 @@ class _TextInputFieldState extends State<TextInputField> {
     super.initState();
     _isObscured = widget.obscureText;
     _selectedValue =
-        widget.dropDownOptions?.first; // Set default value for dropdown
+        widget.dropDownOptions?.first; 
   }
 
   void _togglePasswordVisibility() {
@@ -111,7 +116,11 @@ class _TextInputFieldState extends State<TextInputField> {
                       color: AppColors.grey,
                     ),
                     onPressed: _togglePasswordVisibility,
-                  )
+                  ):
+                 widget.viewIcon?Padding(
+                   padding: const EdgeInsets.all(12.0),
+                   child: SizedBox(child: SvgPicture.asset(widget.iconName.toString(),colorFilter: ColorFilter.mode(AppColors.grey, BlendMode.srcIn),)),
+                 )
                 : null,
           ),
         ),

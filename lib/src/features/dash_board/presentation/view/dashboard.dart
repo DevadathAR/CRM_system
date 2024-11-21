@@ -1,3 +1,4 @@
+import 'package:crm_system/main.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEventsCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/projectDetailCard.dart';
@@ -12,10 +13,13 @@ import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DashBoard extends StatelessWidget {
+     static const route = 'dashboard';
+
   const DashBoard({super.key});
 
   @override
@@ -144,12 +148,7 @@ class DashBoard extends StatelessWidget {
                   _buildTitle(
                     title: "Nearest Events",
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NearesteventsPage(),
-                        ),
-                      );
+                      context.goNamed(NearesteventsPage.route);
                     },
                   ),
                   SizedBox(

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Employees extends StatelessWidget {
+  static const route = 'employees-page';
   const Employees({super.key});
 
   @override

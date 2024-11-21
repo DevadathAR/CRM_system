@@ -2,6 +2,7 @@ import 'package:crm_system/src/features/authentication/presentation/view/sign_in
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
+import 'package:crm_system/src/services/routeServices.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -10,9 +11,12 @@ import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep4 extends StatefulWidget {
+     static const route = 'sign-up-step-4';
+
   const SignUpStep4({super.key});
 
   @override
@@ -98,11 +102,8 @@ class _SignUpStep4State extends State<SignUpStep4> {
               const Spacer(),
               Buttons(
                 ontap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const SuccessPage();
-                    },
-                  ));
+                  context.goNamed(SuccessPage.route);
+                 
                 },
                 label: 'Next Step',
                 length: 145,

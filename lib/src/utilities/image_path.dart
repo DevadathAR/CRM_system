@@ -29,7 +29,8 @@ const employeesIconSvg = 'assets/svg/employeesicon.svg';
 const aeroplaneSvg = 'assets/svg/aeroplan.svg';
 const chatIconSvg = 'assets/svg/chaticon.svg';
 const filterSvg = 'assets/svg/filter.svg';
-
+const editSvg = 'assets/svg/edit.svg';
+const locationSvg = 'assets/svg/location.svg';
 const logOutIconSvg = 'assets/svg/logouticon.svg';
 const closeIconSvg = 'assets/svg/closeIcon.svg';
 

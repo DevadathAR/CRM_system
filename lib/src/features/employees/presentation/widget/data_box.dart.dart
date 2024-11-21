@@ -1,7 +1,9 @@
+import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/userInfo.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DataBox extends StatelessWidget {
@@ -9,47 +11,52 @@ class DataBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VStack(
-      crossAlignment: CrossAxisAlignment.stretch,
-      [
-        const HStack(
-          [
-            UserInfo(
-                name: 'Evan Yates',
-                role: 'evanyates@gmail.com',
-                avatar: dp1png),
-            Spacer(),
-            Icon(Icons.more_vert_sharp)
-          ],
-          crossAlignment: CrossAxisAlignment.start,
-        ),
-        const Divider(),
-        HStack(
-          [
-            _infoBox(label: 'Gender', datum: 'Male'),
-            const Spacer(),
-            _infoBox(label: 'Birthday', datum: 'Aprile 23, 1995'),
-            const Spacer(),
-            _infoBox(label: 'Full age', datum: '25'),
-          ],
-          alignment: MainAxisAlignment.spaceBetween,
-        ),
-        _infoBox(
-            label: 'Position',
-            datum: 'UI/UX Designer',
-            isbox: true,
-            level: 'Middle')
-      ],
-      alignment: MainAxisAlignment.spaceAround,
-    )
-        .box
-        .white
-        .roundedLg
-        .shadow
-        .p16
-        .margin(const EdgeInsets.symmetric(horizontal: 20, vertical: 12))
-        .height(250)
-        .make();
+    return InkWell(onTap: () {
+            context.goNamed(EmployessProfile.route);
+
+    },
+      child: VStack(
+        crossAlignment: CrossAxisAlignment.stretch,
+        [
+          const HStack(
+            [
+              UserInfo(
+                  name: 'Evan Yates',
+                  role: 'evanyates@gmail.com',
+                  avatar: dp1png),
+              Spacer(),
+              Icon(Icons.more_vert_sharp)
+            ],
+            crossAlignment: CrossAxisAlignment.start,
+          ),
+          const Divider(),
+          HStack(
+            [
+              _infoBox(label: 'Gender', datum: 'Male'),
+              const Spacer(),
+              _infoBox(label: 'Birthday', datum: 'Aprile 23, 1995'),
+              const Spacer(),
+              _infoBox(label: 'Full age', datum: '25'),
+            ],
+            alignment: MainAxisAlignment.spaceBetween,
+          ),
+          _infoBox(
+              label: 'Position',
+              datum: 'UI/UX Designer',
+              isbox: true,
+              level: 'Middle')
+        ],
+        alignment: MainAxisAlignment.spaceAround,
+      )
+          .box
+          .white
+          .roundedLg
+          .shadow
+          .p16
+          .margin(const EdgeInsets.symmetric(horizontal: 20, vertical: 12))
+          .height(250)
+          .make(),
+    );
   }
 
   Widget _infoBox(

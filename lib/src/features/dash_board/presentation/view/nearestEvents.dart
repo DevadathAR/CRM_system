@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class NearesteventsPage extends StatelessWidget {
+  static const route = 'nearest-event-page';
   const NearesteventsPage({super.key});
 
   @override

@@ -15,9 +15,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class EmployessProfile extends StatelessWidget {
-  static const route = 'employee-profile';
-  const EmployessProfile({super.key});
+class MyProfile extends StatelessWidget {
+  static const route = 'user-profile';
+  const MyProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class EmployessProfile extends StatelessWidget {
           children: [
             const CustumAppBar(),
             24.heightBox,
-            "Employee's Profile"
+            "My Profile"
                 .text
                 .align(TextAlign.left)
                 .size(36)

@@ -7,9 +7,12 @@ import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep2 extends StatelessWidget {
+     static const route = 'sign-up-step-2';
+
   const SignUpStep2({super.key});
 
   Widget build(BuildContext context) {
@@ -91,11 +94,8 @@ class SignUpStep2 extends StatelessWidget {
               const Spacer(),
               Buttons(
                 ontap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const SignUpStep3();
-                      },
-                    ));
+                                    context.goNamed(SignUpStep3.route);
+
                   },
                 label: 'Next Step',
                 length: 145,
