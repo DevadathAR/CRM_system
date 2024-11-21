@@ -1,12 +1,14 @@
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
+import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
 import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
-import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 
 class AppDrawerWidget extends StatelessWidget {
   const AppDrawerWidget({super.key});
@@ -21,13 +23,10 @@ class AppDrawerWidget extends StatelessWidget {
           width: 250,
           backgroundColor: AppColors.white,
           child: Column(
-            // padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
-
                 margin: const EdgeInsets.all(0),
                 decoration: const BoxDecoration(
-                  border: Border(),
                   color: Colors.white,
                 ),
                 child: Row(
@@ -61,7 +60,7 @@ class AppDrawerWidget extends StatelessWidget {
               _buildListTile(
                 context: context,
                 svgIcon: calendarGreySvg,
-                label: 'Calender',
+                label: 'Calendar',
                 path: 'Calender',
                 page: const VacationsPage(),
               ),
@@ -86,35 +85,50 @@ class AppDrawerWidget extends StatelessWidget {
     );
   }
 
-  // Helper method for ListTile
-  ListTile _buildListTile({
+  Widget _buildListTile({
     required BuildContext context,
     required Widget page,
     required String svgIcon,
     required String label,
     required String path,
   }) {
-    return ListTile(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25),
-          bottomLeft: Radius.circular(25),
+    final selectedPath =
+        context.watch<DashbordProvider>().selectedPath; // Get selected path
+    final isSelected =
+        selectedPath == path; // Check if the current item is selected
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        tileColor: isSelected ? AppColors.backgroindGrey1 : AppColors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
+        leading: SvgPicture.asset(
+          svgIcon,
+          width: 24,
+          height: 24,
+          color:
+              isSelected ? AppColors.blue : AppColors.textGrey1, // Active color
+        ),
+        title: Text(
+          label,
+          style: AppTextStyle.boldText(
+            size: 16,
+            color: isSelected
+                ? AppColors.blue
+                : AppColors.textGrey1, // Active color
+          ),
+        ),
+        onTap: () {
+          context
+              .read<DashbordProvider>()
+              .selectPath(path); // Update selected path
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => page),
+          );
+        },
       ),
-      leading: SvgPicture.asset(
-        svgIcon,
-        width: 24,
-        height: 24,
-        color: AppColors.textGrey1, // Optional: Apply a color if needed
-      ),
-      title: Text(
-        label,
-        style: AppTextStyle.boldText(size: 16, color: AppColors.textGrey1),
-      ),
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => page));
-      },
     );
   }
 }
