@@ -72,6 +72,8 @@ class _TextInputFieldState extends State<TextInputField> {
                   ))
               .toList(),
           decoration: InputDecoration(
+            filled: true,
+            fillColor: AppColors.white,
             labelText: widget.labelText,
             labelStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.grey),

@@ -1,5 +1,6 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/data_box.dart.dart';
+import 'package:crm_system/src/features/employees/presentation/widget/pagination.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
@@ -18,6 +19,7 @@ class EmployeeActivity extends StatelessWidget {
         child: ListView(
           children: [
             _employeeActivityView(),
+            PaginationView()
           ],
         ),
       ),

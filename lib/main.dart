@@ -1,7 +1,6 @@
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
-import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
-import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
+import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +9,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => DashbordProvider()),
+        ChangeNotifierProvider(create: (_) => EmployeeProvider()),
       ],
       child: const MainApp(),
     ),

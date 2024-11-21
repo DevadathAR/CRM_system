@@ -5,6 +5,7 @@ const calendarGreySvg = "assets/svg/calendarGrey.svg";
 const search = "assets/svg/search.svg";
 const medicalAPpSvg = "assets/svg/medicalApp.svg";
 const foodServiceSvg = "assets/svg/foodService1.svg";
+const foodService2Svg = "assets/svg/foodservice2.svg";
 const arrowUpSvg = "assets/svg/arrowUp.svg";
 const arrowDownSvg = "assets/svg/arrowDown.svg";
 const clockSvg = "assets/svg/clock.svg";
@@ -25,6 +26,8 @@ const projectsIconsSvg = 'assets/svg/projectsicon.svg';
 const employeesIconSvg = 'assets/svg/employeesicon.svg';
 const aeroplaneSvg = 'assets/svg/aeroplan.svg';
 const chatIconSvg = 'assets/svg/chaticon.svg';
+const filterSvg = 'assets/svg/filter.svg';
+
 
 // Png files
 const dp1png = "assets/svg/image1.png";

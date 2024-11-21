@@ -32,6 +32,7 @@ class ProjectCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
+        boxShadow: [BoxShadow(color: AppColors.grey,offset: Offset(1,1),blurRadius: .5)],
         borderRadius: BorderRadius.circular(24),
         color: Colors.white,
       ),

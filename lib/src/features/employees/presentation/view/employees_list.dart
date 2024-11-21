@@ -1,4 +1,5 @@
 import 'package:crm_system/src/features/employees/presentation/widget/data_box.dart.dart';
+import 'package:crm_system/src/features/employees/presentation/widget/pagination.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,6 +15,7 @@ class EmployeesList extends StatelessWidget {
         child: ListView(
           children: [
             _employeeListView(), 
+             PaginationView()
           ],
         ),
       ),

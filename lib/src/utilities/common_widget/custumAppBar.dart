@@ -1,3 +1,5 @@
+import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
+import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,6 +16,9 @@ class CustumAppBar extends StatelessWidget {
       preferredSize: const Size.fromHeight(80), // AppBar height
       child: VxBox(
         child: AppBar(
+             backgroundColor: Colors.transparent, // Transparent background
+          elevation: 0, // Remove default shadow
+
           leading: Padding(
               padding: const EdgeInsets.all(8.0), // Add padding to logo
               child: SvgPicture.asset(
@@ -43,17 +48,16 @@ class CustumAppBar extends StatelessWidget {
               icon: CircleAvatar(
                 child: Image.asset(dp1png),
               ),
-              onPressed: () {},
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => EmployessProfile(),));},
             ),
           ],
-          backgroundColor: Colors.transparent, // Transparent background
-          elevation: 0, // Remove default shadow
+       
         ),
       )
           .margin(const EdgeInsets.all(16)) // Add margin around the AppBar
-          .color(Colors.white) // Background color
+          .color(AppColors.white) // Background color
           .withRounded(value: 24) // Rounded corners
-          .shadow
+          .shadowXs
           .make(),
     );
   }
