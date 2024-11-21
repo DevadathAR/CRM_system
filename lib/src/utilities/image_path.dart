@@ -11,6 +11,8 @@ const arrowDownSvg = "assets/svg/arrowDown.svg";
 const clockSvg = "assets/svg/clock.svg";
 const dp2Svg = "assets/svg/dp2.svg";
 const arrowForwardSvg = 'assets/svg/arrowForward.svg';
+const dropDownIconSvg = 'assets/svg/dropDownIcon.svg';
+const nextArrowSvg = 'assets/svg/nextArrow.svg';
 const iSvg = 'assets/svg/i.svg';
 const arrowBackSvg = 'assets/svg/arrow_back.svg';
 const addSvg = 'assets/svg/add.svg';
@@ -28,6 +30,8 @@ const aeroplaneSvg = 'assets/svg/aeroplan.svg';
 const chatIconSvg = 'assets/svg/chaticon.svg';
 const filterSvg = 'assets/svg/filter.svg';
 
+const logOutIconSvg = 'assets/svg/logouticon.svg';
+const closeIconSvg = 'assets/svg/closeIcon.svg';
 
 // Png files
 const dp1png = "assets/svg/image1.png";

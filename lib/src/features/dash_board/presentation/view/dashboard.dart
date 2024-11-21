@@ -190,7 +190,7 @@ class DashBoard extends StatelessWidget {
         CustumIconButton(
           onTap: onTap,
           buttonTItle: "View all",
-          icon: Icons.arrow_forward_ios_outlined,
+          icon: nextArrowSvg,
         ),
       ],
     );
