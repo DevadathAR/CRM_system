@@ -1,10 +1,19 @@
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
+import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => DashbordProvider()),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
