@@ -6,6 +6,7 @@ import 'package:crm_system/src/features/projects/presentation/view/projects_list
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:crm_system/src/utilities/colors.dart';
@@ -51,35 +52,35 @@ class AppDrawerWidget extends StatelessWidget {
                 svgIcon: dashboardIconSvg,
                 label: 'Dashboard',
                 path: 'Dashboard',
-                page: const DashBoard(),
+                page:  DashBoard.route,
               ),
               _buildListTile(
                 context: context,
                 svgIcon: projectsIconsSvg,
                 label: 'Projects',
                 path: 'Projects',
-                page: const ProjectsListPage(),
+                page: ProjectsListPage.route,
               ),
               _buildListTile(
                 context: context,
                 svgIcon: calendarGreySvg,
                 label: 'Calendar',
                 path: 'Calender',
-                page: const VacationsPage(),
+                page:  VacationsPage.route,
               ),
               _buildListTile(
                 context: context,
                 svgIcon: employeesIconSvg,
                 label: 'Employees',
                 path: 'Employees',
-                page: const Employees(),
+                page:  Employees.route,
               ),
               _buildListTile(
                 context: context,
                 svgIcon: aeroplaneSvg,
                 label: 'Vacations',
                 path: 'Vacations',
-                page: const VacationsPage(),
+                page: VacationsPage.route,
               ),
               _supportButton(context),
               const Spacer(),
@@ -119,7 +120,7 @@ class AppDrawerWidget extends StatelessWidget {
 
   Widget _buildListTile({
     required BuildContext context,
-    required Widget page,
+    required String page,
     required String svgIcon,
     required String label,
     required String path,
@@ -156,9 +157,10 @@ class AppDrawerWidget extends StatelessWidget {
           context
               .read<DashbordProvider>()
               .selectPath(path); // Update selected path
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => page),
-          );
+              context.goNamed(page);
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(builder: (context) => page),
+          // );
         },
       ),
     );

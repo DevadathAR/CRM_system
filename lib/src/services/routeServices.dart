@@ -12,6 +12,7 @@ import 'package:crm_system/src/features/dash_board/presentation/view/nearestEven
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
+import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -91,6 +92,13 @@ final router = GoRouter(
           name: MyProfile.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const MyProfile()),
+        ),
+        
+        GoRoute(
+          path: 'projects',
+          name: ProjectsListPage.route,
+          pageBuilder: (context, state) =>
+              getCustomTransition(state, const ProjectsListPage()),
         ),
       ],
     ),
