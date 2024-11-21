@@ -55,7 +55,7 @@ class ActivityCard extends StatelessWidget {
            CustumIconButton(
             onTap: onViewMoreTap,
             buttonTItle: "View more",
-            icon: Icons.keyboard_arrow_down,
+            icon: dropDownIconSvg,
           )
         ],
       ),
