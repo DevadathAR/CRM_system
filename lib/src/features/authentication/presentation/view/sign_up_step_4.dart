@@ -55,7 +55,7 @@ class _SignUpStep4State extends State<SignUpStep4> {
               16.heightBox,
               memberMail.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,

@@ -40,7 +40,7 @@ class EmployeeActivity extends StatelessWidget {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: AppColors.grey,
+                color: AppColors.textGrey1,
                 blurRadius: 12,
                 offset: const Offset(0, 1))
           ],
@@ -74,7 +74,7 @@ class EmployeeActivity extends StatelessWidget {
           Text(
             textAlign: TextAlign.center,
             label,
-            style: AppTextStyle.regularText(size: 14, color: AppColors.grey),
+            style: AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
           ),
         ],
       );

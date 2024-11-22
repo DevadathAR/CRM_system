@@ -19,13 +19,13 @@ class ProfileTabView extends StatelessWidget {
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.bluebox,
+                                    color: AppColors.primaryBackGround,
                                     blurRadius: 6,
                                     offset: const Offset(0, 1),
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(500),
-                                color: AppColors.tabGrey,
+                                color: AppColors.backgroindGrey1,
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

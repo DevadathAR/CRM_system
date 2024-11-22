@@ -79,7 +79,7 @@ class ActivityItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
-        color: AppColors.backgroindGrey2,
+        color: AppColors.primaryBackGround,
       ),
       child: Row(
         children: [

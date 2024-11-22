@@ -11,7 +11,7 @@ class VacationBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return VStack(
       [
-        ...List.generate(8, (_) => _personDataBox()),
+        ...List.generate(2, (_) => _personDataBox()),
       ],
     );
   }
@@ -52,7 +52,7 @@ class VacationBody extends StatelessWidget {
   Widget _infoBox({required String label, required String datum}) {
     return VStack(
       [
-        label.text.size(14).color(AppColors.grey).make(),
+        label.text.size(14).color(AppColors.textGrey1).make(),
         datum.text.size(16).color(AppColors.black).make(),
       ],
       crossAlignment: CrossAxisAlignment.start,

@@ -36,7 +36,7 @@ class Buttons extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: AppColors.grey, blurRadius: 12, offset: const Offset(0, 6))
+                color: AppColors.textGrey1, blurRadius: 12, offset: const Offset(0, 6))
           ],
           borderRadius: const BorderRadius.all(Radius.circular(14)),
           color: color ?? AppColors.blue,

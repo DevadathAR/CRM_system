@@ -35,7 +35,7 @@ class SignUpStep2 extends StatelessWidget {
               16.heightBox,
               serviceReason.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -47,7 +47,7 @@ class SignUpStep2 extends StatelessWidget {
               24.heightBox,
               describes.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -60,7 +60,7 @@ class SignUpStep2 extends StatelessWidget {
               24.heightBox,
               describes.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,

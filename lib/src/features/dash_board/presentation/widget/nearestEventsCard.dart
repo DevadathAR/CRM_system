@@ -109,7 +109,7 @@ class NearestEventsCard extends StatelessWidget {
                         .box
                         .p8
                         .withRounded(value: 8.0)
-                        .color(AppColors.backgroindGrey2)
+                        .color(AppColors.primaryBackGround)
                         .make(),
                   ],
                 ),

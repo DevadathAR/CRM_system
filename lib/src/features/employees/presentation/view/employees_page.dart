@@ -1,6 +1,5 @@
 import 'package:crm_system/src/features/employees/presentation/view/employee_activity.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employees_list.dart';
-import 'package:crm_system/src/features/employees/presentation/widget/pagination.dart';
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
@@ -59,13 +58,13 @@ class Employees extends StatelessWidget {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.bluebox,
+                          color: AppColors.primaryBackGround,
                           blurRadius: 6,
                           offset: const Offset(0, 1),
                         ),
                       ],
                       borderRadius: BorderRadius.circular(500),
-                      color: AppColors.tabGrey,
+                      color: AppColors.backgroindGrey1,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

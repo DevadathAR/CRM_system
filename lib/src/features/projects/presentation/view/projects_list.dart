@@ -18,7 +18,7 @@ class ProjectsListPage extends StatelessWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: AppColors.backgroindGrey2,
+      backgroundColor: AppColors.primaryBackGround,
       drawer: const AppDrawerWidget(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -15,7 +15,7 @@ class NearesteventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroindGrey2,
+      backgroundColor: AppColors.primaryBackGround,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(

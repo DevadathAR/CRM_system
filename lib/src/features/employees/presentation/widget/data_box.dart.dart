@@ -66,7 +66,7 @@ class DataBox extends StatelessWidget {
       bool isbox = false}) {
     return VStack(
       [
-        label.text.size(14).color(AppColors.grey).make(),
+        label.text.size(14).color(AppColors.textGrey1).make(),
         HStack([
           datum.text.size(16).color(AppColors.black).make(),
           if (isbox)
@@ -77,9 +77,9 @@ class DataBox extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                   color: AppColors.white,
-                  border: Border.all(color: AppColors.grey),
+                  border: Border.all(color: AppColors.textGrey1),
                 ),
-                child: level?.text.color(AppColors.grey).makeCentered())
+                child: level?.text.color(AppColors.textGrey1).makeCentered())
         ]),
       ],
       crossAlignment: CrossAxisAlignment.start,

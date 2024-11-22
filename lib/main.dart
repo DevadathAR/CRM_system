@@ -1,11 +1,7 @@
-import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
-import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
-import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
 import 'package:crm_system/src/services/routeServices.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 void main() {

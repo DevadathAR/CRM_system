@@ -10,7 +10,7 @@ class ProjectCard extends StatelessWidget {
   final String projectName;
   final String creationDate;
   final String priority;
-  final Color priorityColor;
+  // final Color priorityColor;
   final int allTasks;
   final int activeTasks;
   final String projectIcon;
@@ -21,7 +21,7 @@ class ProjectCard extends StatelessWidget {
     required this.projectName,
     required this.creationDate,
     required this.priority,
-    required this.priorityColor,
+    // required this.priorityColor,
     required this.allTasks,
     required this.activeTasks,
     required this.projectIcon,
@@ -32,7 +32,7 @@ class ProjectCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(color: AppColors.grey,offset: Offset(1,1),blurRadius: .5)],
+        // boxShadow: [BoxShadow(color: AppColors.grey,offset: Offset(1,1),blurRadius: .5)],
         borderRadius: BorderRadius.circular(24),
         color: Colors.white,
       ),
@@ -86,7 +86,7 @@ class ProjectCard extends StatelessWidget {
                   10.widthBox,
                   priority.text
                       .textStyle(
-                        AppTextStyle.boldText(size: 14, color: priorityColor),
+                        AppTextStyle.boldText(size: 14,color: priority == "Low"?AppColors.green:AppColors.yellow ),
                       )
                       .make(),
                 ],

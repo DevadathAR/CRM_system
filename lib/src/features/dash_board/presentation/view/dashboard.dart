@@ -33,7 +33,7 @@ class DashBoard extends StatelessWidget {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: AppColors.backgroindGrey2,
+      backgroundColor: AppColors.primaryBackGround,
       drawer: const AppDrawerWidget(
           // currentPath: "Dashboard",
           ),
@@ -124,12 +124,12 @@ class DashBoard extends StatelessWidget {
                   // Repeated Workload Title Section
                   _buildTitle(title: "Project", onTap: () {}),
 
-                  ProjectCard(
+                  const ProjectCard(
                     projectId: "PN0001265",
                     projectName: "Medical App (iOS native)",
                     creationDate: "Created Sep 12, 2020",
                     priority: "Medium",
-                    priorityColor: AppColors.yellow,
+                    // priorityColor: AppColors.yellow,
                     allTasks: 34,
                     activeTasks: 13,
                     projectIcon: medicalAPpSvg,
@@ -140,7 +140,7 @@ class DashBoard extends StatelessWidget {
                     projectName: "Food Delivery Service",
                     creationDate: "Created Sep 12, 2020",
                     priority: "Low", // or "Low"
-                    priorityColor: Colors.green,
+                    // priorityColor: Colors.green,
                     allTasks: 34,
                     activeTasks: 13,
                     projectIcon: foodServiceSvg, // Your SVG path

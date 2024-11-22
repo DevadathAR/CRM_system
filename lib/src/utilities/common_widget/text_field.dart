@@ -81,7 +81,7 @@ class _TextInputFieldState extends State<TextInputField> {
             fillColor: AppColors.white,
             labelText: widget.labelText,
             labelStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.grey),
+                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14)),
             ),
@@ -100,10 +100,10 @@ class _TextInputFieldState extends State<TextInputField> {
           decoration: InputDecoration(
             labelText: widget.labelText,
             labelStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.grey),
+                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             hintText: widget.hintText,
             helperStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.grey),
+                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14)),
             ),
@@ -113,13 +113,13 @@ class _TextInputFieldState extends State<TextInputField> {
                       _isObscured
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
-                      color: AppColors.grey,
+                      color: AppColors.textGrey1,
                     ),
                     onPressed: _togglePasswordVisibility,
                   ):
                  widget.viewIcon?Padding(
                    padding: const EdgeInsets.all(12.0),
-                   child: SizedBox(child: SvgPicture.asset(widget.iconName.toString(),colorFilter: ColorFilter.mode(AppColors.grey, BlendMode.srcIn),)),
+                   child: SizedBox(child: SvgPicture.asset(widget.iconName.toString(),colorFilter: ColorFilter.mode(AppColors.textGrey1, BlendMode.srcIn),)),
                  )
                 : null,
           ),
@@ -165,7 +165,7 @@ class _CountryCodeFieldState extends State<CountryCodeField> {
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(14)),
           ),
-          labelStyle: AppTextStyle.mediumText(size: 14, color: AppColors.grey),
+          labelStyle: AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
         ),
         items: widget.countryCodes.map((code) {
           return DropdownMenuItem<String>(
@@ -214,7 +214,7 @@ class PhoneNumberField extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: hintText ?? "Enter phone number",
-          hintStyle: AppTextStyle.mediumText(size: 14, color: AppColors.grey),
+          hintStyle: AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(14)),
           ),
@@ -285,7 +285,7 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             maxLength: 1,
-            style: AppTextStyle.regularText(size: 14, color: AppColors.grey),
+            style: AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             decoration: InputDecoration(
               counterText: '', // Hides the character counter
               border: OutlineInputBorder(

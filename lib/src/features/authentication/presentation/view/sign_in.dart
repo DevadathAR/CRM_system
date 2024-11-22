@@ -39,7 +39,7 @@ class _SignInState extends State<SignIn> {
               // Email Field
               email.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
               // Password Field
               pswd.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -78,7 +78,7 @@ class _SignInState extends State<SignIn> {
                   Spacer(),
                   GestureDetector(
                     onTap: () {},
-                    child: forgot.text.size(14).color(AppColors.grey).make(),
+                    child: forgot.text.size(14).color(AppColors.textGrey1).make(),
                   ),
                 ],
                 alignment: MainAxisAlignment.spaceBetween,

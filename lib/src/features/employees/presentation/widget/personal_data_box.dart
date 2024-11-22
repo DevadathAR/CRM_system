@@ -32,7 +32,7 @@ class PersonalDataBox extends StatelessWidget {
                       strokeWidth: 3,
                       strokeAlign: 1.5,
                       valueColor: AlwaysStoppedAnimation(AppColors.blue),
-                      backgroundColor: AppColors.grey.withOpacity(0.2),
+                      backgroundColor: AppColors.textGrey1.withOpacity(0.2),
                     ),
                   ),
                   ClipOval(
@@ -62,7 +62,7 @@ class PersonalDataBox extends StatelessWidget {
           ),
           Text(
             'UI/UX Designer',
-            style: AppTextStyle.regularText(size: 14, color: AppColors.grey),
+            style: AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
           ),
           const Divider(),
           const SizedBox(
@@ -106,7 +106,7 @@ class PersonalDataBox extends StatelessWidget {
         padding: const EdgeInsets.only(top: 12.0, bottom: 6),
         child: Text(
           label,
-          style: AppTextStyle.boldText(size: 14, color: AppColors.grey),
+          style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
         ),
       );
 }

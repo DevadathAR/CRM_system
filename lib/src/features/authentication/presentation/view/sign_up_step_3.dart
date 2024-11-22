@@ -55,7 +55,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               16.heightBox,
               firmname.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -65,7 +65,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               24.heightBox,
               businessDir.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -78,7 +78,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               24.heightBox,
               members.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -168,7 +168,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
       height: 50,
       width: 80,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.grey),
+        border: Border.all(color: AppColors.textGrey1),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         color: isSelected ? AppColors.blue : AppColors.white,
       ),
@@ -177,7 +177,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
           datum,
           style: AppTextStyle.regularText(
             size: 14,
-            color: isSelected ? AppColors.white : AppColors.grey,
+            color: isSelected ? AppColors.white : AppColors.textGrey1,
           ),
         ),
       ),
