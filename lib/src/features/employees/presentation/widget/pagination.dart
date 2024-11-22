@@ -11,12 +11,16 @@ class PaginationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-
-      margin: EdgeInsets.symmetric(horizontal: 90,vertical: 16),
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 90, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(color: AppColors.grey,blurRadius: 6,offset: Offset(0, 1))],
-          borderRadius: BorderRadius.all(Radius.circular(14)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.textGrey1,
+                blurRadius: 6,
+                offset: const Offset(0, 1))
+          ],
+          borderRadius: const BorderRadius.all(Radius.circular(14)),
           color: AppColors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -27,7 +31,7 @@ class PaginationView extends StatelessWidget {
           ),
           SvgPicture.asset(
             arrowBackSvg,
-            colorFilter: ColorFilter.mode(AppColors.grey, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(AppColors.textGrey1, BlendMode.srcIn),
           ),
           SvgPicture.asset(
             arrowForwardSvg,

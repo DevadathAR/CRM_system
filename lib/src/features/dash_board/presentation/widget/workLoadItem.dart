@@ -20,32 +20,34 @@ class workloadItem extends StatelessWidget {
       child: VStack(
         [
           10.heightBox,
-          
+
           Stack(
             alignment: Alignment.center,
             children: [
-               SizedBox(
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: AppColors.white),
                 width: 70,
                 height: 70,
-                child: CircularProgressIndicator(
-                  value: 0.3,
-                  strokeWidth: 4,
-                  strokeAlign: 0.5,
-                  strokeCap: StrokeCap.round,
-                  valueColor: AlwaysStoppedAnimation(AppColors.blue),
-                  backgroundColor: AppColors.textGrey1.withOpacity(0.4),
+                child: Transform.flip(
+                  flipX: true,
+                  child: CircularProgressIndicator(
+                    value: 0.3,
+                    strokeWidth: 4,
+                    strokeAlign: 0.5,
+                    strokeCap: StrokeCap.round,
+                    valueColor: AlwaysStoppedAnimation(AppColors.blue),
+                    backgroundColor: AppColors.textGrey1.withOpacity(0.4),
+                  ),
                 ),
               ),
-              Container(
-                height: 60,width: 60,decoration: BoxDecoration(shape: BoxShape.circle,color: AppColors.white),
-                child: ClipOval(
-                  child: Image.asset(
-                    dp1png,
-                    // scale: 1.5,
-                    fit: BoxFit.cover,
-                    width: 50,
-                    height: 50,
-                  ),
+              ClipOval(
+                child: Image.asset(
+                  dp1png,
+                  // scale: 1.5,
+                  fit: BoxFit.cover,
+                  width: 60,
+                  height: 60,
                 ),
               ),
             ],

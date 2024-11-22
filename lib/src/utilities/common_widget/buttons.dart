@@ -12,7 +12,7 @@ class Buttons extends StatelessWidget {
   final bool forward;
 
   final VoidCallback? ontap;
-  
+
   final Color? textColor;
 
   const Buttons({
@@ -36,7 +36,9 @@ class Buttons extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: AppColors.grey, blurRadius: 12, offset: const Offset(0, 6))
+                color: AppColors.textGrey1,
+                blurRadius: 12,
+                offset: const Offset(0, 6))
           ],
           borderRadius: const BorderRadius.all(Radius.circular(14)),
           color: color ?? AppColors.blue,
@@ -45,13 +47,13 @@ class Buttons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (back) SvgPicture.asset(arrowBackSvg),
-            if (back) SizedBox(width: 8),
+            if (back) const SizedBox(width: 8),
             Text(
               label,
-              style: AppTextStyle.boldText(size: 16, color:textColor),
+              style: AppTextStyle.boldText(size: 16, color: textColor),
             ),
-            if (forward) SizedBox(width: 8),
-           if(forward) SvgPicture.asset(arrowForwardSvg),
+            if (forward) const SizedBox(width: 8),
+            if (forward) SvgPicture.asset(arrowForwardSvg),
           ],
         ),
       ),
@@ -65,11 +67,11 @@ class RadioButtonRow extends StatefulWidget {
   final ValueChanged<String>? onChanged; // Callback when value changes
 
   const RadioButtonRow({
-    Key? key,
+    super.key,
     required this.options,
     this.selectedValue,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   _RadioButtonRowState createState() => _RadioButtonRowState();
@@ -93,7 +95,6 @@ class _RadioButtonRowState extends State<RadioButtonRow> {
           children: [
             Radio<String>(
               activeColor: AppColors.blue,
-              
               value: option,
               groupValue: _selectedValue,
               onChanged: (value) {

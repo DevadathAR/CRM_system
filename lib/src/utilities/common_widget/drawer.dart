@@ -4,6 +4,7 @@ import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.da
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
 import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -52,7 +53,7 @@ class AppDrawerWidget extends StatelessWidget {
                 svgIcon: dashboardIconSvg,
                 label: 'Dashboard',
                 path: 'Dashboard',
-                page:  DashBoard.route,
+                page: DashBoard.route,
               ),
               _buildListTile(
                 context: context,
@@ -66,14 +67,14 @@ class AppDrawerWidget extends StatelessWidget {
                 svgIcon: calendarGreySvg,
                 label: 'Calendar',
                 path: 'Calender',
-                page:  VacationsPage.route,
+                page: VacationsPage.route,
               ),
               _buildListTile(
                 context: context,
                 svgIcon: employeesIconSvg,
                 label: 'Employees',
                 path: 'Employees',
-                page:  Employees.route,
+                page: Employees.route,
               ),
               _buildListTile(
                 context: context,
@@ -157,7 +158,7 @@ class AppDrawerWidget extends StatelessWidget {
           context
               .read<DashbordProvider>()
               .selectPath(path); // Update selected path
-              context.goNamed(page);
+          context.goNamed(page);
           // Navigator.of(context).push(
           //   MaterialPageRoute(builder: (context) => page),
           // );
@@ -313,29 +314,8 @@ class AppDrawerWidget extends StatelessWidget {
                 16.heightBox,
 
                 // Send Request Button with Full Width
-                SizedBox(
-                  width: double.infinity, // Matches the width of other widgets
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context); // Close the dialog
-                      // Add logic to handle request submission here
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12), // Consistent padding
-                    ),
-                    child: "Send Request"
-                        .text
-                        .textStyle(AppTextStyle.boldText(
-                          size: 16,
-                          color: AppColors.white,
-                        ))
-                        .make(),
-                  ),
+                const PrimaryBlueButton(
+                  title: "Send Request",
                 ),
               ],
             ),

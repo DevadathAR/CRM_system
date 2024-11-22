@@ -14,12 +14,14 @@ class PersonalDataBox extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(24)),
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
           color: AppColors.white),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 alignment: Alignment.center,
@@ -32,7 +34,7 @@ class PersonalDataBox extends StatelessWidget {
                       strokeWidth: 3,
                       strokeAlign: 1.5,
                       valueColor: AlwaysStoppedAnimation(AppColors.blue),
-                      backgroundColor: AppColors.grey.withOpacity(0.2),
+                      backgroundColor: AppColors.textGrey1.withOpacity(0.2),
                     ),
                   ),
                   ClipOval(
@@ -46,8 +48,14 @@ class PersonalDataBox extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(padding: EdgeInsets.all(8),
-                height: 40,width: 40,decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(14)),color: AppColors.bgWhite), child: SvgPicture.asset(editSvg))
+              Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(14)),
+                      color: AppColors.bgWhite),
+                  child: SvgPicture.asset(editSvg))
             ],
           ),
           const SizedBox(
@@ -62,7 +70,8 @@ class PersonalDataBox extends StatelessWidget {
           ),
           Text(
             'UI/UX Designer',
-            style: AppTextStyle.regularText(size: 14, color: AppColors.grey),
+            style:
+                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
           ),
           const Divider(),
           const SizedBox(
@@ -73,10 +82,18 @@ class PersonalDataBox extends StatelessWidget {
           const TextInputField(),
           _subText(label: 'Company'),
           const TextInputField(),
-          _subText(label: 'Location',),
-          const TextInputField(viewIcon: true,iconName: locationSvg,),
+          _subText(
+            label: 'Location',
+          ),
+          const TextInputField(
+            viewIcon: true,
+            iconName: locationSvg,
+          ),
           _subText(label: 'Birthday Date'),
-          const TextInputField(viewIcon: true,iconName: calenderSvg,),
+          const TextInputField(
+            viewIcon: true,
+            iconName: calenderSvg,
+          ),
           const SizedBox(
             height: 24,
           ),
@@ -106,7 +123,7 @@ class PersonalDataBox extends StatelessWidget {
         padding: const EdgeInsets.only(top: 12.0, bottom: 6),
         child: Text(
           label,
-          style: AppTextStyle.boldText(size: 14, color: AppColors.grey),
+          style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
         ),
       );
 }

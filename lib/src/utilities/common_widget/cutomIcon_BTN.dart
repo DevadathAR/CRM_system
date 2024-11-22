@@ -17,8 +17,9 @@ class CustumIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onTap,
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      // onPressed: onTap,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,6 +35,6 @@ class CustumIconButton extends StatelessWidget {
           )
         ],
       ),
-    );
+    ).onTap(onTap);
   }
 }

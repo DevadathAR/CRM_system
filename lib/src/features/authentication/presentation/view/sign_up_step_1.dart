@@ -5,7 +5,6 @@ import 'package:crm_system/src/utilities/common_widget/buttons.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -40,7 +39,7 @@ class SignupStep1 extends StatelessWidget {
               // Mobile Field
               mob.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -56,7 +55,7 @@ class SignupStep1 extends StatelessWidget {
               // SMS Field
               sms.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -77,13 +76,19 @@ class SignupStep1 extends StatelessWidget {
                       .expand(),
                 ],
                 alignment: MainAxisAlignment.start,
-              ).box.color(AppColors.bluebox).p16.rounded.height(100).make(),
+              )
+                  .box
+                  .color(AppColors.primaryBackGround)
+                  .p16
+                  .rounded
+                  .height(100)
+                  .make(),
               24.heightBox,
 
               // Email Field
               email.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -93,7 +98,7 @@ class SignupStep1 extends StatelessWidget {
               // Password Field
               craetepswd.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,

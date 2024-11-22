@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep3 extends StatefulWidget {
-     static const route = 'sign-up-step-3';
+  static const route = 'sign-up-step-3';
 
   const SignUpStep3({super.key});
 
@@ -40,7 +40,6 @@ class _SignUpStep3State extends State<SignUpStep3> {
       body: VStack(
         [
           const AuthTopSide(),
-          
 
           VStack(
             [
@@ -55,7 +54,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               16.heightBox,
               firmname.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -65,7 +64,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               24.heightBox,
               businessDir.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -78,7 +77,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               24.heightBox,
               members.text.bold
                   .size(14)
-                  .color(AppColors.grey)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -134,9 +133,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               const Spacer(),
               Buttons(
                 ontap: () {
-                                    context.goNamed(SignUpStep4.route);
-
- 
+                  context.goNamed(SignUpStep4.route);
                 },
                 label: 'Next Step',
                 length: 145,
@@ -158,31 +155,31 @@ class _SignUpStep3State extends State<SignUpStep3> {
 
   // The updated _memberBox with onTap functionality
   GestureDetector _memberBox({
-  required String datum,
-  required bool isSelected,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector( // Replaced onTap() with GestureDetector
-    onTap: onTap,
-    child: Container(
-      height: 50,
-      width: 80,
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.grey),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: isSelected ? AppColors.blue : AppColors.white,
-      ),
-      child: Center(
-        child: Text(
-          datum,
-          style: AppTextStyle.regularText(
-            size: 14,
-            color: isSelected ? AppColors.white : AppColors.grey,
+    required String datum,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      // Replaced onTap() with GestureDetector
+      onTap: onTap,
+      child: Container(
+        height: 50,
+        width: 80,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.textGrey1),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: isSelected ? AppColors.blue : AppColors.white,
+        ),
+        child: Center(
+          child: Text(
+            datum,
+            style: AppTextStyle.regularText(
+              size: 14,
+              color: isSelected ? AppColors.white : AppColors.textGrey1,
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 }
