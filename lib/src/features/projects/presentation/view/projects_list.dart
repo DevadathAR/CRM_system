@@ -1,5 +1,6 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/taskCard.dart';
 import 'package:crm_system/src/features/projects/model/taskModel.dart';
+import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/filterDialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
@@ -9,6 +10,7 @@ import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProjectsListPage extends StatelessWidget {
@@ -48,7 +50,9 @@ class ProjectsListPage extends StatelessWidget {
                   10.heightBox,
 
                   /// jdbkbdfkhkhsdkfhskhf
-                  _projectnameNid(),
+                  _projectnameNid(
+                    ontap: ()=> context.goNamed(ProjectDetails.route)
+                  ),
 
                   15.heightBox,
                   Row(
@@ -153,10 +157,9 @@ class ProjectsListPage extends StatelessWidget {
     );
   }
 
-  Container _projectnameNid() {
+  Container _projectnameNid({required VoidCallback ontap }) {
     return Container(
-      // margin: const EdgeInsets.symmetric(
-      //     horizontal: 4, vertical: 8), // Spacing between cards
+  // Spacing between cards
       padding: const EdgeInsets.only(right: 15, left: 0, top: 15, bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -215,7 +218,7 @@ class ProjectsListPage extends StatelessWidget {
                     CustumIconButton(
                       buttonTItle: "View details",
                       icon: nextArrowSvg,
-                      onTap: () {},
+                      onTap: ontap,
                     ),
                     const Spacer()
                   ],

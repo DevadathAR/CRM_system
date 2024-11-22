@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
@@ -12,10 +11,12 @@ import 'package:crm_system/src/features/dash_board/presentation/view/nearestEven
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
+import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+
 final router = GoRouter(
   initialLocation: '/sign-in', // Start with the Sign In page
   routes: [
@@ -79,26 +80,29 @@ final router = GoRouter(
           pageBuilder: (context, state) =>
               getCustomTransition(state, const EmployessProfile()),
         ),
-        
         GoRoute(
           path: 'vacation-page',
           name: VacationsPage.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const VacationsPage()),
         ),
-        
         GoRoute(
           path: 'my-profile',
           name: MyProfile.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const MyProfile()),
         ),
-        
         GoRoute(
           path: 'projects',
           name: ProjectsListPage.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const ProjectsListPage()),
+        ),
+        GoRoute(
+          path: 'project_details',
+          name: ProjectDetails.route,
+          pageBuilder: (context, state) =>
+              getCustomTransition(state, const ProjectDetails()),
         ),
       ],
     ),

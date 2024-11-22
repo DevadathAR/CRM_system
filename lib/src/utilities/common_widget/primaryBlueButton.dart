@@ -6,7 +6,8 @@ import 'package:velocity_x/velocity_x.dart';
 class PrimaryBlueButton extends StatelessWidget {
   final String title;
   const PrimaryBlueButton({
-    super.key, required this.title,
+    super.key,
+    required this.title,
   });
 
   @override
@@ -23,7 +24,7 @@ class PrimaryBlueButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           padding:
-              const EdgeInsets.symmetric(vertical: 12), // Consistent padding
+              const EdgeInsets.symmetric(vertical: 16), // Consistent padding
         ),
         child: title.text
             .textStyle(AppTextStyle.boldText(

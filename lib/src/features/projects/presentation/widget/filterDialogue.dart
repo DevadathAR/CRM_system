@@ -17,7 +17,7 @@ class FilterDialog extends StatefulWidget {
 }
 
 class _FilterDialogState extends State<FilterDialog> {
-  bool _isChecked = false; // Checkbox state
+  // bool _isChecked = false; // Checkbox state
 
   @override
   Widget build(BuildContext context) {
@@ -161,14 +161,16 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Row _checkboxTile({required String text, bool isImage = false}) {
+    bool isChecked = false; // Checkbox state
+
     return Row(children: [
       isImage
           ? SvgPicture.asset(iSvg)
           : Customcheckbox(
-              value: _isChecked,
+              value: isChecked,
               onChanged: (bool? value) {
                 setState(() {
-                  _isChecked = value ?? false;
+                  isChecked = value ?? false;
                 });
               },
             ),
@@ -181,12 +183,14 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Row _imgcheckboxTile({required String text, required String imgUrl}) {
+    bool isChecked = false; // Checkbox state
+
     return Row(children: [
       Customcheckbox(
-        value: _isChecked,
+        value: isChecked,
         onChanged: (bool? value) {
           setState(() {
-            _isChecked = value ?? false;
+            isChecked = value ?? false;
           });
         },
       ),
