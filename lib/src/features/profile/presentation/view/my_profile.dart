@@ -64,7 +64,7 @@ class MyProfile extends StatelessWidget {
                     16.heightBox,
                     Flexible(
                       child: Container(
-                        color: AppColors.check,
+                        color: AppColors.yellow,
                         child: Consumer<EmployeeProvider>(
                           builder: (context, tabProvider, _) {
                             return IndexedStack(

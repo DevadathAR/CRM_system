@@ -3,9 +3,9 @@ import 'package:crm_system/src/features/authentication/presentation/widget/auth_
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/strings.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -43,7 +43,10 @@ class _SignInState extends State<SignIn> {
                   .make()
                   .objectTopLeft(),
               8.heightBox,
-              const TextInputField(hintText: mailHint).pSymmetric(h: 8),
+              const TextInputField(
+                isSearch: false,
+                hintText: mailHint,
+              ).pSymmetric(h: 8),
               16.heightBox,
 
               // Password Field
@@ -53,8 +56,11 @@ class _SignInState extends State<SignIn> {
                   .make()
                   .objectTopLeft(),
               8.heightBox,
-              const TextInputField(obscureText: true, hintText: pswdHint)
-                  .pSymmetric(h: 8),
+              const TextInputField(
+                isSearch: false,
+                obscureText: true,
+                hintText: pswdHint,
+              ).pSymmetric(h: 8),
               16.heightBox,
 
               // Remember Me and Forgot Password Row
@@ -62,9 +68,7 @@ class _SignInState extends State<SignIn> {
                 [
                   HStack(
                     [
-                      Checkbox(
-                        activeColor: AppColors.white,
-                        checkColor: AppColors.blue,
+                      Customcheckbox(
                         value: _isChecked,
                         onChanged: (bool? value) {
                           setState(() {
@@ -72,10 +76,21 @@ class _SignInState extends State<SignIn> {
                           });
                         },
                       ),
+                      10.widthBox,
+                      // Checkbox(
+                      //   activeColor: AppColors.white,
+                      //   checkColor: AppColors.blue,
+                      //   value: _isChecked,
+                      //   onChanged: (bool? value) {
+                      //     setState(() {
+                      //       _isChecked = value ?? false;
+                      //     });
+                      //   },
+                      // ),
                       remember.text.size(14).color(AppColors.black).make(),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GestureDetector(
                     onTap: () {},
                     child: forgot.text.size(14).color(AppColors.textGrey1).make(),

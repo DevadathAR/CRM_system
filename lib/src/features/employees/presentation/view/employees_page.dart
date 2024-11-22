@@ -69,15 +69,16 @@ class Employees extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _tabItem(context,
+                        _tabItem(
+                          context,
                           title: 'List',
                           isSelected: tabProvider.selectedIndex == 0,
                           onTap: () {
                             tabProvider.updateIndex(0);
                           },
-                          
                         ),
-                        _tabItem(context,
+                        _tabItem(
+                          context,
                           title: 'Activity',
                           isSelected: tabProvider.selectedIndex == 1,
                           onTap: () {
@@ -104,7 +105,6 @@ class Employees extends StatelessWidget {
                   },
                 ),
               ),
-             
             ],
           ),
         ),
@@ -112,16 +112,17 @@ class Employees extends StatelessWidget {
     );
   }
 
-  Widget _tabItem(context,{
+  Widget _tabItem(
+    context, {
     required String title,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-    Size size =  MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: size.width*.4,
+        width: size.width * .4,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),

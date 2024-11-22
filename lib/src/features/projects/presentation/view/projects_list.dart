@@ -1,4 +1,6 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/taskCard.dart';
+import 'package:crm_system/src/features/projects/model/taskModel.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/filterDialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
@@ -10,7 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProjectsListPage extends StatelessWidget {
-  static  const route = 'projects';
+  static const route = 'projects';
   const ProjectsListPage({super.key});
 
   @override
@@ -64,31 +66,65 @@ class ProjectsListPage extends StatelessWidget {
                           .withRounded(value: 14)
                           .color(AppColors.white)
                           .p12
-                          .make(),
+                          .make()
+                          .onTap(
+                        () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => const FilterDialog(),
+                          );
+                        },
+                      ),
                     ],
                   ),
                   10.heightBox,
                   _greyHeadingBox(title: "Active Tasks"),
                   10.heightBox,
-                  const TaskCardWidget(
-                    progress: 6, //(progess out of 10)
-                    taskName: "Research",
-                    estimate: "2d 4h",
-                    spentTime: "1d 2h",
-                    assigneeImageUrl: dp1png, // Replace with actual URL
-                    priority: "Medium",
-                    status: "Done",
-                    statusColor: Colors.greenAccent,
+                  ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap:
+                        true, // Optional, but useful when dealing with nested lists
+
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: mockTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = mockTasks[index];
+
+                      return TaskCardWidget(
+                        isBacklog: false,
+                        progress: task.progress,
+                        taskName: task.taskName,
+                        estimate: task.estimate,
+                        spentTime: task.spentTime,
+                        assigneeImageUrl: task.assigneeImageUrl,
+                        priority: task.priority,
+                        status: task.status,
+                      );
+                    },
                   ),
-                  const TaskCardWidget(
-                    progress: 6, //(progess out of 10)
-                    taskName: "Research",
-                    estimate: "2d 4h",
-                    spentTime: "1d 2h",
-                    assigneeImageUrl: dp1png, // Replace with actual URL
-                    priority: "Low",
-                    status: "Done",
-                    statusColor: Colors.greenAccent,
+                  10.heightBox,
+                  _greyHeadingBox(title: "Backlog"),
+                  ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap:
+                        true, // Optional, but useful when dealing with nested lists
+
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: mockTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = mockTasks[index];
+
+                      return TaskCardWidget(
+                        isBacklog: true,
+                        progress: task.progress,
+                        taskName: task.taskName,
+                        estimate: task.estimate,
+                        spentTime: task.spentTime,
+                        assigneeImageUrl: task.assigneeImageUrl,
+                        priority: task.priority,
+                        status: task.status,
+                      );
+                    },
                   ),
                 ],
               ),

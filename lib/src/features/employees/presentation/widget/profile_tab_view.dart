@@ -62,6 +62,7 @@ class ProfileTabView extends StatelessWidget {
                       },
                     );
   }
+
   Widget _tabItem(
     context, {
     required String title,

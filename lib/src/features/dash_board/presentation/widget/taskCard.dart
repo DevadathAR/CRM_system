@@ -14,8 +14,8 @@ class TaskCardWidget extends StatelessWidget {
   final String assigneeImageUrl;
   final String priority;
   final String status;
-  final Color statusColor;
   final int progress;
+  final bool isBacklog;
 
   const TaskCardWidget({
     super.key,
@@ -25,8 +25,8 @@ class TaskCardWidget extends StatelessWidget {
     required this.assigneeImageUrl,
     required this.priority,
     required this.status,
-    required this.statusColor,
     required this.progress,
+    required this.isBacklog,
   });
 
   @override
@@ -35,29 +35,28 @@ class TaskCardWidget extends StatelessWidget {
       switch (status.toLowerCase()) {
         case 'done':
           return {
-            'background': AppColors.lightgreen, // Green background
-            'text': AppColors.green, // Light green text
+            'background': AppColors.lightgreen,
+            'text': AppColors.green,
           };
         case 'in progress':
           return {
-            'background': AppColors.blue.withOpacity(0.2), // Blue background
-            'text': AppColors.blue, // Light blue text
+            'background': AppColors.blue.withOpacity(0.2),
+            'text': AppColors.blue,
           };
         case 'todo':
           return {
-            'background':
-                AppColors.textGrey1.withOpacity(0.4), // Grey background
-            'text': AppColors.textGrey1, // Light grey text
+            'background': AppColors.textGrey1.withOpacity(0.4),
+            'text': AppColors.textGrey1,
           };
-        case 'In review':
+        case 'in review':
           return {
-            'background': AppColors.lightrose, // Rose background
-            'text': AppColors.rose, // Light rose text
+            'background': AppColors.rose.withOpacity(0.4),
+            'text': AppColors.rose,
           };
         default:
           return {
-            'background': AppColors.textGrey1, // Default background color
-            'text': AppColors.textGrey2, // Default text color
+            'background': AppColors.textGrey1,
+            'text': AppColors.textGrey2,
           };
       }
     }
@@ -89,19 +88,23 @@ class TaskCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _textColumn(title: "Task Name", value: taskName),
-                Transform.flip(
-                  flipX: true,
-                  child: CircularProgressIndicator(
-                    value: progressValue,
-                    strokeAlign: -3.0,
-                    strokeWidth: 2.3,
-                    strokeCap: StrokeCap.round,
-                    backgroundColor: AppColors.textGrey1.withOpacity(0.4),
-                    valueColor: AlwaysStoppedAnimation(AppColors.blue),
-                  ).onTap(
-                    () {},
-                  ),
-                ),
+                !isBacklog
+                    ? Transform.flip(
+                        flipX: true,
+                        child: CircularProgressIndicator(
+                          value: progressValue,
+                          strokeAlign: -3.0,
+                          strokeWidth: 2.3,
+                          strokeCap: StrokeCap.round,
+                          backgroundColor: AppColors.textGrey1.withOpacity(0.4),
+                          valueColor: AlwaysStoppedAnimation(AppColors.blue),
+                        ).onTap(
+                          () {},
+                        ),
+                      )
+                    : SvgPicture.asset(
+                        priority == low ? arrowDownSvg : arrowUpSvg,
+                      ),
               ],
             ),
             const SizedBox(height: 10),
@@ -129,47 +132,47 @@ class TaskCardWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-
-            // Priority and Status Row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleText("Priority"),
-                    5.heightBox,
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          priority == low ? arrowDownSvg : arrowUpSvg,
-                          // color: AppColors.yellow,
-                          height: 16,
-                          width: 16,
-                        ),
-                        10.widthBox,
-                        priority.text
-                            .textStyle(AppTextStyle.boldText(
-                                size: 14, color: AppColors.yellow))
-                            .make(),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: colors['background'],
-                    borderRadius: BorderRadius.circular(8),
+            if (isBacklog == false)
+              // Priority and Status Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      titleText("Priority"),
+                      5.heightBox,
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            priority == low ? arrowDownSvg : arrowUpSvg,
+                            // color: AppColors.yellow,
+                            height: 16,
+                            width: 16,
+                          ),
+                          10.widthBox,
+                          priority.text
+                              .textStyle(AppTextStyle.boldText(
+                                  size: 14, color: AppColors.yellow))
+                              .make(),
+                        ],
+                      ),
+                    ],
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  child: status.text
-                      .textStyle(AppTextStyle.boldText(
-                          size: 12, color: colors['text']))
-                      .make(),
-                ),
-              ],
-            ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: colors['background'],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: status.text
+                        .textStyle(AppTextStyle.boldText(
+                            size: 12, color: colors['text']))
+                        .make(),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

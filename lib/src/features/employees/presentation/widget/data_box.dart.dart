@@ -11,10 +11,10 @@ class DataBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(onTap: () {
-            context.goNamed(EmployessProfile.route);
-
-    },
+    return InkWell(
+      onTap: () {
+        context.goNamed(EmployessProfile.route);
+      },
       child: VStack(
         crossAlignment: CrossAxisAlignment.stretch,
         [

@@ -1,4 +1,5 @@
 import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,10 +13,11 @@ class TextInputField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final bool isDropDown;
   final bool viewIcon;
+  final bool isSearch;
   final String? iconName;
   final List<String>? dropDownOptions;
   const TextInputField({
-    Key? key,
+    super.key,
     this.controller,
     this.hintText,
     this.labelText,
@@ -26,7 +28,8 @@ class TextInputField extends StatefulWidget {
     this.onChanged,
     this.isDropDown = false,
     this.dropDownOptions,
-  }) : super(key: key);
+    this.isSearch = false,
+  });
 
   @override
   _TextInputFieldState createState() => _TextInputFieldState();
@@ -40,8 +43,7 @@ class _TextInputFieldState extends State<TextInputField> {
   void initState() {
     super.initState();
     _isObscured = widget.obscureText;
-    _selectedValue =
-        widget.dropDownOptions?.first; 
+    _selectedValue = widget.dropDownOptions?.first;
   }
 
   void _togglePasswordVisibility() {
@@ -57,6 +59,16 @@ class _TextInputFieldState extends State<TextInputField> {
       return SizedBox(
         height: 50,
         child: DropdownButtonFormField<String>(
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: AppColors.white,
+            labelText: widget.labelText,
+            labelStyle:
+                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(14)),
+            ),
+          ),
           value: _selectedValue,
           onChanged: (value) {
             setState(() {
@@ -76,16 +88,6 @@ class _TextInputFieldState extends State<TextInputField> {
                     ),
                   ))
               .toList(),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: AppColors.white,
-            labelText: widget.labelText,
-            labelStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),
-            ),
-          ),
         ),
       );
     } else {
@@ -102,11 +104,23 @@ class _TextInputFieldState extends State<TextInputField> {
             labelStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             hintText: widget.hintText,
+            hintStyle:
+                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             helperStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14)),
             ),
+            prefixIcon: widget.isSearch
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      searchIcon,
+                      colorFilter: ColorFilter.mode(
+                          AppColors.textGrey1, BlendMode.srcIn),
+                    ),
+                  )
+                : null,
             suffixIcon: widget.obscureText
                 ? IconButton(
                     icon: Icon(
@@ -116,12 +130,17 @@ class _TextInputFieldState extends State<TextInputField> {
                       color: AppColors.textGrey1,
                     ),
                     onPressed: _togglePasswordVisibility,
-                  ):
-                 widget.viewIcon?Padding(
-                   padding: const EdgeInsets.all(12.0),
-                   child: SizedBox(child: SvgPicture.asset(widget.iconName.toString(),colorFilter: ColorFilter.mode(AppColors.textGrey1, BlendMode.srcIn),)),
-                 )
-                : null,
+                  )
+                : widget.viewIcon
+                    ? Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset(
+                          widget.iconName.toString(),
+                          colorFilter: ColorFilter.mode(
+                              AppColors.textGrey1, BlendMode.srcIn),
+                        ),
+                      )
+                    : null,
           ),
         ),
       );
@@ -135,11 +154,11 @@ class CountryCodeField extends StatefulWidget {
   final ValueChanged<String>? onCodeChanged;
 
   const CountryCodeField({
-    Key? key,
+    super.key,
     required this.countryCodes,
     this.selectedCode,
     this.onCodeChanged,
-  }) : super(key: key);
+  });
 
   @override
   _CountryCodeFieldState createState() => _CountryCodeFieldState();
@@ -197,11 +216,11 @@ class PhoneNumberField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
 
   const PhoneNumberField({
-    Key? key,
+    super.key,
     this.controller,
     this.hintText,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +247,7 @@ class SMSCodeInput extends StatefulWidget {
   final ValueChanged<String>?
       onCodeEntered; // Callback when the complete code is entered
 
-  const SMSCodeInput({Key? key, this.onCodeEntered}) : super(key: key);
+  const SMSCodeInput({super.key, this.onCodeEntered});
 
   @override
   _SMSCodeInputState createState() => _SMSCodeInputState();

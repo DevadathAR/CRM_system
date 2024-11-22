@@ -11,16 +11,16 @@ import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep2 extends StatelessWidget {
-     static const route = 'sign-up-step-2';
+  static const route = 'sign-up-step-2';
 
   const SignUpStep2({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: VStack(
         [
           const AuthTopSide(),
-          
 
           VStack(
             [
@@ -64,7 +64,7 @@ class SignUpStep2 extends StatelessWidget {
                   .make()
                   .objectTopLeft(),
               8.heightBox,
-              RadioButtonRow(options: ['Yes', 'No']),
+              const RadioButtonRow(options: ['Yes', 'No']),
               24.heightBox,
             ],
           )
@@ -94,9 +94,8 @@ class SignUpStep2 extends StatelessWidget {
               const Spacer(),
               Buttons(
                 ontap: () {
-                                    context.goNamed(SignUpStep3.route);
-
-                  },
+                  context.goNamed(SignUpStep3.route);
+                },
                 label: 'Next Step',
                 length: 145,
                 forward: true,

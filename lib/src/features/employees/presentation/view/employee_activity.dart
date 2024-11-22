@@ -17,10 +17,7 @@ class EmployeeActivity extends StatelessWidget {
       backgroundColor: AppColors.bgWhite,
       body: SafeArea(
         child: ListView(
-          children: [
-            _employeeActivityView(),
-            PaginationView()
-          ],
+          children: [_employeeActivityView(), const PaginationView()],
         ),
       ),
     );

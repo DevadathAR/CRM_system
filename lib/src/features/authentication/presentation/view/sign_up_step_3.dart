@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep3 extends StatefulWidget {
-     static const route = 'sign-up-step-3';
+  static const route = 'sign-up-step-3';
 
   const SignUpStep3({super.key});
 
@@ -40,7 +40,6 @@ class _SignUpStep3State extends State<SignUpStep3> {
       body: VStack(
         [
           const AuthTopSide(),
-          
 
           VStack(
             [
@@ -134,9 +133,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
               const Spacer(),
               Buttons(
                 ontap: () {
-                                    context.goNamed(SignUpStep4.route);
-
- 
+                  context.goNamed(SignUpStep4.route);
                 },
                 label: 'Next Step',
                 length: 145,

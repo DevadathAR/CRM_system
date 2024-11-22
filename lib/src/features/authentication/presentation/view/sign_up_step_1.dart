@@ -5,7 +5,6 @@ import 'package:crm_system/src/utilities/common_widget/buttons.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -84,6 +83,7 @@ class SignupStep1 extends StatelessWidget {
               email.text.bold
                   .size(14)
                   .color(AppColors.textGrey1)
+                  .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),
               8.heightBox,
@@ -93,6 +93,7 @@ class SignupStep1 extends StatelessWidget {
               // Password Field
               craetepswd.text.bold
                   .size(14)
+                  .color(AppColors.textGrey1)
                   .color(AppColors.textGrey1)
                   .make()
                   .objectTopLeft(),

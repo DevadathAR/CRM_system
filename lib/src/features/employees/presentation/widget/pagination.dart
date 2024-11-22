@@ -11,9 +11,8 @@ class PaginationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-
-      margin: EdgeInsets.symmetric(horizontal: 90,vertical: 16),
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 90, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(color: AppColors.textGrey1,blurRadius: 6,offset: Offset(0, 1))],
           borderRadius: BorderRadius.all(Radius.circular(14)),

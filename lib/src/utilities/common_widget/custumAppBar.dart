@@ -36,7 +36,7 @@ class CustumAppBar extends StatelessWidget {
           actions: [
             // SVG icon for search
             IconButton(
-              icon: SvgPicture.asset(search,
+              icon: SvgPicture.asset(searchIcon,
                   width: 24, height: 24), // Replace with your SVG path
               onPressed: () {},
             ),

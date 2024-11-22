@@ -52,7 +52,7 @@ class ActivityCard extends StatelessWidget {
             icon: updateIconSvg,
             description: "Updated the status of Mind Map task to In Progress",
           ),
-           CustumIconButton(
+          CustumIconButton(
             onTap: onViewMoreTap,
             buttonTItle: "View more",
             icon: dropDownIconSvg,

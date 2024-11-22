@@ -18,7 +18,7 @@ import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DashBoard extends StatelessWidget {
-     static const route = 'dashboard';
+  static const route = 'dashboard';
 
   const DashBoard({super.key});
 

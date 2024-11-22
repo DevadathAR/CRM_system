@@ -14,12 +14,14 @@ class PersonalDataBox extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(24)),
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
           color: AppColors.white),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 alignment: Alignment.center,
@@ -46,8 +48,14 @@ class PersonalDataBox extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(padding: EdgeInsets.all(8),
-                height: 40,width: 40,decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(14)),color: AppColors.bgWhite), child: SvgPicture.asset(editSvg))
+              Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(14)),
+                      color: AppColors.bgWhite),
+                  child: SvgPicture.asset(editSvg))
             ],
           ),
           const SizedBox(
@@ -73,10 +81,18 @@ class PersonalDataBox extends StatelessWidget {
           const TextInputField(),
           _subText(label: 'Company'),
           const TextInputField(),
-          _subText(label: 'Location',),
-          const TextInputField(viewIcon: true,iconName: locationSvg,),
+          _subText(
+            label: 'Location',
+          ),
+          const TextInputField(
+            viewIcon: true,
+            iconName: locationSvg,
+          ),
           _subText(label: 'Birthday Date'),
-          const TextInputField(viewIcon: true,iconName: calenderSvg,),
+          const TextInputField(
+            viewIcon: true,
+            iconName: calenderSvg,
+          ),
           const SizedBox(
             height: 24,
           ),

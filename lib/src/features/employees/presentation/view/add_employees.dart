@@ -1,3 +1,4 @@
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:crm_system/src/utilities/colors.dart';
@@ -68,29 +69,31 @@ class AddEmployees extends StatelessWidget {
           8.heightBox,
 
           // Approve Button with VelocityX
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the dialog
-                // Add logic to handle request submission here
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 12), // Consistent padding
-              ),
-              child: "Approve"
-                  .text
-                  .textStyle(AppTextStyle.boldText(
-                    size: 16,
-                    color: AppColors.white,
-                  ))
-                  .make(),
-            ),
-          ),
+
+          PrimaryBlueButton(title: 'Approve')
+          // SizedBox(
+          //   width: double.infinity,
+          //   child: ElevatedButton(
+          //     onPressed: () {
+          //       Navigator.pop(context); // Close the dialog
+          //       // Add logic to handle request submission here
+          //     },
+          //     style: ElevatedButton.styleFrom(
+          //       backgroundColor: AppColors.blue,
+          //       shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(14),
+          //       ),
+          //       padding: const EdgeInsets.symmetric(vertical: 12), // Consistent padding
+          //     ),
+          //     child: "Approve"
+          //         .text
+          //         .textStyle(AppTextStyle.boldText(
+          //           size: 16,
+          //           color: AppColors.white,
+          //         ))
+          //         .make(),
+          //   ),
+          // ),
         ],
         // crossAxisAlignment: CrossAxisAlignment.start,
         alignment: MainAxisAlignment.start,

@@ -15,7 +15,7 @@ import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep4 extends StatefulWidget {
-     static const route = 'sign-up-step-4';
+  static const route = 'sign-up-step-4';
 
   const SignUpStep4({super.key});
 
@@ -40,8 +40,6 @@ class _SignUpStep4State extends State<SignUpStep4> {
       body: VStack(
         [
           const AuthTopSide(),
-          
-
           VStack(
             [
               "STEP 4/4"
@@ -59,21 +57,19 @@ class _SignUpStep4State extends State<SignUpStep4> {
                   .make()
                   .objectTopLeft(),
               8.heightBox,
-
               ...textFields,
-
               24.heightBox,
               HStack([
                 SvgPicture.asset(addSvg),
                 SizedBox(width: 8),
                 Text(
                   addMember,
-                  style: AppTextStyle.semiboldText(size: 16, color: AppColors.blue),
+                  style: AppTextStyle.semiboldText(
+                      size: 16, color: AppColors.blue),
                 ),
               ]).onTap(() {
                 _addTextField(); // Add a new text field when tapped
               }),
-
               16.heightBox,
             ],
           )
@@ -84,9 +80,7 @@ class _SignUpStep4State extends State<SignUpStep4> {
               .p16
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
-
           24.heightBox,
-
           HStack(
             [
               Buttons(
@@ -103,7 +97,6 @@ class _SignUpStep4State extends State<SignUpStep4> {
               Buttons(
                 ontap: () {
                   context.goNamed(SuccessPage.route);
-                 
                 },
                 label: 'Next Step',
                 length: 145,
