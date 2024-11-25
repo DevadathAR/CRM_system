@@ -13,6 +13,7 @@ import 'package:crm_system/src/features/employees/presentation/view/employess_pr
 import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
+import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -100,9 +101,15 @@ final router = GoRouter(
         ),
         GoRoute(
           path: 'project_details',
-          name: ProjectDetails.route,
+          name: ProjectDetailsPage.route,
           pageBuilder: (context, state) =>
-              getCustomTransition(state, const ProjectDetails()),
+              getCustomTransition(state, const ProjectDetailsPage()),
+        ),
+        GoRoute(
+          path: 'Task_details',
+          name: TaskDetailsPage.route,
+          pageBuilder: (context, state) =>
+              getCustomTransition(state, const TaskDetailsPage()),
         ),
       ],
     ),

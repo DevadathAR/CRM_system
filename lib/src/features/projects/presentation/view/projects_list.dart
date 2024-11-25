@@ -1,11 +1,14 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/taskCard.dart';
 import 'package:crm_system/src/features/projects/model/taskModel.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
+import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/filterDialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
+import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
 import 'package:crm_system/src/utilities/common_widget/drawer.dart';
+import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
@@ -19,119 +22,113 @@ class ProjectsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: AppColors.primaryBackGround,
-      drawer: const AppDrawerWidget(),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: AppColors.blue,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-          child: SvgPicture.asset(
-            addSvg,
-            colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-          ),
-        ),
-      ),
-      body: SafeArea(
-        child: Column(
+    // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    return CustumScaffold(
+      //  Scaffold(
+      //   key: scaffoldKey,
+      //   backgroundColor: AppColors.primaryBackGround,
+      //   drawer: const AppDrawerWidget(),
+      //   floatingActionButton: Padding(
+      //     padding: const EdgeInsets.all(8.0),
+      //     child: FloatingActionButton(
+      //       onPressed: () {},
+      //       backgroundColor: AppColors.blue,
+      //       shape:
+      //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      //       child: SvgPicture.asset(
+      //         addSvg,
+      //         colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+      //       ),
+      //     ),
+      //   ),
+      body: Expanded(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           children: [
-            const CustumAppBar(),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                children: [
-                  20.heightBox,
-                  "Projects".text.bold.size(36).make(),
-                  10.heightBox,
+            20.heightBox,
+            "Projects".text.bold.size(36).make(),
+            10.heightBox,
 
-                  /// jdbkbdfkhkhsdkfhskhf
-                  _projectnameNid(
-                    ontap: ()=> context.goNamed(ProjectDetails.route)
-                  ),
+            /// jdbkbdfkhkhsdkfhskhf
+            _projectnameNid(
+                ontap: () => context.goNamed(ProjectDetailsPage.route)),
 
-                  15.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      "Tasks"
-                          .text
-                          .textStyle(AppTextStyle.boldText(size: 22))
-                          .make(),
-                      SvgPicture.asset(
-                        taskIconSvg,
-                        color: AppColors.black,
-                      )
-                          .box
-                          .withRounded(value: 14)
-                          .color(AppColors.white)
-                          .p12
-                          .make()
-                          .onTap(
-                        () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => const FilterDialog(),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  10.heightBox,
-                  _greyHeadingBox(title: "Active Tasks"),
-                  10.heightBox,
-                  ListView.builder(
-                    padding: const EdgeInsets.all(0),
-                    shrinkWrap:
-                        true, // Optional, but useful when dealing with nested lists
+            15.heightBox,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                "Tasks".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
+                SvgPicture.asset(
+                  taskIconSvg,
+                  color: AppColors.black,
+                )
+                    .box
+                    .withRounded(value: 14)
+                    .color(AppColors.white)
+                    .p12
+                    .make()
+                    .onTap(
+                  () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const FilterDialog(),
+                    );
+                  },
+                ),
+              ],
+            ),
+            10.heightBox,
+            _greyHeadingBox(title: "Active Tasks"),
+            10.heightBox,
+            ListView.builder(
+              padding: const EdgeInsets.all(0),
+              shrinkWrap:
+                  true, // Optional, but useful when dealing with nested lists
 
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: mockTasks.length,
-                    itemBuilder: (context, index) {
-                      final task = mockTasks[index];
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: mockTasks.length,
+              itemBuilder: (context, index) {
+                final task = mockTasks[index];
 
-                      return TaskCardWidget(
-                        isBacklog: false,
-                        progress: task.progress,
-                        taskName: task.taskName,
-                        estimate: task.estimate,
-                        spentTime: task.spentTime,
-                        assigneeImageUrl: task.assigneeImageUrl,
-                        priority: task.priority,
-                        status: task.status,
-                      );
-                    },
-                  ),
-                  10.heightBox,
-                  _greyHeadingBox(title: "Backlog"),
-                  ListView.builder(
-                    padding: const EdgeInsets.all(0),
-                    shrinkWrap:
-                        true, // Optional, but useful when dealing with nested lists
+                return TaskCardWidget(
+                  isBacklog: false,
+                  progress: task.progress,
+                  taskName: task.taskName,
+                  estimate: task.estimate,
+                  spentTime: task.spentTime,
+                  assigneeImageUrl: task.assigneeImageUrl,
+                  priority: task.priority,
+                  status: task.status,
+                  onTap: () {
+                    context.pushNamed(TaskDetailsPage.route);
+                  },
+                );
+              },
+            ),
+            10.heightBox,
+            _greyHeadingBox(title: "Backlog"),
+            ListView.builder(
+              padding: const EdgeInsets.all(0),
+              shrinkWrap:
+                  true, // Optional, but useful when dealing with nested lists
 
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: mockTasks.length,
-                    itemBuilder: (context, index) {
-                      final task = mockTasks[index];
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: mockTasks.length,
+              itemBuilder: (context, index) {
+                final task = mockTasks[index];
 
-                      return TaskCardWidget(
-                        isBacklog: true,
-                        progress: task.progress,
-                        taskName: task.taskName,
-                        estimate: task.estimate,
-                        spentTime: task.spentTime,
-                        assigneeImageUrl: task.assigneeImageUrl,
-                        priority: task.priority,
-                        status: task.status,
-                      );
-                    },
-                  ),
-                ],
-              ),
+                return TaskCardWidget(
+                  isBacklog: true,
+                  progress: task.progress,
+                  taskName: task.taskName,
+                  estimate: task.estimate,
+                  spentTime: task.spentTime,
+                  assigneeImageUrl: task.assigneeImageUrl,
+                  priority: task.priority,
+                  status: task.status,
+                  onTap: () => context.pushNamed(TaskDetailsPage.route),
+                );
+              },
             ),
           ],
         ),
@@ -157,9 +154,9 @@ class ProjectsListPage extends StatelessWidget {
     );
   }
 
-  Container _projectnameNid({required VoidCallback ontap }) {
+  Container _projectnameNid({required VoidCallback ontap}) {
     return Container(
-  // Spacing between cards
+      // Spacing between cards
       padding: const EdgeInsets.only(right: 15, left: 0, top: 15, bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -192,26 +189,35 @@ class ProjectsListPage extends StatelessWidget {
                         size: 12, color: AppColors.textGrey2))
                     .make()
                     .pOnly(left: 10),
-                Row(
-                  children: [
-                    // Title
-                    Expanded(
-                      child: "Medical App (iOS native)"
-                          .toString()
-                          .text
-                          .maxLines(2)
-                          .overflow(TextOverflow.ellipsis)
-                          .textStyle(AppTextStyle.boldText(size: 16))
-                          .make()
-                          .pOnly(left: 10),
-                    ),
-                    // Icon
-                    SvgPicture.asset(
-                      dropDownIconSvg,
-                      color: AppColors.black,
-                    )
+                const TextInputField(
+                  isBorder: false,
+                  isDropDown: true,
+                  dropDownOptions: [
+                    "Medical App (iOS native",
+                    "Food Delivery Service",
+                    "Food Delivery ",
                   ],
                 ),
+                // Row(
+                //   children: [
+                //     // Title
+                //     Expanded(
+                //       child: "Medical App (iOS native)"
+                //           .toString()
+                //           .text
+                //           .maxLines(2)
+                //           .overflow(TextOverflow.ellipsis)
+                //           .textStyle(AppTextStyle.boldText(size: 16))
+                //           .make()
+                //           .pOnly(left: 10),
+                //     ),
+                //     // Icon
+                //     SvgPicture.asset(
+                //       dropDownIconSvg,
+                //       color: AppColors.black,
+                //     )
+                //   ],
+                // ),
                 10.heightBox,
                 Row(
                   children: [

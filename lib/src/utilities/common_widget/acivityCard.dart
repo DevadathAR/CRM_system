@@ -8,8 +8,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ActivityCard extends StatelessWidget {
+  final String heading;
+  final double headingSize;
   final VoidCallback onViewMoreTap;
-  const ActivityCard({super.key, required this.onViewMoreTap});
+  const ActivityCard(
+      {super.key, required this.onViewMoreTap, required this.headingSize, required this.heading});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,11 @@ class ActivityCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          "Activity Stream"
+          heading
               .text
-              .textStyle(AppTextStyle.boldText(size: 22))
+              .textStyle(AppTextStyle.boldText(size: headingSize))
               .make(),
-          10.heightBox,
+          24.heightBox,
           const UserInfo(
             name: "Oscar Holloway",
             role: "UI/UX Designer",

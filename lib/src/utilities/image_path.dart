@@ -20,6 +20,7 @@ const addSvg = 'assets/svg/add.svg';
 const successSvg = 'assets/svg/success.svg';
 const updateIconSvg = 'assets/svg/updateIcon.svg';
 const attachIconSvg = 'assets/svg/attachicon.svg';
+const linkIconSvg = 'assets/svg/linkicon.svg';
 const buildingSvg = 'assets/svg/building.svg';
 const personsSvg = 'assets/svg/persons.svg';
 const giftSvg = 'assets/svg/gift.svg';

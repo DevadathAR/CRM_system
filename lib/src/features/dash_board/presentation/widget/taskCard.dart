@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TaskCardWidget extends StatelessWidget {
+  final VoidCallback onTap;
   final String taskName;
   final String estimate;
   final String spentTime;
@@ -26,7 +27,7 @@ class TaskCardWidget extends StatelessWidget {
     required this.priority,
     required this.status,
     required this.progress,
-    required this.isBacklog,
+    required this.isBacklog, required this.onTap,
   });
 
   @override
@@ -175,7 +176,7 @@ class TaskCardWidget extends StatelessWidget {
               ),
           ],
         ),
-      ),
+      ).onTap(onTap),
     );
   }
 

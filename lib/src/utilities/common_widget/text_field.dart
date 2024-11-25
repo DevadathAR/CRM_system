@@ -14,6 +14,7 @@ class TextInputField extends StatefulWidget {
   final bool isDropDown;
   final bool viewIcon;
   final bool isSearch;
+  final bool isBorder;
   final String? iconName;
   final List<String>? dropDownOptions;
   const TextInputField({
@@ -29,6 +30,7 @@ class TextInputField extends StatefulWidget {
     this.isDropDown = false,
     this.dropDownOptions,
     this.isSearch = false,
+    this.isBorder = true,
   });
 
   @override
@@ -65,9 +67,24 @@ class _TextInputFieldState extends State<TextInputField> {
             labelText: widget.labelText,
             labelStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),
-            ),
+            enabledBorder: widget.isBorder
+                ? OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.textGrey1),
+                  )
+                : InputBorder.none,
+            focusedBorder: widget.isBorder
+                ? OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.textGrey1),
+                  )
+                : InputBorder.none,
+            border: widget.isBorder
+                ? OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.textGrey1),
+                  )
+                : InputBorder.none,
           ),
           value: _selectedValue,
           onChanged: (value) {
@@ -184,7 +201,8 @@ class _CountryCodeFieldState extends State<CountryCodeField> {
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(14)),
           ),
-          labelStyle: AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+          labelStyle:
+              AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
         ),
         items: widget.countryCodes.map((code) {
           return DropdownMenuItem<String>(
@@ -233,7 +251,8 @@ class PhoneNumberField extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: hintText ?? "Enter phone number",
-          hintStyle: AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+          hintStyle:
+              AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(14)),
           ),
@@ -304,7 +323,8 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             maxLength: 1,
-            style: AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
+            style:
+                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             decoration: InputDecoration(
               counterText: '', // Hides the character counter
               border: OutlineInputBorder(

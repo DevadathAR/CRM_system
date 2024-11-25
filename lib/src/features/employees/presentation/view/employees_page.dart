@@ -3,6 +3,7 @@ import 'package:crm_system/src/features/employees/presentation/view/employees_li
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
+import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
@@ -16,30 +17,28 @@ class Employees extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-    return Scaffold(
-      key: scaffoldKey,
-      drawer: const AppDrawerWidget(),
-      backgroundColor: AppColors.bgWhite,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.blue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(1500),
-        ),
-        onPressed: () {},
-        child: SvgPicture.asset(
-          addSvg,
-          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-        ),
-      ),
-      body: SafeArea(
-        child: ChangeNotifierProvider(
-          create: (_) => EmployeeProvider(),
+    return CustumScaffold(
+      //  Scaffold(
+      //   key: scaffoldKey,
+      //   drawer: const AppDrawerWidget(),
+      //   backgroundColor: AppColors.bgWhite,
+      //   floatingActionButton: FloatingActionButton(
+      //     backgroundColor: AppColors.blue,
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(1500),
+      //     ),
+      //     onPressed: () {},
+      //     child: SvgPicture.asset(
+      //       addSvg,
+      //       colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+      //     ),
+      //   ),
+      body: ChangeNotifierProvider(
+        create: (_) => EmployeeProvider(),
+        child: Expanded(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustumAppBar(),
-              24.heightBox,
               'Employees (28)'
                   .text
                   .align(TextAlign.start)
