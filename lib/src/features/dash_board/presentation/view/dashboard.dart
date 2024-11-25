@@ -30,28 +30,7 @@ class DashBoard extends StatelessWidget {
     final formattedDate =
         DateFormat('MMM dd, yyyy').format(now); // Format the date
 
-    return CustumScaffold(
-      // Scaffold(
-      //   key: scaffoldKey,
-      //   backgroundColor: AppColors.primaryBackGround,
-      //   drawer: const AppDrawerWidget(
-      //       // currentPath: "Dashboard",
-      //       ),
-      //   drawerEnableOpenDragGesture: true, // Disables swipe gesture
-
-      //   floatingActionButton: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: FloatingActionButton(
-      //       onPressed: () {},
-      //       backgroundColor: AppColors.blue,
-      //       shape:
-      //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-      //       child: SvgPicture.asset(
-      //         addSvg,
-      //         colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-      //       ),
-      //     ),
-      //   ),
+    return CustumScaffold(   
       body: Expanded(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15),

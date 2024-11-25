@@ -6,14 +6,18 @@ class IconBox extends StatelessWidget {
   final String icon;
   final Color backgroundColor;
   final Color? iconColor;
-  final VoidCallback? ontap;
+  final VoidCallback ?ontap;
+  final double vp;
+  final double hp;
 
   const IconBox({
-    Key? key,
+    super.key,
     required this.icon,
     required this.backgroundColor,
-    this.iconColor,  this.ontap,
-  }) : super(key: key);
+    this.iconColor,
+    this.vp = 8,
+    this.hp = 8,  this.ontap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +27,7 @@ class IconBox extends StatelessWidget {
       // colorFilter: ColorFilter.mode(iconColor ?? AppColors.black, BlendMode.srcIn),
     )
         .box
-        
-        .p8
+        .padding(EdgeInsets.symmetric(vertical: vp, horizontal: hp))
         .withRounded(value: 14)
         .color(backgroundColor)
         .make()

@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/projects/presentation/widget/statusContainer.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
@@ -27,42 +28,13 @@ class TaskCardWidget extends StatelessWidget {
     required this.priority,
     required this.status,
     required this.progress,
-    required this.isBacklog, required this.onTap,
+    required this.isBacklog,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Color> getStatusColors(String status) {
-      switch (status.toLowerCase()) {
-        case 'done':
-          return {
-            'background': AppColors.lightgreen,
-            'text': AppColors.green,
-          };
-        case 'in progress':
-          return {
-            'background': AppColors.blue.withOpacity(0.2),
-            'text': AppColors.blue,
-          };
-        case 'todo':
-          return {
-            'background': AppColors.textGrey1.withOpacity(0.4),
-            'text': AppColors.textGrey1,
-          };
-        case 'in review':
-          return {
-            'background': AppColors.rose.withOpacity(0.4),
-            'text': AppColors.rose,
-          };
-        default:
-          return {
-            'background': AppColors.textGrey1,
-            'text': AppColors.textGrey2,
-          };
-      }
-    }
-
-    final colors = getStatusColors(status);
+   
     final double progressValue = progress / 10;
 
     return Padding(
@@ -160,18 +132,7 @@ class TaskCardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: colors['background'],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    child: status.text
-                        .textStyle(AppTextStyle.boldText(
-                            size: 12, color: colors['text']))
-                        .make(),
-                  ),
+                  StatusContainer(status: status),
                 ],
               ),
           ],

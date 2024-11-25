@@ -1,8 +1,10 @@
 import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/common_widget/calanderAndCreatedat.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
+import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,12 +12,15 @@ import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProjectDetailsPage extends StatelessWidget {
+  // final String priority;
+
   static const route = 'project_details';
 
   const ProjectDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const String priority = "Medium";
     return CustumScaffold(
       body: Expanded(
         child: Column(
@@ -109,14 +114,44 @@ class ProjectDetailsPage extends StatelessWidget {
                         ),
                         8.heightBox,
                         // greyTitle(text: "Assignees"),
-                        _buildStackedImages(
-                          imageUrls: [
-                            dp1png,
-                            dp2png,
-                            dp3png,
-                            dp1png,
-                            dp1png,
-                            dp2png
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildStackedImages(
+                              imageUrls: [
+                                dp1png,
+                                dp2png,
+                                dp3png,
+                                dp1png,
+                                dp1png,
+                                dp2png
+                              ],
+                            ),
+                            // priority
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                greyTitle(text: "Priority"),
+                                8.heightBox,
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      priority == low
+                                          ? arrowDownSvg
+                                          : arrowUpSvg,
+                                      // color: AppColors.yellow,
+                                      height: 16,
+                                      width: 16,
+                                    ),
+                                    10.widthBox,
+                                    priority.text
+                                        .textStyle(AppTextStyle.boldText(
+                                            size: 14, color: AppColors.yellow))
+                                        .make(),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         20.heightBox,
@@ -128,18 +163,10 @@ class ProjectDetailsPage extends StatelessWidget {
                                 size: 16, color: AppColors.lightblack))
                             .make(),
                         20.heightBox,
-                        Row(
-                          children: [
-                            SvgPicture.asset(calendarGreySvg),
-                            10.widthBox,
-                            "Created May 28, 2020"
-                                .text
-                                .textStyle(AppTextStyle.semiboldText(
-                                    size: 14, color: AppColors.textGrey1))
-                                .make(),
-                          ],
-                        ),
+                        // the calendr and its side text
+                        const CalenderAndCreatedat(),
                         36.heightBox,
+                        // iconrow
                         Row(
                           children: [
                             IconBox(
@@ -166,8 +193,6 @@ class ProjectDetailsPage extends StatelessWidget {
       ),
     );
   }
-
-  
 
   Widget greyTitle({required String text}) {
     return Text(
@@ -247,7 +272,7 @@ class ProjectDetailsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         greyTitle(text: "Assignees"),
-        10.heightBox,
+        6.heightBox,
         SizedBox(
           height: 45, // Control the height of the stack container
           width: 110 +
