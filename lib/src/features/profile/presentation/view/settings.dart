@@ -1,5 +1,7 @@
 import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
+import 'package:crm_system/src/features/profile/presentation/widget/expantion_tile.dart';
 import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -13,7 +15,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
-  static String route ='settings';
+  static String route = 'settings';
   const Settings({super.key});
 
   @override
@@ -23,255 +25,198 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   // To track the expanded tile
   final ValueNotifier<Key?> _expandedItem = ValueNotifier<Key?>(null);
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return CustumScaffold(
-      
       body: Expanded(
         child: Padding(
-padding: const EdgeInsets.only(
-            top: 24.0, right: 24, left: 24, bottom: 16),  
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+          padding:
+              const EdgeInsets.only(top: 24.0, right: 24, left: 24, bottom: 16),
+          child: ListView(
             children: [
               Align(
-              alignment: Alignment.topLeft,
-              child: CustumIconButton(
-                isPrefix: true,
-                buttonTItle: "Back to Profile",
-                icon: arrowBackSvg,
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
+                alignment: Alignment.topLeft,
+                child: CustumIconButton(
+                  isPrefix: true,
+                  buttonTItle: "Back to Profile",
+                  icon: arrowBackSvg,
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
-            ),
-            16.heightBox,
-            // Title
-            Text(
-              'Settings',
-              style: AppTextStyle.boldText(size: 22, color: AppColors.black),
-            ),
+              16.heightBox,
+              // Title
+              Text(
+                'Settings',
+                style: AppTextStyle.boldText(size: 22, color: AppColors.black),
+              ),
 
-            
-              CustomExpansionTile(
-                key: const Key('tile_1'),
-                title: Container()
-                
-                
-                ,
-                expandedItem: _expandedItem,
-                children: [
-                  ListTile(
-                    title: const Text('Edit Name'),
-                    onTap: () => print('Edit Name tapped'),
-                  ),
-                  ListTile(
-                    title: const Text('Change Profile Picture'),
-                    onTap: () => print('Change Profile Picture tapped'),
-                  ),
-                ],
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                margin: EdgeInsets.only(top: 16),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                    color: AppColors.white),
+                child: Column(
+                  children: [
+                    CustomExpansionTile(
+                      key: const Key('tile_1'),
+                      label: 'Account',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [Text('data')],
+                    ),
+                    CustomExpansionTile(
+                      key: const Key('tile_2'),
+                      label: 'Notification',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [
+                        Column(
+                          children: [
+                            _notificationBox(
+                                header: 'Issue Activity',
+                                data:
+                                    'Send me email notifications for issue activity'),
+                            16.heightBox,
+                            _notificationBox(
+                                header: 'Tracking Activity',
+                                data:
+                                    'Send me notifications when someone’ve tracked time in tasks'),
+                            16.heightBox,
+                            _notificationBox(
+                                header: 'New Comments',
+                                data:
+                                    'Send me notifications when someone’ve sent the comment'),
+                            16.heightBox,
+                            HStack(
+                              [
+                                Customcheckbox(
+                                  value: _isChecked,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      _isChecked = value ?? false;
+                                    });
+                                  },
+                                ),
+                                10.widthBox,
+                                Flexible(
+                                  child: Text(
+                                    "Don't send me notifications after 9:00 PM",
+                                    softWrap: true,
+                                    style: AppTextStyle.regularText(
+                                        size: 16, color: AppColors.black),
+                                  ),
+                                )
+                              ],
+                            ).px16(),
+                          ],
+                        )
+                      ],
+                    ),
+                    CustomExpansionTile(
+                      key: const Key('tile_3'),
+                      label: 'My Company',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [Text('data')],
+                    ),
+                    CustomExpansionTile(
+                      key: const Key('tile_4'),
+                      label: 'Connected Apps',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [Text('data')],
+                    ),
+                    CustomExpansionTile(
+                      key: const Key('tile_5'),
+                      label: 'Payments',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [Text('data')],
+                    ),
+                    CustomExpansionTile(
+                      key: const Key('tile_6'),
+                      label: 'Confidentaility',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [Text('data')],
+                    ),
+                    CustomExpansionTile(
+                      key: const Key('tile_7'),
+                      label: 'Safety',
+                      icon: addSvg,
+                      expandedItem: _expandedItem,
+                      children: [Text('data')],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 16),
-          
             ],
           ),
         ),
       ),
     );
   }
-}
 
+  StatefulBuilder _notificationBox({header, data}) {
+    bool isToggled = false; // Local state variable for toggle switch
 
-
-
-const Duration _kExpand = Duration(milliseconds: 200);
-
-class CustomExpansionTile extends StatefulWidget {
-  const CustomExpansionTile({
-    super.key,
-    this.leading,
-    required this.title,
-    this.backgroundColor,
-    this.children = const <Widget>[],
-    this.trailing,
-    required this.expandedItem,
-    this.padding,
-    this.crossAxisAlignment,
-  });
-
-  /// A widget to display before the title.
-  ///
-  /// Typically a [CircleAvatar] widget.
-  final Widget? leading;
-
-  /// The primary content of the list item.
-  ///
-  /// Typically a [Text] widget.
-  final Widget title;
-
-  /// The widgets that are displayed when the tile expands.
-  ///
-  /// Typically [ListTile] widgets.
-  final List<Widget> children;
-
-  /// The color to display behind the sublist when expanded.
-  final Color? backgroundColor;
-
-  /// A widget to display instead of a rotating arrow icon.
-  final Widget? trailing;
-
-  // Alignment of children in column
-  final CrossAxisAlignment? crossAxisAlignment;
-
-  final ValueNotifier<Key?> expandedItem;
-
-  final EdgeInsets? padding;
-
-  @override
-  _CustomExpansionTileState createState() => _CustomExpansionTileState();
-}
-
-class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTickerProviderStateMixin {
-  static final Animatable<double> _easeOutTween = CurveTween(curve: Curves.easeOut);
-  static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
-  static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);
-
-  final ColorTween _borderColorTween = ColorTween();
-  final ColorTween _headerColorTween = ColorTween();
-  final ColorTween _iconColorTween = ColorTween();
-  final ColorTween _backgroundColorTween = ColorTween();
-
-  late AnimationController _controller;
-  late Animation<double> _iconTurns;
-  late Animation<double> _heightFactor;
-  late Animation<Color?> _borderColor;
-  late Animation<Color?> _headerColor;
-  late Animation<Color?> _iconColor;
-  late Animation<Color?> _backgroundColor;
-
-  bool _isExpanded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(duration: _kExpand, vsync: this);
-    _heightFactor = _controller.drive(_easeInTween);
-    _iconTurns = _controller.drive(_halfTween.chain(_easeInTween));
-    _borderColor = _controller.drive(_borderColorTween.chain(_easeOutTween));
-    _headerColor = _controller.drive(_headerColorTween.chain(_easeInTween));
-    _iconColor = _controller.drive(_iconColorTween.chain(_easeInTween));
-    _backgroundColor = _controller.drive(_backgroundColorTween.chain(_easeOutTween));
-
-    _isExpanded = widget.expandedItem.value == widget.key;
-    if (_isExpanded) _controller.value = 1.0;
-
-    widget.expandedItem.addListener(listener);
-  }
-
-  void listener() {
-    setState(() {
-      _changeState(widget.expandedItem.value == widget.key);
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    widget.expandedItem.removeListener(listener);
-    super.dispose();
-  }
-
-  void _changeState(bool isExpanded) {
-    setState(() {
-      _isExpanded = isExpanded;
-      if (_isExpanded) {
-        _controller.forward();
-      } else {
-        _controller.reverse().then<void>((void value) {
-          if (!mounted) return;
-          setState(() {
-            // Rebuild without widget.children.
-          });
-        });
-      }
-      PageStorage.of(context).writeState(context, _isExpanded);
-    });
-  }
-
-  void _handleTap() {
-    _changeState(!_isExpanded);
-    widget.expandedItem.value = _isExpanded ? widget.key : const ValueKey(-1);
-  }
-
-  Widget _buildChildren(BuildContext context, Widget? child) {
-    final Color borderSideColor = _borderColor.value ?? Colors.transparent;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: _backgroundColor.value ?? Colors.transparent,
-        border: Border(
-          top: BorderSide(color: borderSideColor),
-          bottom: BorderSide(color: borderSideColor),
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTileTheme.merge(
-            iconColor: _iconColor.value,
-            textColor: _headerColor.value,
-            child: ListTile(
-              contentPadding: widget.padding ?? EdgeInsets.zero,
-              onTap: _handleTap,
-              leading: widget.leading,
-              title: 
-              Row(children: [SvgPicture.asset(editSvg),const Text('pass data')],),
-              trailing: widget.trailing ??
-                  RotationTransition(
-                    turns: _iconTurns,
-                    child: const Icon(Icons.expand_more),
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Container(
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(14)),
+            color: AppColors.bgWhite,
+          ),
+          padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12), // Add padding for better appearance
+          child: Row(
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween, // Space between text and toggle
+            children: [
+              Flexible(
+                child: SizedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        header,
+                        style: AppTextStyle.boldText(
+                            size: 14, color: AppColors.black),
+                      ),
+                      SizedBox(
+                          height: 4), // Add spacing between title and subtitle
+                      Text(
+                        softWrap: true,
+                        data,
+                        style: AppTextStyle.regularText(
+                            size: 12, color: AppColors.textGrey1),
+                      ),
+                    ],
                   ),
-            ),
+                ),
+              ),
+              Switch(
+                value: isToggled,
+                activeColor: AppColors.blue, // Customize active toggle color
+                onChanged: (bool value) {
+                  setState(() {
+                    isToggled = value; // Update the toggle state
+                  });
+                },
+              ),
+            ],
           ),
-          ClipRect(
-            child: Align(
-              heightFactor: _heightFactor.value,
-              child: child,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    final ThemeData theme = Theme.of(context);
-    // _borderColorTween.end = theme.dividerColor;
-    _borderColorTween.end = Colors.transparent;
-    _headerColorTween
-      ..begin = theme.textTheme.titleMedium?.color
-      ..end = theme.colorScheme.secondary;
-    _iconColorTween
-      ..begin = theme.unselectedWidgetColor
-      ..end = theme.colorScheme.secondary;
-    _backgroundColorTween.end = widget.backgroundColor;
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final bool closed = !_isExpanded && _controller.isDismissed;
-    return AnimatedBuilder(
-      animation: _controller.view,
-      builder: _buildChildren,
-      child: closed ? null : Column(crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.center, children: widget.children),
+        );
+      },
     );
   }
 }
-
-
-
-
-
