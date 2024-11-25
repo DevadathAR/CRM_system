@@ -6,13 +6,17 @@ class IconBox extends StatelessWidget {
   final String icon;
   final Color backgroundColor;
   final Color? iconColor;
+  final double vp;
+  final double hp;
 
   const IconBox({
-    Key? key,
+    super.key,
     required this.icon,
     required this.backgroundColor,
     this.iconColor,
-  }) : super(key: key);
+    this.vp = 8,
+    this.hp = 8,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class IconBox extends StatelessWidget {
       // colorFilter: ColorFilter.mode(iconColor ?? AppColors.black, BlendMode.srcIn),
     )
         .box
-        .p8
+        .padding(EdgeInsets.symmetric(vertical: vp, horizontal: hp))
         .withRounded(value: 14)
         .color(backgroundColor)
         .make();

@@ -12,7 +12,10 @@ class ActivityCard extends StatelessWidget {
   final double headingSize;
   final VoidCallback onViewMoreTap;
   const ActivityCard(
-      {super.key, required this.onViewMoreTap, required this.headingSize, required this.heading});
+      {super.key,
+      required this.onViewMoreTap,
+      required this.headingSize,
+      required this.heading});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +28,7 @@ class ActivityCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          heading
-              .text
+          heading.text
               .textStyle(AppTextStyle.boldText(size: headingSize))
               .make(),
           24.heightBox,
@@ -59,7 +61,7 @@ class ActivityCard extends StatelessWidget {
             onTap: onViewMoreTap,
             buttonTItle: "View more",
             icon: dropDownIconSvg,
-          )
+          ).centered()
         ],
       ),
     );

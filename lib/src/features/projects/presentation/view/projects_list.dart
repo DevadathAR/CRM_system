@@ -1,4 +1,4 @@
-import 'package:crm_system/src/features/dash_board/presentation/widget/taskCard.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/taskCard.dart';
 import 'package:crm_system/src/features/projects/model/taskModel.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
@@ -24,23 +24,6 @@ class ProjectsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return CustumScaffold(
-      //  Scaffold(
-      //   key: scaffoldKey,
-      //   backgroundColor: AppColors.primaryBackGround,
-      //   drawer: const AppDrawerWidget(),
-      //   floatingActionButton: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: FloatingActionButton(
-      //       onPressed: () {},
-      //       backgroundColor: AppColors.blue,
-      //       shape:
-      //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-      //       child: SvgPicture.asset(
-      //         addSvg,
-      //         colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-      //       ),
-      //     ),
-      //   ),
       body: Expanded(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -198,26 +181,7 @@ class ProjectsListPage extends StatelessWidget {
                     "Food Delivery ",
                   ],
                 ),
-                // Row(
-                //   children: [
-                //     // Title
-                //     Expanded(
-                //       child: "Medical App (iOS native)"
-                //           .toString()
-                //           .text
-                //           .maxLines(2)
-                //           .overflow(TextOverflow.ellipsis)
-                //           .textStyle(AppTextStyle.boldText(size: 16))
-                //           .make()
-                //           .pOnly(left: 10),
-                //     ),
-                //     // Icon
-                //     SvgPicture.asset(
-                //       dropDownIconSvg,
-                //       color: AppColors.black,
-                //     )
-                //   ],
-                // ),
+               
                 10.heightBox,
                 Row(
                   children: [
