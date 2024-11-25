@@ -14,8 +14,10 @@ class TextInputField extends StatefulWidget {
   final bool isDropDown;
   final bool viewIcon;
   final bool isSearch;
+  final bool isPrefix;
   final bool isBorder;
   final String? iconName;
+  final String? viewprefix;
   final List<String>? dropDownOptions;
   const TextInputField({
     super.key,
@@ -30,7 +32,9 @@ class TextInputField extends StatefulWidget {
     this.isDropDown = false,
     this.dropDownOptions,
     this.isSearch = false,
-    this.isBorder = true,
+    this.isPrefix= false,
+    this.isBorder = true, 
+    this.viewprefix,
   });
 
   @override
@@ -62,6 +66,16 @@ class _TextInputFieldState extends State<TextInputField> {
         height: 50,
         child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
+            prefixIcon: widget.isPrefix
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      widget.viewprefix.toString(),
+                      colorFilter: ColorFilter.mode(
+                          AppColors.textGrey1, BlendMode.srcIn),
+                    ),
+                  )
+                : null,
             filled: true,
             fillColor: AppColors.white,
             labelText: widget.labelText,
@@ -125,8 +139,8 @@ class _TextInputFieldState extends State<TextInputField> {
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             helperStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),
+            border:  OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(14)),borderSide: BorderSide(color: AppColors.textGrey1)
             ),
             prefixIcon: widget.isSearch
                 ? Padding(

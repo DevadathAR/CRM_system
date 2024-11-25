@@ -7,11 +7,12 @@ import 'package:flutter_svg/svg.dart';
 
 class CustumScaffold extends StatelessWidget {
   // final String? route;
+  final VoidCallback ? ontap;
 
   final Widget body;
   CustumScaffold({
     super.key,
-    required this.body,
+    required this.body,  this.ontap,
     // this.route,
   });
 
@@ -26,7 +27,7 @@ class CustumScaffold extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: ontap,
           backgroundColor: AppColors.blue,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),

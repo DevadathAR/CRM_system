@@ -46,7 +46,8 @@ class NearesteventsPage extends StatelessWidget {
                   icon: arrowBackSvg,
                   onTap: () {
                      context.pop();
-                  }),
+                  }
+                  ),
               " Nearest Events"
                   .text
                   .textStyle(AppTextStyle.boldText(size: 22))

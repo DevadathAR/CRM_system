@@ -37,6 +37,7 @@ const logOutIconSvg = 'assets/svg/logouticon.svg';
 const closeIconSvg = 'assets/svg/closeIcon.svg';
 const roundCloseIconSvg = 'assets/svg/roundCloseIcon.svg';
 const taskIconSvg = 'assets/svg/taskicon.svg';
+const settingsSVg = 'assets/svg/settings.svg';
 
 // Png files
 const dp1png = "assets/svg/image1.png";

@@ -99,7 +99,8 @@ class _FilterDialogState extends State<FilterDialog> {
                   CustumIconButton(
                       buttonTItle: "View more",
                       icon: dropDownIconSvg,
-                      onTap: () {}),
+                      onTap: () {}
+                      ),
                   const Spacer()
                 ],
               )

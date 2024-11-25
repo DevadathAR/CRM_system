@@ -105,7 +105,7 @@ class DashBoard extends StatelessWidget {
                             childAspectRatio: 1.0),
                     itemCount: 6, // Number of items
                     itemBuilder: (context, index) {
-                      return const workloadItem();
+                      return  workloadItem(bgColor:  AppColors.backgroindGrey1,);
                     },
                     shrinkWrap: true,
                     physics:

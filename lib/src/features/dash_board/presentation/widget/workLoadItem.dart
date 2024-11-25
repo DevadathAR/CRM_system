@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class workloadItem extends StatelessWidget {
+  final Color bgColor;
   const workloadItem({
-    super.key,
+    super.key, required this.bgColor,
   });
 
   @override
@@ -14,7 +15,7 @@ class workloadItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.backgroindGrey1,
+        color: bgColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: VStack(

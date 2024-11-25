@@ -4,17 +4,18 @@ import 'package:crm_system/src/features/employees/presentation/widget/filter_row
 import 'package:crm_system/src/features/employees/presentation/widget/personal_data_box.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/profile_tab_view.dart';
 import 'package:crm_system/src/features/profile/model/profiile_project_model.dart';
+import 'package:crm_system/src/features/profile/presentation/view/settings.dart';
 import 'package:crm_system/src/features/profile/presentation/widget/profile_vacation.dart';
-import 'package:crm_system/src/features/vaccations/presentation/widget/vacation_body.dart';
+import 'package:crm_system/src/services/routeServices.dart';
 import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
+import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
-import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
-import 'package:crm_system/src/utilities/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -24,33 +25,41 @@ class MyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const AppDrawerWidget(),
-      backgroundColor: AppColors.bgWhite,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.blue,
-        shape: const CircleBorder(),
-        onPressed: () => showDialog(
+    return CustumScaffold(ontap: () => showDialog(
           context: context,
           builder: (_) => AddEmployees(),
         ),
-        child: SvgPicture.asset(
-          addSvg,
-          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-        ),
-      ),
-      body: SafeArea(
+      // drawer: const AppDrawerWidget(),
+      // backgroundColor: AppColors.bgWhite,
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: AppColors.blue,
+      //   shape: const CircleBorder(),
+      //   onPressed: () => showDialog(
+      //     context: context,
+      //     builder: (_) => AddEmployees(),
+      //   ),
+      //   child: SvgPicture.asset(
+      //     addSvg,
+      //     colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+      //   ),
+      // ),
+      body: Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustumAppBar(),
             24.heightBox,
-            "My Profile"
-                .text
-                .size(36)
-                .color(AppColors.black)
-                .make()
-                .pSymmetric(h: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                "My Profile".text.size(36).color(AppColors.black).make(),
+                IconBox(
+                  icon: settingsSVg,
+                  backgroundColor: AppColors.white,
+                  ontap: 
+                  () =>context .goNamed(Settings.route),
+                )
+              ],
+            ).pSymmetric(h: 24),
             8.heightBox,
             Expanded(
               child: Padding(
@@ -62,21 +71,16 @@ class MyProfile extends StatelessWidget {
                     16.heightBox,
                     const ProfileTabView(),
                     16.heightBox,
-                    Flexible(
-                      child: Container(
-                        color: AppColors.yellow,
-                        child: Consumer<EmployeeProvider>(
-                          builder: (context, tabProvider, _) {
-                            return IndexedStack(
-                                index: tabProvider.selectedIndex,
-                                children: [
-                                  _buildProjectList(),
-                                  _buildWorkloadGrid(),
-                                  _buildPVacationList()
-                                ]);
-                          },
-                        ),
-                      ),
+                    Consumer<EmployeeProvider>(
+                      builder: (context, tabProvider, _) {
+                        return IndexedStack(
+                            index: tabProvider.selectedIndex,
+                            children: [
+                              _buildProjectList(),
+                              _buildWorkloadGrid(),
+                              _buildPVacationList()
+                            ]);
+                      },
                     ),
                   ],
                 ),
@@ -106,7 +110,7 @@ class MyProfile extends StatelessWidget {
       itemBuilder: (context, index) {
         final project = mockProjects[index];
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding: const EdgeInsets.only(bottom: 16.0),
           child: ProjectCard(
             projectId: project.projectId,
             projectName: project.projectName,
@@ -130,14 +134,15 @@ class MyProfile extends StatelessWidget {
       itemBuilder: (context, index) {
         final vacation = mockVacationList[index];
         return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.only(bottom: 16.0),
             child: ProfileVacation(
-                avatarColor: vacation.avatarColor,
-                leaveType: vacation.leaveType,
-                status: vacation.status,
-                statusContainerColor: vacation.statusContainerColor,
-                dateRange: vacation.dateRange,
-                duration: vacation.duration,));
+              avatarColor: vacation.avatarColor,
+              leaveType: vacation.leaveType,
+              status: vacation.status,
+              statusContainerColor: vacation.statusContainerColor,
+              dateRange: vacation.dateRange,
+              duration: vacation.duration,
+            ));
       },
     );
   }
@@ -146,12 +151,12 @@ class MyProfile extends StatelessWidget {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 10,
+        crossAxisSpacing: 16,
         mainAxisExtent: 180,
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 16,
       ),
       itemCount: 6,
-      itemBuilder: (_, __) => const workloadItem(),
+      itemBuilder: (_, __) => workloadItem(bgColor: AppColors.white),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
     );

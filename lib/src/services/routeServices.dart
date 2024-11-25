@@ -11,6 +11,7 @@ import 'package:crm_system/src/features/dash_board/presentation/view/nearestEven
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
+import 'package:crm_system/src/features/profile/presentation/view/settings.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
 import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
@@ -110,6 +111,12 @@ final router = GoRouter(
           name: TaskDetailsPage.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const TaskDetailsPage()),
+        ),
+        GoRoute(
+          path: 'settings',
+          name: Settings.route,
+          pageBuilder: (context, state) =>
+              getCustomTransition(state, const Settings()),
         ),
       ],
     ),

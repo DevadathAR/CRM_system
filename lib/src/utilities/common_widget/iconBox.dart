@@ -6,12 +6,13 @@ class IconBox extends StatelessWidget {
   final String icon;
   final Color backgroundColor;
   final Color? iconColor;
+  final VoidCallback? ontap;
 
   const IconBox({
     Key? key,
     required this.icon,
     required this.backgroundColor,
-    this.iconColor,
+    this.iconColor,  this.ontap,
   }) : super(key: key);
 
   @override
@@ -22,10 +23,12 @@ class IconBox extends StatelessWidget {
       // colorFilter: ColorFilter.mode(iconColor ?? AppColors.black, BlendMode.srcIn),
     )
         .box
+        
         .p8
         .withRounded(value: 14)
         .color(backgroundColor)
-        .make();
+        .make()
+        .onInkTap(ontap);
   }
 }
 

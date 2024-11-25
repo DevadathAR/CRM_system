@@ -45,7 +45,7 @@ class EmployeeActivity extends StatelessWidget {
           color: AppColors.white),
       child: Column(
         children: [
-          const workloadItem(),
+           workloadItem(bgColor: AppColors.backgroindGrey1,),
           const SizedBox(
             height: 16,
           ),

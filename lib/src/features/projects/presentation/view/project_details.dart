@@ -28,7 +28,8 @@ class ProjectDetailsPage extends StatelessWidget {
                 onTap: () {
                   // navigate to previous page
                   context.pop();
-                }).pSymmetric(h: 6),
+                }
+                ).pSymmetric(h: 6),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
