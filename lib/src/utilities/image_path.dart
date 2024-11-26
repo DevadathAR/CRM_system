@@ -13,6 +13,7 @@ const clocNakedkSvg = "assets/svg/clockNaked.svg";
 const dp2Svg = "assets/svg/dp2.svg";
 const arrowForwardSvg = 'assets/svg/arrowForward.svg';
 const dropDownIconSvg = 'assets/svg/dropDownIcon.svg';
+const dropUpIconSvg = 'assets/svg/dropUp.svg';
 const nextArrowSvg = 'assets/svg/nextArrow.svg';
 const iSvg = 'assets/svg/i.svg';
 const arrowBackSvg = 'assets/svg/arrow_back.svg';

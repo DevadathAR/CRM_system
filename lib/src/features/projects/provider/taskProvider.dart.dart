@@ -1,11 +1,11 @@
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:flutter/material.dart';
 
-class TaskProvider extends ChangeNotifier {
+class ProjectsProvider extends ChangeNotifier {
   int progress;
   String status;
 
-  TaskProvider({this.progress = 0, this.status = 'todo'});
+  ProjectsProvider({this.progress = 0, this.status = 'todo'});
 
   void updateProgress(int newProgress) {
     progress = newProgress;
@@ -17,4 +17,12 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
- }
+  bool _isExpanded = false;
+
+  bool get isExpanded => _isExpanded;
+
+  void toggleExpanded() {
+    _isExpanded = !_isExpanded;
+    notifyListeners();
+  }
+}

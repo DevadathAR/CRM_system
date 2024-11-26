@@ -3,6 +3,7 @@ import 'package:crm_system/src/features/projects/model/taskModel.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/filterDialogue.dart';
+import 'package:crm_system/src/features/projects/provider/taskProvider.dart.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
@@ -14,6 +15,7 @@ import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProjectsListPage extends StatelessWidget {
@@ -31,16 +33,19 @@ class ProjectsListPage extends StatelessWidget {
             20.heightBox,
             "Projects".text.bold.size(36).make(),
             10.heightBox,
-
+    
             /// jdbkbdfkhkhsdkfhskhf
             _projectnameNid(
                 ontap: () => context.goNamed(ProjectDetailsPage.route)),
-
+    
             15.heightBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                "Tasks".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
+                "Tasks"
+                    .text
+                    .textStyle(AppTextStyle.boldText(size: 22))
+                    .make(),
                 SvgPicture.asset(
                   taskIconSvg,
                   color: AppColors.black,
@@ -63,55 +68,73 @@ class ProjectsListPage extends StatelessWidget {
             10.heightBox,
             _greyHeadingBox(title: "Active Tasks"),
             10.heightBox,
-            ListView.builder(
-              padding: const EdgeInsets.all(0),
-              shrinkWrap:
-                  true, // Optional, but useful when dealing with nested lists
-
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: mockTasks.length,
-              itemBuilder: (context, index) {
-                final task = mockTasks[index];
-
-                return TaskCardWidget(
-                  isBacklog: false,
-                  progress: task.progress,
-                  taskName: task.taskName,
-                  estimate: task.estimate,
-                  spentTime: task.spentTime,
-                  assigneeImageUrl: task.assigneeImageUrl,
-                  priority: task.priority,
-                  status: task.status,
-                  onTap: () {
-                    context.pushNamed(TaskDetailsPage.route);
+    
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustumIconButton(
+                        isPrefix: true,
+                        buttonTItle: "Design (6 issues)",
+                        icon: dropUpIconSvg,
+                        onTap: () {
+                          // The content below this should only be visible on taping this
+                        })
+                    .pSymmetric(h: 20)
+                    .onTap(() {
+                  context.read<ProjectsProvider>().toggleExpanded();
+                }),
+                10.heightBox,
+                ListView.builder(
+                  padding: const EdgeInsets.all(0),
+                  shrinkWrap:
+                      true, // Optional, but useful when dealing with nested lists
+    
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: mockTasks.length,
+                  itemBuilder: (context, index) {
+                    final task = mockTasks[index];
+    
+                    return TaskCardWidget(
+                      isBacklog: false,
+                      progress: task.progress,
+                      taskName: task.taskName,
+                      estimate: task.estimate,
+                      spentTime: task.spentTime,
+                      assigneeImageUrl: task.assigneeImageUrl,
+                      priority: task.priority,
+                      status: task.status,
+                      onTap: () {
+                        context.pushNamed(TaskDetailsPage.route);
+                      },
+                    );
                   },
-                );
-              },
-            ),
-            10.heightBox,
-            _greyHeadingBox(title: "Backlog"),
-            ListView.builder(
-              padding: const EdgeInsets.all(0),
-              shrinkWrap:
-                  true, // Optional, but useful when dealing with nested lists
-
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: mockTasks.length,
-              itemBuilder: (context, index) {
-                final task = mockTasks[index];
-
-                return TaskCardWidget(
-                  isBacklog: true,
-                  progress: task.progress,
-                  taskName: task.taskName,
-                  estimate: task.estimate,
-                  spentTime: task.spentTime,
-                  assigneeImageUrl: task.assigneeImageUrl,
-                  priority: task.priority,
-                  status: task.status,
-                  onTap: () => context.pushNamed(TaskDetailsPage.route),
-                );
-              },
+                ),
+                10.heightBox,
+                _greyHeadingBox(title: "Backlog"),
+                ListView.builder(
+                  padding: const EdgeInsets.all(0),
+                  shrinkWrap:
+                      true, // Optional, but useful when dealing with nested lists
+    
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: mockTasks.length,
+                  itemBuilder: (context, index) {
+                    final task = mockTasks[index];
+    
+                    return TaskCardWidget(
+                      isBacklog: true,
+                      progress: task.progress,
+                      taskName: task.taskName,
+                      estimate: task.estimate,
+                      spentTime: task.spentTime,
+                      assigneeImageUrl: task.assigneeImageUrl,
+                      priority: task.priority,
+                      status: task.status,
+                      onTap: () => context.pushNamed(TaskDetailsPage.route),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -137,7 +160,7 @@ class ProjectsListPage extends StatelessWidget {
     );
   }
 
-  Container _projectnameNid({required VoidCallback ontap}) {
+  Widget _projectnameNid({required VoidCallback ontap}) {
     return Container(
       // Spacing between cards
       padding: const EdgeInsets.only(right: 15, left: 0, top: 15, bottom: 15),
@@ -181,7 +204,7 @@ class ProjectsListPage extends StatelessWidget {
                     "Food Delivery ",
                   ],
                 ),
-               
+
                 10.heightBox,
                 Row(
                   children: [

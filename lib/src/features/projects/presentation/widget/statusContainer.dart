@@ -7,12 +7,15 @@ import 'package:velocity_x/velocity_x.dart';
 
 class StatusContainer extends StatelessWidget {
   final bool isDropdwn;
+  final List<String>? dropDownOptions;
+
   final String status;
   const StatusContainer({
     super.key,
     // required this.colors,
     required this.status,
     this.isDropdwn = false,
+    this.dropDownOptions,
   });
 
   @override
@@ -33,10 +36,11 @@ class StatusContainer extends StatelessWidget {
               .textStyle(AppTextStyle.boldText(size: 12, color: colors['text']))
               .make(),
           5.widthBox,
-          SvgPicture.asset(
-            dropDownIconSvg,
-            colorFilter: ColorFilter.mode(colors['text']!, BlendMode.srcIn),
-          )
+          if (isDropdwn == true)
+            SvgPicture.asset(
+              dropDownIconSvg,
+              colorFilter: ColorFilter.mode(colors['text']!, BlendMode.srcIn),
+            ),
         ],
       ),
     );
