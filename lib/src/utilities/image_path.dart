@@ -40,6 +40,13 @@ const roundCloseIconSvg = 'assets/svg/roundCloseIcon.svg';
 const taskIconSvg = 'assets/svg/taskicon.svg';
 const settingsSVg = 'assets/svg/settings.svg';
 const moreiconSvg = 'assets/svg/moreicon.svg';
+const accountsvg = 'assets/svg/account.svg';
+const confidentalitySvg = 'assets/svg/confidentality.svg';
+const connectedSvg = 'assets/svg/connected.svg';
+const greynotiSvg = 'assets/svg/greynoti.svg';
+const mycompSvg = 'assets/svg/mycomp.svg';
+const paymentSvg = 'assets/svg/payment.svg';
+const safetySvg = 'assets/svg/safety.svg';
 
 // Png files
 const dp1png = "assets/svg/image1.png";

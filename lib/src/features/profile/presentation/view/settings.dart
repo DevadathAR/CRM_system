@@ -65,14 +65,15 @@ class _SettingsState extends State<Settings> {
                     CustomExpansionTile(
                       key: const Key('tile_1'),
                       label: 'Account',
-                      icon: addSvg,
+                      icon: accountsvg
+                      ,
                       expandedItem: _expandedItem,
                       children: [Text('data')],
                     ),
                     CustomExpansionTile(
                       key: const Key('tile_2'),
                       label: 'Notification',
-                      icon: addSvg,
+                      icon: greynotiSvg,
                       expandedItem: _expandedItem,
                       children: [
                         Column(
@@ -120,35 +121,35 @@ class _SettingsState extends State<Settings> {
                     CustomExpansionTile(
                       key: const Key('tile_3'),
                       label: 'My Company',
-                      icon: addSvg,
+                      icon: mycompSvg,
                       expandedItem: _expandedItem,
                       children: [Text('data')],
                     ),
                     CustomExpansionTile(
                       key: const Key('tile_4'),
                       label: 'Connected Apps',
-                      icon: addSvg,
+                      icon: connectedSvg,
                       expandedItem: _expandedItem,
                       children: [Text('data')],
                     ),
                     CustomExpansionTile(
                       key: const Key('tile_5'),
                       label: 'Payments',
-                      icon: addSvg,
+                      icon: paymentSvg,
                       expandedItem: _expandedItem,
                       children: [Text('data')],
                     ),
                     CustomExpansionTile(
                       key: const Key('tile_6'),
                       label: 'Confidentaility',
-                      icon: addSvg,
+                      icon: confidentalitySvg,
                       expandedItem: _expandedItem,
                       children: [Text('data')],
                     ),
                     CustomExpansionTile(
                       key: const Key('tile_7'),
                       label: 'Safety',
-                      icon: addSvg,
+                      icon: safetySvg,
                       expandedItem: _expandedItem,
                       children: [Text('data')],
                     ),

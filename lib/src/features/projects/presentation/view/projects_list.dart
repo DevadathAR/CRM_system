@@ -80,17 +80,6 @@ class ProjectsListPage extends StatelessWidget {
                     .onTap(() {
                   context.read<ProjectsProvider>().toggleExpanded();
                 }),
-                CustumIconButton(
-                        isPrefix: true,
-                        buttonTItle: "Design (6 issues)",
-                        icon: dropUpIconSvg,
-                        onTap: () {
-                          // The content below this should only be visible on taping this
-                        })
-                    .pSymmetric(h: 20)
-                    .onTap(() {
-                  context.read<ProjectsProvider>().toggleExpanded();
-                }),
                 10.heightBox,
                 ListView.builder(
                   padding: const EdgeInsets.all(0),
