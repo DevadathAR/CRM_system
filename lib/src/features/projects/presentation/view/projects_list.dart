@@ -33,19 +33,16 @@ class ProjectsListPage extends StatelessWidget {
             20.heightBox,
             "Projects".text.bold.size(36).make(),
             10.heightBox,
-    
+
             /// jdbkbdfkhkhsdkfhskhf
             _projectnameNid(
                 ontap: () => context.goNamed(ProjectDetailsPage.route)),
-    
+
             15.heightBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                "Tasks"
-                    .text
-                    .textStyle(AppTextStyle.boldText(size: 22))
-                    .make(),
+                "Tasks".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
                 SvgPicture.asset(
                   taskIconSvg,
                   color: AppColors.black,
@@ -68,10 +65,21 @@ class ProjectsListPage extends StatelessWidget {
             10.heightBox,
             _greyHeadingBox(title: "Active Tasks"),
             10.heightBox,
-    
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                CustumIconButton(
+                        isPrefix: true,
+                        buttonTItle: "Design (6 issues)",
+                        icon: dropUpIconSvg,
+                        onTap: () {
+                          // The content below this should only be visible on taping this
+                        })
+                    .pSymmetric(h: 20)
+                    .onTap(() {
+                  context.read<ProjectsProvider>().toggleExpanded();
+                }),
                 CustumIconButton(
                         isPrefix: true,
                         buttonTItle: "Design (6 issues)",
@@ -88,12 +96,12 @@ class ProjectsListPage extends StatelessWidget {
                   padding: const EdgeInsets.all(0),
                   shrinkWrap:
                       true, // Optional, but useful when dealing with nested lists
-    
+
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: mockTasks.length,
                   itemBuilder: (context, index) {
                     final task = mockTasks[index];
-    
+
                     return TaskCardWidget(
                       isBacklog: false,
                       progress: task.progress,
@@ -115,12 +123,12 @@ class ProjectsListPage extends StatelessWidget {
                   padding: const EdgeInsets.all(0),
                   shrinkWrap:
                       true, // Optional, but useful when dealing with nested lists
-    
+
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: mockTasks.length,
                   itemBuilder: (context, index) {
                     final task = mockTasks[index];
-    
+
                     return TaskCardWidget(
                       isBacklog: true,
                       progress: task.progress,

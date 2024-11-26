@@ -10,7 +10,6 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => DashbordProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
-        ChangeNotifierProvider(create: (_) => ProjectsProvider()),
       ],
       child: const MainApp(),
     ),
