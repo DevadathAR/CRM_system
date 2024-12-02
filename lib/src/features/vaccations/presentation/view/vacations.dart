@@ -5,6 +5,7 @@ import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -16,40 +17,36 @@ class VacationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustumScaffold(
-    // 
-    // Scaffold(
-    //   key: scaffoldKey,
-    //   drawer: const AppDrawerWidget(),
-    //   backgroundColor: AppColors.bgWhite,
-    //   floatingActionButton: FloatingActionButton(
-    //     backgroundColor: AppColors.blue,
-    //     shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.circular(1500),
-    //     ),
-    //     onPressed: () {},
-    //     child: SvgPicture.asset(
-    //       addSvg,
-    //       colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-    //     ),
-    //   ),
+      //
+      // Scaffold(
+      //   key: scaffoldKey,
+      //   drawer: const AppDrawerWidget(),
+      //   backgroundColor: AppColors.bgWhite,
+      //   floatingActionButton: FloatingActionButton(
+      //     backgroundColor: AppColors.blue,
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(1500),
+      //     ),
+      //     onPressed: () {},
+      //     child: SvgPicture.asset(
+      //       addSvg,
+      //       colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+      //     ),
+      //   ),
       body: VStack(
         [
           vacations.text
-              .size(36)
               .color(AppColors.black)
-              .bold
+              .textStyle(AppTextStyle.boldText(size: 36))
               .make()
               .pSymmetric(h: 24),
           8.heightBox,
-      
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: VacationBody(),
           )
-          
         ],
       ),
     );
   }
-
 }

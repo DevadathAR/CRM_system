@@ -1,4 +1,5 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
+import 'package:crm_system/src/features/calendar/presentation/view/calander_page.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
@@ -70,7 +71,7 @@ class AppDrawerWidget extends StatelessWidget {
                       svgIcon: calendarGreySvg,
                       label: 'Calendar',
                       path: 'Calender',
-                      page: VacationsPage.route,
+                      page: CalanderPage.route,
                     ),
                     _buildListTile(
                       context: context,

@@ -31,7 +31,7 @@ class ProjectsListPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           children: [
             20.heightBox,
-            "Projects".text.bold.size(36).make(),
+            "Projects".text.textStyle(AppTextStyle.boldText(size: 36)).make(),
             10.heightBox,
 
             /// jdbkbdfkhkhsdkfhskhf
@@ -159,7 +159,6 @@ class ProjectsListPage extends StatelessWidget {
 
   Widget _projectnameNid({required VoidCallback ontap}) {
     return Container(
-      // Spacing between cards
       padding: const EdgeInsets.only(right: 15, left: 0, top: 15, bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),

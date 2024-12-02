@@ -6,6 +6,7 @@ import 'package:crm_system/src/features/authentication/presentation/view/sign_up
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_4.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
+import 'package:crm_system/src/features/calendar/presentation/view/calander_page.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employees_page.dart';
@@ -81,6 +82,12 @@ final router = GoRouter(
           name: EmployessProfile.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const EmployessProfile()),
+        ),
+        GoRoute(
+          path: 'calander_page',
+          name: CalanderPage.route,
+          pageBuilder: (context, state) =>
+              getCustomTransition(state, const CalanderPage()),
         ),
         GoRoute(
           path: 'vacation-page',
