@@ -10,7 +10,7 @@ import 'package:velocity_x/velocity_x.dart';
 class AddEmployees extends StatelessWidget {
   final TextEditingController descriptionController = TextEditingController();
 
-  AddEmployees({Key? key}) : super(key: key);
+  AddEmployees({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class AddEmployees extends StatelessWidget {
                   .text
                   .textStyle(AppTextStyle.boldText(size: 18))
                   .make(),
-                  Spacer(),
+              const Spacer(),
               SvgPicture.asset(
                 closeIconSvg,
                 height: 24,
@@ -62,7 +62,8 @@ class AddEmployees extends StatelessWidget {
               8.widthBox,
               "Add Member"
                   .text
-                  .textStyle(AppTextStyle.semiboldText(size: 16, color: AppColors.blue))
+                  .textStyle(AppTextStyle.semiboldText(
+                      size: 16, color: AppColors.blue))
                   .make(),
             ],
           ).onTap(() {}),
@@ -70,30 +71,11 @@ class AddEmployees extends StatelessWidget {
 
           // Approve Button with VelocityX
 
-          PrimaryBlueButton(title: 'Approve')
-          // SizedBox(
-          //   width: double.infinity,
-          //   child: ElevatedButton(
-          //     onPressed: () {
-          //       Navigator.pop(context); // Close the dialog
-          //       // Add logic to handle request submission here
-          //     },
-          //     style: ElevatedButton.styleFrom(
-          //       backgroundColor: AppColors.blue,
-          //       shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.circular(14),
-          //       ),
-          //       padding: const EdgeInsets.symmetric(vertical: 12), // Consistent padding
-          //     ),
-          //     child: "Approve"
-          //         .text
-          //         .textStyle(AppTextStyle.boldText(
-          //           size: 16,
-          //           color: AppColors.white,
-          //         ))
-          //         .make(),
-          //   ),
-          // ),
+          PrimaryBlueButton(
+            onPressed: () {},
+            title: 'Approve',
+          )
+      
         ],
         // crossAxisAlignment: CrossAxisAlignment.start,
         alignment: MainAxisAlignment.start,

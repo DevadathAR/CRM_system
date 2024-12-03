@@ -47,9 +47,9 @@ class CustumAppBar extends StatelessWidget {
               icon: SvgPicture.asset(bellSvg,
                   width: 24, height: 24), // Replace with your SVG path
               onPressed: () => showDialog(
-          context: context,
-          builder: (_) => NotificationPage(),
-        ),
+                context: context,
+                builder: (_) => NotificationPage(),
+              ),
             ),
             // SVG icon for more options
             IconButton(
