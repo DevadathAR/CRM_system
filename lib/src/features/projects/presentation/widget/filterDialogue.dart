@@ -1,5 +1,6 @@
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
+import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
@@ -48,7 +49,7 @@ class _FilterDialogState extends State<FilterDialog> {
             color: AppColors.dividergrey,
           ),
           // Example Filter Options
-          titleText(text: "Period"),
+          greyTitle(text: "Period"),
 
           16.heightBox,
           const TextInputField(
@@ -61,7 +62,7 @@ class _FilterDialogState extends State<FilterDialog> {
             color: AppColors.dividergrey,
           ),
           10.heightBox,
-          titleText(text: "Task Group"),
+          greyTitle(text: "Task Group"),
           16.heightBox,
           Column(
             children: [
@@ -79,7 +80,7 @@ class _FilterDialogState extends State<FilterDialog> {
           ).pSymmetric(h: 16),
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          titleText(text: "Reporter"),
+          greyTitle(text: "Reporter"),
           16.heightBox,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +100,7 @@ class _FilterDialogState extends State<FilterDialog> {
                   CustumIconButton(
                       buttonTItle: "View more",
                       icon: dropDownIconSvg,
-                      onTap: () {}
-                      ),
+                      onTap: () {}),
                   const Spacer()
                 ],
               )
@@ -108,7 +108,7 @@ class _FilterDialogState extends State<FilterDialog> {
           ).pSymmetric(h: 16),
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          titleText(text: "Assignees"),
+          greyTitle(text: "Assignees"),
           10.heightBox,
 
           const TextInputField(
@@ -130,7 +130,7 @@ class _FilterDialogState extends State<FilterDialog> {
           10.heightBox,
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          titleText(text: "Estimate"),
+          greyTitle(text: "Estimate"),
           10.heightBox,
           const TextInputField(
             hintText: "Select duration",
@@ -140,7 +140,7 @@ class _FilterDialogState extends State<FilterDialog> {
           10.heightBox,
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          titleText(text: "Priority"),
+          greyTitle(text: "Priority"),
           10.heightBox,
           // dropDOwn
           const TextInputField(
@@ -152,7 +152,10 @@ class _FilterDialogState extends State<FilterDialog> {
           _checkboxTile(text: "10 matches found", isImage: true)
               .pSymmetric(h: 16),
           16.heightBox,
-          const PrimaryBlueButton(
+           PrimaryBlueButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
             title: "Save filters  (3)",
           ).pSymmetric(h: 16),
           16.heightBox,
@@ -234,10 +237,10 @@ class _FilterDialogState extends State<FilterDialog> {
     ).box.p3.color(AppColors.primaryBackGround).withRounded(value: 16).make();
   }
 
-  Widget titleText({required String text}) {
-    return Text(
-      text,
-      style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
-    ).pSymmetric(h: 16);
-  }
+  // Widget greyTitle({required String text}) {
+  //   return Text(
+  //     text,
+  //     style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
+  //   ).pSymmetric(h: 16);
+  // }
 }

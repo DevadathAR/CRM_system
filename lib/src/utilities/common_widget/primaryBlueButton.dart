@@ -9,11 +9,13 @@ class PrimaryBlueButton extends StatelessWidget {
   final bool isprefix;
   final String icon;
   final String title;
+  final VoidCallback onPressed;
   const PrimaryBlueButton({
     super.key,
     required this.title,
     this.isprefix = false,
     this.icon = clocNakedkSvg,
+    required this.onPressed,
   });
 
   @override
@@ -22,13 +24,11 @@ class PrimaryBlueButton extends StatelessWidget {
       width: double.infinity, // Matches the width of other widgets
       child: ElevatedButton(
         iconAlignment: IconAlignment.end,
-        onPressed: () {
-          Navigator.pop(context); // Close the dialog
-        },
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.blue,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(14),
           ),
           padding:
               const EdgeInsets.symmetric(vertical: 16), // Consistent padding

@@ -1,7 +1,11 @@
+import 'package:crm_system/src/features/profile/presentation/view/notification.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/confirm_task_status.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/radio_tile.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/statusContainer.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
 import 'package:crm_system/src/utilities/common_widget/calanderAndCreatedat.dart';
+import 'package:crm_system/src/utilities/common_widget/custom_bottomsheet.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
@@ -36,8 +40,7 @@ class TaskDetailsPage extends StatelessWidget {
                 onTap: () {
                   // navigate to previous page
                   context.pop();
-                }
-                ).pSymmetric(h: 6),
+                }).pSymmetric(h: 6),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
@@ -173,7 +176,8 @@ class TaskDetailsPage extends StatelessWidget {
                                 ],
                               ),
                               20.heightBox,
-                              const PrimaryBlueButton(
+                              PrimaryBlueButton(
+                                onPressed: () {},
                                 isprefix: true,
                                 title: "Log time",
                               ),
@@ -194,105 +198,33 @@ class TaskDetailsPage extends StatelessWidget {
                       .make()
                       .pSymmetric(h: 6),
                   20.heightBox,
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(24)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const StatusContainer(
-                              status: "In Progress",
-                              isDropdwn: true,
-                            ),
-                            IconBox(
-                                icon: editSvg,
-                                backgroundColor: AppColors.primaryBackGround)
-                          ],
-                        ),
-                        22.heightBox,
-                        greyTitle(text: "Task Number"),
-                        8.heightBox,
-                        "PN0001245"
-                            .text
-                            .textStyle(
-                              AppTextStyle.regularText(
-                                  size: 16, color: AppColors.lightblack),
-                            )
-                            .make(),
-                        "Description"
-                            .text
-                            .textStyle(
-                              AppTextStyle.boldText(
-                                  size: 16, color: AppColors.lightblack),
-                            )
-                            .make(),
-                        10.heightBox,
-                        "Think over UX for Login and Registration, create a flow using wireframes. Upon completion, show the team and discuss. Attach the source to the task."
-                            .text
-                            .textStyle(
-                              AppTextStyle.regularText(
-                                  size: 14, color: AppColors.lightblack),
-                            )
-                            .make(),
-                        8.heightBox,
-                        Row(
-                          children: [
-                            IconBox(
-                              icon: attachIconSvg,
-                              backgroundColor: AppColors.lightpurple,
-                              // iconColor: AppColors.purple,
-                            ),
-                            16.widthBox,
-                            IconBox(
-                              icon: linkIconSvg,
-                              backgroundColor: AppColors.lightCyan,
-                              // iconColor: AppColors.cyan,
-                            ),
-                          ],
-                        ),
-                        24.heightBox,
-                        "Task Attachments (3)"
-                            .text
-                            .textStyle(
-                              AppTextStyle.boldText(
-                                  size: 16, color: AppColors.lightblack),
-                            )
-                            .make(),
-                        16.heightBox,
-                        attachmentTile(
-                            fileName: "SiteScreen.png", fileSize: "10 MB PNG"),
-                        16.heightBox,
-                        attachmentTile(
-                            fileName: "Wireframes.png", fileSize: "10 MB PNG"),
-                        16.heightBox,
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.lightCyan,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SvgPicture.asset(linkIconSvg),
-                              10.widthBox,
-                              "Invision Prototype"
-                                  .text
-                                  .textStyle(AppTextStyle.semiboldText(
-                                      size: 16, color: AppColors.cyan))
-                                  .make(),
-                            ],
-                          ),
+                  //TaskDiscription
+                  taskDiscription(context, onTap: () {
+                    CustomBottomSheet.show(
+                      context: context,
+                      title: "Select Task Status",
+                      content: SelectTaskStatus(
+                        onSelectionChanged: (value) {
+                          print("Selected Value: $value");
+                        },
+                      ),
+                      actions: [
+                        PrimaryBlueButton(
+                          title: "Approve",
+                          onPressed: () {
+                            // Close the current dialog first
+                            Navigator.pop(context);
+
+                            // Then show the second dialog (NotificationPage)
+                            showDialog(
+                              context: context,
+                              builder: (_) => const ConfirmTaskStatusDialogue(),
+                            );
+                          },
                         ),
                       ],
-                    ),
-                  ),
+                    );
+                  }),
                   30.heightBox,
                   ActivityCard(
                     heading: "Recent Activity",
@@ -304,6 +236,102 @@ class TaskDetailsPage extends StatelessWidget {
             ),
           ],
         ).pSymmetric(h: 20, v: 20),
+      ),
+    );
+  }
+
+  Widget taskDiscription(context, {required VoidCallback onTap}) {
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+          color: AppColors.white, borderRadius: BorderRadius.circular(24)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const StatusContainer(
+                status: "In Progress",
+                isDropdwn: true,
+              ).onTap(() {
+                // to show BottomSheet
+                onTap();
+              }),
+              IconBox(
+                  icon: editSvg, backgroundColor: AppColors.primaryBackGround)
+            ],
+          ),
+          22.heightBox,
+          greyTitle(text: "Task Number"),
+          8.heightBox,
+          "PN0001245"
+              .text
+              .textStyle(
+                AppTextStyle.regularText(size: 16, color: AppColors.lightblack),
+              )
+              .make(),
+          "Description"
+              .text
+              .textStyle(
+                AppTextStyle.boldText(size: 16, color: AppColors.lightblack),
+              )
+              .make(),
+          10.heightBox,
+          "Think over UX for Login and Registration, create a flow using wireframes. Upon completion, show the team and discuss. Attach the source to the task."
+              .text
+              .textStyle(
+                AppTextStyle.regularText(size: 14, color: AppColors.lightblack),
+              )
+              .make(),
+          8.heightBox,
+          Row(
+            children: [
+              IconBox(
+                icon: attachIconSvg,
+                backgroundColor: AppColors.lightpurple,
+                // iconColor: AppColors.purple,
+              ),
+              16.widthBox,
+              IconBox(
+                icon: linkIconSvg,
+                backgroundColor: AppColors.lightCyan,
+                // iconColor: AppColors.cyan,
+              ),
+            ],
+          ),
+          24.heightBox,
+          "Task Attachments (3)"
+              .text
+              .textStyle(
+                AppTextStyle.boldText(size: 16, color: AppColors.lightblack),
+              )
+              .make(),
+          16.heightBox,
+          attachmentTile(fileName: "SiteScreen.png", fileSize: "10 MB PNG"),
+          16.heightBox,
+          attachmentTile(fileName: "Wireframes.png", fileSize: "10 MB PNG"),
+          16.heightBox,
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.lightCyan,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(linkIconSvg),
+                10.widthBox,
+                "Invision Prototype"
+                    .text
+                    .textStyle(AppTextStyle.semiboldText(
+                        size: 16, color: AppColors.cyan))
+                    .make(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

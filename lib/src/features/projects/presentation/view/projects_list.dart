@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/taskCard.dart';
 import 'package:crm_system/src/features/projects/model/taskModel.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
@@ -26,6 +27,12 @@ class ProjectsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return CustumScaffold(
+      ontap: () {
+        showDialog(
+          context: context,
+          builder: (context) => const AddProjectDialogue(),
+        );
+      },
       body: Expanded(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15),

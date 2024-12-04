@@ -33,7 +33,8 @@ class StatusContainer extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           status.text
-              .textStyle(AppTextStyle.boldText(size: 12, color: colors['text']))
+              .textStyle(
+                  AppTextStyle.boldText(size: 12, color: colors['text']))
               .make(),
           5.widthBox,
           if (isDropdwn == true)
