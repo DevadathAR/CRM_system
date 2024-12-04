@@ -1,11 +1,14 @@
 import 'package:crm_system/main.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
+import 'package:crm_system/src/features/dash_board/presentation/widget/f_a_b.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEventsCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/projectDetailCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/sampleDatalists.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
+import 'package:crm_system/src/utilities/common_widget/custom_bottomsheet.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
@@ -30,7 +33,15 @@ class DashBoard extends StatelessWidget {
     final formattedDate =
         DateFormat('MMM dd, yyyy').format(now); // Format the date
 
-    return CustumScaffold(   
+    return CustumScaffold(
+      ontap: () {
+        CustomBottomSheet.show(
+          context: context,
+          title: "Select Task Status",
+          content: const FAB(),
+        );
+       
+      },
       body: Expanded(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -84,7 +95,9 @@ class DashBoard extends StatelessWidget {
                             childAspectRatio: 1.0),
                     itemCount: 6, // Number of items
                     itemBuilder: (context, index) {
-                      return  workloadItem(bgColor:  AppColors.backgroindGrey1,);
+                      return workloadItem(
+                        bgColor: AppColors.backgroindGrey1,
+                      );
                     },
                     shrinkWrap: true,
                     physics:
@@ -105,7 +118,7 @@ class DashBoard extends StatelessWidget {
               // priorityColor: AppColors.yellow,
               allTasks: 34,
               activeTasks: 13,
-              projectIcon: medicalAPpSvg,
+              projectIcon: projectAvatar3,
             ),
             10.heightBox,
             const ProjectCard(
@@ -116,7 +129,7 @@ class DashBoard extends StatelessWidget {
               // priorityColor: Colors.green,
               allTasks: 34,
               activeTasks: 13,
-              projectIcon: foodServiceSvg, // Your SVG path
+              projectIcon: projectavtar1, // Your SVG path
             ),
             _buildTitle(
               title: "Nearest Events",

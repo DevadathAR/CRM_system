@@ -1,5 +1,4 @@
 import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -9,14 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AddProjectDialogue extends StatefulWidget {
-  const AddProjectDialogue({super.key});
+class AddTaskDialogue extends StatelessWidget {
+  const AddTaskDialogue({super.key});
 
-  @override
-  State<AddProjectDialogue> createState() => _AddProjectDialogueState();
-}
-
-class _AddProjectDialogueState extends State<AddProjectDialogue> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -34,7 +28,7 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                "Add Project"
+                "Add Task"
                     .text
                     .textStyle(AppTextStyle.boldText(size: 22))
                     .make(),
@@ -48,18 +42,24 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
               ],
             ),
             8.heightBox,
-            greyTitle(text: "Project Name"),
+            greyTitle(text: "Task Name"),
             8.heightBox,
             const TextInputField(
-              hintText: "Project Name",
+              hintText: "Task Name",
+            ),
+            greyTitle(text: "Task Group"),
+            8.heightBox,
+            const TextInputField(
+              isDropDown: true,
+              dropDownOptions: ["Design", "Backend", "FrontEnd"],
             ),
             8.heightBox,
-            greyTitle(text: "Starts"),
+            greyTitle(text: "Estimate"),
             8.heightBox,
             const TextInputField(
               viewIcon: true,
-              iconName: calenderSvg,
-              hintText: "Select Date",
+              iconName: clocNakedkSvg,
+              hintText: "Select duration",
             ),
             8.heightBox,
             greyTitle(text: "Dead Line"),
@@ -77,14 +77,21 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
               dropDownOptions: ["Medium", "Low", "High"],
             ),
             8.heightBox,
+            greyTitle(text: "Assignees"),
+            8.heightBox,
+            const TextInputField(
+              hintText: "Select Assignee",
+              isDropDown: true,
+              dropDownOptions: ["dev", "arjun", "Nikshay"],
+            ),
+            8.heightBox,
             greyTitle(text: "Description"),
             8.heightBox,
             const TextInputField(
               height: 150,
               maxlines: 4,
-              hintText: "Add some description of the project",
+              hintText: "Add some description of the task",
             ),
-            const AvatarSelection(),
             10.heightBox,
             Row(
               children: [
@@ -104,7 +111,7 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
             ),
             10.heightBox,
             PrimaryBlueButton(
-              title: "Save Project",
+              title: "Save Task",
               onPressed: () {},
             ),
             5.heightBox,
@@ -118,81 +125,6 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
     return Text(
       text,
       style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
-    );
-  }
-}
-
-class AvatarSelection extends StatelessWidget {
-  const AvatarSelection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final List<String> svgImages = [
-      projectavtar1,
-      projectAvatar2,
-      projectAvatar3,
-      projectAvatar4,
-      projectAvatarBlue,
-      projectAvatarGreen,
-      projectAvatarRed,
-      projectAvatarPurple,
-      projectAvatarRose,
-      projectAvatarTeal,
-      projectAvatarYellow,
-      uploadImageSvg,
-    ]; // Example list of SVG image paths
-
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          border: Border.all(width: 1, color: AppColors.borderGrey),
-          borderRadius: BorderRadius.circular(24)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          "Select image"
-              .text
-              .textStyle(
-                  AppTextStyle.boldText(size: 18, color: AppColors.lightblack))
-              .make(),
-          Text(
-            "Select or upload an avatar for the project(available formats : jpg,png)",
-            style:
-                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
-          ),
-          8.heightBox,
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // Number of columns in the grid
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-              childAspectRatio: 1, // Square items
-            ),
-            itemCount: svgImages.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  // Handle image selection
-                  print("Selected: ${svgImages[index]}");
-                },
-                child: SizedBox(
-                  height: 25,
-                  width: 25,
-                  child: SvgPicture.asset(
-                    svgImages[index],
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              );
-            },
-          ),
-          8.heightBox,
-        ],
-      ),
     );
   }
 }

@@ -19,56 +19,42 @@ class NearesteventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustumScaffold(
-      // Scaffold(
-      //   backgroundColor: AppColors.primaryBackGround,
-      //   floatingActionButton: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: FloatingActionButton(
-      //       onPressed: () {},
-      //       backgroundColor: AppColors.blue,
-      //       shape:
-      //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-      //       child: SvgPicture.asset(
-      //         addSvg,
-      //         colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-      //       ),
-      //     ),
-      //   ),
-      body: Column(
-        children: [
-          // AppBar Section
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustumIconButton(
-                  isPrefix: true,
-                  buttonTItle: "Back to Dashboard",
-                  icon: arrowBackSvg,
-                  onTap: () {
-                     context.pop();
-                  }
-                  ),
-              " Nearest Events"
-                  .text
-                  .textStyle(AppTextStyle.boldText(size: 22))
-                  .make(),
-            ],
-          ).pSymmetric(h: 15),
-          // Welcome Text Section
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              itemCount: nearestEvents.length,
-              itemBuilder: (context, index) {
-                return NearestEventsCard(
-                  isnearestEvents: true,
-                  event: nearestEvents[index],
-                );
-              },
+      body: Expanded(
+        child: Column(
+          children: [
+            // AppBar Section
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustumIconButton(
+                    isPrefix: true,
+                    buttonTItle: "Back to Dashboard",
+                    icon: arrowBackSvg,
+                    onTap: () {
+                      context.pop();
+                    }),
+                " Nearest Events"
+                    .text
+                    .textStyle(AppTextStyle.boldText(size: 22))
+                    .make(),
+              ],
+            ).pSymmetric(h: 15),
+            // Welcome Text Section
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                itemCount: nearestEvents.length,
+                itemBuilder: (context, index) {
+                  return NearestEventsCard(
+                    isnearestEvents: true,
+                    event: nearestEvents[index],
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

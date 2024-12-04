@@ -2,6 +2,7 @@ import 'package:crm_system/src/features/profile/presentation/view/notification.d
 import 'package:crm_system/src/features/projects/presentation/widget/confirm_task_status.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/radio_tile.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/statusContainer.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/time_tracking_dialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
 import 'package:crm_system/src/utilities/common_widget/calanderAndCreatedat.dart';
@@ -177,7 +178,13 @@ class TaskDetailsPage extends StatelessWidget {
                               ),
                               20.heightBox,
                               PrimaryBlueButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        const TimeTrackingDialogue(),
+                                  );
+                                },
                                 isprefix: true,
                                 title: "Log time",
                               ),

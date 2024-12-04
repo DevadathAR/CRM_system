@@ -3,9 +3,20 @@ const bellSvg = "assets/svg/bell.svg";
 const calenderSvg = "assets/svg/calendar.svg";
 const calendarGreySvg = "assets/svg/calendarGrey.svg";
 const searchIcon = "assets/svg/search.svg";
-const medicalAPpSvg = "assets/svg/medicalApp.svg";
-const foodServiceSvg = "assets/svg/foodService1.svg";
-const foodService2Svg = "assets/svg/foodservice2.svg";
+const projectAvatar3 = "assets/svg/medicalApp.svg";
+const projectavtar1 = "assets/svg/foodService1.svg";
+const projectAvatar2 = "assets/svg/foodservice2.svg";
+const projectAvatar4 = "assets/svg/project_avatar4.svg";
+const projectAvatarBlue = "assets/svg/project_avatar_blue5.svg";
+const projectAvatarGreen = "assets/svg/project_avatar_green8.svg";
+const projectAvatarPurple = "assets/svg/project_avatar_purple6.svg";
+const projectAvatarRose = "assets/svg/project_avatar_rose9.svg";
+const projectAvatarTeal = "assets/svg/project_avatar_teal7.svg";
+const projectAvatarYellow = "assets/svg/project_avatar_yellow.svg";
+const projectAvatarRed = "assets/svg/project_avatar_red.svg";
+const uploadImageSvg = "assets/svg/upload_image.svg";
+const noTaskPlaceHolderSvg = "assets/svg/noTaskPlaceholder.svg";
+
 const arrowUpSvg = "assets/svg/arrowUp.svg";
 const arrowDownSvg = "assets/svg/arrowDown.svg";
 const clockSvg = "assets/svg/clock.svg";
@@ -31,13 +42,20 @@ const projectsIconsSvg = 'assets/svg/projectsicon.svg';
 const employeesIconSvg = 'assets/svg/employeesicon.svg';
 const aeroplaneSvg = 'assets/svg/aeroplan.svg';
 const chatIconSvg = 'assets/svg/chaticon.svg';
-// const filterSvg = 'assets/svg/filter.svg';
 const editSvg = 'assets/svg/edit.svg';
 const locationSvg = 'assets/svg/location.svg';
 const logOutIconSvg = 'assets/svg/logouticon.svg';
 const closeIconSvg = 'assets/svg/closeIcon.svg';
 const roundCloseIconSvg = 'assets/svg/roundCloseIcon.svg';
-const taskIconSvg = 'assets/svg/taskicon.svg';
+
+//....
+const taskiconScg = 'assets/svg/taskicon.svg';
+const filterIconSvg = 'assets/svg/filtericon.svg';
+const eventIconSvg = 'assets/svg/eventicon.svg';
+const addEmployeeIconSvg = 'assets/svg/addemployeeIcon.svg';
+const folderIconSvg = 'assets/svg/folderIcon.svg';
+
+//............
 const settingsSVg = 'assets/svg/settings.svg';
 const moreiconSvg = 'assets/svg/moreicon.svg';
 const accountsvg = 'assets/svg/account.svg';

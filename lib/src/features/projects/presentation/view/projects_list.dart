@@ -1,4 +1,5 @@
 import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/add_task_dialogue.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/taskCard.dart';
 import 'package:crm_system/src/features/projects/model/taskModel.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
@@ -30,7 +31,7 @@ class ProjectsListPage extends StatelessWidget {
       ontap: () {
         showDialog(
           context: context,
-          builder: (context) => const AddProjectDialogue(),
+          builder: (context) => const AddTaskDialogue(),
         );
       },
       body: Expanded(
@@ -46,103 +47,121 @@ class ProjectsListPage extends StatelessWidget {
                 ontap: () => context.goNamed(ProjectDetailsPage.route)),
 
             15.heightBox,
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 "Tasks".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
-                SvgPicture.asset(
-                  taskIconSvg,
-                  color: AppColors.black,
-                )
-                    .box
-                    .withRounded(value: 14)
-                    .color(AppColors.white)
-                    .p12
-                    .make()
-                    .onTap(
-                  () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const FilterDialog(),
-                    );
-                  },
-                ),
+                if (mockTasks.isNotEmpty)
+                  SvgPicture.asset(filterIconSvg,
+                          colorFilter: ColorFilter.mode(
+                              AppColors.black, BlendMode.srcIn))
+                      .box
+                      .withRounded(value: 14)
+                      .color(AppColors.white)
+                      .p12
+                      .make()
+                      .onTap(
+                    () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const FilterDialog(),
+                      );
+                    },
+                  ),
               ],
             ),
             10.heightBox,
-            _greyHeadingBox(title: "Active Tasks"),
-            10.heightBox,
+            if (mockTasks.isEmpty) ...[
+              _noTaskPlaceholder(),
+            ] else ...[
+              _greyHeadingBox(title: "Active Tasks"),
+              10.heightBox,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustumIconButton(
+                          isPrefix: true,
+                          buttonTItle: "Design (6 issues)",
+                          icon: dropUpIconSvg,
+                          onTap: () {
+                            // The content below this should only be visible on taping this
+                          })
+                      .pSymmetric(h: 20)
+                      .onTap(() {
+                    context.read<ProjectsProvider>().toggleExpanded();
+                  }),
+                  10.heightBox,
+                  ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap:
+                        true, // Optional, but useful when dealing with nested lists
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustumIconButton(
-                        isPrefix: true,
-                        buttonTItle: "Design (6 issues)",
-                        icon: dropUpIconSvg,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: mockTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = mockTasks[index];
+
+                      return TaskCardWidget(
+                        isBacklog: false,
+                        progress: task.progress,
+                        taskName: task.taskName,
+                        estimate: task.estimate,
+                        spentTime: task.spentTime,
+                        assigneeImageUrl: task.assigneeImageUrl,
+                        priority: task.priority,
+                        status: task.status,
                         onTap: () {
-                          // The content below this should only be visible on taping this
-                        })
-                    .pSymmetric(h: 20)
-                    .onTap(() {
-                  context.read<ProjectsProvider>().toggleExpanded();
-                }),
-                10.heightBox,
-                ListView.builder(
-                  padding: const EdgeInsets.all(0),
-                  shrinkWrap:
-                      true, // Optional, but useful when dealing with nested lists
+                          context.pushNamed(TaskDetailsPage.route);
+                        },
+                      );
+                    },
+                  ),
+                  10.heightBox,
+                  _greyHeadingBox(title: "Backlog"),
+                  ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap:
+                        true, // Optional, but useful when dealing with nested lists
 
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: mockTasks.length,
-                  itemBuilder: (context, index) {
-                    final task = mockTasks[index];
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: mockTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = mockTasks[index];
 
-                    return TaskCardWidget(
-                      isBacklog: false,
-                      progress: task.progress,
-                      taskName: task.taskName,
-                      estimate: task.estimate,
-                      spentTime: task.spentTime,
-                      assigneeImageUrl: task.assigneeImageUrl,
-                      priority: task.priority,
-                      status: task.status,
-                      onTap: () {
-                        context.pushNamed(TaskDetailsPage.route);
-                      },
-                    );
-                  },
-                ),
-                10.heightBox,
-                _greyHeadingBox(title: "Backlog"),
-                ListView.builder(
-                  padding: const EdgeInsets.all(0),
-                  shrinkWrap:
-                      true, // Optional, but useful when dealing with nested lists
-
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: mockTasks.length,
-                  itemBuilder: (context, index) {
-                    final task = mockTasks[index];
-
-                    return TaskCardWidget(
-                      isBacklog: true,
-                      progress: task.progress,
-                      taskName: task.taskName,
-                      estimate: task.estimate,
-                      spentTime: task.spentTime,
-                      assigneeImageUrl: task.assigneeImageUrl,
-                      priority: task.priority,
-                      status: task.status,
-                      onTap: () => context.pushNamed(TaskDetailsPage.route),
-                    );
-                  },
-                ),
-              ],
-            ),
+                      return TaskCardWidget(
+                        isBacklog: true,
+                        progress: task.progress,
+                        taskName: task.taskName,
+                        estimate: task.estimate,
+                        spentTime: task.spentTime,
+                        assigneeImageUrl: task.assigneeImageUrl,
+                        priority: task.priority,
+                        status: task.status,
+                        onTap: () => context.pushNamed(TaskDetailsPage.route),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
           ],
         ),
       ),
+    );
+  }
+
+  Widget _noTaskPlaceholder() {
+    return Column(
+      children: [
+        SvgPicture.asset(noTaskPlaceHolderSvg),
+        10.heightBox,
+        "There are no taks in this project yet Lets add them"
+            .text
+            .textStyle(
+                AppTextStyle.boldText(size: 16, color: AppColors.lightblack))
+            .make(),
+      ],
     );
   }
 
