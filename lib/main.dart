@@ -1,5 +1,6 @@
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
+import 'package:crm_system/src/features/profile/provider/pageview_provider.dart';
 import 'package:crm_system/src/services/routeServices.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => DashbordProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
+        ChangeNotifierProvider(create: (_) => PageviewProvider()),
       ],
       child: const MainApp(),
     ),

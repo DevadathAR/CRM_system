@@ -1,111 +1,108 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/projectDetailCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
+import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/filter_row.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/personal_data_box.dart';
-import 'package:crm_system/src/features/employees/presentation/widget/profile_tab_view.dart';
 import 'package:crm_system/src/features/profile/model/profiile_project_model.dart';
 import 'package:crm_system/src/features/profile/presentation/view/settings.dart';
 import 'package:crm_system/src/features/profile/presentation/widget/profile_vacation.dart';
+import 'package:crm_system/src/features/profile/provider/pageview_provider.dart';
 import 'package:crm_system/src/services/routeServices.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
-import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
-import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
-import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 class MyProfile extends StatelessWidget {
   static const route = 'user-profile';
-  const MyProfile({super.key});
+   MyProfile({super.key});
+
+  final List<String> _titles = ["Project", "Team", "Vacations"];
 
   @override
   Widget build(BuildContext context) {
-    return CustumScaffold(ontap: () => showDialog(
-          context: context,
-          builder: (_) => AddEmployees(),
-        ),
-      // drawer: const AppDrawerWidget(),
-      // backgroundColor: AppColors.bgWhite,
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: AppColors.blue,
-      //   shape: const CircleBorder(),
-      //   onPressed: () => showDialog(
-      //     context: context,
-      //     builder: (_) => AddEmployees(),
-      //   ),
-      //   child: SvgPicture.asset(
-      //     addSvg,
-      //     colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-      //   ),
-      // ),
-      body: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            24.heightBox,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                "My Profile".text.size(36).color(AppColors.black).make(),
-                IconBox(
-                  icon: settingsSVg,
-                  backgroundColor: AppColors.white,
-                  ontap: 
-                  () =>context .goNamed(Settings.route),
-                )
-              ],
-            ).pSymmetric(h: 24),
-            8.heightBox,
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: ListView(
-                  children: [
-                    const PersonalDataBox(),
-                    const FilterRow(),
-                    16.heightBox,
-                    const ProfileTabView(),
-                    16.heightBox,
-                    Consumer<EmployeeProvider>(
-                      builder: (context, tabProvider, _) {
-                        return IndexedStack(
-                            index: tabProvider.selectedIndex,
-                            children: [
-                              _buildProjectList(),
-                              _buildWorkloadGrid(),
-                              _buildPVacationList()
-                            ]);
+    return ChangeNotifierProvider(
+      create: (_) => PageviewProvider(),  // Providing the PageviewProvider
+      child: Consumer<PageviewProvider>(
+        builder: (context, tabProvider, child) {
+          return CustumScaffold(
+            ontap: () => showDialog(
+              context: context,
+              builder: (_) => AddEmployees(),
+            ),
+            body: Expanded(
+              child: ListView(
+                children: [
+                  24.heightBox,
+                  // Header Section
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      "My Profile".text.size(36).color(AppColors.black).make(),
+                      IconBox(
+                        icon: settingsSVg,
+                        backgroundColor: AppColors.white,
+                        ontap: () => context.goNamed(Settings.route),
+                      ),
+                    ],
+                  ).pSymmetric(h: 24),
+              
+                  16.heightBox,
+                  PersonalDataBox(),
+                  16.heightBox,
+                  FilterRow(),
+              
+                  8.heightBox,
+                  // Tab Titles
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                       _customTab('Project', 0, tabProvider),
+_customTab('Team', 1, tabProvider),
+_customTab('Vacation', 2, tabProvider),
+
+                      ],
+                    ),
+                  ),
+                  16.heightBox,
+              
+                  // PageView Section
+                  SizedBox(height: 500,
+                    child: PageView.builder(
+                      controller: tabProvider.pageController,
+                      onPageChanged: tabProvider.onPageChanged,
+                      itemCount: _titles.length,
+                      itemBuilder: (context, index) {
+                        switch (index) {
+                          case 0:
+                            return _buildProjectList();
+                          case 1:
+                            return _buildWorkloadGrid();
+                          case 2:
+                            return _buildPVacationList();
+                          default:
+                            return const SizedBox();
+                        }
                       },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
-
-  Widget _buildDynamicHeightWidget(Widget child) {
-    return IntrinsicHeight(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [child],
-      ),
-    );
-  }
-
   Widget _buildProjectList() {
     return ListView.builder(
       padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       itemCount: mockProjects.length,
       itemBuilder: (context, index) {
         final project = mockProjects[index];
@@ -128,21 +125,20 @@ class MyProfile extends StatelessWidget {
   Widget _buildPVacationList() {
     return ListView.builder(
       padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       itemCount: mockVacationList.length,
       itemBuilder: (context, index) {
         final vacation = mockVacationList[index];
         return Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: ProfileVacation(
-              avatarColor: vacation.avatarColor,
-              leaveType: vacation.leaveType,
-              status: vacation.status,
-              statusContainerColor: vacation.statusContainerColor,
-              dateRange: vacation.dateRange,
-              duration: vacation.duration,
-            ));
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: ProfileVacation(
+            avatarColor: vacation.avatarColor,
+            leaveType: vacation.leaveType,
+            status: vacation.status,
+            statusContainerColor: vacation.statusContainerColor,
+            dateRange: vacation.dateRange,
+            duration: vacation.duration,
+          ),
+        );
       },
     );
   }
@@ -157,8 +153,37 @@ class MyProfile extends StatelessWidget {
       ),
       itemCount: 6,
       itemBuilder: (_, __) => workloadItem(bgColor: AppColors.white),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+    );
+  }
+
+  Widget _customTab(
+      String label, int index, PageviewProvider provider) {
+    bool isSelected = provider.selectedIndex == index;
+    return GestureDetector(
+
+      onTap: () => provider.jumpToPage(index),
+      child: Container(
+        height: 40,
+        width: 100,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(13),
+          border: Border.all(
+            color: AppColors.blue,
+            width: 2,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: AppTextStyle.regularText(
+              size: 14,
+              color: isSelected ? AppColors.textGrey1 : AppColors.white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

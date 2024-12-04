@@ -10,57 +10,73 @@ class ProfileTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<EmployeeProvider>(
-                      builder: (context, tabProvider, child) {
-                        return Column(
-                          children: [
-                            Container(
-                              // margin: const EdgeInsets.symmetric(horizontal: 24),
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.primaryBackGround,
-                                    blurRadius: 6,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(500),
-                                color: AppColors.backgroindGrey1,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _tabItem(
-                                    context,
-                                    title: 'Project',
-                                    isSelected: tabProvider.selectedIndex == 0,
-                                    onTap: () {
-                                      tabProvider.updateIndex(0);
-                                    },
-                                  ),
-                                  _tabItem(
-                                    context,
-                                    title: 'Team',
-                                    isSelected: tabProvider.selectedIndex == 1,
-                                    onTap: () {
-                                      tabProvider.updateIndex(1);
-                                    },
-                                  ),
-                                  _tabItem(
-                                    context,
-                                    title: 'Vacation',
-                                    isSelected: tabProvider.selectedIndex == 2,
-                                    onTap: () {
-                                      tabProvider.updateIndex(2);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+      builder: (context, tabProvider, child) {
+        return Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primaryBackGround,
+                    blurRadius: 6,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(500),
+                color: AppColors.backgroindGrey1,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _tabItem(
+                    context,
+                    title: 'Project',
+                    isSelected: tabProvider.selectedIndex == 0,
+                    onTap: () {
+                      tabProvider.updateIndex(0);
+                    },
+                  ),
+                  _tabItem(
+                    context,
+                    title: 'Team',
+                    isSelected: tabProvider.selectedIndex == 1,
+                    onTap: () {
+                      tabProvider.updateIndex(1);
+                    },
+                  ),
+                  _tabItem(
+                    context,
+                    title: 'Vacation',
+                    isSelected: tabProvider.selectedIndex == 2,
+                    onTap: () {
+                      tabProvider.updateIndex(2);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: PageView.builder(
+                controller: PageController(initialPage: tabProvider.selectedIndex),
+                itemCount: 3, // Number of pages
+                onPageChanged: (index) {
+                  tabProvider.updateIndex(index);
+                },
+                itemBuilder: (context, index) {
+                  return Center(
+                    child: Text(
+                      _getPageContent(index),
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _tabItem(
@@ -84,5 +100,18 @@ class ProfileTabView extends StatelessWidget {
             .makeCentered(),
       ),
     );
+  }
+
+  String _getPageContent(int index) {
+    switch (index) {
+      case 0:
+        return 'Project Content';
+      case 1:
+        return 'Team Content';
+      case 2:
+        return 'Vacation Content';
+      default:
+        return 'Unknown Content';
+    }
   }
 }

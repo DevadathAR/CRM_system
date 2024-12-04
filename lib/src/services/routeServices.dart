@@ -99,7 +99,7 @@ final router = GoRouter(
           path: 'my-profile',
           name: MyProfile.route,
           pageBuilder: (context, state) =>
-              getCustomTransition(state, const MyProfile()),
+              getCustomTransition(state, MyProfile()),
         ),
         GoRoute(
           path: 'projects',
