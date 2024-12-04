@@ -16,6 +16,8 @@ class TextInputField extends StatefulWidget {
   final bool isSearch;
   final bool isPrefix;
   final bool isBorder;
+  final int maxlines;
+  final double height;
   final String? iconName;
   final String? viewprefix;
   final List<String>? dropDownOptions;
@@ -32,9 +34,11 @@ class TextInputField extends StatefulWidget {
     this.isDropDown = false,
     this.dropDownOptions,
     this.isSearch = false,
-    this.isPrefix= false,
-    this.isBorder = true, 
+    this.isPrefix = false,
+    this.isBorder = true,
     this.viewprefix,
+    this.maxlines = 1,
+    this.height = 50,
   });
 
   @override
@@ -63,9 +67,12 @@ class _TextInputFieldState extends State<TextInputField> {
     if (widget.isDropDown) {
       // Show dropdown when isDropDown is true
       return SizedBox(
-        height: 50,
+        height: widget.height,
         child: DropdownButtonFormField<String>(
-          
+          icon: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: AppColors.textGrey1,
+          ),
           decoration: InputDecoration(
             prefixIcon: widget.isPrefix
                 ? Padding(
@@ -116,7 +123,7 @@ class _TextInputFieldState extends State<TextInputField> {
                     child: Text(
                       option,
                       style: AppTextStyle.mediumText(
-                          size: 14, color: AppColors.black),
+                          size: 14, color: AppColors.textGrey1),
                     ),
                   ))
               .toList(),
@@ -125,8 +132,9 @@ class _TextInputFieldState extends State<TextInputField> {
     } else {
       // Default TextFormField behavior
       return SizedBox(
-        height: 50,
+        height: widget.height,
         child: TextFormField(
+          maxLines: widget.maxlines,
           controller: widget.controller,
           obscureText: _isObscured,
           keyboardType: widget.keyboardType,
@@ -140,9 +148,9 @@ class _TextInputFieldState extends State<TextInputField> {
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             helperStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            border:  OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),borderSide: BorderSide(color: AppColors.textGrey1)
-            ),
+            border: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.textGrey1)),
             prefixIcon: widget.isSearch
                 ? Padding(
                     padding: const EdgeInsets.all(12.0),
