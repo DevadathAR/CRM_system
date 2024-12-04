@@ -126,12 +126,12 @@ final router = GoRouter(
           pageBuilder: (context, state) =>
               getCustomTransition(state, const Settings()),
         ),
-        GoRoute(
-          path: 'dummy',
-          name: Dummy.route,
-          pageBuilder: (context, state) =>
-              getCustomTransition(state,  Dummy()),
-        ),
+        // GoRoute(
+        //   path: 'dummy',
+        //   name: Dummy.route,
+        //   pageBuilder: (context, state) =>
+        //       getCustomTransition(state,  Dummy()),
+        // ),
       ],
     ),
   ],

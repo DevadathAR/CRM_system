@@ -1,18 +1,14 @@
-import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
 import 'package:crm_system/src/features/profile/presentation/widget/expantion_tile.dart';
-import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
-import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
+import 'package:crm_system/src/utilities/colors.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import 'package:flutter/material.dart';
+
+
 
 class Settings extends StatefulWidget {
   static String route = 'settings';
@@ -22,7 +18,7 @@ class Settings extends StatefulWidget {
   State<Settings> createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<Settings> { 
   // To track the expanded tile
   final ValueNotifier<Key?> _expandedItem = ValueNotifier<Key?>(null);
   bool _isChecked = false;

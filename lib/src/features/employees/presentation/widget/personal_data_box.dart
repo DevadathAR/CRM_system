@@ -1,3 +1,5 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
+import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
@@ -89,7 +91,13 @@ class PersonalDataBox extends StatelessWidget {
             iconName: locationSvg,
           ),
           _subText(label: 'Birthday Date'),
-          const TextInputField(
+           TextInputField(
+            ontap: () {
+             showDialog(
+          context: context,
+          builder: (context) => const CalanderPopScreen(),
+        );
+            },
             viewIcon: true,
             iconName: calenderSvg,
           ),

@@ -33,6 +33,87 @@ final List<ProjectCard> mockProjects = [
     activeTasks: 25,
     projectIcon: foodService2Svg, // Replace with your SVG path
   ),
+  const ProjectCard(
+    projectId: "PN0001265",
+    projectName: "Medical App (iOS native)",
+    creationDate: "Created Sep 12, 2020",
+    priority: "Medium",
+    allTasks: 34,
+    activeTasks: 13,
+    projectIcon:medicalAPpSvg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001266",
+    projectName: "Food Delivery Service",
+    creationDate: "Created Sep 12, 2020",
+    priority: "Low",
+    allTasks: 34,
+    activeTasks: 13,
+    projectIcon: foodServiceSvg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001267",
+    projectName: "E-commerce Platform",
+    creationDate: "Created Nov 15, 2021",
+    priority: "Low",
+    allTasks: 50,
+    activeTasks: 25,
+    projectIcon: foodService2Svg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001265",
+    projectName: "Medical App (iOS native)",
+    creationDate: "Created Sep 12, 2020",
+    priority: "Medium",
+    allTasks: 34,
+    activeTasks: 13,
+    projectIcon:medicalAPpSvg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001266",
+    projectName: "Food Delivery Service",
+    creationDate: "Created Sep 12, 2020",
+    priority: "Low",
+    allTasks: 34,
+    activeTasks: 13,
+    projectIcon: foodServiceSvg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001267",
+    projectName: "E-commerce Platform",
+    creationDate: "Created Nov 15, 2021",
+    priority: "Low",
+    allTasks: 50,
+    activeTasks: 25,
+    projectIcon: foodService2Svg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001265",
+    projectName: "Medical App (iOS native)",
+    creationDate: "Created Sep 12, 2020",
+    priority: "Medium",
+    allTasks: 34,
+    activeTasks: 13,
+    projectIcon:medicalAPpSvg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001266",
+    projectName: "Food Delivery Service",
+    creationDate: "Created Sep 12, 2020",
+    priority: "Low",
+    allTasks: 34,
+    activeTasks: 13,
+    projectIcon: foodServiceSvg, // Replace with your SVG path
+  ),
+  const ProjectCard(
+    projectId: "PN0001267",
+    projectName: "E-commerce Platform",
+    creationDate: "Created Nov 15, 2021",
+    priority: "Low",
+    allTasks: 50,
+    activeTasks: 25,
+    projectIcon: foodService2Svg, // Replace with your SVG path
+  ),
 ];
 
 final List<ProfileVacation> mockVacationList = [

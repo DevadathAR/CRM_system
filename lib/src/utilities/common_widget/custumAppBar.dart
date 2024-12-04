@@ -59,7 +59,7 @@ class CustumAppBar extends StatelessWidget {
               ),
               onPressed: () {
                 
-                context.goNamed(Dummy.route);
+                context.goNamed(MyProfile.route);
               },
             ),
           ],

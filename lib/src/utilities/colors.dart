@@ -21,6 +21,7 @@ class AppColors {
   static Color purple = const Color(0xFF6D5DD3);
   static Color cyan = const Color(0xFF15C0E6);
   static Color lightCyan = const Color(0x1A15C0E6);
+  static Color togglegrey = const Color(0xFFCED5E0);
 
   static Color green = const Color(0xFF00D097);
 

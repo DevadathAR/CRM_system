@@ -21,6 +21,7 @@ class TextInputField extends StatefulWidget {
   final String? iconName;
   final String? viewprefix;
   final List<String>? dropDownOptions;
+  final VoidCallback? ontap;
   const TextInputField({
     super.key,
     this.controller,
@@ -39,6 +40,7 @@ class TextInputField extends StatefulWidget {
     this.viewprefix,
     this.maxlines = 1,
     this.height = 50,
+    this.ontap,
   });
 
   @override
@@ -174,10 +176,12 @@ class _TextInputFieldState extends State<TextInputField> {
                 : widget.viewIcon
                     ? Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: SvgPicture.asset(
-                          widget.iconName.toString(),
-                          colorFilter: ColorFilter.mode(
-                              AppColors.textGrey1, BlendMode.srcIn),
+                        child: InkWell(onTap:widget.ontap,
+                          child: SvgPicture.asset(
+                            widget.iconName.toString(),
+                            colorFilter: ColorFilter.mode(
+                                AppColors.textGrey1, BlendMode.srcIn),
+                          ),
                         ),
                       )
                     : null,
