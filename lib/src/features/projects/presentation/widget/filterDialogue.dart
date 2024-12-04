@@ -237,10 +237,10 @@ class _FilterDialogState extends State<FilterDialog> {
     ).box.p3.color(AppColors.primaryBackGround).withRounded(value: 16).make();
   }
 
-  // Widget greyTitle({required String text}) {
-  //   return Text(
-  //     text,
-  //     style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
-  //   ).pSymmetric(h: 16);
-  // }
+  Widget greyTitle({required String text}) {
+    return Text(
+      text,
+      style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
+    ).pSymmetric(h: 16);
+  }
 }
