@@ -94,19 +94,19 @@ class _TextInputFieldState extends State<TextInputField> {
             enabledBorder: widget.isBorder
                 ? OutlineInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(14)),
-                    borderSide: BorderSide(color: AppColors.textGrey1),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
                   )
                 : InputBorder.none,
             focusedBorder: widget.isBorder
                 ? OutlineInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(14)),
-                    borderSide: BorderSide(color: AppColors.textGrey1),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
                   )
                 : InputBorder.none,
             border: widget.isBorder
                 ? OutlineInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(14)),
-                    borderSide: BorderSide(color: AppColors.textGrey1),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
                   )
                 : InputBorder.none,
           ),
@@ -142,6 +142,7 @@ class _TextInputFieldState extends State<TextInputField> {
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
           decoration: InputDecoration(
+            // enabledBorder: ,
             labelText: widget.labelText,
             labelStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
@@ -150,9 +151,13 @@ class _TextInputFieldState extends State<TextInputField> {
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             helperStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+              borderSide: BorderSide(color: AppColors.borderGrey),
+            ),
             border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(14)),
-                borderSide: BorderSide(color: AppColors.textGrey1)),
+                borderSide: BorderSide(color: AppColors.borderGrey)),
             prefixIcon: widget.isSearch
                 ? Padding(
                     padding: const EdgeInsets.all(12.0),

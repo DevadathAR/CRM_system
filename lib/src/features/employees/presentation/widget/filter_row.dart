@@ -26,7 +26,7 @@ class FilterRow extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(14)),
               color: AppColors.white),
           child: SvgPicture.asset(
-            taskIconSvg,
+            filterIconSvg,
             height: 5,
           ),
         ),
