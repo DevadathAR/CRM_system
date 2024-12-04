@@ -1,3 +1,4 @@
+import 'package:crm_system/dummy.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
 import 'package:crm_system/src/features/profile/provider/pageview_provider.dart';
@@ -12,7 +13,9 @@ void main() {
         ChangeNotifierProvider(create: (_) => DashbordProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
         ChangeNotifierProvider(create: (_) => PageviewProvider()),
+        ChangeNotifierProvider(create: (_) => PageSelectionProvider()),
       ],
+
       child: const MainApp(),
     ),
   );

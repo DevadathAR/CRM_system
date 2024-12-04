@@ -1,3 +1,4 @@
+import 'package:crm_system/dummy.dart';
 import 'package:crm_system/main.dart';
 import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
@@ -57,7 +58,8 @@ class CustumAppBar extends StatelessWidget {
                 child: Image.asset(dp1png),
               ),
               onPressed: () {
-                context.goNamed(MyProfile.route);
+                
+                context.goNamed(Dummy.route);
               },
             ),
           ],

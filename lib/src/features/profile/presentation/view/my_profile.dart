@@ -77,7 +77,7 @@ _customTab('Vacation', 2, tabProvider),
                     child: PageView.builder(
                       controller: tabProvider.pageController,
                       onPageChanged: tabProvider.onPageChanged,
-                      itemCount: _titles.length,
+                      itemCount: 3,
                       itemBuilder: (context, index) {
                         switch (index) {
                           case 0:

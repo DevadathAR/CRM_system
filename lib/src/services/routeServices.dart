@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crm_system/dummy.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
@@ -124,6 +125,12 @@ final router = GoRouter(
           name: Settings.route,
           pageBuilder: (context, state) =>
               getCustomTransition(state, const Settings()),
+        ),
+        GoRoute(
+          path: 'dummy',
+          name: Dummy.route,
+          pageBuilder: (context, state) =>
+              getCustomTransition(state,  Dummy()),
         ),
       ],
     ),
