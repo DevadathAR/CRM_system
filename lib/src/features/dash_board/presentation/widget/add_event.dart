@@ -1,4 +1,5 @@
 import 'package:crm_system/src/features/dash_board/provider/add_event_provider.dart';
+import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
@@ -70,19 +71,15 @@ class AddEvent extends StatelessWidget {
             8.heightBox,
             greyTitle(text: "Date"),
             8.heightBox,
-            const TextInputField(
-              viewIcon: true,
-              iconName: calenderSvg,
-              hintText: 'Select Date',
-            ),
+            const CustomDateTimePicker(iconName: calenderSvg,
+              hintText: 'Select Date',),
             8.heightBox,
             greyTitle(text: "Time"),
             8.heightBox,
-            const TextInputField(
-              viewIcon: true,
-              iconName: clocNakedkSvg,
-              hintText: 'Select Time',
-            ),
+            
+            const CustomDateTimePicker(iconName: clocNakedkSvg,
+              hintText: 'Select Time',),
+           
             8.heightBox,
             greyTitle(text: "Description"),
             8.heightBox,
@@ -208,7 +205,7 @@ class AddEvent extends StatelessWidget {
       required bool isSelected,
       required VoidCallback onTap}) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       height: height,
       width: width,
       decoration: BoxDecoration(

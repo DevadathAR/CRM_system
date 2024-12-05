@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
@@ -56,19 +57,16 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
             8.heightBox,
             greyTitle(text: "Starts"),
             8.heightBox,
-            const TextInputField(
-              viewIcon: true,
-              iconName: calenderSvg,
-              hintText: "Select Date",
-            ),
+            
+            const CustomDateTimePicker(iconName: calenderSvg,
+              hintText: 'Select Date',),
+           
             8.heightBox,
             greyTitle(text: "Dead Line"),
             8.heightBox,
-            const TextInputField(
-              hintText: "Select Date",
-              viewIcon: true,
-              iconName: calenderSvg,
-            ),
+                
+            const CustomDateTimePicker(iconName: calenderSvg,
+              hintText: 'Select Date',),
             8.heightBox,
             greyTitle(text: "Priority"),
             8.heightBox,

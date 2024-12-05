@@ -5,6 +5,7 @@ import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEv
 import 'package:crm_system/src/features/dash_board/presentation/widget/projectDetailCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/sampleDatalists.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
+import 'package:crm_system/src/features/profile/model/profiile_project_model.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
@@ -86,23 +87,31 @@ class DashBoard extends StatelessWidget {
                   10.heightBox,
                   // GridView inside ListView
                   GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisExtent: 180,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 1.0),
-                    itemCount: 6, // Number of items
-                    itemBuilder: (context, index) {
-                      return workloadItem(
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 10,
+    mainAxisExtent: 180, // Adjusted to avoid clipping
+    mainAxisSpacing: 10,
+    childAspectRatio: 1.0,
+  ),
+  itemCount: 4,
+  // itemCount: mockWorkloadList.length, // Dynamic item count
+  itemBuilder: (context, index) {
+    // Pass data from the list to workloadItem
+    final item = mockWorkloadList[index];
+    return WorkloadItem(
                         bgColor: AppColors.backgroindGrey1,
-                      );
-                    },
-                    shrinkWrap: true,
-                    physics:
-                        const NeverScrollableScrollPhysics(), // Grid inside ListView
-                  ),
+      progressValue: item.progressValue,
+      dpImage: item.dpImage,
+      name: item.name,
+      role: item.role,
+      level: item.level,
+    );
+  },
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(), // Grid inside ListView
+),
+
                 ],
               ),
             ),

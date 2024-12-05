@@ -16,7 +16,7 @@ const projectAvatarYellow = "assets/svg/project_avatar_yellow.svg";
 const projectAvatarRed = "assets/svg/project_avatar_red.svg";
 const uploadImageSvg = "assets/svg/upload_image.svg";
 const noTaskPlaceHolderSvg = "assets/svg/noTaskPlaceholder.svg";
-
+const chatSvg = "assets/svg/chat.svg";
 const arrowUpSvg = "assets/svg/arrowUp.svg";
 const arrowDownSvg = "assets/svg/arrowDown.svg";
 const clockSvg = "assets/svg/clock.svg";

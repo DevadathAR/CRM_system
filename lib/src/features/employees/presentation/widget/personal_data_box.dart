@@ -1,4 +1,4 @@
-import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
+import 'package:crm_system/src/features/calendar/presentation/view/calander_page.dart';
 import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -72,7 +72,8 @@ class PersonalDataBox extends StatelessWidget {
           ),
           Text(
             'UI/UX Designer',
-            style: AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
+            style:
+                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
           ),
           const Divider(),
           const SizedBox(
@@ -91,15 +92,13 @@ class PersonalDataBox extends StatelessWidget {
             iconName: locationSvg,
           ),
           _subText(label: 'Birthday Date'),
-           TextInputField(
-            ontap: () {
-             showDialog(
-          context: context,
-          builder: (context) => const CalanderPopScreen(),
-        );
-            },
-            viewIcon: true,
+          CustomDateTimePicker(
             iconName: calenderSvg,
+            label: 'Birthday Date',
+            initialDate: DateTime.now(),
+            onDateSelected: (date) {
+              print('Selected Date: $date');
+            },
           ),
           const SizedBox(
             height: 24,

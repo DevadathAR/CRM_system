@@ -1,6 +1,7 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/data_box.dart.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/pagination.dart';
+import 'package:crm_system/src/features/profile/model/profiile_project_model.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
@@ -43,7 +44,28 @@ class EmployeeActivity extends StatelessWidget {
           ],
           borderRadius: const BorderRadius.all(Radius.circular(24)),
           color: AppColors.white),
-      child: Column(
+      child:
+     
+     
+//       Column(
+//       children: List.generate(mockWorkloadList.length, (index) {
+//     final item = mockWorkloadList[index];
+//         return Padding(
+//           padding: const EdgeInsets.only(bottom: 16.0),
+//           child: WorkloadItem(
+// bgColor: AppColors.blue,      progressValue: item.progressValue,
+//       dpImage: item.dpImage,
+//       name: item.name,
+//       role: item.role,
+//       level: item.level,
+
+//     )
+//         );
+//       }),
+//     ),
+      
+      
+       Column(
         children: [
            workloadItem(bgColor: AppColors.backgroindGrey1,),
           const SizedBox(
@@ -59,6 +81,8 @@ class EmployeeActivity extends StatelessWidget {
           )
         ],
       ),
+
+
     );
   }
 

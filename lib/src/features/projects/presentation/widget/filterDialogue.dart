@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
@@ -52,11 +53,9 @@ class _FilterDialogState extends State<FilterDialog> {
           greyTitle(text: "Period"),
 
           16.heightBox,
-          const TextInputField(
-            hintText: "Select Period",
-            viewIcon: true,
-            iconName: calenderSvg,
-          ).pSymmetric(h: 16),
+               
+            const CustomDateTimePicker(iconName: calenderSvg,
+              hintText: 'Select Date',).pSymmetric(h: 16),
           16.heightBox,
           Divider(
             color: AppColors.dividergrey,
@@ -132,9 +131,8 @@ class _FilterDialogState extends State<FilterDialog> {
           10.heightBox,
           greyTitle(text: "Estimate"),
           10.heightBox,
-          const TextInputField(
+          const CustomDateTimePicker(
             hintText: "Select duration",
-            viewIcon: true,
             iconName: clocNakedkSvg,
           ).pSymmetric(h: 16),
           10.heightBox,

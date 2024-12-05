@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
@@ -56,11 +57,9 @@ class AddTaskDialogue extends StatelessWidget {
             8.heightBox,
             greyTitle(text: "Estimate"),
             8.heightBox,
-            const TextInputField(
-              viewIcon: true,
-              iconName: clocNakedkSvg,
-              hintText: "Select duration",
-            ),
+            const CustomDateTimePicker(iconName: clocNakedkSvg,
+              hintText: 'Select duration',),
+         
             8.heightBox,
             greyTitle(text: "Dead Line"),
             8.heightBox,

@@ -1,4 +1,7 @@
+import 'package:crm_system/src/features/vaccations/presentation/widget/multy_date_calendar.dart';
+import 'package:crm_system/src/features/projects/presentation/widget/add_task_dialogue.dart';
 import 'package:crm_system/src/features/vaccations/presentation/widget/vacation_body.dart';
+import 'package:crm_system/src/features/vaccations/presentation/widget/vacation_req_popup.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
@@ -17,22 +20,12 @@ class VacationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustumScaffold(
-      //
-      // Scaffold(
-      //   key: scaffoldKey,
-      //   drawer: const AppDrawerWidget(),
-      //   backgroundColor: AppColors.bgWhite,
-      //   floatingActionButton: FloatingActionButton(
-      //     backgroundColor: AppColors.blue,
-      //     shape: RoundedRectangleBorder(
-      //       borderRadius: BorderRadius.circular(1500),
-      //     ),
-      //     onPressed: () {},
-      //     child: SvgPicture.asset(
-      //       addSvg,
-      //       colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-      //     ),
-      //   ),
+      ontap: () {
+        showDialog(
+          context: context,
+          builder: (context) => VacationRequest()
+        );
+      },
       body: VStack(
         [
           vacations.text

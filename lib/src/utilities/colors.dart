@@ -22,6 +22,8 @@ class AppColors {
   static Color cyan = const Color(0xFF15C0E6);
   static Color lightCyan = const Color(0x1A15C0E6);
   static Color togglegrey = const Color(0xFFCED5E0);
+  static Color calendarColor= const Color(0xFF00BFEC);
+  
 
   static Color green = const Color(0xFF00D097);
 
