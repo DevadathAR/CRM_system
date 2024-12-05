@@ -1,6 +1,7 @@
 import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
+import 'package:crm_system/src/utilities/common_widget/dialogue_box_title.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -33,24 +34,15 @@ class _FilterDialogState extends State<FilterDialog> {
         // mainAxisSize: MainAxisSize.max,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              "Filters".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
-              SvgPicture.asset(
-                closeIconSvg,
-                color: AppColors.lightblack,
-                height: 18,
-                width: 18,
-              ).onTap(() => Navigator.pop(context)), // Close button
-            ],
+          const DialogueBoxTitle(
+            title: "Filters",
           ).p16(),
           10.heightBox,
           Divider(
             color: AppColors.dividergrey,
           ),
           // Example Filter Options
-          greyTitle(text: "Period"),
+          boldGreyTitle(text: "Period"),
 
           16.heightBox,
                
@@ -61,7 +53,7 @@ class _FilterDialogState extends State<FilterDialog> {
             color: AppColors.dividergrey,
           ),
           10.heightBox,
-          greyTitle(text: "Task Group"),
+          boldGreyTitle(text: "Task Group"),
           16.heightBox,
           Column(
             children: [
@@ -79,7 +71,7 @@ class _FilterDialogState extends State<FilterDialog> {
           ).pSymmetric(h: 16),
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          greyTitle(text: "Reporter"),
+          boldGreyTitle(text: "Reporter"),
           16.heightBox,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +99,7 @@ class _FilterDialogState extends State<FilterDialog> {
           ).pSymmetric(h: 16),
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          greyTitle(text: "Assignees"),
+          boldGreyTitle(text: "Assignees"),
           10.heightBox,
 
           const TextInputField(
@@ -129,7 +121,7 @@ class _FilterDialogState extends State<FilterDialog> {
           10.heightBox,
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          greyTitle(text: "Estimate"),
+          boldGreyTitle(text: "Estimate"),
           10.heightBox,
           const CustomDateTimePicker(
             hintText: "Select duration",
@@ -138,7 +130,7 @@ class _FilterDialogState extends State<FilterDialog> {
           10.heightBox,
           Divider(color: AppColors.dividergrey),
           10.heightBox,
-          greyTitle(text: "Priority"),
+          boldGreyTitle(text: "Priority"),
           10.heightBox,
           // dropDOwn
           const TextInputField(
@@ -150,7 +142,7 @@ class _FilterDialogState extends State<FilterDialog> {
           _checkboxTile(text: "10 matches found", isImage: true)
               .pSymmetric(h: 16),
           16.heightBox,
-           PrimaryBlueButton(
+          PrimaryBlueButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -235,7 +227,7 @@ class _FilterDialogState extends State<FilterDialog> {
     ).box.p3.color(AppColors.primaryBackGround).withRounded(value: 16).make();
   }
 
-  Widget greyTitle({required String text}) {
+  Widget boldGreyTitle({required String text}) {
     return Text(
       text,
       style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),

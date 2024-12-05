@@ -2,6 +2,8 @@ import 'package:crm_system/src/features/authentication/presentation/view/sign_up
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
@@ -37,36 +39,31 @@ class _SignUpStep3State extends State<SignUpStep3> {
     ];
 
     return Scaffold(
-      body: VStack(
-        [
+      body: Column(
+        children: [
           const AuthTopSide(),
 
-          VStack(
-            [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               "STEP 3/4"
                   .text
-                  .bold
-                  .size(14)
-                  .color(AppColors.blue)
+                  .textStyle(
+                      AppTextStyle.boldText(size: 14, color: AppColors.blue))
                   .makeCentered(),
               16.heightBox,
-              abtCompany.text.bold.size(18).makeCentered(),
+              abtCompany.text
+                  .textStyle(AppTextStyle.boldText(
+                      size: 18, color: AppColors.lightblack))
+                  .makeCentered(),
               16.heightBox,
-              firmname.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: firmname),
               8.heightBox,
               const TextInputField(
                 hintText: firmnameHint,
               ),
               24.heightBox,
-              businessDir.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: businessDir),
               8.heightBox,
               const TextInputField(
                 obscureText: true,
@@ -75,11 +72,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
                 dropDownOptions: ['IT and Programing', 'HR', 'Pre - sales'],
               ),
               24.heightBox,
-              members.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: members),
               8.heightBox,
               SizedBox(
                 height: 210,
@@ -109,39 +102,46 @@ class _SignUpStep3State extends State<SignUpStep3> {
           )
               .box
               .white
-              .rounded
-              .shadowLg
-              .p16
+              // give shadow if needed
+              .withRounded(value: 24)
+              .p20
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
 
           24.heightBox,
 
           // Next Step Button
-          HStack(
-            [
-              Buttons(
-                ontap: () {
-                  Navigator.pop(context);
-                },
-                label: 'Previous',
-                length: 145,
-                color: AppColors.bgWhite,
-                back: true,
-                textColor: AppColors.blue,
+
+          Row(
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: PrimaryBlueButton(
+                  title: "Previous",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  backGroundColor: AppColors.primaryBackGround,
+                  elevation: 0,
+                  isprefix: true,
+                  prefixIcon: arrowBackSvg,
+                  prefixColor: AppColors.blue,
+                  labelColor: AppColors.blue,
+                ),
               ),
-              const Spacer(),
-              Buttons(
-                ontap: () {
-                  context.goNamed(SignUpStep4.route);
-                },
-                label: 'Next Step',
-                length: 145,
-                forward: true,
-                textColor: AppColors.white,
+              Expanded(
+                child: PrimaryBlueButton(
+                  title: "Next Step",
+                  onPressed: () {
+                    context.goNamed(SignUpStep4.route);
+                  },
+                  isSuffix: true,
+                  suffixIcon: arrowForwardSvg,
+                ),
               ),
             ],
-          ).px24(),
+          ).p20(),
+
           16.heightBox,
         ],
       )
@@ -155,31 +155,35 @@ class _SignUpStep3State extends State<SignUpStep3> {
 
   // The updated _memberBox with onTap functionality
   GestureDetector _memberBox({
-  required String datum,
-  required bool isSelected,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector( // Replaced onTap() with GestureDetector
-    onTap: onTap,
-    child: Container(
-      height: 50,
-      width: 80,
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.textGrey1),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: isSelected ? AppColors.blue : AppColors.white,
-      ),
-      child: Center(
-        child: Text(
-          datum,
-          style: AppTextStyle.regularText(
-            size: 14,
-            color: isSelected ? AppColors.white : AppColors.textGrey1,
+    required String datum,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      // Replaced onTap() with GestureDetector
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        height: 50,
+        width: 80,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.textGrey1),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: isSelected ? AppColors.blue : AppColors.white,
+        ),
+        child: Center(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              datum,
+              style: AppTextStyle.regularText(
+                size: 14,
+                color: isSelected ? AppColors.white : AppColors.textGrey1,
+              ),
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 }

@@ -1,8 +1,10 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class TextInputField extends StatefulWidget {
   final TextEditingController? controller;
@@ -181,7 +183,8 @@ class _TextInputFieldState extends State<TextInputField> {
                 : widget.viewIcon
                     ? Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: InkWell(onTap:widget.ontap,
+                        child: InkWell(
+                          onTap: widget.ontap,
                           child: SvgPicture.asset(
                             widget.iconName.toString(),
                             colorFilter: ColorFilter.mode(
@@ -225,14 +228,26 @@ class _CountryCodeFieldState extends State<CountryCodeField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
-      width: 83,
+      height: 48,
+      // width: size.width * 0.3,
       child: DropdownButtonFormField<String>(
+        isDense: true,
+        icon: Icon(
+          Icons.keyboard_arrow_down_rounded,
+          color: AppColors.textGrey1,
+        ),
         value: _selectedCode,
         decoration: InputDecoration(
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14)),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 0), // Adjust as needed
+
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(14)),
+            borderSide: BorderSide(color: AppColors.borderGrey),
           ),
+          border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+              borderSide: BorderSide(color: AppColors.borderGrey)),
           labelStyle:
               AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
         ),
@@ -276,7 +291,6 @@ class PhoneNumberField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
-      width: 230,
       child: TextFormField(
         controller: controller,
         keyboardType: TextInputType.phone,
@@ -285,9 +299,13 @@ class PhoneNumberField extends StatelessWidget {
           hintText: hintText ?? "Enter phone number",
           hintStyle:
               AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14)),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(14)),
+            borderSide: BorderSide(color: AppColors.borderGrey),
           ),
+          border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+              borderSide: BorderSide(color: AppColors.borderGrey)),
         ),
       ),
     );
@@ -345,10 +363,7 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(4, (index) {
-        return Container(
-          width: 60,
-          height: 50,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
+        return Flexible(
           child: TextField(
             controller: _controllers[index],
             focusNode: _focusNodes[index],
@@ -359,9 +374,13 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             decoration: InputDecoration(
               counterText: '', // Hides the character counter
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.borderGrey),
               ),
+              border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(14)),
+                  borderSide: BorderSide(color: AppColors.borderGrey)),
             ),
             onChanged: (value) {
               if (value.isNotEmpty) {
@@ -370,7 +389,7 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
                 _previousField(index, value);
               }
             },
-          ),
+          ).pSymmetric(h: 4),
         );
       }),
     );

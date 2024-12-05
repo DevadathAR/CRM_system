@@ -9,3 +9,10 @@ import 'package:velocity_x/velocity_x.dart';
 //       style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
 //     ).pSymmetric(h: 16);
 //   }
+
+Widget greyTitle({required String text}) {
+    return Text(
+      text,
+      style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
+    );
+  }

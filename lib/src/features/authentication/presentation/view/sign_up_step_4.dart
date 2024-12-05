@@ -5,6 +5,8 @@ import 'package:crm_system/src/features/authentication/presentation/widget/auth_
 import 'package:crm_system/src/services/routeServices.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
@@ -51,17 +53,13 @@ class _SignUpStep4State extends State<SignUpStep4> {
               16.heightBox,
               invite.text.bold.size(18).makeCentered(),
               16.heightBox,
-              memberMail.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: memberMail),
               8.heightBox,
               ...textFields,
               24.heightBox,
               HStack([
                 SvgPicture.asset(addSvg),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   addMember,
                   style: AppTextStyle.semiboldText(
@@ -75,36 +73,40 @@ class _SignUpStep4State extends State<SignUpStep4> {
           )
               .box
               .white
-              .rounded
-              .shadowLg
-              .p16
+              .withRounded(value: 24)
+              .p20
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
           24.heightBox,
-          HStack(
-            [
-              Buttons(
-                ontap: () {
-                  Navigator.pop(context);
-                },
-                label: 'Previous',
-                length: 145,
-                color: AppColors.bgWhite,
-                back: true,
-                textColor: AppColors.blue,
+          Row(
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: PrimaryBlueButton(
+                  title: "Previous",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  backGroundColor: AppColors.primaryBackGround,
+                  elevation: 0,
+                  isprefix: true,
+                  prefixIcon: arrowBackSvg,
+                  prefixColor: AppColors.blue,
+                  labelColor: AppColors.blue,
+                ),
               ),
-              const Spacer(),
-              Buttons(
-                ontap: () {
-                  context.goNamed(SuccessPage.route);
-                },
-                label: 'Next Step',
-                length: 145,
-                forward: true,
-                textColor: AppColors.white,
+              Expanded(
+                child: PrimaryBlueButton(
+                  title: "Next Step",
+                  onPressed: () {
+                    context.goNamed(SuccessPage.route);
+                  },
+                  isSuffix: true,
+                  suffixIcon: arrowForwardSvg,
+                ),
               ),
             ],
-          ).px24(),
+          ).p20(),
           16.heightBox,
         ],
       )
