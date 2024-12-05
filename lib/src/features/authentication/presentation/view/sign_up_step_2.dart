@@ -2,9 +2,12 @@ import 'package:crm_system/src/features/authentication/presentation/view/sign_up
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -26,18 +29,16 @@ class SignUpStep2 extends StatelessWidget {
             [
               "STEP 2/4"
                   .text
-                  .bold
-                  .size(14)
-                  .color(AppColors.blue)
+                  .textStyle(
+                      AppTextStyle.boldText(size: 14, color: AppColors.blue))
                   .makeCentered(),
               16.heightBox,
-              yourself.text.bold.size(18).makeCentered(),
+              yourself.text
+                  .textStyle(AppTextStyle.boldText(
+                      size: 18, color: AppColors.lightblack))
+                  .makeCentered(),
               16.heightBox,
-              serviceReason.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: serviceReason),
               8.heightBox,
               const TextInputField(
                 hintText: mailHint,
@@ -45,11 +46,7 @@ class SignUpStep2 extends StatelessWidget {
                 dropDownOptions: ['Work', 'Research'],
               ),
               24.heightBox,
-              describes.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: describes),
               8.heightBox,
               const TextInputField(
                 obscureText: true,
@@ -58,51 +55,51 @@ class SignUpStep2 extends StatelessWidget {
                 dropDownOptions: ['Business Owner', 'Employee', 'Freelance'],
               ),
               24.heightBox,
-              describes.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: describes),
               8.heightBox,
               const RadioButtonRow(options: ['Yes', 'No']),
               24.heightBox,
             ],
           )
               .box
-              .white
-              .rounded
-              .shadowLg
-              .p16
+              .color(AppColors.white)
+              .withRounded(value: 24)
+              .p20
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
 
           24.heightBox,
 
           // Next Step Button
-          HStack(
-            [
-              Buttons(
-                ontap: () {
-                  Navigator.pop(context);
-                },
-                label: 'Previous',
-                length: 145,
-                color: AppColors.bgWhite,
-                back: true,
-                textColor: AppColors.blue,
+          Row(
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: PrimaryBlueButton(
+                  title: "Previous",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  backGroundColor: AppColors.primaryBackGround,
+                  elevation: 0,
+                  isprefix: true,
+                  prefixIcon: arrowBackSvg,
+                  prefixColor: AppColors.blue,
+                  labelColor: AppColors.blue,
+                ),
               ),
-              const Spacer(),
-              Buttons(
-                ontap: () {
-                  context.goNamed(SignUpStep3.route);
-                },
-                label: 'Next Step',
-                length: 145,
-                forward: true,
-                textColor: AppColors.white,
+              Expanded(
+                child: PrimaryBlueButton(
+                  title: "Next Step",
+                  onPressed: () {
+                    context.goNamed(SignUpStep3.route);
+                  },
+                  isSuffix: true,
+                  suffixIcon: arrowForwardSvg,
+                ),
               ),
             ],
-          ).px24(),
+          ).p20(),
           16.heightBox,
         ],
       )

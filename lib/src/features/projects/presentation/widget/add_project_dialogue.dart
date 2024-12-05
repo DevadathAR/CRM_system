@@ -1,4 +1,5 @@
 import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/common_widget/dialogue_box_title.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
@@ -31,21 +32,8 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
         child: ListView(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                "Add Project"
-                    .text
-                    .textStyle(AppTextStyle.boldText(size: 22))
-                    .make(),
-                SvgPicture.asset(
-                  closeIconSvg,
-                  colorFilter:
-                      ColorFilter.mode(AppColors.lightblack, BlendMode.srcIn),
-                  height: 18,
-                  width: 18,
-                ).onTap(() => Navigator.pop(context)), // Close button
-              ],
+           const DialogueBoxTitle(
+              title: "Add project",
             ),
             8.heightBox,
             greyTitle(text: "Project Name"),
@@ -114,12 +102,7 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
     );
   }
 
-  Widget greyTitle({required String text}) {
-    return Text(
-      text,
-      style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
-    );
-  }
+  
 }
 
 class AvatarSelection extends StatelessWidget {

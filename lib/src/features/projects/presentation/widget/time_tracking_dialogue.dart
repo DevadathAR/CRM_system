@@ -1,5 +1,8 @@
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/dialogue_box_title.dart';
+import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
+import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +30,7 @@ class TimeTrackingDialogue extends StatelessWidget {
             const DialogueBoxTitle(
               title: "Time Tracking",
             ),
+            10.heightBox,
             //timeTracking
             Row(
               children: [
@@ -54,10 +58,55 @@ class TimeTrackingDialogue extends StatelessWidget {
                   ],
                 ),
               ],
+            )
+                .box
+                .withRounded(value: 14)
+                .color(AppColors.primaryBackGround)
+                .make(),
+            8.heightBox,
+            greyTitle(text: "Time spent"),
+            const TextInputField(
+              labelText: "1w 4d 6h 40m",
             ),
+            8.heightBox,
+
+            greyTitle(text: "Date"),
+            const TextInputField(
+              viewIcon: true,
+              iconName: calenderSvg,
+              labelText: "Dec 20, 2020",
+            ),
+            8.heightBox,
+            greyTitle(text: "Time"),
+            const TextInputField(
+              viewIcon: true,
+              iconName: clocNakedkSvg,
+              labelText: "2.00 pm",
+            ),
+            8.heightBox,
+            greyTitle(text: "Work Description"),
+            8.heightBox,
+            const TextInputField(
+              height: 150,
+              maxlines: 4,
+              hintText: "Add some description of the task",
+            ),
+            10.heightBox,
+            PrimaryBlueButton(
+              title: "Save",
+              onPressed: () {},
+            ),
+            5.heightBox,
           ],
         ).p20(),
       ),
     );
   }
+
+  // Widget greyTitle({required String text}) {
+  //   return Text(
+  //     text,
+  //     style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
+  //   );
+  // }
 }

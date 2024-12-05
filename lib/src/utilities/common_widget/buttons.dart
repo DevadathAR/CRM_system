@@ -36,7 +36,9 @@ class Buttons extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: AppColors.textGrey1, blurRadius: 12, offset: const Offset(0, 6))
+                color: AppColors.textGrey1,
+                blurRadius: 12,
+                offset: const Offset(0, 6))
           ],
           borderRadius: const BorderRadius.all(Radius.circular(14)),
           color: color ?? AppColors.blue,
@@ -87,7 +89,7 @@ class _RadioButtonRowState extends State<RadioButtonRow> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: widget.options.map((option) {
         return Row(
           children: [
@@ -108,9 +110,6 @@ class _RadioButtonRowState extends State<RadioButtonRow> {
               option,
               style: AppTextStyle.regularText(size: 14, color: AppColors.black),
             ),
-            const SizedBox(
-              width: 50,
-            )
           ],
         );
       }).toList(),

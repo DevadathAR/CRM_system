@@ -1,4 +1,5 @@
 import 'package:crm_system/main.dart';
+import 'package:crm_system/src/features/dash_board/model/project_model.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/f_a_b.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEventsCard.dart';
@@ -40,7 +41,6 @@ class DashBoard extends StatelessWidget {
           title: "Select Task Status",
           content: const FAB(),
         );
-       
       },
       body: Expanded(
         child: ListView(
@@ -107,29 +107,25 @@ class DashBoard extends StatelessWidget {
               ),
             ),
             10.heightBox,
-            // Repeated Workload Title Section
+            // Project Section
             _buildTitle(title: "Project", onTap: () {}),
-
-            const ProjectCard(
-              projectId: "PN0001265",
-              projectName: "Medical App (iOS native)",
-              creationDate: "Created Sep 12, 2020",
-              priority: "Medium",
-              // priorityColor: AppColors.yellow,
-              allTasks: 34,
-              activeTasks: 13,
-              projectIcon: projectAvatar3,
-            ),
-            10.heightBox,
-            const ProjectCard(
-              projectId: "PN0001265",
-              projectName: "Food Delivery Service",
-              creationDate: "Created Sep 12, 2020",
-              priority: "Low", // or "Low"
-              // priorityColor: Colors.green,
-              allTasks: 34,
-              activeTasks: 13,
-              projectIcon: projectavtar1, // Your SVG path
+            ListView.builder(
+              padding: const EdgeInsets.all(0),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                final project = projects[index];
+                return ProjectCard(
+                  projectId: project.projectId,
+                  projectName: project.projectName,
+                  creationDate: project.creationDate,
+                  priority: project.priority,
+                  allTasks: project.allTasks,
+                  activeTasks: project.activeTasks,
+                  projectIcon: project.projectIcon,
+                ).pOnly(bottom: 10); // Adds spacing between cards
+              },
             ),
             _buildTitle(
               title: "Nearest Events",

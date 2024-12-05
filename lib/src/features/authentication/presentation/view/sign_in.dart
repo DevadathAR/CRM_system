@@ -4,8 +4,11 @@ import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.d
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
+import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/strings.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -24,50 +27,60 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VStack(
-        [
+      body: Column(
+        children: [
           // Top Section
           const AuthTopSide(),
 
           // Form Section
-          VStack(
-            [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               // Title
-              woorkroomsignin.text.bold.size(18).makeCentered(),
+              woorkroomsignin.text
+                  .textStyle(AppTextStyle.boldText(
+                      size: 18, color: AppColors.lightblack))
+                  .makeCentered(),
               16.heightBox,
 
               // Email Field
-              email.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: email),
+              // email.text.bold
+              //     .size(14)
+              //     .color(AppColors.textGrey1)
+              //     .make()
+              //     .objectTopLeft(),
               8.heightBox,
               const TextInputField(
                 isSearch: false,
                 hintText: mailHint,
-              ).pSymmetric(h: 8),
+              ),
               16.heightBox,
 
               // Password Field
-              pswd.text.bold
-                  .size(14)
-                  .color(AppColors.textGrey1)
-                  .make()
-                  .objectTopLeft(),
+              greyTitle(text: pswd),
+              // pswd.text.bold
+              //     .size(14)
+              //     .color(AppColors.textGrey1)
+              //     .make()
+              //     .objectTopLeft(),
               8.heightBox,
               const TextInputField(
                 isSearch: false,
                 obscureText: true,
                 hintText: pswdHint,
-              ).pSymmetric(h: 8),
+              ),
               16.heightBox,
-
-              // Remember Me and Forgot Password Row
-              HStack(
-                [
-                  HStack(
-                    [
+              Wrap(
+                spacing: 10.0, // Space between items in the same row
+                runSpacing: 8.0, // Space between rows
+                alignment: WrapAlignment.spaceBetween,
+                children: [
+                  Wrap(
+                    spacing: 10.0, // Space between items in the same row
+                    runSpacing: 8.0,
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
                       Customcheckbox(
                         value: _isChecked,
                         onChanged: (bool? value) {
@@ -77,37 +90,32 @@ class _SignInState extends State<SignIn> {
                         },
                       ),
                       10.widthBox,
-                      // Checkbox(
-                      //   activeColor: AppColors.white,
-                      //   checkColor: AppColors.blue,
-                      //   value: _isChecked,
-                      //   onChanged: (bool? value) {
-                      //     setState(() {
-                      //       _isChecked = value ?? false;
-                      //     });
-                      //   },
-                      // ),
-                      remember.text.size(14).color(AppColors.black).make(),
+                      remember.text
+                          .textStyle(AppTextStyle.regularText(
+                              size: 14, color: AppColors.lightblack))
+                          .make(),
                     ],
                   ),
-                  const Spacer(),
                   GestureDetector(
-                    onTap: () {},
-                    child: forgot.text.size(14).color(AppColors.textGrey1).make(),
+                    onTap: () {
+                      // Handle forgot action here
+                    },
+                    child: forgot.text
+                        .textStyle(AppTextStyle.regularText(
+                            size: 14, color: AppColors.textGrey1))
+                        .make(),
                   ),
                 ],
-                alignment: MainAxisAlignment.spaceBetween,
               ),
               24.heightBox,
-
+              PrimaryBlueButton(
+                title: "Sign In",
+                onPressed: () {
+                  context.goNamed(DashBoard.route);
+                },
+              ),
               // Sign In Button
-              Buttons(
-                      ontap: () {
-                        context.goNamed(DashBoard.route);
-                      },
-                      textColor: AppColors.white,
-                      label: 'Sign In')
-                  .centered(),
+
               16.heightBox,
 
               // Signup Navigation

@@ -3,6 +3,7 @@ import 'package:crm_system/src/features/authentication/presentation/widget/auth_
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
@@ -12,49 +13,47 @@ import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SuccessPage extends StatelessWidget {
-     static const route = 'success-page';
+  static const route = 'success-page';
 
   const SuccessPage({super.key});
 
+  @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: VStack(
         [
           const AuthTopSide(),
-          
           VStack(
             [
               32.heightBox,
               SvgPicture.asset(successSvg),
               24.heightBox,
-              Align(alignment: Alignment.topCenter,
+              Align(
+                alignment: Alignment.topCenter,
                 child: Text(
                   success,
-                  style: AppTextStyle.boldText(size: 18, color: AppColors.black),
+                  style:
+                      AppTextStyle.boldText(size: 18, color: AppColors.black),
                 ),
               ),
               16.heightBox,
               Center(
-                child: Buttons(
-                  ontap: () {
-                   context.goNamed(DashBoard.route);
-                  },
-                  label: "Let's Start",
-                  length: 145,
-                  color: AppColors.blue,
-                  forward: true,
-                  textColor: AppColors.white,
-                ),
-              ),
+                  child: PrimaryBlueButton(
+                width: size.width * 0.5,
+                title: "Let's Start",
+                onPressed: () {
+                  context.goNamed(DashBoard.route);
+                },
+              )),
               32.heightBox
             ],
           )
               .box
               .width(double.infinity)
               .white
-              .rounded
-              .shadowLg
-              .p16
+              .withRounded(value: 24)
+              .p20
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .makeCentered(),
           24.heightBox,
