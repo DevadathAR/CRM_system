@@ -11,7 +11,7 @@ class VacationBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return VStack(
       [
-        ...List.generate(2, (_) => _personDataBox()),
+        ...List.generate(2  , (_) => _personDataBox()),
       ],
     );
   }

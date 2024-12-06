@@ -181,8 +181,7 @@ class VacationRequest extends StatelessWidget {
     ]);
   }
 
-  Container _pageTitle(
-      BuildContext context, VacationProvider provider, int index) {
+Container _pageTitle(context, VacationProvider provider, int index) {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.all(4),
@@ -196,10 +195,9 @@ class VacationRequest extends StatelessWidget {
       child: Center(
         child: Text(
           titles[index],
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style:provider.currentPage == index ?  AppTextStyle.boldText(size: 14,color:  AppColors.white):AppTextStyle.regularText(size: 14,color:  AppColors.black)
+          
+      
         ),
       ),
     );

@@ -10,6 +10,7 @@ import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,7 @@ class MyProfile extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    color: AppColors.textGrey1,
+                    color: AppColors.textGrey1.withOpacity(0.3),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,10 +80,9 @@ class MyProfile extends StatelessWidget {
               builder: (context, provider, child) {
                 double pageHeight;
 
-                // Set height based on the current page index
                 if (provider.currentPage == 0) {
                   pageHeight = mockProjects.length *
-                      260.0; // Dynamically set height based on list length
+                      260.0; 
                 } else if (provider.currentPage == 1) {
 
                   
@@ -92,7 +92,7 @@ class MyProfile extends StatelessWidget {
                 } else if (provider.currentPage == 2) {
                   pageHeight =
                       mockVacationList.length * 170; // Fixed height for page 1
-                } else {
+                } else { 
                   pageHeight = 100.0; // Default height
                 }
                 return SizedBox(
@@ -197,10 +197,9 @@ bgColor: AppColors.white,      progressValue: item.progressValue,
       child: Center(
         child: Text(
           titles[index],
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style:provider.currentPage == index ?  AppTextStyle.boldText(size: 14,color:  AppColors.white):AppTextStyle.regularText(size: 14,color:  AppColors.black)
+          
+      
         ),
       ),
     );
