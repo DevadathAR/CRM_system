@@ -36,12 +36,12 @@ class EmployeeActivity extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.textGrey1,
-                blurRadius: 12,
-                offset: const Offset(0, 1))
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //       color: AppColors.textGrey1,
+          //       blurRadius: 12,
+          //       offset: const Offset(0, 1))
+          // ],
           borderRadius: const BorderRadius.all(Radius.circular(24)),
           color: AppColors.white),
       child:

@@ -40,7 +40,7 @@ final List<ProjectCard> mockProjects = [
     priority: "Medium",
     allTasks: 34,
     activeTasks: 13,
-    projectIcon:projectAvatar3, // Replace with your SVG path
+    projectIcon: projectAvatar3, // Replace with your SVG path
   ),
   const ProjectCard(
     projectId: "PN0001266",
@@ -67,7 +67,7 @@ final List<ProjectCard> mockProjects = [
     priority: "Medium",
     allTasks: 34,
     activeTasks: 13,
-    projectIcon:projectavtar1, // Replace with your SVG path
+    projectIcon: projectavtar1, // Replace with your SVG path
   ),
   const ProjectCard(
     projectId: "PN0001266",
@@ -113,7 +113,8 @@ final List<ProfileVacation> mockVacationList = [
     statusContainerColor: AppColors.blue,
     dateRange: "Nov 15, 2020 - Nov 30, 2020",
     duration: "15d",
-  ),ProfileVacation(
+  ),
+  ProfileVacation(
     avatarColor: AppColors.blue,
     leaveType: "Sick Leave",
     status: "Pending",
@@ -136,7 +137,8 @@ final List<ProfileVacation> mockVacationList = [
     statusContainerColor: AppColors.blue,
     dateRange: "Nov 15, 2020 - Nov 30, 2020",
     duration: "15d",
-  ),ProfileVacation(
+  ),
+  ProfileVacation(
     avatarColor: AppColors.blue,
     leaveType: "Sick Leave",
     status: "Pending",
@@ -159,7 +161,8 @@ final List<ProfileVacation> mockVacationList = [
     statusContainerColor: AppColors.blue,
     dateRange: "Nov 15, 2020 - Nov 30, 2020",
     duration: "15d",
-  ),ProfileVacation(
+  ),
+  ProfileVacation(
     avatarColor: AppColors.blue,
     leaveType: "Sick Leave",
     status: "Pending",
@@ -182,7 +185,8 @@ final List<ProfileVacation> mockVacationList = [
     statusContainerColor: AppColors.blue,
     dateRange: "Nov 15, 2020 - Nov 30, 2020",
     duration: "15d",
-  ),ProfileVacation(
+  ),
+  ProfileVacation(
     avatarColor: AppColors.blue,
     leaveType: "Sick Leave",
     status: "Pending",
@@ -208,9 +212,7 @@ final List<ProfileVacation> mockVacationList = [
   ),
 ];
 
-
-
-final List<WorkloadItem>mockWorkloadList = [
+final List<WorkloadItem> mockWorkloadList = [
   WorkloadItem(
     progressValue: 0.3,
     dpImage: dp1png,
@@ -219,10 +221,9 @@ final List<WorkloadItem>mockWorkloadList = [
     level: "Middle",
     bgColor: Colors.blue.shade100,
   ),
-  
   WorkloadItem(
     progressValue: 0.8,
-    dpImage:dp3png,
+    dpImage: dp3png,
     name: "Michael Ford",
     role: "Backend Developer",
     level: "Expert",
@@ -235,7 +236,8 @@ final List<WorkloadItem>mockWorkloadList = [
     role: "Product Manager",
     level: "Junior",
     bgColor: Colors.purple.shade100,
-  ),  WorkloadItem(
+  ),
+  WorkloadItem(
     progressValue: 0.3,
     dpImage: dp1png,
     name: "Shawn Stone",
@@ -253,7 +255,7 @@ final List<WorkloadItem>mockWorkloadList = [
   ),
   WorkloadItem(
     progressValue: 0.8,
-    dpImage:dp3png,
+    dpImage: dp3png,
     name: "Michael Ford",
     role: "Backend Developer",
     level: "Expert",
@@ -266,7 +268,8 @@ final List<WorkloadItem>mockWorkloadList = [
     role: "Product Manager",
     level: "Junior",
     bgColor: Colors.purple.shade100,
-  ),  WorkloadItem(
+  ),
+  WorkloadItem(
     progressValue: 0.3,
     dpImage: dp1png,
     name: "Shawn Stone",
@@ -284,7 +287,7 @@ final List<WorkloadItem>mockWorkloadList = [
   ),
   WorkloadItem(
     progressValue: 0.8,
-    dpImage:dp3png,
+    dpImage: dp3png,
     name: "Michael Ford",
     role: "Backend Developer",
     level: "Expert",
@@ -297,7 +300,8 @@ final List<WorkloadItem>mockWorkloadList = [
     role: "Product Manager",
     level: "Junior",
     bgColor: Colors.purple.shade100,
-  ),  WorkloadItem(
+  ),
+  WorkloadItem(
     progressValue: 0.3,
     dpImage: dp1png,
     name: "Shawn Stone",
@@ -315,7 +319,7 @@ final List<WorkloadItem>mockWorkloadList = [
   ),
   WorkloadItem(
     progressValue: 0.8,
-    dpImage:dp3png,
+    dpImage: dp3png,
     name: "Michael Ford",
     role: "Backend Developer",
     level: "Expert",
@@ -328,7 +332,8 @@ final List<WorkloadItem>mockWorkloadList = [
     role: "Product Manager",
     level: "Junior",
     bgColor: Colors.purple.shade100,
-  ),  WorkloadItem(
+  ),
+  WorkloadItem(
     progressValue: 0.3,
     dpImage: dp1png,
     name: "Shawn Stone",
@@ -346,7 +351,7 @@ final List<WorkloadItem>mockWorkloadList = [
   ),
   WorkloadItem(
     progressValue: 0.8,
-    dpImage:dp3png,
+    dpImage: dp3png,
     name: "Michael Ford",
     role: "Backend Developer",
     level: "Expert",
@@ -359,7 +364,8 @@ final List<WorkloadItem>mockWorkloadList = [
     role: "Product Manager",
     level: "Junior",
     bgColor: Colors.purple.shade100,
-  ),  WorkloadItem(
+  ),
+  WorkloadItem(
     progressValue: 0.3,
     dpImage: dp1png,
     name: "Shawn Stone",
@@ -377,7 +383,7 @@ final List<WorkloadItem>mockWorkloadList = [
   ),
   WorkloadItem(
     progressValue: 0.8,
-    dpImage:dp3png,
+    dpImage: dp3png,
     name: "Michael Ford",
     role: "Backend Developer",
     level: "Expert",
