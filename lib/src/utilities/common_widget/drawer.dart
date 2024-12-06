@@ -92,7 +92,9 @@ class AppDrawerWidget extends StatelessWidget {
               ),
               _supportButton(context),
               // const Spacer(),
-              _logoutTile(),
+              _logoutTile(ontap: () {
+                showLogOutDialog(context);
+              }),
             ],
           ),
         ),
@@ -100,7 +102,7 @@ class AppDrawerWidget extends StatelessWidget {
     );
   }
 
-  Padding _logoutTile() {
+  Padding _logoutTile({required VoidCallback ontap}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
@@ -121,7 +123,7 @@ class AppDrawerWidget extends StatelessWidget {
             color: AppColors.textGrey1, // Active color
           ),
         ),
-        onTap: () {},
+        onTap: ontap,
       ),
     );
   }
@@ -321,8 +323,8 @@ class AppDrawerWidget extends StatelessWidget {
                 16.heightBox,
 
                 // Send Request Button with Full Width
-                 PrimaryBlueButton(
-                  onPressed: (){},
+                PrimaryBlueButton(
+                  onPressed: () {},
                   title: "Send Request",
                 ),
               ],
@@ -339,3 +341,31 @@ class AppDrawerWidget extends StatelessWidget {
     );
   }
 }
+
+void showLogOutDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Logout'),
+      content: const Text('Are you sure you want to log out?'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(), // Close the dialog
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+            context.goNamed(SignIn.route);
+          },
+          child: const Text('Log Out'),
+        ),
+      ],
+    ),
+  );
+}
+
+// // Use it in the logout button
+// IconButton(
+//   icon: Icon(Icons.logout),
+//   onPressed: () => showLogOutDialog(context),
+// ),

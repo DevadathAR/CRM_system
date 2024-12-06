@@ -13,10 +13,7 @@ class EmployeesList extends StatelessWidget {
       backgroundColor: AppColors.bgWhite,
       body: SafeArea(
         child: ListView(
-          children: [
-            _employeeListView(), 
-             PaginationView()
-          ],
+          children: [_employeeListView(), const PaginationView()],
         ),
       ),
     );
@@ -24,11 +21,11 @@ class EmployeesList extends StatelessWidget {
 
   Widget _employeeListView() {
     return VStack(
-      List.generate(8, (_) => _personDataBox()),
-    ).scrollVertical(); 
+      List.generate(8, (_) => const DataBox()),
+    ).scrollVertical();
   }
 
-  Widget _personDataBox() {
-    return const DataBox();
-  }
+  // Widget _personDataBox() {
+  //   return const DataBox();
+  // }
 }

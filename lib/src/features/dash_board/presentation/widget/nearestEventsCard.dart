@@ -1,10 +1,10 @@
-import 'package:crm_system/src/utilities/strings.dart';
-import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
+import 'package:crm_system/src/utilities/strings.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class NearestEventsCard extends StatelessWidget {
   final bool isnearestEvents;
@@ -29,10 +29,9 @@ class NearestEventsCard extends StatelessWidget {
         color: Colors.white,
       ),
       child: Row(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // Aligns children at the top
+        crossAxisAlignment: CrossAxisAlignment.start, // Aligns children at the top
         children: [
-          !isnearestEvents
+          isnearestEvents
               ? // Blue Line
               Container(
                   height: 80,
@@ -47,9 +46,7 @@ class NearestEventsCard extends StatelessWidget {
           // Event Details
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              // CrossAxisAlignment.start, // Align text to the start
               children: [
                 // Event Title and Icon
                 Row(
@@ -66,7 +63,6 @@ class NearestEventsCard extends StatelessWidget {
                           .make(),
                     ),
                     // Icon
-
                     SvgPicture.asset(
                       progress == low
                           ? arrowDownSvg
@@ -76,45 +72,41 @@ class NearestEventsCard extends StatelessWidget {
                   ],
                 ),
                 10.heightBox,
-                // const Spacer(),
                 // Event Date, Time, and Duration
-                Flexible(
-                  flex: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Date and Time
-                      "${event['date']} | ${event['time']}"
-                          .text
-                          .textStyle(AppTextStyle.regularText(
-                            size: 14,
-                            color: AppColors.textGrey2,
-                          ))
-                          .make(),
-                      // Duration
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            clockSvg, // Example clock icon path
-                            height: 14,
-                          ),
-                          5.widthBox,
-                          "${event['duration']}h"
-                              .text
-                              .textStyle(AppTextStyle.boldText(
-                                size: 12,
-                                color: AppColors.textGrey1,
-                              ))
-                              .make(),
-                        ],
-                      )
-                          .box
-                          .p8
-                          .withRounded(value: 8.0)
-                          .color(AppColors.primaryBackGround)
-                          .make(),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Date and Time
+                    "${event['date']} | ${event['time']}"
+                        .text
+                        .textStyle(AppTextStyle.regularText(
+                          size: 14,
+                          color: AppColors.textGrey2,
+                        ))
+                        .make(),
+                    // Duration
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          clockSvg, // Example clock icon path
+                          height: 14,
+                        ),
+                        5.widthBox,
+                        "${event['duration']}h"
+                            .text
+                            .textStyle(AppTextStyle.boldText(
+                              size: 12,
+                              color: AppColors.textGrey1,
+                            ))
+                            .make(),
+                      ],
+                    )
+                        .box
+                        .p8
+                        .withRounded(value: 8.0)
+                        .color(AppColors.primaryBackGround)
+                        .make(),
+                  ],
                 ),
               ],
             ),

@@ -20,17 +20,15 @@ class NearesteventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustumScaffold(
-       ontap: () {
+      ontap: () {
         showDialog(
           context: context,
-          builder: (context) =>  AddEvent(),
+          builder: (context) => AddEvent(),
         );
       },
-   
       body: Expanded(
-        child: Column(
+        child: ListView(
           children: [
-            // AppBar Section
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,9 +37,8 @@ class NearesteventsPage extends StatelessWidget {
                     buttonTItle: "Back to Dashboard",
                     icon: arrowBackSvg,
                     onTap: () {
-                       context.pop();
-                    }
-                    ),
+                      context.pop();
+                    }),
                 " Nearest Events"
                     .text
                     .textStyle(AppTextStyle.boldText(size: 22))
@@ -49,7 +46,8 @@ class NearesteventsPage extends StatelessWidget {
               ],
             ).pSymmetric(h: 15),
             // Welcome Text Section
-            Expanded(
+            Flexible(
+              flex: 3,
               child: ListView.builder(
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(horizontal: 15),
