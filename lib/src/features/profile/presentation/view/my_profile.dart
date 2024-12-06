@@ -18,15 +18,16 @@ import 'package:velocity_x/velocity_x.dart';
 class MyProfile extends StatelessWidget {
   static String route = 'user-profile';
   final List<String> titles = ["Project", "Team", "Vacations"];
-  final PageController _pageController =
-      PageController(); // Added PageController
+  final PageController _pageController = PageController();
+
+  MyProfile({super.key}); // Added PageController
 
   @override
   Widget build(BuildContext context) {
     return CustumScaffold(
       body: Expanded(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           children: [
             24.heightBox,
             // Header Section
@@ -82,13 +83,11 @@ class MyProfile extends StatelessWidget {
                 // Set height based on the current page index
                 if (provider.currentPage == 0) {
                   pageHeight = mockProjects.length *
-                      260.0; // Dynamically set height based on list length
+                      270.0; // Dynamically set height based on list length
                 } else if (provider.currentPage == 1) {
-
-                  
-                  pageHeight =mockWorkloadList.length%2==0?
-
-                      (mockWorkloadList.length*95.0)+20:((mockWorkloadList.length+1)* 95.0)+20;
+                  pageHeight = mockWorkloadList.length % 2 == 0
+                      ? (mockWorkloadList.length * 95.0) + 20
+                      : ((mockWorkloadList.length + 1) * 95.0) + 20;
                 } else if (provider.currentPage == 2) {
                   pageHeight =
                       mockVacationList.length * 170; // Fixed height for page 1
@@ -139,29 +138,29 @@ class MyProfile extends StatelessWidget {
 
   Widget _buildWorkloadGrid() {
     return GridView.builder(
-  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2,
-    crossAxisSpacing: 10,
-    mainAxisExtent: 180, // Adjusted to avoid clipping
-    mainAxisSpacing: 10,
-    childAspectRatio: 1.0,
-  ),
-  itemCount: mockWorkloadList.length, // Dynamic item count
-  itemBuilder: (context, index) {
-    // Pass data from the list to workloadItem
-    final item = mockWorkloadList[index];
-    return WorkloadItem(
-bgColor: AppColors.white,      progressValue: item.progressValue,
-      dpImage: item.dpImage,
-      name: item.name,
-      role: item.role,
-      level: item.level,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisExtent: 180, // Adjusted to avoid clipping
+        mainAxisSpacing: 10,
+        childAspectRatio: 1.0,
+      ),
+      itemCount: mockWorkloadList.length, // Dynamic item count
+      itemBuilder: (context, index) {
+        // Pass data from the list to workloadItem
+        final item = mockWorkloadList[index];
+        return WorkloadItem(
+          bgColor: AppColors.white,
+          progressValue: item.progressValue,
+          dpImage: item.dpImage,
+          name: item.name,
+          role: item.role,
+          level: item.level,
+        );
+      },
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(), // Grid inside ListView
     );
-  },
-  shrinkWrap: true,
-  physics: const NeverScrollableScrollPhysics(), // Grid inside ListView
-);
-
   }
 
   Widget _buildPVacationList() {

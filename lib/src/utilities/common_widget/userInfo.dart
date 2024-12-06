@@ -24,15 +24,17 @@ class UserInfo extends StatelessWidget {
           backgroundImage: AssetImage(avatar),
         ),
         10.widthBox,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            name.text.textStyle(AppTextStyle.boldText(size: 16)).make(),
-            role.text
-                .textStyle(AppTextStyle.regularText(
-                    size: 14, color: AppColors.textGrey2))
-                .make(),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              name.text.textStyle(AppTextStyle.boldText(size: 16)).make(),
+              role.text
+                  .textStyle(AppTextStyle.regularText(
+                      size: 14, color: AppColors.textGrey2))
+                  .make(),
+            ],
+          ),
         ),
       ],
     );
