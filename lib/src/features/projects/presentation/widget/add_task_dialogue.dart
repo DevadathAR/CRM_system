@@ -43,18 +43,18 @@ class AddTaskDialogue extends StatelessWidget {
               isDropDown: true,
               dropDownOptions: ["Design", "Backend", "FrontEnd"],
             ),
-            8.heightBox,
-            greyTitle(text: "Estimate"),
-            8.heightBox,
-            const CustomDateTimePicker(iconName: clocNakedkSvg,
-              hintText: 'Select duration',),
+            
+            // 8.heightBox,
+            // greyTitle(text: "Estimate"),
+            // 8.heightBox,
+            // const CustomDateTimePicker(iconName: clocNakedkSvg,
+            //   hintText: 'Select duration',),
          
             8.heightBox,
             greyTitle(text: "Dead Line"),
             8.heightBox,
-            const TextInputField(
+            const CustomDateTimePicker(
               hintText: "Select Date",
-              viewIcon: true,
               iconName: calenderSvg,
             ),
             8.heightBox,

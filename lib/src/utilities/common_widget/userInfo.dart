@@ -7,12 +7,13 @@ class UserInfo extends StatelessWidget {
   final String name;
   final String role;
   final String avatar;
+  final bool isExpanded;
 
   const UserInfo({
     super.key,
     required this.name,
     required this.role,
-    required this.avatar,
+    required this.avatar,  this.isExpanded= true,
   });
 
   @override
@@ -24,6 +25,20 @@ class UserInfo extends StatelessWidget {
           backgroundImage: AssetImage(avatar),
         ),
         10.widthBox,
+        if(isExpanded)
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              name.text.textStyle(AppTextStyle.boldText(size: 16)).make(),
+              role.text
+                  .textStyle(AppTextStyle.regularText(
+                      size: 14, color: AppColors.textGrey2))
+                  .make(),
+            ],
+          ),
+        ),
+        if(!isExpanded)
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

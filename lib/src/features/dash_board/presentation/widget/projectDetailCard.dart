@@ -51,37 +51,49 @@ class ProjectCard extends StatelessWidget {
                 child: SvgPicture.asset(projectIcon, width: 40, height: 40),
               ),
               10.widthBox,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  projectId.text
-                      .textStyle(AppTextStyle.regularText(
-                          size: 14, color: AppColors.textGrey2))
-                      .make(),
-                  projectName.text
-                      .textStyle(AppTextStyle.boldText(size: 18))
-                      .make(),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    projectId.text
+                        .textStyle(AppTextStyle.regularText(
+                            size: 14, color: AppColors.textGrey2))
+                        .make(),
+                    projectName.text
+                        .textStyle(AppTextStyle.boldText(size: 18))
+                        .make(),
+                  ],
+                ),
               ),
             ],
           ),
           10.heightBox,
           // created date row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            runSpacing: 5,
+            spacing: 30,
+            alignment: WrapAlignment.spaceBetween,
+
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SvgPicture.asset(calendarGreySvg),
                   10.widthBox,
-                  creationDate.text
-                      .textStyle(AppTextStyle.semiboldText(
-                          size: 14, color: AppColors.textGrey1))
-                      .overflow(TextOverflow.ellipsis)
-                      .make(),
+                  Flexible(
+                    flex: 2,
+                    child: creationDate.text
+                        .textStyle(AppTextStyle.semiboldText(
+                            size: 14, color: AppColors.textGrey1))
+                        .overflow(TextOverflow.ellipsis)
+                        .make(),
+                  ),
                 ],
               ),
+              const Spacer(),
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SvgPicture.asset(
                     priority == "Low"
@@ -91,7 +103,11 @@ class ProjectCard extends StatelessWidget {
                   10.widthBox,
                   priority.text
                       .textStyle(
-                        AppTextStyle.boldText(size: 14,color: priority == "Low"?AppColors.green:AppColors.yellow ),
+                        AppTextStyle.boldText(
+                            size: 14,
+                            color: priority == "Low"
+                                ? AppColors.green
+                                : AppColors.yellow),
                       )
                       .make(),
                 ],
@@ -108,41 +124,50 @@ class ProjectCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  "All tasks"
-                      .text
-                      .textStyle(AppTextStyle.regularText(
-                          size: 14, color: AppColors.textGrey2))
-                      .make(),
-                  10.heightBox,
-                  "$allTasks"
-                      .text
-                      .textStyle(AppTextStyle.boldText(size: 16))
-                      .make(),
-                ],
+              Flexible(
+                flex: 2, // Adjust the flex factor as needed
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    "All tasks"
+                        .text
+                        .textStyle(AppTextStyle.regularText(
+                            size: 14, color: AppColors.textGrey2))
+                        .make(),
+                    10.heightBox,
+                    "$allTasks"
+                        .text
+                        .textStyle(AppTextStyle.boldText(size: 16))
+                        .make(),
+                  ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  "Active tasks"
-                      .text
-                      .textStyle(AppTextStyle.regularText(
-                          size: 14, color: AppColors.textGrey2))
-                      .make(),
-                  10.heightBox,
-                  "$activeTasks"
-                      .text
-                      .textStyle(AppTextStyle.boldText(size: 16))
-                      .make(),
-                ],
+              Flexible(
+                flex: 2, // Adjust the flex factor as needed
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    "Active tasks"
+                        .text
+                        .textStyle(AppTextStyle.regularText(
+                            size: 14, color: AppColors.textGrey2))
+                        .make(),
+                    10.heightBox,
+                    "$activeTasks"
+                        .text
+                        .textStyle(AppTextStyle.boldText(size: 16))
+                        .make(),
+                  ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildAssigneeSection(imageUrl: dp1png),
-                ],
+              Flexible(
+                flex: 3, // Allow more space for the assignees
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildAssigneeSection(imageUrl: dp1png),
+                  ],
+                ),
               ),
             ],
           ),
@@ -152,9 +177,12 @@ class ProjectCard extends StatelessWidget {
   }
 
   Widget _buildAssigneeSection({required String imageUrl}) {
-    List<Widget> buildPositionedAvatars() {
-      // List of horizontal offsets for the images
-      List<double> offsets = [0.0, 40.0, 75.0];
+    List<Widget> buildPositionedAvatars(double screenWidth) {
+      // Dynamically adjust offsets based on screen width
+      double gap =
+          screenWidth < 300 ? 25.0 : 40.0; // Reduce gap for small screens
+      List<double> offsets = [0.0, gap, 2 * gap]; // Dynamic horizontal offsets
+
       return offsets.map((left) {
         return Positioned(
           left: left,
@@ -183,26 +211,32 @@ class ProjectCard extends StatelessWidget {
       }).toList();
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        "Assignees"
-            .text
-            .textStyle(
-                AppTextStyle.regularText(size: 14, color: AppColors.textGrey2))
-            .make(),
-        10.heightBox,
-        // Wrap the Stack with a SizedBox to control the size and prevent infinite size errors
-        SizedBox(
-          height: 45, // Control the height of the stack container
-          width: 110, // Ensure there's enough width to hold the images
-          child: Stack(
-            alignment: Alignment.topCenter,
-            clipBehavior: Clip.none, // Ensure that images don't get clipped
-            children: buildPositionedAvatars(),
-          ),
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double screenWidth = constraints.maxWidth;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            "Assignees"
+                .text
+                .textStyle(AppTextStyle.regularText(
+                    size: 14, color: AppColors.textGrey2))
+                .make(),
+            10.heightBox,
+            // Wrap the Stack with a SizedBox to control the size and prevent infinite size errors
+            SizedBox(
+              height: 45, // Control the height of the stack container
+              width: screenWidth, // Use available width
+              child: Stack(
+                alignment: Alignment.topCenter,
+                clipBehavior: Clip.none, // Ensure that images don't get clipped
+                children: buildPositionedAvatars(screenWidth),
+              ),
+            )
+          ],
+        ).centered();
+      },
     );
   }
 }

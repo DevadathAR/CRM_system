@@ -87,31 +87,32 @@ class DashBoard extends StatelessWidget {
                   10.heightBox,
                   // GridView inside ListView
                   GridView.builder(
-  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2,
-    crossAxisSpacing: 10,
-    mainAxisExtent: 180, // Adjusted to avoid clipping
-    mainAxisSpacing: 10,
-    childAspectRatio: 1.0,
-  ),
-  itemCount: 4,
-  // itemCount: mockWorkloadList.length, // Dynamic item count
-  itemBuilder: (context, index) {
-    // Pass data from the list to workloadItem
-    final item = mockWorkloadList[index];
-    return WorkloadItem(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisExtent: 180, // Adjusted to avoid clipping
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1.0,
+                    ),
+                    itemCount: 4,
+                    // itemCount: mockWorkloadList.length, // Dynamic item count
+                    itemBuilder: (context, index) {
+                      // Pass data from the list to workloadItem
+                      final item = mockWorkloadList[index];
+                      return WorkloadItem(
                         bgColor: AppColors.backgroindGrey1,
-      progressValue: item.progressValue,
-      dpImage: item.dpImage,
-      name: item.name,
-      role: item.role,
-      level: item.level,
-    );
-  },
-  shrinkWrap: true,
-  physics: const NeverScrollableScrollPhysics(), // Grid inside ListView
-),
-
+                        progressValue: item.progressValue,
+                        dpImage: item.dpImage,
+                        name: item.name,
+                        role: item.role,
+                        level: item.level,
+                      );
+                    },
+                    shrinkWrap: true,
+                    physics:
+                        const NeverScrollableScrollPhysics(), // Grid inside ListView
+                  ),
                 ],
               ),
             ),
@@ -175,7 +176,11 @@ class DashBoard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        "$title".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
+        Expanded(
+            child: "$title"
+                .text
+                .textStyle(AppTextStyle.boldText(size: 22))
+                .make()),
         CustumIconButton(
           onTap: onTap,
           buttonTItle: "View all",

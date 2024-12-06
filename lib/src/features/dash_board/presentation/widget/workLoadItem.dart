@@ -24,89 +24,98 @@ class WorkloadItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isScrollable = screenWidth < 300; // Adjust width threshold
+
     return Container(
-      height: 200,
+      height: 210,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: VStack(
-        [
-          10.heightBox,
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.white,
-                ),
-                width: 70,
-                height: 70,
-                child: Transform.flip(
-                  flipX: true,
-                  child: CircularProgressIndicator(
-                    value: progressValue, // Dynamic value
-                    strokeWidth: 4,
-                    strokeAlign: 0.5,
-                    strokeCap: StrokeCap.round,
-                    valueColor: AlwaysStoppedAnimation(AppColors.blue),
-                    backgroundColor: AppColors.textGrey1.withOpacity(0.4),
-                  ),
+      child: content(),
+    );
+  }
+
+  VStack content() {
+    return VStack(
+      [
+        10.heightBox,
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.white,
+              ),
+              width: 70,
+              height: 70,
+              child: Transform.flip(
+                flipX: true,
+                child: CircularProgressIndicator(
+                  value: progressValue, // Dynamic value
+                  strokeWidth: 4,
+                  strokeAlign: 0.5,
+                  strokeCap: StrokeCap.round,
+                  valueColor: AlwaysStoppedAnimation(AppColors.blue),
+                  backgroundColor: AppColors.textGrey1.withOpacity(0.4),
                 ),
               ),
-              ClipOval(
-                child: Image.asset(
-                  dpImage, // Dynamic image
-                  fit: BoxFit.cover,
-                  width: 60,
-                  height: 60,
-                ),
+            ),
+            ClipOval(
+              child: Image.asset(
+                dpImage, // Dynamic image
+                fit: BoxFit.cover,
+                width: 60,
+                height: 60,
               ),
-            ],
-          ).centered(),
-          10.heightBox,
-          name
-              .text
-              .textStyle(AppTextStyle.boldText(size: 16))
+            ),
+          ],
+        ).centered(),
+        10.heightBox,
+        name.text
+            .textStyle(AppTextStyle.boldText(size: 16))
+            .overflow(TextOverflow.ellipsis)
+            .maxLines(1)
+            .make()
+            .centered(), // Dynamic name
+        5.heightBox,
+        role.text
+            .textStyle(AppTextStyle.regularText(size: 14))
+            .overflow(TextOverflow.ellipsis)
+            .maxLines(1)
+            .make()
+            .centered(), // Dynamic role
+        5.heightBox,
+        Flexible(
+          child: level.text
+              .textStyle(AppTextStyle.semiboldText(size: 12))
+              .overflow(TextOverflow.ellipsis)
+              .maxLines(1)
               .make()
-              .centered(), // Dynamic name
-          5.heightBox,
-          role
-              .text
-              .textStyle(AppTextStyle.regularText(size: 14))
+              .box
+              .border(color: AppColors.textGrey1)
+              .withRounded(value: 4)
+              .p3
               .make()
-              .centered(), // Dynamic role
-          5.heightBox,
-          Flexible(
-            child: level
-                .text
-                .textStyle(AppTextStyle.semiboldText(size: 12))
-                .make()
-                .box
-                .border(color: AppColors.textGrey1)
-                .withRounded(value: 4)
-                .p3
-                .make()
-                .centered(), // Dynamic level
-          ),
-        ],
-        alignment: MainAxisAlignment.center,
-      ).centered(),
+              .centered(), // Dynamic level
+        ),
+      ],
+      alignment: MainAxisAlignment.center,
     );
   }
 }
 
-
 ////////
 ///
-
 
 class workloadItem extends StatelessWidget {
   final Color bgColor;
   const workloadItem({
-    super.key, required this.bgColor,
+    super.key,
+    required this.bgColor,
   });
 
   @override
@@ -184,4 +193,3 @@ class workloadItem extends StatelessWidget {
     );
   }
 }
-

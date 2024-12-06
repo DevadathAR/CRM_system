@@ -78,40 +78,43 @@ class NearestEventsCard extends StatelessWidget {
                 10.heightBox,
                 // const Spacer(),
                 // Event Date, Time, and Duration
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Date and Time
-                    "${event['date']} | ${event['time']}"
-                        .text
-                        .textStyle(AppTextStyle.regularText(
-                          size: 14,
-                          color: AppColors.textGrey2,
-                        ))
-                        .make(),
-                    // Duration
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          clockSvg, // Example clock icon path
-                          height: 14,
-                        ),
-                        5.widthBox,
-                        "${event['duration']}h"
-                            .text
-                            .textStyle(AppTextStyle.boldText(
-                              size: 12,
-                              color: AppColors.textGrey1,
-                            ))
-                            .make(),
-                      ],
-                    )
-                        .box
-                        .p8
-                        .withRounded(value: 8.0)
-                        .color(AppColors.primaryBackGround)
-                        .make(),
-                  ],
+                Flexible(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Date and Time
+                      "${event['date']} | ${event['time']}"
+                          .text
+                          .textStyle(AppTextStyle.regularText(
+                            size: 14,
+                            color: AppColors.textGrey2,
+                          ))
+                          .make(),
+                      // Duration
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            clockSvg, // Example clock icon path
+                            height: 14,
+                          ),
+                          5.widthBox,
+                          "${event['duration']}h"
+                              .text
+                              .textStyle(AppTextStyle.boldText(
+                                size: 12,
+                                color: AppColors.textGrey1,
+                              ))
+                              .make(),
+                        ],
+                      )
+                          .box
+                          .p8
+                          .withRounded(value: 8.0)
+                          .color(AppColors.primaryBackGround)
+                          .make(),
+                    ],
+                  ),
                 ),
               ],
             ),

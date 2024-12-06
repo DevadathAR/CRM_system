@@ -21,6 +21,7 @@ class DataBox extends StatelessWidget {
           const HStack(
             [
               UserInfo(
+                isExpanded: false,
                   name: 'Evan Yates',
                   role: 'evanyates@gmail.com',
                   avatar: dp1png),
