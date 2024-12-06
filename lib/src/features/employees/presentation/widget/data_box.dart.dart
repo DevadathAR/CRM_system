@@ -52,7 +52,7 @@ class DataBox extends StatelessWidget {
           .box
           .white
           .roundedLg
-          .shadow
+          // .shadow
           .p16
           .margin(const EdgeInsets.symmetric(horizontal: 20, vertical: 12))
           .height(250)

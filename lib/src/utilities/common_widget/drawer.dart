@@ -92,7 +92,7 @@ class AppDrawerWidget extends StatelessWidget {
               ),
               _supportButton(context),
               // const Spacer(),
-              _logoutTile(),
+              _logoutTile(onTap: () {context.goNamed(SignIn.route);}),
             ],
           ),
         ),
@@ -100,7 +100,7 @@ class AppDrawerWidget extends StatelessWidget {
     );
   }
 
-  Padding _logoutTile() {
+  Padding _logoutTile({onTap}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
@@ -121,7 +121,7 @@ class AppDrawerWidget extends StatelessWidget {
             color: AppColors.textGrey1, // Active color
           ),
         ),
-        onTap: () {},
+        onTap: onTap,
       ),
     );
   }

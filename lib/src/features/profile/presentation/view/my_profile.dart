@@ -27,90 +27,79 @@ class MyProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustumScaffold(
       body: Expanded(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          children: [
-            24.heightBox,
-            // Header Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                "My Profile".text.size(36).color(AppColors.black).make(),
-                IconBox(
-                  icon: settingsSVg,
-                  backgroundColor: AppColors.white,
-                  ontap: () => context.goNamed(Settings.route),
+        child: DefaultTabController(
+          length: 3, // Number of tabs
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              24.heightBox,
+              // Header Section
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    "My Profile".text.size(36).color(AppColors.black).make(),
+                    IconBox(
+                      icon: settingsSVg,
+                      backgroundColor: AppColors.white,
+                      ontap: () => context.goNamed(Settings.route),
+                    ),
+                  ],
                 ),
-              ],
-            ).pSymmetric(h: 24),
-
-            16.heightBox,
-            const PersonalDataBox(),
-            16.heightBox,
-            const FilterRow(),
-
-            8.heightBox,
-            Consumer<PageSelectionProvider>(
-              builder: (context, provider, child) {
-                return Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    color: AppColors.textGrey1.withOpacity(0.3),
+              ),
+              16.heightBox,
+              const PersonalDataBox(),
+              16.heightBox,
+              const FilterRow(),
+              8.heightBox,
+              // Tab Selector
+              Container(
+                height: 50,
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  color: AppColors.textGrey1.withOpacity(0.3),
+                ),
+                child: TabBar(
+                  indicator: BoxDecoration(
+                    color: AppColors.blue,
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(3, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          provider.setPage(index);
-                          _pageController
-                              .jumpToPage(index); // Sync with PageController
-                        },
-                        child: _pageTitle(context, provider, index),
-                      );
-                    }),
-                  ),
-                );
-              },
-            ),
-
-            16.heightBox,
-            // PageView Section
-            Consumer<PageSelectionProvider>(
-              builder: (context, provider, child) {
-                double pageHeight;
-
-                if (provider.currentPage == 0) {
-                  pageHeight = mockProjects.length *
-                      270.0; // Dynamically set height based on list length
-                } else if (provider.currentPage == 1) {
-                  pageHeight = mockWorkloadList.length % 2 == 0
-                      ? (mockWorkloadList.length * 95.0) + 20
-                      : ((mockWorkloadList.length + 1) * 95.0) + 20;
-                } else if (provider.currentPage == 2) {
-                  pageHeight =
-                      mockVacationList.length * 170; // Fixed height for page 1
-                } else { 
-                  pageHeight = 100.0; // Default height
-                }
-                return SizedBox(
-                  height: pageHeight,
-                  child: PageView(
-                    controller: _pageController, // Connect PageController
-                    onPageChanged: (index) {
-                      provider.setPage(index); // Update Provider on swipe
-                    },
-                    children: [
-                      _buildProjectList(),
-                      _buildWorkloadGrid(),
-                      _buildPVacationList(),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
+                  labelColor: AppColors.white,
+                  unselectedLabelColor: AppColors.black,
+                  tabs: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.33,
+                      child: const Tab(text: "Projects"),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.33,
+                      child: const Tab(text: "Workload"),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.33,
+                      child: const Tab(text: "Vacations"),
+                    ),
+                  ],
+                ),
+              ),
+              16.heightBox,
+              SizedBox(
+                height: 500,
+                child: TabBarView(
+                  children: [
+                    _buildProjectList(),
+                    _buildWorkloadGrid(),
+                    _buildPVacationList(),
+                    // Container(height: 200, color: AppColors.green),
+                    // Container(height: 200, color: AppColors.yellow),
+                    // Container(height: 200, color: AppColors.blue),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -194,12 +183,10 @@ class MyProfile extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(10),
       child: Center(
-        child: Text(
-          titles[index],
-          style:provider.currentPage == index ?  AppTextStyle.boldText(size: 14,color:  AppColors.white):AppTextStyle.regularText(size: 14,color:  AppColors.black)
-          
-      
-        ),
+        child: Text(titles[index],
+            style: provider.currentPage == index
+                ? AppTextStyle.boldText(size: 14, color: AppColors.white)
+                : AppTextStyle.regularText(size: 14, color: AppColors.black)),
       ),
     );
   }

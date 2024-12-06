@@ -79,7 +79,7 @@ class _SignInState extends State<SignIn> {
                   Wrap(
                     spacing: 10.0, // Space between items in the same row
                     runSpacing: 8.0,
-                    // mainAxisSize: MainAxisSize.min,
+                    // mainAxisSize: MainAxisSize.min, 
                     children: [
                       Customcheckbox(
                         value: _isChecked,
