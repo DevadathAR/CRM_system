@@ -4,6 +4,7 @@ import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.d
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
+import 'package:crm_system/src/utilities/common_widget/custum_text_feild.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -45,28 +46,20 @@ class _SignInState extends State<SignIn> {
 
               // Email Field
               greyTitle(text: email),
-              // email.text.bold
-              //     .size(14)
-              //     .color(AppColors.textGrey1)
-              //     .make()
-              //     .objectTopLeft(),
+        
               8.heightBox,
               const TextInputField(
-                isSearch: false,
+                // isSearch: false,
                 hintText: mailHint,
               ),
               16.heightBox,
 
               // Password Field
               greyTitle(text: pswd),
-              // pswd.text.bold
-              //     .size(14)
-              //     .color(AppColors.textGrey1)
-              //     .make()
-              //     .objectTopLeft(),
+        
               8.heightBox,
               const TextInputField(
-                isSearch: false,
+                // isSearch: false,
                 obscureText: true,
                 hintText: pswdHint,
               ),

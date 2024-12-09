@@ -5,6 +5,7 @@ import 'package:crm_system/src/features/employees/provider/employee_provider.dar
 import 'package:crm_system/src/features/profile/provider/pageview_provider.dart';
 import 'package:crm_system/src/features/vaccations/provider/vacation_provider.dart';
 import 'package:crm_system/src/services/routeServices.dart';
+import 'package:crm_system/src/utilities/provider/textfeild_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => PageSelectionProvider()),
         ChangeNotifierProvider(create: (_) => RepeatEventProvider()),
         ChangeNotifierProvider(create: (_) => VacationProvider()),
+        ChangeNotifierProvider(create: (_) => FormStateNotifier()),
       ],
 
       child: const MainApp(),

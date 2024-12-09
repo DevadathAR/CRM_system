@@ -2,6 +2,7 @@ import 'package:crm_system/src/features/authentication/presentation/view/sign_up
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/buttons.dart';
+import 'package:crm_system/src/utilities/common_widget/custum_text_feild.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
