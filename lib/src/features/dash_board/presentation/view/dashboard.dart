@@ -1,4 +1,3 @@
-import 'package:crm_system/main.dart';
 import 'package:crm_system/src/features/dash_board/model/project_model.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/f_a_b.dart';
@@ -7,14 +6,11 @@ import 'package:crm_system/src/features/dash_board/presentation/widget/projectDe
 import 'package:crm_system/src/features/dash_board/presentation/widget/sampleDatalists.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
 import 'package:crm_system/src/features/profile/model/profiile_project_model.dart';
-import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
 import 'package:crm_system/src/utilities/common_widget/custom_bottomsheet.dart';
-import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
-import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';

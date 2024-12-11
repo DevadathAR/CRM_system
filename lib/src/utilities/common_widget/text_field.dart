@@ -24,6 +24,7 @@ class TextInputField extends StatefulWidget {
   final String? viewprefix;
   final List<String>? dropDownOptions;
   final VoidCallback? ontap;
+  final dynamic validator;
   const TextInputField({
     super.key,
     this.controller,
@@ -43,6 +44,7 @@ class TextInputField extends StatefulWidget {
     this.maxlines = 1,
     this.height = 50,
     this.ontap,
+    this.validator,
   });
 
   @override
@@ -143,6 +145,7 @@ class _TextInputFieldState extends State<TextInputField> {
           obscureText: _isObscured,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
+          validator: widget.validator,
           decoration: InputDecoration(
             // enabledBorder: ,
             labelText: widget.labelText,
@@ -153,6 +156,7 @@ class _TextInputFieldState extends State<TextInputField> {
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
             helperStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+
             enabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(14)),
               borderSide: BorderSide(color: AppColors.borderGrey),
@@ -254,7 +258,7 @@ class _CountryCodeFieldState extends State<CountryCodeField> {
         items: widget.countryCodes.map((code) {
           return DropdownMenuItem<String>(
             value: code,
-            child: Text(
+            child: Text(textAlign: TextAlign.center,
               code,
               style: AppTextStyle.mediumText(size: 14, color: AppColors.black),
             ),
@@ -312,11 +316,12 @@ class PhoneNumberField extends StatelessWidget {
   }
 }
 
+/*
 class SMSCodeInput extends StatefulWidget {
-  final ValueChanged<String>?
-      onCodeEntered; // Callback when the complete code is entered
+  final TextEditingController? controller; // External controller for the SMS code
+  final ValueChanged<String>? onCodeEntered; // Callback when the complete code is entered
 
-  const SMSCodeInput({super.key, this.onCodeEntered});
+  const SMSCodeInput({super.key, this.controller, this.onCodeEntered});
 
   @override
   _SMSCodeInputState createState() => _SMSCodeInputState();
@@ -324,8 +329,24 @@ class SMSCodeInput extends StatefulWidget {
 
 class _SMSCodeInputState extends State<SMSCodeInput> {
   final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
-  final List<TextEditingController> _controllers =
-      List.generate(4, (_) => TextEditingController());
+  late List<TextEditingController> _controllers;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize individual controllers and synchronize with the external controller if provided.
+    _controllers = List.generate(4, (_) => TextEditingController());
+
+    if (widget.controller != null) {
+      widget.controller!.addListener(() {
+        final code = widget.controller!.text.padRight(4, ' ');
+        for (int i = 0; i < 4; i++) {
+          _controllers[i].text = i < code.length ? code[i] : '';
+        }
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -340,6 +361,7 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
 
   void _onDigitChanged() {
     final code = _controllers.map((controller) => controller.text).join();
+    widget.controller?.text = code; // Update the external controller
     if (code.length == 4) {
       widget.onCodeEntered?.call(code);
     }
@@ -395,3 +417,4 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
     );
   }
 }
+*/

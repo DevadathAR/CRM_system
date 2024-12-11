@@ -1,4 +1,3 @@
-import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
 import 'package:flutter/material.dart';
 

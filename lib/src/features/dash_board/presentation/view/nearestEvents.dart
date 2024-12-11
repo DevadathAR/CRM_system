@@ -1,15 +1,11 @@
 import 'package:crm_system/src/features/dash_board/presentation/widget/add_event.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEventsCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/sampleDatalists.dart';
-import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
-import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 

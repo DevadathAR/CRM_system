@@ -1,4 +1,3 @@
-import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/add_task_dialogue.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/taskCard.dart';
 import 'package:crm_system/src/features/projects/model/taskModel.dart';
@@ -7,10 +6,8 @@ import 'package:crm_system/src/features/projects/presentation/view/task_details.
 import 'package:crm_system/src/features/projects/presentation/widget/filterDialogue.dart';
 import 'package:crm_system/src/features/projects/provider/taskProvider.dart.dart';
 import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
-import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
