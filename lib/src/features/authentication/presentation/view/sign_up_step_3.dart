@@ -9,6 +9,7 @@ import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep3 extends StatefulWidget {
@@ -21,7 +22,34 @@ class SignUpStep3 extends StatefulWidget {
 }
 
 class _SignUpStep3State extends State<SignUpStep3> {
+  final TextEditingController firmNameController = TextEditingController();
+  final TextEditingController businessDirController = TextEditingController();
+  final TextEditingController memberSelectionController = TextEditingController();
   String? _selectedMember; // This will store the selected member count
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedData(); // Load saved data from SharedPreferences
+  }
+
+  Future<void> _loadSavedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      firmNameController.text = prefs.getString('firmName') ?? '';
+      businessDirController.text = prefs.getString('businessDir') ?? '';
+      _selectedMember = prefs.getString('selectedMember');
+      memberSelectionController.text = prefs.getString('memberSelection') ?? '';
+    });
+  }
+
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('firmName', firmNameController.text);
+    await prefs.setString('businessDir', businessDirController.text);
+    await prefs.setString('selectedMember', _selectedMember ?? '');
+    await prefs.setString('memberSelection', memberSelectionController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +85,15 @@ class _SignUpStep3State extends State<SignUpStep3> {
               16.heightBox,
               greyTitle(text: firmname),
               8.heightBox,
-              const TextInputField(
+              TextInputField(
+                controller: firmNameController,
                 hintText: firmnameHint,
               ),
               24.heightBox,
               greyTitle(text: businessDir),
               8.heightBox,
-              const TextInputField(
-                obscureText: true,
+              TextInputField(
+                controller: businessDirController,
                 hintText: pswdHint,
                 isDropDown: true,
                 dropDownOptions: ['IT and Programing', 'HR', 'Pre - sales'],
@@ -72,6 +101,11 @@ class _SignUpStep3State extends State<SignUpStep3> {
               24.heightBox,
               greyTitle(text: members),
               8.heightBox,
+              TextInputField(
+                controller: memberSelectionController,
+                hintText: "Enter member count",
+              ),
+              16.heightBox,
               SizedBox(
                 height: 210,
                 child: GridView.builder(
@@ -83,13 +117,14 @@ class _SignUpStep3State extends State<SignUpStep3> {
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                   ),
-                  itemCount: 8,
+                  itemCount: memberCount.length,
                   itemBuilder: (context, index) => _memberBox(
                     datum: memberCount[index],
                     isSelected: _selectedMember == memberCount[index],
                     onTap: () {
                       setState(() {
                         _selectedMember = memberCount[index];
+                        memberSelectionController.text = memberCount[index];
                       });
                     },
                   ),
@@ -100,7 +135,6 @@ class _SignUpStep3State extends State<SignUpStep3> {
           )
               .box
               .white
-              // give shadow if needed
               .withRounded(value: 24)
               .p20
               .margin(const EdgeInsets.symmetric(horizontal: 24))
@@ -109,9 +143,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
           24.heightBox,
 
           // Next Step Button
-
           Row(
-            // mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: PrimaryBlueButton(
@@ -130,7 +162,8 @@ class _SignUpStep3State extends State<SignUpStep3> {
               Expanded(
                 child: PrimaryBlueButton(
                   title: "Next Step",
-                  onPressed: () {
+                  onPressed: () async {
+                    await _saveData(); // Save data before navigating
                     context.goNamed(SignUpStep4.route);
                   },
                   isSuffix: true,
@@ -151,14 +184,12 @@ class _SignUpStep3State extends State<SignUpStep3> {
     );
   }
 
-  // The updated _memberBox with onTap functionality
   GestureDetector _memberBox({
     required String datum,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
     return GestureDetector(
-      // Replaced onTap() with GestureDetector
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(5),

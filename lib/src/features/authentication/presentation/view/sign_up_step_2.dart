@@ -1,8 +1,7 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/buttons.dart';
-import 'package:crm_system/src/utilities/common_widget/custum_text_feild.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -11,6 +10,7 @@ import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep2 extends StatefulWidget {
@@ -23,9 +23,34 @@ class SignUpStep2 extends StatefulWidget {
 }
 
 class _SignUpStep2State extends State<SignUpStep2> {
-  
-  final TextEditingController service = TextEditingController();
-  final TextEditingController role = TextEditingController();
+  final TextEditingController serviceController = TextEditingController();
+  final TextEditingController roleController = TextEditingController();
+  final TextEditingController companyController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadStoredData(); // Load saved data on initialization
+  }
+
+  /// Loads saved data from SharedPreferences
+  Future<void> _loadStoredData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      serviceController.text = prefs.getString('service') ?? '';
+      roleController.text = prefs.getString('role') ?? '';
+      companyController.text = prefs.getString('company') ?? '';
+    });
+  }
+
+  /// Stores data in SharedPreferences
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('service', serviceController.text);
+    await prefs.setString('role', roleController.text);
+    await prefs.setString('company', companyController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +73,8 @@ class _SignUpStep2State extends State<SignUpStep2> {
               16.heightBox,
               greyTitle(text: serviceReason),
               8.heightBox,
-              const TextInputField(
+              TextInputField(
+                controller: serviceController,
                 hintText: mailHint,
                 isDropDown: true,
                 dropDownOptions: ['Work', 'Research'],
@@ -56,8 +82,8 @@ class _SignUpStep2State extends State<SignUpStep2> {
               24.heightBox,
               greyTitle(text: describes),
               8.heightBox,
-              const TextInputField(
-                obscureText: true,
+              TextInputField(
+                controller: roleController,
                 hintText: pswdHint,
                 isDropDown: true,
                 dropDownOptions: ['Business Owner', 'Employee', 'Freelance'],
@@ -65,7 +91,17 @@ class _SignUpStep2State extends State<SignUpStep2> {
               24.heightBox,
               greyTitle(text: describes),
               8.heightBox,
-              const RadioButtonRow(options: ['Yes', 'No']),
+              TextInputField(
+                controller: companyController,
+                hintText: mailHint,
+                isDropDown: true,
+                dropDownOptions: [
+                  'Company A',
+                  'Company B',
+                  'Company C',
+                  'Company D',
+                ],
+              ),
               24.heightBox,
             ],
           )
@@ -80,7 +116,6 @@ class _SignUpStep2State extends State<SignUpStep2> {
 
           // Next Step Button
           Row(
-            // mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: PrimaryBlueButton(
@@ -99,7 +134,8 @@ class _SignUpStep2State extends State<SignUpStep2> {
               Expanded(
                 child: PrimaryBlueButton(
                   title: "Next Step",
-                  onPressed: () {
+                  onPressed: () async {
+                    await _saveData();
                     context.goNamed(SignUpStep3.route);
                   },
                   isSuffix: true,

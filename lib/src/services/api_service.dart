@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static const String baseUrl = "http://10.0.2.2:8000";
+  static const String baseUrl = 
+  "http://10.0.2.2:8000";
+  // 'http:127.0.0.1:8000';
 
   Future<Map<String, dynamic>> signIn(String email, String password) async {
     final url = Uri.parse('$baseUrl/login');
@@ -21,6 +24,7 @@ class AuthService {
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
+        log(jsonDecode('$e'));
         throw Exception("Failed to sign in: ${response.body}");
       }
     } catch (e) {

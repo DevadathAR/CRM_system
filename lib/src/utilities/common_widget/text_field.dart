@@ -8,6 +8,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class TextInputField extends StatelessWidget {
   final TextEditingController? controller;
+  final TextEditingController? dropcontroller;
   final String? hintText;
   final String? labelText;
   final bool obscureText;
@@ -30,6 +31,7 @@ class TextInputField extends StatelessWidget {
   const TextInputField({
     super.key,
     this.controller,
+    this.dropcontroller,
     this.hintText,
     this.labelText,
     this.obscureText = false,
@@ -53,68 +55,73 @@ class TextInputField extends StatelessWidget {
     final provider = Provider.of<FormStateNotifier>(context);
 
     if (isDropDown) {
-      return SizedBox(
-        height: height,
-        child: DropdownButtonFormField<String>(
-          icon: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: AppColors.textGrey1,
-          ),
-          decoration: InputDecoration(
-            prefixIcon: isPrefix
-                ? Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SvgPicture.asset(
-                      viewprefix.toString(),
-                      colorFilter: ColorFilter.mode(
-                          AppColors.textGrey1, BlendMode.srcIn),
-                    ),
-                  )
-                : null,
-            filled: true,
-            fillColor: AppColors.white,
-            labelText: labelText,
-            labelStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            enabledBorder: isBorder
-                ? OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(14)),
-                    borderSide: BorderSide(color: AppColors.borderGrey),
-                  )
-                : InputBorder.none,
-            focusedBorder: isBorder
-                ? OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(14)),
-                    borderSide: BorderSide(color: AppColors.borderGrey),
-                  )
-                : InputBorder.none,
-            border: isBorder
-                ? OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(14)),
-                    borderSide: BorderSide(color: AppColors.borderGrey),
-                  )
-                : InputBorder.none,
-          ),
-          value: provider.selectedValue ?? dropDownOptions?.first,
-          onChanged: (value) {
-            provider.setSelectedValue(value);
-            if (onChanged != null && value != null) {
-              onChanged!(value);
-            }
-          },
-          items: dropDownOptions
-              ?.map((option) => DropdownMenuItem(
-                    value: option,
-                    child: Text(
-                      option,
-                      style: AppTextStyle.mediumText(
-                          size: 14, color: AppColors.textGrey1),
-                    ),
-                  ))
-              .toList(),
-        ),
-      );
-    } else {
+  return SizedBox(
+    height: height,
+    child: DropdownButtonFormField<String>(
+      icon: Icon(
+        Icons.keyboard_arrow_down_rounded,
+        color: AppColors.textGrey1,
+      ),
+      decoration: InputDecoration(
+        prefixIcon: isPrefix
+            ? Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SvgPicture.asset(
+                  viewprefix.toString(),
+                  colorFilter: ColorFilter.mode(
+                      AppColors.textGrey1, BlendMode.srcIn),
+                ),
+              )
+            : null,
+        filled: true,
+        fillColor: AppColors.white,
+        labelText: labelText,
+        labelStyle:
+            AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+        enabledBorder: isBorder
+            ? OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.borderGrey),
+              )
+            : InputBorder.none,
+        focusedBorder: isBorder
+            ? OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.borderGrey),
+              )
+            : InputBorder.none,
+        border: isBorder
+            ? OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.borderGrey),
+              )
+            : InputBorder.none,
+      ),
+      value: dropcontroller?.text.isNotEmpty == true
+          ? dropcontroller?.text
+          : dropDownOptions?.first,
+      onChanged: (value) {
+        if (dropcontroller != null) {
+          dropcontroller!.text = value ?? '';
+        }
+        if (onChanged != null && value != null) {
+          onChanged!(value);
+        }
+      },
+      items: dropDownOptions
+          ?.map((option) => DropdownMenuItem(
+                value: option,
+                child: Text(
+                  option,
+                  style: AppTextStyle.mediumText(
+                      size: 14, color: AppColors.textGrey1),
+                ),
+              ))
+          .toList(),
+    ),
+  );
+}
+else {
       return SizedBox(
         height: height,
         child: TextFormField(

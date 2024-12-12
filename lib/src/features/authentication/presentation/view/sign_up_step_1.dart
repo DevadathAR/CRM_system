@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/services/api_service.dart';
@@ -8,10 +13,6 @@ import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignupStep1 extends StatefulWidget {
@@ -23,7 +24,6 @@ class SignupStep1 extends StatefulWidget {
 }
 
 class _SignupStep1State extends State<SignupStep1> {
-  // Define TextEditingControllers
   final TextEditingController codeController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
@@ -32,7 +32,6 @@ class _SignupStep1State extends State<SignupStep1> {
 
   @override
   void dispose() {
-    // Dispose controllers to avoid memory leaks
     mobileController.dispose();
     otpController.dispose();
     emailController.dispose();
@@ -40,14 +39,21 @@ class _SignupStep1State extends State<SignupStep1> {
     super.dispose();
   }
 
+  Future<void> _saveUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('mobile', mobileController.text.trim());
+    prefs.setString('otp', otpController.text.trim());
+    prefs.setString('email', emailController.text.trim());
+    prefs.setString('password', passwordController.text.trim());
+  }
+
   Future<void> _handleSignUp() async {
-    final mobile =codeController.text.trim() + mobileController.text.trim();
+    final mobile = codeController.text.trim() + mobileController.text.trim();
     final otp = otpController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
     if (mobile.isEmpty || otp.isEmpty || email.isEmpty || password.isEmpty) {
-      // Show error message for missing input
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fill in all fields.')),
       );
@@ -62,21 +68,40 @@ class _SignupStep1State extends State<SignupStep1> {
         password: password,
       );
 
-      if (response['value'] == true) {
-        // Navigate to next step
+      if (response['value'] = true) {
+        _saveUserData();
         context.goNamed(SignUpStep2.route);
-      } else {
-        // Show error message from API
+      }
+      else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response['value'] ?? 'Sign-up failed')),
         );
       }
-    } catch (error) {
-      // Show generic error message
+    }
+    catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(error.toString())),
       );
     }
+  }
+
+  Future<void> _loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final mobile = prefs.getString('mobile') ?? '';
+    final otp = prefs.getString('otp') ?? '';
+    final email = prefs.getString('email') ?? '';
+    final password = prefs.getString('password') ?? '';
+
+    mobileController.text = mobile;
+    otpController.text = otp;
+    emailController.text = email;
+    passwordController.text = password;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
   }
 
   @override
@@ -188,10 +213,7 @@ class _SignupStep1State extends State<SignupStep1> {
           16.heightBox,
           PrimaryBlueButton(
             width: size.width * .45,
-            onPressed:
-             _handleSignUp,
-         //  () {context.goNamed(SignUpStep2.route);},
-
+            onPressed: _handleSignUp,
             title: "Next Step",
             backGroundColor: AppColors.blue,
             isSuffix: true,
