@@ -1,3 +1,4 @@
+import 'package:crm_system/src/utilities/colors.dart';
 import 'package:flutter/material.dart';
 
 class ProjectsProvider extends ChangeNotifier {

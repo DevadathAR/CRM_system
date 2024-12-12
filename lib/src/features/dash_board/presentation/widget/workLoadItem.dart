@@ -24,6 +24,8 @@ class WorkloadItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isScrollable = screenWidth < 300; // Adjust width threshold
 
     return Container(
       height: 210,

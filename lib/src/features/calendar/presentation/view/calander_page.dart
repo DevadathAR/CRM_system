@@ -65,7 +65,7 @@ class _CalanderPageState extends State<CalanderPage> {
             20.heightBox,
             "Calendar"
                 .text
-                .textStyle(AppTextStyle.boldText(size: 36)) 
+                .textStyle(AppTextStyle.boldText(size: 36))
                 .make()
                 .pSymmetric(h: 8),
             10.heightBox,

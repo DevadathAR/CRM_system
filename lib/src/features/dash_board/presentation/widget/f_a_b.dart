@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/add_task_dialogue.dart';
@@ -6,6 +7,7 @@ import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -54,6 +56,7 @@ class FAB extends StatelessWidget {
                 builder: (context) => AddEmployees(),
               );
             }),
+        // custumTile(title: "Folder to Info Portal", imgpath: folderIconSvg),
       ],
     );
   }

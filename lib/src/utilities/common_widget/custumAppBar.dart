@@ -1,4 +1,6 @@
-
+import 'package:crm_system/main.dart';
+import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
+import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
 import 'package:crm_system/src/features/profile/presentation/view/notification.dart';
 import 'package:crm_system/src/utilities/colors.dart';

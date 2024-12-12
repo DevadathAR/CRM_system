@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'package:flutter/material.dart';
+
 const Duration _kExpand = Duration(milliseconds: 200);
 
 class CustomExpansionTile extends StatefulWidget {

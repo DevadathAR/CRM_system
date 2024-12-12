@@ -228,4 +228,11 @@ class AddEvent extends StatelessWidget {
       ),
     ).onTap(onTap); // Call the onTap to update the selection
   }
+
+  // Widget greyTitle({required String text}) {
+  //   return Text(
+  //     text,
+  //     style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
+  //   );
+  // }
 }

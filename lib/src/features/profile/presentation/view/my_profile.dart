@@ -13,12 +13,13 @@ import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MyProfile extends StatelessWidget {
   static String route = 'user-profile';
   final List<String> titles = ["Project", "Team", "Vacations"];
-  // final PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   MyProfile({super.key}); // Added PageController
 

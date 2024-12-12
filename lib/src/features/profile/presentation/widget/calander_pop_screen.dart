@@ -226,7 +226,7 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
             onPressed: widget.iconName == calenderSvg
                 ? widget.isDateonly
                     ? () => _pickDate(context)
-                    : () => _pickDateTime(context) 
+                    : () => _pickDateTime(context) // Handle calendar icon
                 : () => _pickTime(context), // Handle time picker icon
           ),
           hintText: widget.hintText,

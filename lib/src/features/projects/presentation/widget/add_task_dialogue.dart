@@ -6,7 +6,9 @@ import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AddTaskDialogue extends StatelessWidget {
@@ -41,12 +43,17 @@ class AddTaskDialogue extends StatelessWidget {
               isDropDown: true,
               dropDownOptions: ["Design", "Backend", "FrontEnd"],
             ),
+            
+            // 8.heightBox,
+            // greyTitle(text: "Estimate"),
+            // 8.heightBox,
+            // const CustomDateTimePicker(iconName: clocNakedkSvg,
+            //   hintText: 'Select duration',),
          
             8.heightBox,
             greyTitle(text: "Dead Line"),
             8.heightBox,
             const CustomDateTimePicker(
-              isDateonly: false,
               hintText: "Select Date",
               iconName: calenderSvg,
             ),
@@ -102,4 +109,10 @@ class AddTaskDialogue extends StatelessWidget {
     );
   }
 
+  // Widget greyTitle({required String text}) {
+  //   return Text(
+  //     text,
+  //     style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
+  //   );
+  // }
 }

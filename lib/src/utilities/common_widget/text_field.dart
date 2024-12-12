@@ -1,12 +1,12 @@
-import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
-import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/image_path.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
+import 'package:crm_system/src/utilities/provider/textfeild_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'package:crm_system/src/utilities/colors.dart';
+import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TextInputField extends StatefulWidget {
+class TextInputField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
   final String? labelText;
@@ -25,6 +25,8 @@ class TextInputField extends StatefulWidget {
   final List<String>? dropDownOptions;
   final VoidCallback? ontap;
   final dynamic validator;
+
+
   const TextInputField({
     super.key,
     this.controller,
@@ -43,48 +45,27 @@ class TextInputField extends StatefulWidget {
     this.viewprefix,
     this.maxlines = 1,
     this.height = 50,
-    this.ontap,
-    this.validator,
+    this.ontap, this.validator,
   });
 
   @override
-  _TextInputFieldState createState() => _TextInputFieldState();
-}
-
-class _TextInputFieldState extends State<TextInputField> {
-  late bool _isObscured;
-  late String? _selectedValue; // For dropdown selection
-
-  @override
-  void initState() {
-    super.initState();
-    _isObscured = widget.obscureText;
-    _selectedValue = widget.dropDownOptions?.first;
-  }
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isObscured = !_isObscured;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (widget.isDropDown) {
-      // Show dropdown when isDropDown is true
+    final provider = Provider.of<FormStateNotifier>(context);
+
+    if (isDropDown) {
       return SizedBox(
-        height: widget.height,
+        height: height,
         child: DropdownButtonFormField<String>(
           icon: Icon(
             Icons.keyboard_arrow_down_rounded,
             color: AppColors.textGrey1,
           ),
           decoration: InputDecoration(
-            prefixIcon: widget.isPrefix
+            prefixIcon: isPrefix
                 ? Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: SvgPicture.asset(
-                      widget.viewprefix.toString(),
+                      viewprefix.toString(),
                       colorFilter: ColorFilter.mode(
                           AppColors.textGrey1, BlendMode.srcIn),
                     ),
@@ -92,38 +73,36 @@ class _TextInputFieldState extends State<TextInputField> {
                 : null,
             filled: true,
             fillColor: AppColors.white,
-            labelText: widget.labelText,
+            labelText: labelText,
             labelStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            enabledBorder: widget.isBorder
+            enabledBorder: isBorder
                 ? OutlineInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(14)),
                     borderSide: BorderSide(color: AppColors.borderGrey),
                   )
                 : InputBorder.none,
-            focusedBorder: widget.isBorder
+            focusedBorder: isBorder
                 ? OutlineInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(14)),
                     borderSide: BorderSide(color: AppColors.borderGrey),
                   )
                 : InputBorder.none,
-            border: widget.isBorder
+            border: isBorder
                 ? OutlineInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(14)),
                     borderSide: BorderSide(color: AppColors.borderGrey),
                   )
                 : InputBorder.none,
           ),
-          value: _selectedValue,
+          value: provider.selectedValue ?? dropDownOptions?.first,
           onChanged: (value) {
-            setState(() {
-              _selectedValue = value;
-            });
-            if (widget.onChanged != null && value != null) {
-              widget.onChanged!(value);
+            provider.setSelectedValue(value);
+            if (onChanged != null && value != null) {
+              onChanged!(value);
             }
           },
-          items: widget.dropDownOptions
+          items: dropDownOptions
               ?.map((option) => DropdownMenuItem(
                     value: option,
                     child: Text(
@@ -136,27 +115,23 @@ class _TextInputFieldState extends State<TextInputField> {
         ),
       );
     } else {
-      // Default TextFormField behavior
       return SizedBox(
-        height: widget.height,
+        height: height,
         child: TextFormField(
-          maxLines: widget.maxlines,
-          controller: widget.controller,
-          obscureText: _isObscured,
-          keyboardType: widget.keyboardType,
-          onChanged: widget.onChanged,
-          validator: widget.validator,
+          maxLines: maxlines,
+          controller: controller,
+          obscureText: obscureText ? provider.isObscured : false,
+          keyboardType: keyboardType,
+          onChanged: onChanged,
+          validator: validator,
+
           decoration: InputDecoration(
-            // enabledBorder: ,
-            labelText: widget.labelText,
+            labelText: labelText,
             labelStyle:
                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            hintText: widget.hintText,
+            hintText: hintText,
             hintStyle:
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
-            helperStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-
             enabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(14)),
               borderSide: BorderSide(color: AppColors.borderGrey),
@@ -164,33 +139,33 @@ class _TextInputFieldState extends State<TextInputField> {
             border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(14)),
                 borderSide: BorderSide(color: AppColors.borderGrey)),
-            prefixIcon: widget.isSearch
+            prefixIcon: isSearch
                 ? Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: SvgPicture.asset(
-                      searchIcon,
+                      "assets/icons/search_icon.svg", // Replace with your path
                       colorFilter: ColorFilter.mode(
                           AppColors.textGrey1, BlendMode.srcIn),
                     ),
                   )
                 : null,
-            suffixIcon: widget.obscureText
+            suffixIcon: obscureText
                 ? IconButton(
                     icon: Icon(
-                      _isObscured
+                      provider.isObscured
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
                       color: AppColors.textGrey1,
                     ),
-                    onPressed: _togglePasswordVisibility,
+                    onPressed: provider.togglePasswordVisibility,
                   )
-                : widget.viewIcon
+                : viewIcon
                     ? Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: InkWell(
-                          onTap: widget.ontap,
+                          onTap: ontap,
                           child: SvgPicture.asset(
-                            widget.iconName.toString(),
+                            iconName.toString(),
                             colorFilter: ColorFilter.mode(
                                 AppColors.textGrey1, BlendMode.srcIn),
                           ),
@@ -204,198 +179,28 @@ class _TextInputFieldState extends State<TextInputField> {
   }
 }
 
-class CountryCodeField extends StatefulWidget {
-  final List<String> countryCodes; // List of country codes
-  final String? selectedCode; // Currently selected code
-  final ValueChanged<String>? onCodeChanged;
+// countryCode feild
+
+class CountryCodeField extends StatelessWidget {
+  final List<String> countryCodes;
 
   const CountryCodeField({
     super.key,
     required this.countryCodes,
-    this.selectedCode,
-    this.onCodeChanged,
-  });
-
-  @override
-  _CountryCodeFieldState createState() => _CountryCodeFieldState();
-}
-
-class _CountryCodeFieldState extends State<CountryCodeField> {
-  late String _selectedCode;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedCode = widget.selectedCode ?? widget.countryCodes.first;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      // width: size.width * 0.3,
-      child: DropdownButtonFormField<String>(
-        isDense: true,
-        icon: Icon(
-          Icons.keyboard_arrow_down_rounded,
-          color: AppColors.textGrey1,
-        ),
-        value: _selectedCode,
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 0), // Adjust as needed
-
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
-            borderSide: BorderSide(color: AppColors.borderGrey),
-          ),
-          border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(14)),
-              borderSide: BorderSide(color: AppColors.borderGrey)),
-          labelStyle:
-              AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-        ),
-        items: widget.countryCodes.map((code) {
-          return DropdownMenuItem<String>(
-            value: code,
-            child: Text(textAlign: TextAlign.center,
-              code,
-              style: AppTextStyle.mediumText(size: 14, color: AppColors.black),
-            ),
-          );
-        }).toList(),
-        onChanged: (value) {
-          if (value != null) {
-            setState(() {
-              _selectedCode = value;
-            });
-            if (widget.onCodeChanged != null) {
-              widget.onCodeChanged!(value);
-            }
-          }
-        },
-      ),
-    );
-  }
-}
-
-class PhoneNumberField extends StatelessWidget {
-  final TextEditingController? controller;
-  final String? hintText;
-  final ValueChanged<String>? onChanged;
-
-  const PhoneNumberField({
-    super.key,
-    this.controller,
-    this.hintText,
-    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: TextFormField(
-        controller: controller,
-        keyboardType: TextInputType.phone,
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          hintText: hintText ?? "Enter phone number",
-          hintStyle:
-              AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
-            borderSide: BorderSide(color: AppColors.borderGrey),
-          ),
-          border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(14)),
-              borderSide: BorderSide(color: AppColors.borderGrey)),
-        ),
-      ),
-    );
-  }
-}
-
-/*
-class SMSCodeInput extends StatefulWidget {
-  final TextEditingController? controller; // External controller for the SMS code
-  final ValueChanged<String>? onCodeEntered; // Callback when the complete code is entered
-
-  const SMSCodeInput({super.key, this.controller, this.onCodeEntered});
-
-  @override
-  _SMSCodeInputState createState() => _SMSCodeInputState();
-}
-
-class _SMSCodeInputState extends State<SMSCodeInput> {
-  final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
-  late List<TextEditingController> _controllers;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Initialize individual controllers and synchronize with the external controller if provided.
-    _controllers = List.generate(4, (_) => TextEditingController());
-
-    if (widget.controller != null) {
-      widget.controller!.addListener(() {
-        final code = widget.controller!.text.padRight(4, ' ');
-        for (int i = 0; i < 4; i++) {
-          _controllers[i].text = i < code.length ? code[i] : '';
-        }
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    for (final controller in _controllers) {
-      controller.dispose();
-    }
-    for (final focusNode in _focusNodes) {
-      focusNode.dispose();
-    }
-    super.dispose();
-  }
-
-  void _onDigitChanged() {
-    final code = _controllers.map((controller) => controller.text).join();
-    widget.controller?.text = code; // Update the external controller
-    if (code.length == 4) {
-      widget.onCodeEntered?.call(code);
-    }
-  }
-
-  void _nextField(int index, String value) {
-    if (value.isNotEmpty && index < 3) {
-      FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
-    }
-    _onDigitChanged();
-  }
-
-  void _previousField(int index, String value) {
-    if (value.isEmpty && index > 0) {
-      FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(4, (index) {
-        return Flexible(
-          child: TextField(
-            controller: _controllers[index],
-            focusNode: _focusNodes[index],
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            maxLength: 1,
-            style:
-                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
+    return Consumer<FormStateNotifier>(
+      builder: (context, formState, _) {
+        return SizedBox(
+          height: 48,
+          child: DropdownButtonFormField<String>(
+            value: formState.selectedCode.isEmpty
+                ? countryCodes.first
+                : formState.selectedCode,
             decoration: InputDecoration(
-              counterText: '', // Hides the character counter
+              contentPadding: const EdgeInsets.only(left: 10),
               enabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(14)),
                 borderSide: BorderSide(color: AppColors.borderGrey),
@@ -403,18 +208,121 @@ class _SMSCodeInputState extends State<SMSCodeInput> {
               border: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(14)),
                   borderSide: BorderSide(color: AppColors.borderGrey)),
+              labelStyle:
+                  AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             ),
+            items: countryCodes.map((code) {
+              return DropdownMenuItem<String>(
+                value: code,
+                child: Text(
+                  code,
+                  style:
+                      AppTextStyle.mediumText(size: 14, color: AppColors.black),
+                ),
+              );
+            }).toList(),
             onChanged: (value) {
-              if (value.isNotEmpty) {
-                _nextField(index, value);
-              } else {
-                _previousField(index, value);
+              if (value != null) {
+                formState.selectedCode = value;
               }
             },
-          ).pSymmetric(h: 4),
+          ),
         );
-      }),
+      },
     );
   }
 }
-*/
+
+// Phone Number feild
+class PhoneNumberField extends StatelessWidget {
+  final TextEditingController? controller;
+  final String? hintText;
+
+  const PhoneNumberField({
+    super.key,
+    this.controller,
+    this.hintText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<FormStateNotifier>(
+      builder: (context, formState, _) {
+        return SizedBox(
+          height: 50,
+          child: TextFormField(
+            controller: controller,
+            keyboardType: TextInputType.phone,
+            onChanged: (value) {
+              formState.phoneNumber = value;
+            },
+            decoration: InputDecoration(
+              hintText: hintText ?? "Enter phone number",
+              hintStyle:
+                  AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.borderGrey),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+
+// OtP code code 
+
+
+class SMSCodeInput extends StatelessWidget {
+  final ValueChanged<String>? onCodeEntered;
+
+  const SMSCodeInput({Key? key, this.onCodeEntered}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<FormStateNotifier>(
+      builder: (context, provider, _) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(4, (index) {
+            return Flexible(
+              child: TextField(
+                controller: provider.controllers[index],
+                focusNode: provider.focusNodes[index],
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                maxLength: 1,
+                style: AppTextStyle.regularText(
+                  size: 14,
+                  color: AppColors.textGrey1,
+                ),
+                decoration: InputDecoration(
+                  counterText: '', // Hides the character counter
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
+                  ),
+                ),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    provider.nextField(context, index, value);
+                  } else {
+                    provider.previousField(context, index, value);
+                  }
+                  provider.onDigitChanged(onCodeEntered);
+                },
+              ).pSymmetric(h: 4),
+            );
+          }),
+        );
+      },
+    );
+  }
+}
