@@ -1,8 +1,7 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
+import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/buttons.dart';
-import 'package:crm_system/src/utilities/common_widget/custum_text_feild.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
@@ -12,41 +11,97 @@ import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SignupStep1 extends StatelessWidget {
+class SignupStep1 extends StatefulWidget {
   static const route = 'sign-up-step-1';
   const SignupStep1({super.key});
 
   @override
+  _SignupStep1State createState() => _SignupStep1State();
+}
+
+class _SignupStep1State extends State<SignupStep1> {
+  // Define TextEditingControllers
+  final TextEditingController codeController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Dispose controllers to avoid memory leaks
+    mobileController.dispose();
+    otpController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleSignUp() async {
+    final mobile =codeController.text.trim() + mobileController.text.trim();
+    final otp = otpController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (mobile.isEmpty || otp.isEmpty || email.isEmpty || password.isEmpty) {
+      // Show error message for missing input
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields.')),
+      );
+      return;
+    }
+
+    try {
+      final response = await AuthService().signUp(
+        mobile: mobile,
+        smsCode: otp,
+        email: email,
+        password: password,
+      );
+
+      if (response['value'] == true) {
+        // Navigate to next step
+        context.goNamed(SignUpStep2.route);
+      } else {
+        // Show error message from API
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['value'] ?? 'Sign-up failed')),
+        );
+      }
+    } catch (error) {
+      // Show generic error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.toString())),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isSmallScreen = size.width < 600;
 
     return Scaffold(
       body: Column(
         children: [
           const AuthTopSide(),
-          // Form Container
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Step Indicator
               "STEP 1/4"
                   .text
                   .textStyle(
                       AppTextStyle.boldText(size: 14, color: AppColors.blue))
                   .makeCentered(),
               6.heightBox,
-              // Title
               validfon.text
-                  .textStyle(AppTextStyle.boldText(
-                    size: 18,
-                  ))
+                  .textStyle(AppTextStyle.boldText(size: 18))
                   .makeCentered(),
               16.heightBox,
-              // Mobile Field
               greyTitle(text: mob),
-
               8.heightBox,
               Row(
                 children: [
@@ -55,23 +110,38 @@ class SignupStep1 extends StatelessWidget {
                     child: CountryCodeField(countryCodes: contrycode),
                   ),
                   8.widthBox,
-                  const Flexible(
+                  Flexible(
                     flex: 7,
-                    child: PhoneNumberField(),
+                    child: PhoneNumberField(controller: mobileController),
                   ),
                 ],
               ),
-
               24.heightBox,
-
-              // SMS Field
               greyTitle(text: sms),
-
               8.heightBox,
-              const SMSCodeInput(),
+              PinCodeTextField(
+                appContext: context,
+                controller: otpController,
+                length: 4,
+                obscureText: false,
+                onChanged: (value) {},
+                onCompleted: (otp) {
+                  otpController.text = otp;
+                },
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(10),
+                  fieldHeight: isSmallScreen ? 50 : 60,
+                  fieldWidth: isSmallScreen ? 60 : 70,
+                  activeFillColor: AppColors.white,
+                  inactiveFillColor: AppColors.white,
+                  selectedFillColor: AppColors.white,
+                  inactiveColor: AppColors.borderGrey,
+                  selectedColor: AppColors.blue,
+                  activeColor: AppColors.borderGrey,
+                ),
+              ),
               24.heightBox,
-
-              // SMS Info Box
               Row(
                 children: [
                   SvgPicture.asset(iSvg),
@@ -92,19 +162,20 @@ class SignupStep1 extends StatelessWidget {
                   .height(100)
                   .make(),
               24.heightBox,
-
-              // Email Field
               greyTitle(text: email),
-
               8.heightBox,
-              const TextInputField(hintText: mailHint),
+              TextInputField(
+                hintText: mailHint,
+                controller: emailController,
+              ),
               24.heightBox,
-
-              // Password Field
               greyTitle(text: craetepswd),
-
               8.heightBox,
-              const TextInputField(obscureText: true, hintText: pswdHint),
+              TextInputField(
+                obscureText: true,
+                hintText: pswdHint,
+                controller: passwordController,
+              ),
               16.heightBox,
             ],
           )
@@ -114,20 +185,18 @@ class SignupStep1 extends StatelessWidget {
               .p16
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
-
           16.heightBox,
           PrimaryBlueButton(
             width: size.width * .45,
-            onPressed: () {
-              context.goNamed(SignUpStep2.route);
-            },
+            onPressed:
+             _handleSignUp,
+         //  () {context.goNamed(SignUpStep2.route);},
+
             title: "Next Step",
             backGroundColor: AppColors.blue,
             isSuffix: true,
             suffixIcon: arrowForwardSvg,
           ).pSymmetric(h: 24).objectBottomRight(),
-          //Next Step Button
-
           16.heightBox,
         ],
       )

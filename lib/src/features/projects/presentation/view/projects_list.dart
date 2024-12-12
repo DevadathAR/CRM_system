@@ -86,7 +86,6 @@ class ProjectsListPage extends StatelessWidget {
                           buttonTItle: "Design (6 issues)",
                           icon: dropUpIconSvg,
                           onTap: () {
-                            // The content below this should only be visible on taping this
                           })
                       .pSymmetric(h: 20)
                       .onTap(() {

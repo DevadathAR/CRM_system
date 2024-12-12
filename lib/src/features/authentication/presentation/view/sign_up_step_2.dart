@@ -10,15 +10,22 @@ import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/strings.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SignUpStep2 extends StatelessWidget {
+class SignUpStep2 extends StatefulWidget {
   static const route = 'sign-up-step-2';
 
   const SignUpStep2({super.key});
 
+  @override
+  State<SignUpStep2> createState() => _SignUpStep2State();
+}
+
+class _SignUpStep2State extends State<SignUpStep2> {
+  
+  final TextEditingController service = TextEditingController();
+  final TextEditingController role = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
