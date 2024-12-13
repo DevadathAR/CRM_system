@@ -1,4 +1,3 @@
-
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_4.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
@@ -74,10 +73,14 @@ class SignUpStep3Content extends StatelessWidget {
               24.heightBox,
               greyTitle(text: members),
               8.heightBox,
-              TextInputField(
-                controller: provider.memberSelectionController,
-                hintText: "Enter member count",
-              ),
+
+              textDisply(label:  provider.memberSelectionController.text.isEmpty?'Choose member count':provider.memberSelectionController.text),
+              // TextInputField(
+              //   controller: provider.memberSelectionController,
+              //   hintText: "Enter member count",
+              // ),
+
+
               16.heightBox,
               SizedBox(
                 height: 210,
@@ -93,8 +96,8 @@ class SignUpStep3Content extends StatelessWidget {
                   itemCount: provider.memberCount.length,
                   itemBuilder: (context, index) => _memberBox(
                     datum: provider.memberCount[index],
-                    isSelected: provider.selectedMember ==
-                        provider.memberCount[index],
+                    isSelected:
+                        provider.selectedMember == provider.memberCount[index],
                     onTap: () {
                       provider.selectMember(provider.memberCount[index]);
                     },
@@ -131,15 +134,30 @@ class SignUpStep3Content extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: PrimaryBlueButton(
-                  title: "Next Step",
-                  onPressed: () async {
-                    // await provider.saveData();
-                    context.goNamed(SignUpStep4.route);
-                  },
-                  isSuffix: true,
-                  suffixIcon: arrowForwardSvg,
-                ),
+                child: provider.firmNameController.text.isEmpty ||
+                        provider.businessDirController.text.isEmpty ||
+                        provider.memberSelectionController.text.isEmpty
+                    ? PrimaryBlueButton(
+                        title: "Next Step",
+                        backGroundColor: AppColors.textGrey1,
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Fill all the fields')),
+                          );
+                        },
+                        isSuffix: true,
+                        suffixIcon: arrowForwardSvg,
+                      )
+                    : PrimaryBlueButton(
+                        title: "Next Step",
+                        onPressed: () async {
+                          // await provider.saveData();
+                          context.goNamed(SignUpStep4.route);
+                        },
+                        isSuffix: true,
+                        suffixIcon: arrowForwardSvg,
+                      ),
               ),
             ],
           ).p20(),
@@ -181,6 +199,22 @@ class SignUpStep3Content extends StatelessWidget {
                 color: isSelected ? AppColors.white : AppColors.textGrey1,
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget textDisply({label}) {
+    return Container(width: double.infinity,
+    height: 50,
+      decoration:  BoxDecoration(
+        border: Border.all(color: AppColors.borderGrey),
+        borderRadius: BorderRadius.all(Radius.circular(14)),color: AppColors.white
+      ),
+      child: Align(alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Text(label,style:                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
           ),
         ),
       ),

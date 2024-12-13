@@ -1,4 +1,3 @@
-
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -111,7 +110,7 @@ class SignupStep2 extends StatelessWidget {
                   Expanded(
                     child: provider.nameController.text.isEmpty ||
                             provider.userTypeController.text.isEmpty ||
-                            provider.roleController.text.isEmpty 
+                            provider.roleController.text.isEmpty
                         ? PrimaryBlueButton(
                             title: "Next Step",
                             backGroundColor: AppColors.textGrey1,

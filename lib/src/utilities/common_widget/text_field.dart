@@ -188,13 +188,14 @@ else {
 }
 
 // countryCode feild
-
 class CountryCodeField extends StatelessWidget {
   final List<String> countryCodes;
+  final TextEditingController? controller;
 
   const CountryCodeField({
     super.key,
     required this.countryCodes,
+    this.controller,
   });
 
   @override
@@ -204,9 +205,9 @@ class CountryCodeField extends StatelessWidget {
         return SizedBox(
           height: 48,
           child: DropdownButtonFormField<String>(
-            value: formState.selectedCode.isEmpty
-                ? countryCodes.first
-                : formState.selectedCode,
+            value: controller?.text.isNotEmpty == true
+                ? controller?.text
+                : countryCodes.first,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(left: 10),
               enabledBorder: OutlineInputBorder(
@@ -214,8 +215,9 @@ class CountryCodeField extends StatelessWidget {
                 borderSide: BorderSide(color: AppColors.borderGrey),
               ),
               border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(14)),
-                  borderSide: BorderSide(color: AppColors.borderGrey)),
+                borderRadius: const BorderRadius.all(Radius.circular(14)),
+                borderSide: BorderSide(color: AppColors.borderGrey),
+              ),
               labelStyle:
                   AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
             ),
@@ -231,6 +233,9 @@ class CountryCodeField extends StatelessWidget {
             }).toList(),
             onChanged: (value) {
               if (value != null) {
+                if (controller != null) {
+                  controller!.text = value;
+                }
                 formState.selectedCode = value;
               }
             },
@@ -240,6 +245,7 @@ class CountryCodeField extends StatelessWidget {
     );
   }
 }
+
 
 // Phone Number feild
 class PhoneNumberField extends StatelessWidget {

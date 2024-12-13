@@ -45,9 +45,10 @@ class SignupStep1 extends StatelessWidget {
                 8.heightBox,
                 Row(
                   children: [
-                    const Flexible(
+                    Flexible(
                       flex: 3,
-                      child: CountryCodeField(countryCodes: contrycode),
+                      child: CountryCodeField(countryCodes: contrycode,
+                      controller: provider.codeController),
                     ),
                     8.widthBox,
                     Flexible(
@@ -132,12 +133,13 @@ class SignupStep1 extends StatelessWidget {
               onPressed: provider.mobileController.text.isEmpty ||
                       provider.otpController.text.isEmpty ||
                       provider.emailController.text.isEmpty ||
-                      provider.passwordController.text.isEmpty
+                      provider.passwordController.text.isEmpty||
+                      provider.codeController.text.isEmpty
                   ? () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Fill all the fields')),
-      );
-                  }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Fill all the fields')),
+                      );
+                    }
                   : () {
                       context.goNamed(SignupStep2.route);
                     },

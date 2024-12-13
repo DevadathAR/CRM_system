@@ -7,13 +7,14 @@ import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
-  final TextEditingController singInpasswordController =
-      TextEditingController();
+  final TextEditingController singInpasswordController =TextEditingController();
   bool isChecked = false;
 
   // SignUp feild
@@ -26,6 +27,13 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController userTypeController = TextEditingController();
   final TextEditingController companyIdController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
+  final TextEditingController typeOfCompanyController = TextEditingController();
+  final TextEditingController companyNameController = TextEditingController();
+  final TextEditingController totalStrengthController = TextEditingController();
+  final TextEditingController invitedMembersController = TextEditingController();
+  final TextEditingController firmNameController = TextEditingController();
+  final TextEditingController businessDirController = TextEditingController();
+  final TextEditingController memberSelectionController =TextEditingController();
   int get userType {
     switch (userTypeController.text.trim()) {
       case 'Work':
@@ -40,11 +48,7 @@ class AuthProvider extends ChangeNotifier {
   bool get itsEmployee => roleController.text == 'Employee';
 
 // Onboarding controller ....
-  final TextEditingController firmNameController = TextEditingController();
-  final TextEditingController businessDirController = TextEditingController();
-  final TextEditingController memberSelectionController =
-      TextEditingController();
-
+ 
   String? _selectedMember;
   String? get selectedMember => _selectedMember;
 
@@ -127,11 +131,10 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> handleSignUp(BuildContext context) async {
-    final mobile = codeController.text.trim() + mobileController.text.trim();
-    // final otp = otpController.text.trim();
+    final mobile = mobileController.text.trim();
+    final code = codeController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    // final Firmname = firmNameController.text.trim();
     final name = nameController.text.trim();
     final tagline = roleController.text.trim();
 
@@ -140,6 +143,7 @@ class AuthProvider extends ChangeNotifier {
         userType: userType.toString(),
         tagline: tagline,
         name: name,
+        code : code,
         mobile: mobile,
         email: email,
         password: password,
@@ -176,69 +180,51 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
-
 //onboarding APi
+  Future<void> handleOnboarding(BuildContext context) async {
+    final typeOfCompany = typeOfCompanyController.text.trim();
+    final companyName = companyNameController.text.trim();
+    final totalStrength = totalStrengthController.text.trim();
 
-// Future<void> handleOnboarding(BuildContext context) async {
-//   try {
-//     // Retrieve the saved token from SharedPreferences
-//     final prefs = await SharedPreferences.getInstance();
-//     final token = prefs.getString('auth_token');
+    // Split the invited members string into a list
+    final invitedMembers = invitedMembersController.text
+        .trim()
+        .split(',')
+        .map((email) => email.trim())
+        .toList();
 
-//     if (token == null || token.isEmpty) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('Error: Token is missing.')),
-//       );
-//       return;
-//     }
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('auth_token');
 
-//     // Define the request body
-//     final requestBody = {
-//       "typeOfCompany": "IT",
-//       "companyName": "festa",
-//       "totalStrength": "1200",
-//       "invitedMembers": [
-//         "rinto@gmail.com",
-//         "jijo@gmail.com",
-//         "lolita@gmail.com"
-//       ]
-//     };
+      if (token == null || token.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error: Token is missing.')),
+        );
+        return;
+      }
 
-//     // Define headers
-//     final headers = {
-//       'Content-Type': 'application/json',
-//       'Authorization': 'Bearer $token',
-//     };
+      // Call the onboarding API via AuthService
+      final response = await AuthService().onboarding(
+        token: token,
+        typeOfCompany: typeOfCompany,
+        companyName: companyName,
+        totalStrength: totalStrength,
+        invitedMembers: invitedMembers,
+      );
 
-//     // Send POST request
-//     final response = await http.post(
-//       Uri.parse('http://127.0.0.1:8000/onboarding'),
-//       headers: headers,
-//       body: json.encode(requestBody),
-//     );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Onboarding successful!')),
+      );
 
-//     if (response.statusCode == 200) {
-//       // Parse the response
-//       final responseData = json.decode(response.body);
-//       print('Response: $responseData');
-
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('Onboarding successful!')),
-//       );
-//       // Navigate to the next screen or perform additional actions
-//       context.goNamed(SuccessPage.route);
-//     } else {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(content: Text('Error: ${response.reasonPhrase}')),
-//       );
-//     }
-//   } catch (error) {
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(content: Text('Exception: $error')),
-//     );
-//   }
-// }
+      // Navigate to the success page
+      context.goNamed(SuccessPage.route);
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Exception: $error')),
+      );
+    }
+  }
 
   @override
   void dispose() {
