@@ -1,29 +1,29 @@
-import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
-import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
+import 'dart:convert';
+
 import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
+import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class AuthProvider extends ChangeNotifier {
+  // SignIn feild
+  final TextEditingController signInemailController = TextEditingController();
+  final TextEditingController singInpasswordController =
+      TextEditingController();
+  bool isChecked = false;
+
+  // SignUp feild
   final TextEditingController codeController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController userTypeController = TextEditingController();
   final TextEditingController companyIdController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController firmNameController = TextEditingController();
-  final TextEditingController businessDirController = TextEditingController();
-  final TextEditingController memberSelectionController =
-      TextEditingController();
-
   int get userType {
     switch (userTypeController.text.trim()) {
       case 'Work':
@@ -36,6 +36,13 @@ class AuthProvider extends ChangeNotifier {
   }
 
   bool get itsEmployee => roleController.text == 'Employee';
+
+// Onboarding controller ....
+  final TextEditingController firmNameController = TextEditingController();
+  final TextEditingController businessDirController = TextEditingController();
+  final TextEditingController memberSelectionController =
+      TextEditingController();
+
   String? _selectedMember;
   String? get selectedMember => _selectedMember;
 
@@ -50,7 +57,7 @@ class AuthProvider extends ChangeNotifier {
     '101 - 500',
     '500+'
   ];
-// step4
+// step4 onboarding
   final List<Widget> _textFields = [
     const TextInputField(hintText: memberMailHint).py8(),
   ];
@@ -71,22 +78,46 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-  // Future<void> _loadSavedData() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   firmNameController.text = prefs.getString('firmName') ?? '';
-  //   businessDirController.text = prefs.getString('businessDir') ?? '';
-  //   _selectedMember = prefs.getString('selectedMember');
-  //   memberSelectionController.text = prefs.getString('memberSelection') ?? '';
-  //   notifyListeners();
-  // }
 
-  // Future<void> saveData() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setString('firmName', firmNameController.text);
-  //   await prefs.setString('businessDir', businessDirController.text);
-  //   await prefs.setString('selectedMember', _selectedMember ?? '');
-  //   await prefs.setString('memberSelection', memberSelectionController.text);
-  // }
+  // SignIn
+  Future<void> handleSignIn(BuildContext context) async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email and Password cannot be empty')),
+      );
+      return;
+    }
+
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    try {
+      final response = await AuthService().signIn(email, password);
+
+      // log(jsonEncode(response));
+
+      if (response['userType'] == 0) {
+        context.goNamed(DashBoard.route);
+      } else if (response['userType'] == 1) {
+        context.goNamed(DashBoard.route);
+      } else if (response['userType'] == 2) {
+        context.goNamed(DashBoard.route);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'] ?? 'Sign in failed')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('An error occurred: $e')),
+      );
+    }
+  }
+
+  void toggleCheckBox(bool? value) {
+    isChecked = value ?? false;
+    notifyListeners();
+  }
 
   void selectMember(String member) {
     _selectedMember = member;
@@ -94,17 +125,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> _saveUserData() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('mobile', mobileController.text.trim());
-  //   prefs.setString('otp', otpController.text.trim());
-  //   prefs.setString('email', emailController.text.trim());
-  //   prefs.setString('password', passwordController.text.trim());
-  // }
-
-  // Check if the company dropdown should be displayed
-
-  // Computed property for userType
 
   Future<void> handleSignUp(BuildContext context) async {
     final mobile = codeController.text.trim() + mobileController.text.trim();
@@ -148,14 +168,6 @@ class AuthProvider extends ChangeNotifier {
       );
     }
   }
-
-  // Future<void> _loadUserData() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   mobileController.text = prefs.getString('mobile') ?? '';
-  //   otpController.text = prefs.getString('otp') ?? '';
-  //   emailController.text = prefs.getString('email') ?? '';
-  //   passwordController.text = prefs.getString('password') ?? '';
-  // }
 
   @override
   void dispose() {
