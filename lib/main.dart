@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
 import 'package:crm_system/src/features/vaccations/presentation/widget/multy_date_calendar.dart';
 import 'package:crm_system/src/features/dash_board/provider/add_event_provider.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
@@ -20,6 +21,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => RepeatEventProvider()),
         ChangeNotifierProvider(create: (_) => VacationProvider()),
         ChangeNotifierProvider(create: (_) => FormStateNotifier()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
 
       child: const MainApp(),
