@@ -205,7 +205,7 @@ class SignupStep2 extends StatelessWidget {
                   16.heightBox,
                   greyTitle(text: "Name"),
                   8.heightBox,
-                   TextInputField(
+                  TextInputField(
                     controller: provider.nameController,
                     hintText: 'Name',
                   ),
@@ -273,19 +273,34 @@ class SignupStep2 extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: PrimaryBlueButton(
-                      title: "Next Step",
-                      onPressed: () async {
-                        if (provider.itsEmployee) {
-                          provider.handleSignUp(context);
-                          context.goNamed(SuccessPage.route);
-                        } else {
-                          context.goNamed(SignUpStep3.route);
-                        }
-                      },
-                      isSuffix: true,
-                      suffixIcon: arrowForwardSvg,
-                    ),
+                    child: provider.nameController.text.isEmpty ||
+                            provider.userTypeController.text.isEmpty ||
+                            provider.roleController.text.isEmpty 
+                        ? PrimaryBlueButton(
+                            title: "Next Step",
+                            backGroundColor: AppColors.textGrey1,
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Fill all the fields')),
+                              );
+                            },
+                            isSuffix: true,
+                            suffixIcon: arrowForwardSvg,
+                          )
+                        : PrimaryBlueButton(
+                            title: "Next Step",
+                            onPressed: () async {
+                              if (provider.itsEmployee) {
+                                provider.handleSignUp(context);
+                                context.goNamed(SuccessPage.route);
+                              } else {
+                                context.goNamed(SignUpStep3.route);
+                              }
+                            },
+                            isSuffix: true,
+                            suffixIcon: arrowForwardSvg,
+                          ),
                   ),
                 ],
               ).p20(),

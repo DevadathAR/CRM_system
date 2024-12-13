@@ -135,9 +135,9 @@ class AuthProvider extends ChangeNotifier {
     final name = nameController.text.trim();
     final tagline = roleController.text.trim();
 
-    if (name.isEmpty ||mobile.isEmpty || /*otp.isEmpty ||*/ email.isEmpty || password.isEmpty) {
-      return;
-    }
+    // if (name.isEmpty ||mobile.isEmpty || otp.isEmpty || email.isEmpty || password.isEmpty) {
+    //   return;
+    // }
 
     try {
       final response = await AuthService().signUp(
