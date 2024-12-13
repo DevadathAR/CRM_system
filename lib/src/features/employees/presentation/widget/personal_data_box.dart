@@ -81,36 +81,38 @@ class PersonalDataBox extends StatelessWidget {
             height: 16,
           ),
           _headerText(label: 'Main Info'),
+          _subText(label: 'Gender'),
+          textDisply(label:"From API"),
           _subText(label: 'Position'),
-          const TextInputField(),
+           textDisply(label:"From API"),
+          _subText(label: 'Experience'),
+           textDisply(label: "From API" ),
           _subText(label: 'Company'),
-          const TextInputField(),
+          textDisply(label:"From API"),
           _subText(
             label: 'Location',
           ),
-          const TextInputField(
-            viewIcon: true,
-            iconName: locationSvg,
-          ),
+           textDisply (label:  "From API" ),
           _subText(label: 'Birthday Date'),
-          CustomDateTimePicker(
-            iconName: calenderSvg,
-            label: 'Birthday Date',
-            initialDate: DateTime.now(),
-            onDateSelected: (date) {
-              print('Selected Date: $date');
-            },
-          ),
+          textDisply(label:"From API"),
+          // CustomDateTimePicker(
+          //   iconName: calenderSvg,
+          //   label: 'Birthday Date',
+          //   initialDate: DateTime.now(),
+          //   onDateSelected: (date) {
+          //     print('Selected Date: $date');
+          //   },
+          // ),
           const SizedBox(
             height: 24,
           ),
           _headerText(label: 'Contact Info'),
           _subText(label: 'Email'),
-          const TextInputField(),
+          textDisply(label:"From API"),
           _subText(label: 'Mobile Number'),
-          const TextInputField(),
+          textDisply(label:"From API"),
           _subText(label: 'Skype'),
-          const TextInputField(),
+          textDisply(label:"From API"),
           const SizedBox(
             height: 16,
           )
@@ -133,4 +135,21 @@ class PersonalDataBox extends StatelessWidget {
           style: AppTextStyle.boldText(size: 14, color: AppColors.textGrey1),
         ),
       );
+
+  Widget textDisply({label}) {
+    return Container(width: double.infinity,
+    height: 50,
+      decoration:  BoxDecoration(
+        border: Border.all(color: AppColors.borderGrey),
+        borderRadius: BorderRadius.all(Radius.circular(14)),color: AppColors.white
+      ),
+      child: Align(alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Text(label,style:                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+          ),
+        ),
+      ),
+    );
+  }
 }

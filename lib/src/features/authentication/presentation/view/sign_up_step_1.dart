@@ -129,13 +129,27 @@ class SignupStep1 extends StatelessWidget {
             16.heightBox,
             PrimaryBlueButton(
               width: size.width * .45,
-              onPressed: () {
-                context.goNamed(SignupStep2.route);
-              },
+              onPressed: provider.mobileController.text.isEmpty ||
+                      provider.otpController.text.isEmpty ||
+                      provider.emailController.text.isEmpty ||
+                      provider.passwordController.text.isEmpty
+                  ? () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Fill all the fields')),
+      );
+                  }
+                  : () {
+                      context.goNamed(SignupStep2.route);
+                    },
 
               //  provider.handleSignUp,
               title: "Next Step",
-              backGroundColor: AppColors.blue,
+              backGroundColor: provider.mobileController.text.isEmpty ||
+                      provider.otpController.text.isEmpty ||
+                      provider.emailController.text.isEmpty ||
+                      provider.passwordController.text.isEmpty
+                  ? AppColors.textGrey1
+                  : AppColors.blue,
               isSuffix: true,
               suffixIcon: arrowForwardSvg,
             ).pSymmetric(h: 24).objectBottomRight(),
@@ -151,5 +165,3 @@ class SignupStep1 extends StatelessWidget {
     });
   }
 }
-
-

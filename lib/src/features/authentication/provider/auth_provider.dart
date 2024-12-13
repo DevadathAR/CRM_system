@@ -7,6 +7,7 @@ import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   // SignIn feild
@@ -21,6 +22,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController otpController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController userTypeController = TextEditingController();
   final TextEditingController companyIdController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
@@ -126,21 +128,18 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> handleSignUp(BuildContext context) async {
     final mobile = codeController.text.trim() + mobileController.text.trim();
-    final otp = otpController.text.trim();
+    // final otp = otpController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    final Firmname = firmNameController.text.trim();
+    // final Firmname = firmNameController.text.trim();
+    final name = nameController.text.trim();
     final tagline = roleController.text.trim();
-
-    if (mobile.isEmpty || otp.isEmpty || email.isEmpty || password.isEmpty) {
-      return;
-    }
 
     try {
       final response = await AuthService().signUp(
         userType: userType.toString(),
         tagline: tagline,
-        name: Firmname,
+        name: name,
         mobile: mobile,
         email: email,
         password: password,
@@ -149,6 +148,11 @@ class AuthProvider extends ChangeNotifier {
       print('userType :- $userType');
 
       if (response['value'] == true) {
+        final token = response['token'];
+        // Save the token in SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('auth_token', token);
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Sign-up successful!')),
         );
@@ -171,6 +175,70 @@ class AuthProvider extends ChangeNotifier {
       );
     }
   }
+
+
+
+//onboarding APi
+
+// Future<void> handleOnboarding(BuildContext context) async {
+//   try {
+//     // Retrieve the saved token from SharedPreferences
+//     final prefs = await SharedPreferences.getInstance();
+//     final token = prefs.getString('auth_token');
+
+//     if (token == null || token.isEmpty) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Error: Token is missing.')),
+//       );
+//       return;
+//     }
+
+//     // Define the request body
+//     final requestBody = {
+//       "typeOfCompany": "IT",
+//       "companyName": "festa",
+//       "totalStrength": "1200",
+//       "invitedMembers": [
+//         "rinto@gmail.com",
+//         "jijo@gmail.com",
+//         "lolita@gmail.com"
+//       ]
+//     };
+
+//     // Define headers
+//     final headers = {
+//       'Content-Type': 'application/json',
+//       'Authorization': 'Bearer $token',
+//     };
+
+//     // Send POST request
+//     final response = await http.post(
+//       Uri.parse('http://127.0.0.1:8000/onboarding'),
+//       headers: headers,
+//       body: json.encode(requestBody),
+//     );
+
+//     if (response.statusCode == 200) {
+//       // Parse the response
+//       final responseData = json.decode(response.body);
+//       print('Response: $responseData');
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Onboarding successful!')),
+//       );
+//       // Navigate to the next screen or perform additional actions
+//       context.goNamed(SuccessPage.route);
+//     } else {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error: ${response.reasonPhrase}')),
+//       );
+//     }
+//   } catch (error) {
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text('Exception: $error')),
+//     );
+//   }
+// }
 
   @override
   void dispose() {
