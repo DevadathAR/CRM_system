@@ -271,12 +271,13 @@ class SignupStep2 extends StatelessWidget {
                     child: PrimaryBlueButton(
                       title: "Next Step",
                       onPressed: () async {
-                        if (provider.itsEmployee) {
-                          provider.handleSignUp(context);
-                          context.goNamed(SuccessPage.route);
-                        } else {
-                          context.goNamed(SignUpStep3.route);
-                        }
+                        provider.handleSignUp(context);
+                        // if (provider.itsEmployee) {
+                        //   provider.handleSignUp(context);
+                        //   context.goNamed(SuccessPage.route);
+                        // } else {
+                        //   context.goNamed(SignUpStep3.route);
+                        // }
                       },
                       isSuffix: true,
                       suffixIcon: arrowForwardSvg,

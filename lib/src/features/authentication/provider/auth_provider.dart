@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/services/api_service.dart';
@@ -77,7 +78,6 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-
   // SignIn
   Future<void> handleSignIn(BuildContext context) async {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
@@ -124,7 +124,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> handleSignUp(BuildContext context) async {
     final mobile = codeController.text.trim() + mobileController.text.trim();
     final otp = otpController.text.trim();
@@ -146,15 +145,21 @@ class AuthProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
+      print(response);
+      print('userType :- $userType');
 
       if (response['value'] == true) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Sign-up successful!')),
         );
-
+        if (userType == 1) {
+          context.goNamed(SuccessPage.route);
+        } else if (userType == 2) {
+          //onbording
+          context.goNamed(SignUpStep3.route);
+        }
         // Navigate to another screen or update app state
         // Example:
-        context.goNamed(SuccessPage.route);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response['message'] ?? 'Sign-up failed')),
