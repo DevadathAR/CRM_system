@@ -4,9 +4,10 @@ import 'package:crm_system/src/utilities/const.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static const String baseUrl = 
-  "http://127.0.0.1:8000";
+  // static const String baseUrl =   "http://127.0.0.1:8000";
   // 'http:127.0.0.1:8000';
+
+  static const String baseUrl = "http://10.0.2.2:8000";
 
   Future<Map<String, dynamic>> signIn(String email, String password) async {
     final url = Uri.parse('$baseUrl/login');
@@ -58,6 +59,8 @@ class AuthService {
     );
 
     if (response.statusCode == 200) {
+      log(jsonDecode(response.body));
+      print(response.statusCode);
       return jsonDecode(response.body);
     } else {
       throw Exception(

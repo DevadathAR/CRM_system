@@ -18,7 +18,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController userTypeController = TextEditingController();
   final TextEditingController companyIdController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
-
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController firmNameController = TextEditingController();
   final TextEditingController businessDirController = TextEditingController();
   final TextEditingController memberSelectionController =
@@ -108,13 +108,14 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> handleSignUp(BuildContext context) async {
     final mobile = codeController.text.trim() + mobileController.text.trim();
-    final otp = otpController.text.trim();
+    // final otp = otpController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    final Firmname = firmNameController.text.trim();
+    // final Firmname = firmNameController.text.trim();
+    final name = nameController.text.trim();
     final tagline = roleController.text.trim();
 
-    if (mobile.isEmpty || otp.isEmpty || email.isEmpty || password.isEmpty) {
+    if (name.isEmpty ||mobile.isEmpty || /*otp.isEmpty ||*/ email.isEmpty || password.isEmpty) {
       return;
     }
 
@@ -122,7 +123,7 @@ class AuthProvider extends ChangeNotifier {
       final response = await AuthService().signUp(
         userType: userType.toString(),
         tagline: tagline,
-        name: Firmname,
+        name: name,
         mobile: mobile,
         email: email,
         password: password,

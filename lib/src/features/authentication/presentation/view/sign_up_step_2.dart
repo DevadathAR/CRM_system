@@ -161,13 +161,11 @@
 //     );
 //   }
 // }
-import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_4.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/utilities/colors.dart';
@@ -204,6 +202,13 @@ class SignupStep2 extends StatelessWidget {
                       .textStyle(AppTextStyle.boldText(
                           size: 18, color: AppColors.lightblack))
                       .makeCentered(),
+                  16.heightBox,
+                  greyTitle(text: "Name"),
+                  8.heightBox,
+                   TextInputField(
+                    controller: provider.nameController,
+                    hintText: 'Name',
+                  ),
                   16.heightBox,
                   greyTitle(text: serviceReason),
                   8.heightBox,
