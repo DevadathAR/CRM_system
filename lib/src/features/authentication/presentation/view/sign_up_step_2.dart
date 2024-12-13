@@ -272,7 +272,7 @@ class SignupStep2 extends StatelessWidget {
                       title: "Next Step",
                       onPressed: () async {
                         if (provider.itsEmployee) {
-                          provider.handleSignUp();
+                          provider.handleSignUp(context);
                           context.goNamed(SuccessPage.route);
                         } else {
                           context.goNamed(SignUpStep3.route);

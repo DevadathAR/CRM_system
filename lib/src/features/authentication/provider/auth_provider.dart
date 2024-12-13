@@ -1,7 +1,13 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
+import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
 import 'package:crm_system/src/services/api_service.dart';
+import 'package:crm_system/src/utilities/common_widget/text_field.dart';
+import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AuthProvider extends ChangeNotifier {
   final TextEditingController codeController = TextEditingController();
@@ -9,8 +15,6 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController otpController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  // final TextEditingController taglineController = TextEditingController();
   final TextEditingController userTypeController = TextEditingController();
   final TextEditingController companyIdController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
@@ -43,8 +47,19 @@ class AuthProvider extends ChangeNotifier {
     '21 - 40',
     '41 - 50',
     '51 - 100',
-    '101 - 500'
+    '101 - 500',
+    '500+'
   ];
+// step4
+  final List<Widget> _textFields = [
+    const TextInputField(hintText: memberMailHint).py8(),
+  ];
+  List<Widget> get textFields => _textFields;
+
+  void addTextField() {
+    _textFields.add(const TextInputField(hintText: memberMailHint).py8());
+    notifyListeners();
+  }
 
   AuthProvider() {
     // _loadUserData();
@@ -91,12 +106,12 @@ class AuthProvider extends ChangeNotifier {
 
   // Computed property for userType
 
-  Future<void> handleSignUp() async {
+  Future<void> handleSignUp(BuildContext context) async {
     final mobile = codeController.text.trim() + mobileController.text.trim();
     final otp = otpController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    final name = nameController.text.trim();
+    final Firmname = firmNameController.text.trim();
     final tagline = roleController.text.trim();
 
     if (mobile.isEmpty || otp.isEmpty || email.isEmpty || password.isEmpty) {
@@ -107,19 +122,29 @@ class AuthProvider extends ChangeNotifier {
       final response = await AuthService().signUp(
         userType: userType.toString(),
         tagline: tagline,
-        name: name,
+        name: Firmname,
         mobile: mobile,
         email: email,
         password: password,
       );
 
       if (response['value'] == true) {
-         // Handle successful sign-up (e.g., navigate or update state)
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Sign-up successful!')),
+        );
+
+        // Navigate to another screen or update app state
+        // Example:
+        context.goNamed(SuccessPage.route);
       } else {
-        debugPrint(response['value'] ?? 'Sign-up failed');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'] ?? 'Sign-up failed')),
+        );
       }
     } catch (error) {
-      debugPrint(error.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $error')),
+      );
     }
   }
 
@@ -137,7 +162,7 @@ class AuthProvider extends ChangeNotifier {
     otpController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    nameController.dispose();
+    firmNameController.dispose();
     userTypeController.dispose();
     roleController.dispose();
     companyIdController.dispose();
