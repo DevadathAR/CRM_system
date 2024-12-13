@@ -7,3 +7,7 @@ export 'package:crm_system/src/utilities/common_widget/custum_text_feild.dart';
 export 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 export 'package:crm_system/src/utilities/common_widget/iconBox.dart';
 // export 'package:crm_system/src/utilities/common_widget/text_field.dart';
+export 'package:velocity_x/velocity_x.dart';
+export 'package:go_router/go_router.dart';
+export 'package:provider/provider.dart';
+
