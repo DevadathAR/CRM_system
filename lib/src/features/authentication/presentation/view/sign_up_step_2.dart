@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -38,13 +39,6 @@ class SignupStep2 extends StatelessWidget {
                           size: 18, color: AppColors.lightblack))
                       .makeCentered(),
                   16.heightBox,
-                  greyTitle(text: "Name"),
-                  8.heightBox,
-                  TextInputField(
-                    controller: provider.nameController,
-                    hintText: 'Name',
-                  ),
-                  16.heightBox,
                   greyTitle(text: serviceReason),
                   8.heightBox,
                   TextInputField(
@@ -68,6 +62,13 @@ class SignupStep2 extends StatelessWidget {
                   ),
                   if (provider.itsEmployee) ...[
                     24.heightBox,
+                    greyTitle(text: "Name"),
+                    8.heightBox,
+                    TextInputField(
+                      controller: provider.nameController,
+                      hintText: 'Name',
+                    ),
+                    16.heightBox,
                     greyTitle(text: "Choose your company"),
                     8.heightBox,
                     TextInputField(
@@ -97,7 +98,8 @@ class SignupStep2 extends StatelessWidget {
                     child: PrimaryBlueButton(
                       title: "Previous",
                       onPressed: () {
-                        context.pop();
+                        // context.pop();
+                        context.goNamed(SignupStep1.route);
                       },
                       backGroundColor: AppColors.primaryBackGround,
                       elevation: 0,
@@ -108,29 +110,32 @@ class SignupStep2 extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: provider.nameController.text.isEmpty ||
-                            provider.userTypeController.text.isEmpty ||
-                            provider.roleController.text.isEmpty
-                        ? PrimaryBlueButton(
-                            title: "Next Step",
-                            backGroundColor: AppColors.textGrey1,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Fill all the fields')),
-                              );
-                            },
-                            isSuffix: true,
-                            suffixIcon: arrowForwardSvg,
-                          )
-                        : PrimaryBlueButton(
-                            title: "Next Step",
-                            onPressed: () async {
-                              provider.handleSignUp(context);
-                            },
-                            isSuffix: true,
-                            suffixIcon: arrowForwardSvg,
-                          ),
+                    child:
+                        //  provider.nameController.text.isEmpty ||
+                        //         provider.userTypeController.text.isEmpty ||
+                        //         provider.roleController.text.isEmpty
+                        //     ?
+                        //  PrimaryBlueButton(
+                        //     title: "Next Step",
+                        //     backGroundColor: AppColors.textGrey1,
+                        //     onPressed: () {
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         const SnackBar(
+                        //             content: Text('Fill all the fields')),
+                        //       );
+                        //     },
+                        //     isSuffix: true,
+                        //     suffixIcon: arrowForwardSvg,
+                        //   )
+                        // :
+                        PrimaryBlueButton(
+                      title: "Next Step",
+                      onPressed: () async {
+                        provider.handleSignUp(context);
+                      },
+                      isSuffix: true,
+                      suffixIcon: arrowForwardSvg,
+                    ),
                   ),
                 ],
               ).p20(),

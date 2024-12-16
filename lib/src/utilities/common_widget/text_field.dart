@@ -190,12 +190,13 @@ else {
 // countryCode feild
 class CountryCodeField extends StatelessWidget {
   final List<String> countryCodes;
+  final dynamic validator;
   final TextEditingController? controller;
 
   const CountryCodeField({
     super.key,
     required this.countryCodes,
-    this.controller,
+    this.controller, this.validator,
   });
 
   @override
@@ -205,6 +206,7 @@ class CountryCodeField extends StatelessWidget {
         return SizedBox(
           height: 48,
           child: DropdownButtonFormField<String>(
+            validator: validator,
             value: controller?.text.isNotEmpty == true
                 ? controller?.text
                 : countryCodes.first,
@@ -251,11 +253,13 @@ class CountryCodeField extends StatelessWidget {
 class PhoneNumberField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
+    final dynamic validator;
+
 
   const PhoneNumberField({
     super.key,
     this.controller,
-    this.hintText,
+    this.hintText, this.validator,
   });
 
   @override
@@ -265,6 +269,7 @@ class PhoneNumberField extends StatelessWidget {
         return SizedBox(
           height: 50,
           child: TextFormField(
+            validator: validator,
             controller: controller,
             keyboardType: TextInputType.phone,
             onChanged: (value) {

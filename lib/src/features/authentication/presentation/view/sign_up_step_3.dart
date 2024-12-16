@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_2.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_4.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
@@ -11,10 +12,8 @@ import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-// ChangeNotifier class for state management
 class SignUpStep3 extends StatelessWidget {
   static const route = 'sign-up-step-3';
 
@@ -22,10 +21,7 @@ class SignUpStep3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AuthProvider(),
-      child: const SignUpStep3Content(),
-    );
+    return const SignUpStep3Content();
   }
 }
 
@@ -40,11 +36,11 @@ class SignUpStep3Content extends StatelessWidget {
       body: Column(
         children: [
           const AuthTopSide(),
-
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              "STEP 3/4"
+              "On- Boarding"
+              // "STEP 3/4"
                   .text
                   .textStyle(
                       AppTextStyle.boldText(size: 14, color: AppColors.blue))
@@ -68,19 +64,20 @@ class SignUpStep3Content extends StatelessWidget {
                 dropcontroller: provider.businessDirController,
                 hintText: pswdHint,
                 isDropDown: true,
-                dropDownOptions: ['IT and Programing', 'HR', 'Pre - sales'],
+                dropDownOptions: const [
+                  'IT and Programing',
+                  'HR',
+                  'Pre - sales'
+                ],
               ),
               24.heightBox,
               greyTitle(text: members),
               8.heightBox,
-
-              textDisply(label:  provider.memberSelectionController.text.isEmpty?'Choose member count':provider.memberSelectionController.text),
-              // TextInputField(
-              //   controller: provider.memberSelectionController,
-              //   hintText: "Enter member count",
-              // ),
-
-
+              textDisply(
+                label: provider.memberSelectionController.text.isEmpty
+                    ? 'Choose member count'
+                    : provider.memberSelectionController.text,
+              ),
               16.heightBox,
               SizedBox(
                 height: 210,
@@ -113,26 +110,24 @@ class SignUpStep3Content extends StatelessWidget {
               .p20
               .margin(const EdgeInsets.symmetric(horizontal: 24))
               .make(),
-
           24.heightBox,
-
-          // Next Step Button
           Row(
             children: [
-              Expanded(
-                child: PrimaryBlueButton(
-                  title: "Previous",
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  backGroundColor: AppColors.primaryBackGround,
-                  elevation: 0,
-                  isprefix: true,
-                  prefixIcon: arrowBackSvg,
-                  prefixColor: AppColors.blue,
-                  labelColor: AppColors.blue,
-                ),
-              ),
+              // Expanded(
+              //   child: PrimaryBlueButton(
+              //     title: "Previous",
+              //     onPressed: () {
+              //       // context.pop();
+              //       context.goNamed(SignupStep2.route);
+              //     },
+              //     backGroundColor: AppColors.primaryBackGround,
+              //     elevation: 0,
+              //     isprefix: true,
+              //     prefixIcon: arrowBackSvg,
+              //     prefixColor: AppColors.blue,
+              //     labelColor: AppColors.blue,
+              //   ),
+              // ),
               Expanded(
                 child: provider.firmNameController.text.isEmpty ||
                         provider.businessDirController.text.isEmpty ||
@@ -151,8 +146,7 @@ class SignUpStep3Content extends StatelessWidget {
                       )
                     : PrimaryBlueButton(
                         title: "Next Step",
-                        onPressed: () async {
-                          // await provider.saveData();
+                        onPressed: () {
                           context.goNamed(SignUpStep4.route);
                         },
                         isSuffix: true,
@@ -161,7 +155,6 @@ class SignUpStep3Content extends StatelessWidget {
               ),
             ],
           ).p20(),
-
           16.heightBox,
         ],
       )
@@ -204,17 +197,24 @@ class SignUpStep3Content extends StatelessWidget {
       ),
     );
   }
-  Widget textDisply({label}) {
-    return Container(width: double.infinity,
-    height: 50,
-      decoration:  BoxDecoration(
+
+  Widget textDisply({required String label}) {
+    return Container(
+      width: double.infinity,
+      height: 50,
+      decoration: BoxDecoration(
         border: Border.all(color: AppColors.borderGrey),
-        borderRadius: BorderRadius.all(Radius.circular(14)),color: AppColors.white
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
+        color: AppColors.white,
       ),
-      child: Align(alignment: Alignment.centerLeft,
+      child: Align(
+        alignment: Alignment.centerLeft,
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0),
-          child: Text(label,style:                 AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+          child: Text(
+            label,
+            style:
+                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
           ),
         ),
       ),

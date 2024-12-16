@@ -7,15 +7,16 @@ import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
-  // SignIn feild
-  final TextEditingController signInemailController = TextEditingController();
-  final TextEditingController singInpasswordController =TextEditingController();
-  bool isChecked = false;
+// //signUp step 2
+
+  // String? role; // Shared state for role
+
+  // bool get itsEmployee => role == 'Employee';
 
   // SignUp feild
   final TextEditingController codeController = TextEditingController();
@@ -30,10 +31,12 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController typeOfCompanyController = TextEditingController();
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController totalStrengthController = TextEditingController();
-  final TextEditingController invitedMembersController = TextEditingController();
+  final TextEditingController invitedMembersController =
+      TextEditingController();
   final TextEditingController firmNameController = TextEditingController();
   final TextEditingController businessDirController = TextEditingController();
-  final TextEditingController memberSelectionController =TextEditingController();
+  final TextEditingController memberSelectionController =
+      TextEditingController();
   int get userType {
     switch (userTypeController.text.trim()) {
       case 'Work':
@@ -48,7 +51,7 @@ class AuthProvider extends ChangeNotifier {
   bool get itsEmployee => roleController.text == 'Employee';
 
 // Onboarding controller ....
- 
+
   String? _selectedMember;
   String? get selectedMember => _selectedMember;
 
@@ -85,44 +88,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // SignIn
-  Future<void> handleSignIn(BuildContext context) async {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Email and Password cannot be empty')),
-      );
-      return;
-    }
-
-    final email = emailController.text.trim();
-    final password = passwordController.text.trim();
-
-    try {
-      final response = await AuthService().signIn(email, password);
-
-      // log(jsonEncode(response));
-
-      if (response['userType'] == 0) {
-        context.goNamed(DashBoard.route);
-      } else if (response['userType'] == 1) {
-        context.goNamed(DashBoard.route);
-      } else if (response['userType'] == 2) {
-        context.goNamed(DashBoard.route);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['message'] ?? 'Sign in failed')),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred: $e')),
-      );
-    }
-  }
-
-  void toggleCheckBox(bool? value) {
-    isChecked = value ?? false;
-    notifyListeners();
-  }
 
   void selectMember(String member) {
     _selectedMember = member;
@@ -143,7 +108,7 @@ class AuthProvider extends ChangeNotifier {
         userType: userType.toString(),
         tagline: tagline,
         name: name,
-        code : code,
+        code: code,
         mobile: mobile,
         email: email,
         password: password,
@@ -212,7 +177,7 @@ class AuthProvider extends ChangeNotifier {
         totalStrength: totalStrength,
         invitedMembers: invitedMembers,
       );
-
+      print('onboarding    :-$response');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Onboarding successful!')),
       );
@@ -236,6 +201,245 @@ class AuthProvider extends ChangeNotifier {
     userTypeController.dispose();
     roleController.dispose();
     companyIdController.dispose();
+    businessDirController.dispose();
+    codeController.dispose();
     super.dispose();
   }
 }
+
+
+
+// // class AuthProvider extends ChangeNotifier {
+// //   String? userType; // Shared state for user type
+// //   String? role;     // Shared state for role
+// //   String? name;     // Shared state for employee name
+// //   String? company;  // Shared state for company selection
+
+// //   bool get itsEmployee => role == 'Employee';
+
+// //   void updateUserType(String? type) {
+// //     userType = type;
+// //     notifyListeners();
+// //   }
+
+// //   void updateRole(String? newRole) {
+// //     role = newRole;
+// //     notifyListeners();
+// //   }
+
+// //   void updateName(String? newName) {
+// //     name = newName;
+// //     notifyListeners();
+// //   }
+
+// //   void updateCompany(String? newCompany) {
+// //     company = newCompany;
+// //     notifyListeners();
+// //   }
+
+// //   void handleSignUp(BuildContext context) {
+// //     // Consolidate and validate the collected data
+// //     print("Signing up with userType: $userType, role: $role, name: $name, company: $company");
+// //     // Proceed with sign-up logic
+// //   }
+// // }
+
+
+// import 'dart:convert';
+
+// import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
+// import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
+// import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
+// import 'package:crm_system/src/services/api_service.dart';
+// import 'package:crm_system/src/utilities/common_widget/text_field.dart';
+// import 'package:crm_system/src/utilities/const.dart';
+// import 'package:flutter/material.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+
+// class AuthProvider extends ChangeNotifier {
+//   // Shared state
+//   bool isChecked = false;
+//   String? _selectedMember;
+//   String? get selectedMember => _selectedMember;
+
+//   int _userType = 0; // Tracks user type (Work: 1, Business: 2)
+//   int get userType => _userType;
+
+//   List<String> memberCount = [
+//     'Only me',
+//     '2 - 5',
+//     '6 - 10',
+//     '11 - 20',
+//     '21 - 40',
+//     '41 - 50',
+//     '51 - 100',
+//     '101 - 500',
+//     '500+'
+//   ];
+
+//   final List<Widget> _textFields = [
+//     const TextInputField(hintText: 'Enter member email').py8(),
+//   ];
+//   List<Widget> get textFields => _textFields;
+
+//   void addTextField() {
+//     _textFields.add(const TextInputField(hintText: 'Enter member email').py8());
+//     notifyListeners();
+//   }
+
+//   AuthProvider() {
+//     // Additional listeners if needed
+//   }
+
+//   // Handle userType logic
+//   void setUserType(String type) {
+//     switch (type.trim()) {
+//       case 'Work':
+//         _userType = 1;
+//         break;
+//       case 'Business':
+//         _userType = 2;
+//         break;
+//       default:
+//         _userType = 0;
+//         break;
+//     }
+//     notifyListeners();
+//   }
+
+//   // Handle checkbox state
+//   void toggleCheckBox(bool? value) {
+//     isChecked = value ?? false;
+//     notifyListeners();
+//   }
+
+//   // Select member from dropdown
+//   void selectMember(String member) {
+//     _selectedMember = member;
+//     notifyListeners();
+//   }
+
+//   // Handle sign-in logic
+//   Future<void> handleSignIn(BuildContext context, String email, String password) async {
+//     if (email.isEmpty || password.isEmpty) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Email and Password cannot be empty')),
+//       );
+//       return;
+//     }
+
+//     try {
+//       final response = await AuthService().signIn(email.trim(), password.trim());
+
+//       if (response['userType'] == 0) {
+//         context.goNamed(DashBoard.route);
+//       } else if (response['userType'] == 1 || response['userType'] == 2) {
+//         context.goNamed(DashBoard.route);
+//       } else {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text(response['message'] ?? 'Sign-in failed')),
+//         );
+//       }
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('An error occurred: $e')),
+//       );
+//     }
+//   }
+
+//   // Handle sign-up logic
+//   Future<void> handleSignUp(
+//     BuildContext context, {
+//     required String name,
+//     required String role,
+//     required String mobile,
+//     required String email,
+//     required String password,
+//     required String code,
+//   }) async {
+//     try {
+//       final response = await AuthService().signUp(
+//         userType: userType.toString(),
+//         tagline: role,
+//         name: name,
+//         code: code,
+//         mobile: mobile,
+//         email: email,
+//         password: password,
+//       );
+
+//       if (response['value'] == true) {
+//         final token = response['token'];
+//         final prefs = await SharedPreferences.getInstance();
+//         await prefs.setString('auth_token', token);
+
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           const SnackBar(content: Text('Sign-up successful!')),
+//         );
+
+//         if (userType == 1) {
+//           context.goNamed(SuccessPage.route);
+//         } else if (userType == 2) {
+//           context.goNamed(SignUpStep3.route);
+//         }
+//       } else {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text(response['message'] ?? 'Sign-up failed')),
+//         );
+//       }
+//     } catch (error) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Error: $error')),
+//       );
+//     }
+//   }
+
+//   // Handle onboarding logic
+//   Future<void> handleOnboarding(
+//     BuildContext context, {
+//     required String typeOfCompany,
+//     required String companyName,
+//     required String totalStrength,
+//     required List<String> invitedMembers,
+//   }) async {
+//     try {
+//       final prefs = await SharedPreferences.getInstance();
+//       final token = prefs.getString('auth_token');
+
+//       if (token == null || token.isEmpty) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           const SnackBar(content: Text('Error: Token is missing.')),
+//         );
+//         return;
+//       }
+
+//       final response = await AuthService().onboarding(
+//         token: token,
+//         typeOfCompany: typeOfCompany,
+//         companyName: companyName,
+//         totalStrength: totalStrength,
+//         invitedMembers: invitedMembers,
+//       );
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Onboarding successful!')),
+//       );
+
+//       context.goNamed(SuccessPage.route);
+//     } catch (error) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Exception: $error')),
+//       );
+//     }
+//   }
+
+//   @override
+//   void dispose() {
+//     // No controllers to dispose here
+//     super.dispose();
+//   }
+// }
+
+
+
+

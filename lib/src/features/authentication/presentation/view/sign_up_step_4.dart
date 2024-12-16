@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_3.dart';
 import 'package:crm_system/src/features/authentication/presentation/view/success.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
@@ -5,9 +6,6 @@ import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class SignUpStep4 extends StatelessWidget {
   static const route = 'sign-up-step-4';
@@ -24,7 +22,8 @@ class SignUpStep4 extends StatelessWidget {
             builder: (context, provider, _) {
               return VStack(
                 [
-                  "STEP 4/4"
+                  "Invite members"
+                      // "STEP 4/4"
                       .text
                       .bold
                       .size(14)
@@ -66,7 +65,8 @@ class SignUpStep4 extends StatelessWidget {
                 child: PrimaryBlueButton(
                   title: "Previous",
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    context.goNamed(SignUpStep3.route);
                   },
                   backGroundColor: AppColors.primaryBackGround,
                   elevation: 0,

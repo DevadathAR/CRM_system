@@ -1,12 +1,12 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_up_step_1.dart';
 import 'package:crm_system/src/features/authentication/presentation/widget/auth_top_side.dart';
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
+import 'package:crm_system/src/features/authentication/provider/signIn_provider.dart';
 import 'package:crm_system/src/utilities/common_widget/customCheckBox.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
-
 
 class SignIn extends StatelessWidget {
   static const route = 'sign-in';
@@ -15,7 +15,7 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<AuthProvider>(
+      body: Consumer<SigninProvider>(
         builder: (context, provider, _) {
           return Column(
             children: [
@@ -36,7 +36,7 @@ class SignIn extends StatelessWidget {
                     greyTitle(text: email),
                     8.heightBox,
                     TextInputField(
-                      controller: provider.emailController,
+                      controller: provider.signInemailController,
                       isSearch: false,
                       hintText: mailHint,
                       validator: (value) {
@@ -55,7 +55,7 @@ class SignIn extends StatelessWidget {
                     greyTitle(text: pswd),
                     8.heightBox,
                     TextInputField(
-                      controller: provider.passwordController,
+                      controller: provider.signInpasswordController,
                       isSearch: false,
                       obscureText: true,
                       hintText: pswdHint,
@@ -116,8 +116,7 @@ class SignIn extends StatelessWidget {
                       onPressed: () {
                         context.goNamed(SignupStep1.route);
                       },
-                      child: noacc.text
-                          .semiBold
+                      child: noacc.text.semiBold
                           .size(16)
                           .color(AppColors.blue)
                           .make(),
