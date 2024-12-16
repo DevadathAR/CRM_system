@@ -54,7 +54,7 @@ class SignUpStep3Content extends StatelessWidget {
               greyTitle(text: firmname),
               8.heightBox,
               TextInputField(
-                controller: provider.firmNameController,
+                controller: provider.companyNameController,
                 hintText: firmnameHint,
               ),
               24.heightBox,
@@ -129,7 +129,7 @@ class SignUpStep3Content extends StatelessWidget {
               //   ),
               // ),
               Expanded(
-                child: provider.firmNameController.text.isEmpty ||
+                child: provider.companyNameController.text.isEmpty ||
                         provider.businessDirController.text.isEmpty ||
                         provider.memberSelectionController.text.isEmpty
                     ? PrimaryBlueButton(

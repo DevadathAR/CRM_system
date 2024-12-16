@@ -33,7 +33,6 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController totalStrengthController = TextEditingController();
   final TextEditingController invitedMembersController =
       TextEditingController();
-  final TextEditingController firmNameController = TextEditingController();
   final TextEditingController businessDirController = TextEditingController();
   final TextEditingController memberSelectionController =
       TextEditingController();
@@ -127,11 +126,14 @@ class AuthProvider extends ChangeNotifier {
         );
         if (userType == 1) {
           context.goNamed(SuccessPage.route);
+         
         } else if (userType == 2) {
           //onbording
           context.goNamed(SignUpStep3.route);
+
         }
         // Navigate to another screen or update app state
+
         // Example:
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -184,6 +186,9 @@ class AuthProvider extends ChangeNotifier {
 
       // Navigate to the success page
       context.goNamed(SuccessPage.route);
+      companyIdController.dispose();
+      companyNameController.dispose();
+      businessDirController.dispose();
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Exception: $error')),
@@ -191,18 +196,19 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  @override
+   @override
   void dispose() {
+    // step 1 
+    codeController.dispose();
     mobileController.dispose();
     otpController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    firmNameController.dispose();
+    // step 2 
     userTypeController.dispose();
     roleController.dispose();
+    nameController.dispose();
     companyIdController.dispose();
-    businessDirController.dispose();
-    codeController.dispose();
     super.dispose();
   }
 }

@@ -28,7 +28,7 @@ class SignupStep2 extends StatelessWidget {
               const AuthTopSide(),
               VStack(
                 [
-                  "STEP 2/4"
+                  "STEP 2/2"
                       .text
                       .textStyle(AppTextStyle.boldText(
                           size: 14, color: AppColors.blue))
@@ -94,42 +94,27 @@ class SignupStep2 extends StatelessWidget {
               24.heightBox,
               Row(
                 children: [
-                  Expanded(
-                    child: PrimaryBlueButton(
-                      title: "Previous",
-                      onPressed: () {
-                        // context.pop();
-                        context.goNamed(SignupStep1.route);
-                      },
-                      backGroundColor: AppColors.primaryBackGround,
-                      elevation: 0,
-                      isprefix: true,
-                      prefixIcon: arrowBackSvg,
-                      prefixColor: AppColors.blue,
-                      labelColor: AppColors.blue,
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: PrimaryBlueButton(
+                  //     title: "Previous",
+                  //     onPressed: () {
+                  
+                  //       context.goNamed(
+                  //           SignupStep1.route); // Or use context.pop() if appropriate.
+                  //     },
+                  //     backGroundColor: AppColors.primaryBackGround,
+                  //     elevation: 0,
+                  //     isprefix: true,
+                  //     prefixIcon: arrowBackSvg,
+                  //     prefixColor: AppColors.blue,
+                  //     labelColor: AppColors.blue,
+                  //   ),
+                  // ),
                   Expanded(
                     child:
-                        //  provider.nameController.text.isEmpty ||
-                        //         provider.userTypeController.text.isEmpty ||
-                        //         provider.roleController.text.isEmpty
-                        //     ?
-                        //  PrimaryBlueButton(
-                        //     title: "Next Step",
-                        //     backGroundColor: AppColors.textGrey1,
-                        //     onPressed: () {
-                        //       ScaffoldMessenger.of(context).showSnackBar(
-                        //         const SnackBar(
-                        //             content: Text('Fill all the fields')),
-                        //       );
-                        //     },
-                        //     isSuffix: true,
-                        //     suffixIcon: arrowForwardSvg,
-                        //   )
-                        // :
+                   
                         PrimaryBlueButton(
-                      title: "Next Step",
+                      title: "SignUp",
                       onPressed: () async {
                         provider.handleSignUp(context);
                       },

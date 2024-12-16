@@ -34,7 +34,7 @@ class SignupStep1 extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  "STEP 1/4"
+                  "STEP 1/2"
                       .text
                       .textStyle(AppTextStyle.boldText(
                           size: 14, color: AppColors.blue))
