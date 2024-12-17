@@ -36,6 +36,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController businessDirController = TextEditingController();
   final TextEditingController memberSelectionController =
       TextEditingController();
+
   int get userType {
     switch (userTypeController.text.trim()) {
       case 'Work':
@@ -112,38 +113,31 @@ class AuthProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
-      print(response);
-      print('userType :- $userType');
+
+      print('Response from sign-up: $response');
+      print('UserType: $userType');
 
       if (response['value'] == true) {
         final token = response['token'];
+        print('Sign-up successful. Token: $token');
+
         // Save the token in SharedPreferences
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', token);
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Sign-up successful!')),
-        );
         if (userType == 1) {
+          print('Navigating to SuccessPage.');
           context.goNamed(SuccessPage.route);
-         
         } else if (userType == 2) {
-          //onbording
+          print('Navigating to SignUpStep3.');
           context.goNamed(SignUpStep3.route);
-
         }
-        // Navigate to another screen or update app state
-
-        // Example:
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['message'] ?? 'Sign-up failed')),
-        );
+        final errorMessage = response['message'] ?? 'Sign-up failed.';
+        print('Sign-up failed. Message: $errorMessage');
       }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $error')),
-      );
+      print('Error occurred during sign-up: $error');
     }
   }
 
@@ -196,15 +190,15 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-   @override
+  @override
   void dispose() {
-    // step 1 
+    // step 1
     codeController.dispose();
     mobileController.dispose();
     otpController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    // step 2 
+    // step 2
     userTypeController.dispose();
     roleController.dispose();
     nameController.dispose();
@@ -212,8 +206,6 @@ class AuthProvider extends ChangeNotifier {
     super.dispose();
   }
 }
-
-
 
 // // class AuthProvider extends ChangeNotifier {
 // //   String? userType; // Shared state for user type
@@ -249,7 +241,6 @@ class AuthProvider extends ChangeNotifier {
 // //     // Proceed with sign-up logic
 // //   }
 // // }
-
 
 // import 'dart:convert';
 
@@ -445,7 +436,3 @@ class AuthProvider extends ChangeNotifier {
 //     super.dispose();
 //   }
 // }
-
-
-
-
