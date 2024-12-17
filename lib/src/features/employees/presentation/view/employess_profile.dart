@@ -3,6 +3,7 @@ import 'package:crm_system/src/features/employees/presentation/widget/filter_row
 import 'package:crm_system/src/features/employees/presentation/widget/personal_data_box.dart';
 import 'package:crm_system/src/features/employees/presentation/widget/profile_tab_view.dart';
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
+import 'package:crm_system/src/features/vaccations/model/vaccation_model.dart';
 import 'package:crm_system/src/features/vaccations/presentation/widget/vacation_body.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
@@ -81,10 +82,35 @@ class EmployessProfile extends StatelessWidget {
                           return Flexible(
                             child: IndexedStack(
                               index: tabProvider.selectedIndex,
-                              children: const [
-                                Text('Add Project page'),
-                                Text('Add Team page'),
-                                VacationBody()
+                              children: [
+                                const Text('Add Project page'),
+                                const Text('Add Team page'),
+                                VacationBody(
+  messages: [
+    Message(
+      userId: 1,
+      vacationRequests: '10',
+      sickLeaveRequests: '2',
+      wfhRequests: '20',
+      requestedby: [
+        Requestedby(
+          id: 1,
+          email: 'evanyates@gmail.com',
+          name: 'Evan Yates',
+          phone: '123456789',
+          userType: 1,
+          tagLine: 'Employee',
+          userImage: '',
+          deletedAt: null,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        )
+      ],
+    ),
+    // Add more Message objects if needed
+  ],
+)
+
                               ],
                             ),
                           );

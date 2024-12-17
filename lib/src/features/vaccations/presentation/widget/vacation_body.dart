@@ -1,21 +1,28 @@
+import 'package:crm_system/src/features/vaccations/model/vaccation_model.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/userInfo.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+
 class VacationBody extends StatelessWidget {
-  const VacationBody({super.key});
+  final List<Message> messages;
+
+  const VacationBody({super.key, required this.messages});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(2, (_) => const PersonDataBox()),
+      children: messages.map((message) => PersonDataBox(message: message)).toList(),
     );
   }
 }
 
 class PersonDataBox extends StatelessWidget {
-  const PersonDataBox({super.key});
+  final Message message;
+
+  const PersonDataBox({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -26,31 +33,29 @@ class PersonDataBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        // Add shadow if needed
-        // boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 4)],
       ),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Row(
             children: [
               UserInfo(
                 isExpanded: false,
-                name: 'Evan Yates',
-                role: 'evanyates@gmail.com',
-                avatar: dp1png,
+                name: message.requestedby.first.name,
+                role: message.requestedby.first.email,
+                avatar: dp1png, // Replace with a dynamic avatar if available
               ),
             ],
           ),
-          Divider(),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InfoBox(label: 'Vacations', datum: '15'),
+              InfoBox(label: 'Vacations', datum: message.vacationRequests),
               Spacer(),
-              InfoBox(label: 'Sick Leave', datum: '3'),
+              InfoBox(label: 'Sick Leave', datum: message.sickLeaveRequests),
               Spacer(),
-              InfoBox(label: 'Work remotely', datum: '50'),
+              InfoBox(label: 'Work remotely', datum: message.wfhRequests),
             ],
           ),
         ],
@@ -58,6 +63,7 @@ class PersonDataBox extends StatelessWidget {
     );
   }
 }
+
 
 class InfoBox extends StatelessWidget {
   final String label;
