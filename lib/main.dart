@@ -1,5 +1,6 @@
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
 import 'package:crm_system/src/features/authentication/provider/signIn_provider.dart';
+import 'package:crm_system/src/features/projects/provider/taskProvider.dart.dart';
 import 'package:crm_system/src/features/vaccations/presentation/widget/multy_date_calendar.dart';
 import 'package:crm_system/src/features/dash_board/provider/add_event_provider.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
@@ -15,8 +16,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SigninProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => SigninProvider()),
+        ChangeNotifierProvider(create: (_) => ProjectsProvider()),
         ChangeNotifierProvider(create: (_) => DashbordProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
         ChangeNotifierProvider(create: (_) => MultipleDatePickerProvider()),
