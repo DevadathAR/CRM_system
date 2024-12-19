@@ -5,7 +5,7 @@ import 'package:crm_system/src/features/projects/model/taskModel.dart';
 import 'package:crm_system/src/features/projects/presentation/view/project_details.dart';
 import 'package:crm_system/src/features/projects/presentation/view/task_details.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/filterDialogue.dart';
-import 'package:crm_system/src/features/projects/provider/taskProvider.dart.dart';
+import 'package:crm_system/src/features/projects/provider/project_Provider.dart.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';

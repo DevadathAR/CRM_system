@@ -14,16 +14,15 @@ class SignUpStep4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: VStack(
-        [
-          const AuthTopSide(),
-          Consumer<AuthProvider>(
-            builder: (context, provider, _) {
-              return VStack(
+    return Consumer<AuthProvider>(
+      builder: (context, provider, _) {
+        return Scaffold(
+          body: VStack(
+            [
+              const AuthTopSide(),
+              VStack(
                 [
                   "Invite members"
-                      // "STEP 4/4"
                       .text
                       .bold
                       .size(14)
@@ -55,47 +54,47 @@ class SignUpStep4 extends StatelessWidget {
                   .withRounded(value: 24)
                   .p20
                   .margin(const EdgeInsets.symmetric(horizontal: 24))
-                  .make();
-            },
-          ),
-          24.heightBox,
-          Row(
-            children: [
-              Expanded(
-                child: PrimaryBlueButton(
-                  title: "Previous",
-                  onPressed: () {
-                    // Navigator.pop(context);
-                    context.goNamed(SignUpStep3.route);
-                  },
-                  backGroundColor: AppColors.primaryBackGround,
-                  elevation: 0,
-                  isprefix: true,
-                  prefixIcon: arrowBackSvg,
-                  prefixColor: AppColors.blue,
-                  labelColor: AppColors.blue,
-                ),
-              ),
-              Expanded(
-                child: PrimaryBlueButton(
-                  title: "Next Step",
-                  onPressed: () {
-                    context.goNamed(SuccessPage.route);
-                  },
-                  isSuffix: true,
-                  suffixIcon: arrowForwardSvg,
-                ),
-              ),
+                  .make(),
+              24.heightBox,
+              Row(
+                children: [
+                  Expanded(
+                    child: PrimaryBlueButton(
+                      title: "Previous",
+                      onPressed: () {
+                        context.goNamed(SignUpStep3.route);
+                      },
+                      backGroundColor: AppColors.primaryBackGround,
+                      elevation: 0,
+                      isprefix: true,
+                      prefixIcon: arrowBackSvg,
+                      prefixColor: AppColors.blue,
+                      labelColor: AppColors.blue,
+                    ),
+                  ),
+                  Expanded(
+                    child: PrimaryBlueButton(
+                      title: "Next Step",
+                      onPressed: () {
+                        provider.handleOnboarding(context);
+                        context.goNamed(SuccessPage.route);
+                      },
+                      isSuffix: true,
+                      suffixIcon: arrowForwardSvg,
+                    ),
+                  ),
+                ],
+              ).p20(),
+              16.heightBox,
             ],
-          ).p20(),
-          16.heightBox,
-        ],
-      )
-          .scrollVertical()
-          .box
-          .height(double.infinity)
-          .color(AppColors.bgWhite)
-          .make(),
+          )
+              .scrollVertical()
+              .box
+              .height(double.infinity)
+              .color(AppColors.bgWhite)
+              .make(),
+        );
+      },
     );
   }
 }

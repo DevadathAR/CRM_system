@@ -3,15 +3,16 @@ import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
 
-class SigninProvider extends ChangeNotifier{
-   // SignIn feild
+class SigninProvider extends ChangeNotifier {
+  // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
   final TextEditingController signInpasswordController =
       TextEditingController();
   bool isChecked = false;
 
   Future<void> handleSignIn(BuildContext context) async {
-    if (signInemailController.text.isEmpty || signInpasswordController.text.isEmpty) {
+    if (signInemailController.text.isEmpty ||
+        signInpasswordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Email and Password cannot be empty')),
       );
@@ -22,7 +23,7 @@ class SigninProvider extends ChangeNotifier{
     final password = signInpasswordController.text.trim();
 
     try {
-      final response = await AuthService().signIn(email, password);
+      final response = await ApiServices().signIn(email, password);
 
       // log(jsonEncode(response));
 
@@ -55,5 +56,4 @@ class SigninProvider extends ChangeNotifier{
     signInpasswordController.dispose();
     super.dispose();
   }
-
 }

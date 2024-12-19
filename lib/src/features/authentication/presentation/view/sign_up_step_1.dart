@@ -174,29 +174,9 @@ class SignupStep1 extends StatelessWidget {
                     );
                   }
                 },
-
-                // provider.mobileController.text.isEmpty ||
-                //         provider.otpController.text.isEmpty ||
-                //         provider.emailController.text.isEmpty ||
-                //         provider.passwordController.text.isEmpty ||
-                //         provider.codeController.text.isEmpty
-                //     ? () {
-                //         ScaffoldMessenger.of(context).showSnackBar(
-                //           const SnackBar(content: Text('Fill all the fields')),
-                //         );
-                //       }
-                //     : () {
-                //         context.goNamed(SignupStep2.route);
-                //       },
-
                 //  provider.handleSignUp,
                 title: "Next Step",
-                // backGroundColor: provider.mobileController.text.isEmpty ||
-                //         provider.otpController.text.isEmpty ||
-                //         provider.emailController.text.isEmpty ||
-                //         provider.passwordController.text.isEmpty
-                //     ? AppColors.textGrey1
-                //     :
+     
                 backGroundColor: AppColors.blue,
                 isSuffix: true,
                 suffixIcon: arrowForwardSvg,

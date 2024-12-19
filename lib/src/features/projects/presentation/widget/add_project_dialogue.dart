@@ -1,16 +1,16 @@
 import 'package:crm_system/src/features/profile/presentation/widget/calander_pop_screen.dart';
+import 'package:crm_system/src/features/projects/provider/project_Provider.dart.dart';
+import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/custum_text_feild.dart';
 import 'package:crm_system/src/utilities/common_widget/dialogue_box_title.dart';
 import 'package:crm_system/src/utilities/common_widget/grey_title.dart';
-import 'package:crm_system/src/utilities/common_widget/iconBox.dart';
-import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
 import 'package:crm_system/src/utilities/common_widget/text_field.dart';
-import 'package:crm_system/src/utilities/image_path.dart';
-import 'package:crm_system/src/utilities/text_style.dart';
+import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:provider/provider.dart';
 
 class AddProjectDialogue extends StatefulWidget {
   const AddProjectDialogue({super.key});
@@ -22,6 +22,8 @@ class AddProjectDialogue extends StatefulWidget {
 class _AddProjectDialogueState extends State<AddProjectDialogue> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProjectsProvider>(context, listen: false);
+
     return Dialog(
       insetPadding: const EdgeInsets.all(10),
       backgroundColor: AppColors.white,
@@ -32,41 +34,85 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
         constraints:
             BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
         child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           const DialogueBoxTitle(
-              title: "Add project",
-            ),
+            const DialogueBoxTitle(title: "Add project"),
             8.heightBox,
             greyTitle(text: "Project Name"),
             8.heightBox,
-            const TextInputField(
+            TextInputField(
+              controller: provider.projectNameController,
               hintText: "Project Name",
             ),
             8.heightBox,
             greyTitle(text: "Starts"),
             8.heightBox,
-            
-            const CustomDateTimePicker(iconName: calenderSvg,
-              hintText: 'Select Date',),
-           
+            CustomDateTimePicker(
+              iconName: calenderSvg,
+              hintText: 'Select Date',
+              onDateSelected: (date) => provider.startDate = date,
+            ),
             8.heightBox,
-            greyTitle(text: "Dead Line"),
+            greyTitle(text: "Deadline"),
             8.heightBox,
-                
-            const CustomDateTimePicker(iconName: calenderSvg,
-              hintText: 'Select Date',),
+            CustomDateTimePicker(
+              iconName: calenderSvg,
+              hintText: 'Select Date',
+              onDateSelected: (date) => provider.deadline = date,
+            ),
             8.heightBox,
             greyTitle(text: "Priority"),
             8.heightBox,
-            const TextInputField(
+            TextInputField(
               isDropDown: true,
-              dropDownOptions: ["Medium", "Low", "High"],
+              dropcontroller: provider.priorityController,
+              dropDownOptions: const ["Medium", "Low", "High"],
+              // onChanged: (value) => provider.priorityController.text = value,
             ),
+            8.heightBox,
+            greyTitle(text: "Reporter"),
+            8.heightBox,
+            const TextInputField(
+              hintText: "Select Reporter",
+              isDropDown: true,
+              dropDownOptions: ["dev", "arjun", "Nikshay"],
+            ),
+            provider.assignees.isEmpty
+                ? const CircularProgressIndicator()
+                : MultiSelectDialogField(
+                    items: provider.assignees
+                        .map((assignee) => MultiSelectItem(
+                              assignee['id'].toString(),
+                              assignee['name'],
+                            ))
+                        .toList(),
+                    title: const Text("Select Assignees"),
+                    selectedColor: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.1),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      border: Border.all(color: Colors.blue, width: 2),
+                    ),
+                    buttonIcon: const Icon(
+                      Icons.person_add,
+                      color: Colors.blue,
+                    ),
+                    buttonText: Text(
+                      "Select Assignees",
+                      style: TextStyle(
+                        color: Colors.blue[800],
+                        fontSize: 16,
+                      ),
+                    ),
+                    onConfirm: (results) {
+                      provider.setSelectedAssignees(
+                          results.map((e) => e.toString()).toList());
+                    },
+                  ),
             8.heightBox,
             greyTitle(text: "Description"),
             8.heightBox,
-            const TextInputField(
+            TextInputField(
+              controller: provider.projectDiscriptionController,
               height: 150,
               maxlines: 4,
               hintText: "Add some description of the project",
@@ -92,7 +138,9 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
             10.heightBox,
             PrimaryBlueButton(
               title: "Save Project",
-              onPressed: () {},
+              onPressed: () async {
+                await provider.handleAddProject(context);
+              },
             ),
             5.heightBox,
           ],
@@ -100,14 +148,10 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
       ),
     );
   }
-
-  
 }
 
 class AvatarSelection extends StatelessWidget {
-  const AvatarSelection({
-    super.key,
-  });
+  const AvatarSelection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +168,7 @@ class AvatarSelection extends StatelessWidget {
       projectAvatarTeal,
       projectAvatarYellow,
       uploadImageSvg,
-    ]; // Example list of SVG image paths
+    ];
 
     return Container(
       padding: const EdgeInsets.all(15),
@@ -140,7 +184,7 @@ class AvatarSelection extends StatelessWidget {
                   AppTextStyle.boldText(size: 18, color: AppColors.lightblack))
               .make(),
           Text(
-            "Select or upload an avatar for the project(available formats : jpg,png)",
+            "Select or upload an avatar for the project (available formats: jpg, png)",
             style:
                 AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
           ),
@@ -149,16 +193,15 @@ class AvatarSelection extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // Number of columns in the grid
+              crossAxisCount: 4,
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
-              childAspectRatio: 1, // Square items
+              childAspectRatio: 1,
             ),
             itemCount: svgImages.length,
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  // Handle image selection
                   print("Selected: ${svgImages[index]}");
                 },
                 child: SizedBox(

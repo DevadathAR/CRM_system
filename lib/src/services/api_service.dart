@@ -1,12 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
-class AuthService {
+class ApiServices {
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
-  static const String baseUrl = "http://10.0.2.2:8000";
-  // static const String baseUrl = "http://127.0.0.1:8000";
+  // static const String baseUrl = "http://10.0.2.2:8000";
+  static const String baseUrl = "http://127.0.0.1:8000";
 
 // AUthentication Api s
 
@@ -66,7 +67,7 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-         var data = jsonDecode(response.body);
+        var data = jsonDecode(response.body);
         var token = data['token'];
         headers['Authorization'] = 'Bearer $token';
         return data;
@@ -109,6 +110,7 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
+        print('onboarding Response :-$response.body');
         return jsonDecode(response.body);
       } else {
         throw Exception(
@@ -122,36 +124,88 @@ class AuthService {
 
   //..........................................................................
 
-  Future<Map<String, dynamic>> addProject() async {
-    final url =
-        Uri.parse('$baseUrl/addproject'); // Corrected double slash issue
+  Future<Map<String, dynamic>> addProject({
+    required String projectName,
+    required DateTime startingDate,
+    required DateTime deadline,
+    required String priority,
+    required String iconID,
+    required String reporterId,
+    required String projectDiscription,
+    required List<String> projectLinks,
+    required List<String> projectAssaignees,
+    required List<File> projectAttachments, // For file uploads
+  }) async {
+    final url = Uri.parse('$baseUrl/addproject');
 
     try {
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode({
-          'projectName': 'newproject',
-          'starts': '2024-12-21',
-          'deadline': '2025-02-23',
-          'priority': '2',
-          'iconId': '1',
-          'reporter': '5',
-          'projectlinks': ['https://new.com', 'https://new.com'],
-          'projectassignees': ['4', '6'],
-          'description': 'our new project',
-        }),
-      );
+      // Create a multipart request
+      var request = http.MultipartRequest('POST', url);
+      request.headers.addAll(headers);
+
+      // Add form fields
+      request.fields['projectName'] = projectName;
+      request.fields['starts'] = startingDate.toIso8601String();
+      request.fields['deadline'] = deadline.toIso8601String();
+      request.fields['priority'] = priority;
+      request.fields['iconId'] = iconID;
+      request.fields['reporter'] = reporterId;
+      request.fields['description'] = projectDiscription;
+
+      // Add arrays for project links and assignees
+      for (var link in projectLinks) {
+        request.fields['projectlinks[]'] = link;
+      }
+      for (var assignee in projectAssaignees) {
+        request.fields['projectassignees[]'] = assignee;
+      }
+
+      // Add file attachments
+      for (var file in projectAttachments) {
+        request.files.add(
+          await http.MultipartFile.fromPath('projectattachment[]', file.path),
+        );
+      }
+
+      // Send the request
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
         throw Exception(
-          'Failed to add project. Status code: ${response.statusCode}, reason: ${response.reasonPhrase}',
-        );
+            'Failed to add project. Status code: ${response.statusCode}, reason: ${response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('An error occurred while adding the project: $e');
     }
   }
+
+  Future<List<Map<String, String>>> fetchAssignees({
+    required String email,
+    required String companyId,
+  }) async {
+    final url = Uri.parse('$baseUrl/listusers');
+    final body = jsonEncode({"email": email, "companyId": companyId});
+    try {
+      final response = await http.post(url, headers: headers, body: body);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        return data.map((e) {
+          return {
+            "id": e['id'].toString(),
+            "name": e['name'].toString(),
+          };
+        }).toList();
+      } else {
+        throw Exception(
+          'Failed to fetch assignees: ${response.statusCode}, reason: ${response.reasonPhrase}',
+        );
+      }
+    } catch (e) {
+      throw Exception('Error fetching assignees: $e');
+    }
+  }
+  // Get requests..................................
 }

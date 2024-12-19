@@ -61,7 +61,7 @@ class SignUpStep3Content extends StatelessWidget {
               greyTitle(text: businessDir),
               8.heightBox,
               TextInputField(
-                dropcontroller: provider.businessDirController,
+                dropcontroller: provider.typeOfCompanyController,
                 hintText: pswdHint,
                 isDropDown: true,
                 dropDownOptions: const [
@@ -113,24 +113,10 @@ class SignUpStep3Content extends StatelessWidget {
           24.heightBox,
           Row(
             children: [
-              // Expanded(
-              //   child: PrimaryBlueButton(
-              //     title: "Previous",
-              //     onPressed: () {
-              //       // context.pop();
-              //       context.goNamed(SignupStep2.route);
-              //     },
-              //     backGroundColor: AppColors.primaryBackGround,
-              //     elevation: 0,
-              //     isprefix: true,
-              //     prefixIcon: arrowBackSvg,
-              //     prefixColor: AppColors.blue,
-              //     labelColor: AppColors.blue,
-              //   ),
-              // ),
+
               Expanded(
                 child: provider.companyNameController.text.isEmpty ||
-                        provider.businessDirController.text.isEmpty ||
+                        provider.typeOfCompanyController.text.isEmpty ||
                         provider.memberSelectionController.text.isEmpty
                     ? PrimaryBlueButton(
                         title: "Next Step",

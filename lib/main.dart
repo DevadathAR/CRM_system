@@ -1,6 +1,6 @@
 import 'package:crm_system/src/features/authentication/provider/auth_provider.dart';
 import 'package:crm_system/src/features/authentication/provider/signIn_provider.dart';
-import 'package:crm_system/src/features/projects/provider/taskProvider.dart.dart';
+import 'package:crm_system/src/features/projects/provider/project_Provider.dart.dart';
 import 'package:crm_system/src/features/vaccations/presentation/widget/multy_date_calendar.dart';
 import 'package:crm_system/src/features/dash_board/provider/add_event_provider.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';

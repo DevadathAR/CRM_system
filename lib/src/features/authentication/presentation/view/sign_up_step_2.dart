@@ -16,122 +16,132 @@ import 'package:velocity_x/velocity_x.dart';
 class SignupStep2 extends StatelessWidget {
   static const route = 'sign-up-step-2';
 
-  const SignupStep2({super.key});
+  SignupStep2({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (_, provider, __) {
         return Scaffold(
-          body: VStack(
-            [
-              const AuthTopSide(),
-              VStack(
-                [
-                  "STEP 2/2"
-                      .text
-                      .textStyle(AppTextStyle.boldText(
-                          size: 14, color: AppColors.blue))
-                      .makeCentered(),
-                  16.heightBox,
-                  yourself.text
-                      .textStyle(AppTextStyle.boldText(
-                          size: 18, color: AppColors.lightblack))
-                      .makeCentered(),
-                  16.heightBox,
-                  greyTitle(text: serviceReason),
-                  8.heightBox,
-                  TextInputField(
-                    dropcontroller: provider.userTypeController,
-                    hintText: mailHint,
-                    isDropDown: true,
-                    dropDownOptions: const ['Work', 'Business'],
-                    onChanged: (value) {},
-                  ),
-                  24.heightBox,
-                  greyTitle(text: describes),
-                  8.heightBox,
-                  TextInputField(
-                    dropcontroller: provider.roleController,
-                    hintText: pswdHint,
-                    isDropDown: true,
-                    dropDownOptions: const [
-                      'Business Owner',
-                      'Employee',
-                    ],
-                  ),
-                  if (provider.itsEmployee) ...[
-                    24.heightBox,
-                    greyTitle(text: "Name"),
-                    8.heightBox,
-                    TextInputField(
-                      controller: provider.nameController,
-                      hintText: 'Name',
-                    ),
+          body: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const AuthTopSide(),
+                Column(
+                  children: [
+                    "STEP 2/2"
+                        .text
+                        .textStyle(AppTextStyle.boldText(
+                            size: 14, color: AppColors.blue))
+                        .makeCentered(),
                     16.heightBox,
-                    greyTitle(text: "Choose your company"),
+                    yourself.text
+                        .textStyle(AppTextStyle.boldText(
+                            size: 18, color: AppColors.lightblack))
+                        .makeCentered(),
+                    16.heightBox,
+                    greyTitle(text: serviceReason),
                     8.heightBox,
                     TextInputField(
-                      controller: provider.companyIdController,
+                      dropcontroller: provider.userTypeController,
                       hintText: mailHint,
                       isDropDown: true,
+                      dropDownOptions: const ['Work', 'Business'],
+                      onChanged: (value) {},
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'this feild is required';
+                        }
+                        return null;
+                      },
+                    ),
+                    24.heightBox,
+                    greyTitle(text: describes),
+                    8.heightBox,
+                    TextInputField(
+                      dropcontroller: provider.roleController,
+                      hintText: pswdHint,
+                      isDropDown: true,
                       dropDownOptions: const [
-                        'Company A',
-                        'Company B',
-                        'Company C',
-                        'Company D',
+                        'Business Owner',
+                        'Employee',
                       ],
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'this feild is required';
+                        }
+                        return null;
+                      },
+                    ),
+                    if (provider.itsEmployee) ...[
+                      24.heightBox,
+                      greyTitle(text: "Name"),
+                      8.heightBox,
+                      TextInputField(
+                        controller: provider.nameController,
+                        hintText: 'Name',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'this feild is required';
+                          }
+                          return null;
+                        },
+                      ),
+                      16.heightBox,
+                      greyTitle(text: "Choose your company"),
+                      8.heightBox,
+                      TextInputField(
+                        controller: provider.companyIdController,
+                        hintText: mailHint,
+                        isDropDown: true,
+                        dropDownOptions: const [
+                          'Company A',
+                          'Company B',
+                          'Company C',
+                          'Company D',
+                        ],
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'this feild is required';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ],
+                )
+                    .box
+                    .color(AppColors.white)
+                    .withRounded(value: 24)
+                    .p20
+                    .margin(const EdgeInsets.symmetric(horizontal: 24))
+                    .make(),
+                24.heightBox,
+                Row(
+                  children: [
+                    Expanded(
+                      child: PrimaryBlueButton(
+                        title: "SignUp",
+                        onPressed: () async {
+                          provider.handleSignUp(context);
+                        },
+                        isSuffix: true,
+                        suffixIcon: arrowForwardSvg,
+                      ),
                     ),
                   ],
-                ],
-              )
-                  .box
-                  .color(AppColors.white)
-                  .withRounded(value: 24)
-                  .p20
-                  .margin(const EdgeInsets.symmetric(horizontal: 24))
-                  .make(),
-              24.heightBox,
-              Row(
-                children: [
-                  // Expanded(
-                  //   child: PrimaryBlueButton(
-                  //     title: "Previous",
-                  //     onPressed: () {
-                  
-                  //       context.goNamed(
-                  //           SignupStep1.route); // Or use context.pop() if appropriate.
-                  //     },
-                  //     backGroundColor: AppColors.primaryBackGround,
-                  //     elevation: 0,
-                  //     isprefix: true,
-                  //     prefixIcon: arrowBackSvg,
-                  //     prefixColor: AppColors.blue,
-                  //     labelColor: AppColors.blue,
-                  //   ),
-                  // ),
-                  Expanded(
-                    child:
-                   
-                        PrimaryBlueButton(
-                      title: "SignUp",
-                      onPressed: () async {
-                        provider.handleSignUp(context);
-                      },
-                      isSuffix: true,
-                      suffixIcon: arrowForwardSvg,
-                    ),
-                  ),
-                ],
-              ).p20(),
-              16.heightBox,
-            ],
-          )
-              .scrollVertical()
-              .box
-              .height(double.infinity)
-              .color(AppColors.bgWhite)
-              .make(),
+                ).p20(),
+                16.heightBox,
+              ],
+            )
+                .scrollVertical()
+                .box
+                .height(double.infinity)
+                .color(AppColors.bgWhite)
+                .make(),
+          ),
         );
       },
     );
