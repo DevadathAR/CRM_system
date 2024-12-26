@@ -86,29 +86,29 @@ class SignupStep2 extends StatelessWidget {
                           if (value == null || value.isEmpty) {
                             return 'this feild is required';
                           }
-                          return null;
+                          return null; 
                         },
                       ),
-                      16.heightBox,
-                      greyTitle(text: "Choose your company"),
-                      8.heightBox,
-                      TextInputField(
-                        controller: provider.companyIdController,
-                        hintText: mailHint,
-                        isDropDown: true,
-                        dropDownOptions: const [
-                          'Company A',
-                          'Company B',
-                          'Company C',
-                          'Company D',
-                        ],
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'this feild is required';
-                          }
-                          return null;
-                        },
-                      ),
+                      // 16.heightBox,
+                      // greyTitle(text: "Choose your company"),
+                      // 8.heightBox,
+                      // TextInputField(
+                      //   controller: provider.companyIdController,
+                      //   hintText: mailHint,
+                      //   isDropDown: true,
+                      //   dropDownOptions: const [
+                      //     'Company A',
+                      //     'Company B',
+                      //     'Company C',
+                      //     'Company D',
+                      //   ],
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'this feild is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                     ],
                   ],
                 )

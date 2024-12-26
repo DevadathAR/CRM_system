@@ -91,7 +91,7 @@ class ProjectCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const Spacer(),
+              // const Spacer(),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

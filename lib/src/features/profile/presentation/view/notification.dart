@@ -1,3 +1,7 @@
+import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
+import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
+import 'package:crm_system/src/utilities/common_widget/primaryBlueButton.dart';
+import 'package:crm_system/src/utilities/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -73,6 +77,71 @@ class NotificationPage extends StatelessWidget {
               ],
               alignment: MainAxisAlignment.spaceBetween,
             ),
+
+            Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(
+              image: AssetImage(dp1png),
+              height: 50,
+            ),
+            16.widthBox, // Add spacing between image and text
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'You are invited to ',
+                          style: AppTextStyle.regularText(
+                              size: 16, color: AppColors.black),
+                        ),
+                        TextSpan(
+                          text: 'Company A',
+                          style: AppTextStyle.boldText(
+                              size: 16, color: AppColors.black),
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+                  16.heightBox,
+
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: 
+                  [
+                    SizedBox(height: 50,width: 100,
+                      child: PrimaryBlueButton(title: 'Accept', onPressed: (){
+                        print('accept the invite');
+                                                context.goNamed(DashBoard.route);
+
+                      }, backGroundColor: AppColors.green,)),
+                    SizedBox(height: 50,width: 100,
+                      child: PrimaryBlueButton(title: 'Declained', onPressed: (){
+                        print('declined the invite');
+
+                      }, backGroundColor: AppColors.red,)),
+                    ],)
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 8.0),
+                  //   child: Text(
+                  //     time,
+                  //     style: AppTextStyle.semiboldText(
+                  //         size: 14, color: AppColors.textGrey1),
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+          ],
+        ),
+
+
             24.heightBox,
             ...List.generate(
               images.length, // Example for generating multiple cards
