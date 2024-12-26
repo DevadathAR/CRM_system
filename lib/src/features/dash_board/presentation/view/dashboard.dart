@@ -1,27 +1,23 @@
-import 'package:crm_system/main.dart';
-import 'package:crm_system/src/features/dash_board/model/project_model.dart';
-import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
-import 'package:crm_system/src/features/dash_board/presentation/widget/f_a_b.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEventsCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/projectDetailCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/sampleDatalists.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/workLoadItem.dart';
+import 'package:crm_system/src/features/dash_board/presentation/view/nearestEvents.dart';
 import 'package:crm_system/src/features/profile/model/profiile_project_model.dart';
-import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
-import 'package:crm_system/src/utilities/colors.dart';
-import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
+import 'package:crm_system/src/features/dash_board/presentation/widget/f_a_b.dart';
 import 'package:crm_system/src/utilities/common_widget/custom_bottomsheet.dart';
-import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
+import 'package:crm_system/src/features/dash_board/model/project_model.dart';
 import 'package:crm_system/src/utilities/common_widget/custumScaffold.dart';
 import 'package:crm_system/src/utilities/common_widget/cutomIcon_BTN.dart';
-import 'package:crm_system/src/utilities/common_widget/drawer.dart';
+import 'package:crm_system/src/utilities/common_widget/acivityCard.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
-import 'package:flutter/material.dart';
+import 'package:crm_system/src/utilities/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DashBoard extends StatelessWidget {
   static const route = 'dashboard';
@@ -176,11 +172,7 @@ class DashBoard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-            child: "$title"
-                .text
-                .textStyle(AppTextStyle.boldText(size: 22))
-                .make()),
+        "$title".text.textStyle(AppTextStyle.boldText(size: 22)).make(),
         CustumIconButton(
           onTap: onTap,
           buttonTItle: "View all",

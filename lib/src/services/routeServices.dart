@@ -41,7 +41,7 @@ final router = GoRouter(
           path: 'sign-up-step-2',
           name: SignupStep2.route,
           pageBuilder: (context, state) =>
-              getCustomTransition(state, const SignupStep2()),
+              getCustomTransition(state,  SignupStep2()),
         ),
         GoRoute(
           path: 'sign-up-step-3',

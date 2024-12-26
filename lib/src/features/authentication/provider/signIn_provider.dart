@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/const.dart';
@@ -6,8 +8,7 @@ import 'package:flutter/material.dart';
 class SigninProvider extends ChangeNotifier {
   // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
-  final TextEditingController signInpasswordController =
-      TextEditingController();
+  final TextEditingController signInpasswordController = TextEditingController();
   bool isChecked = false;
 
   Future<void> handleSignIn(BuildContext context) async {
@@ -39,6 +40,7 @@ class SigninProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
+      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: $e')),
       );
