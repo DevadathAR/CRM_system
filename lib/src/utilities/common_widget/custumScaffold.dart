@@ -1,18 +1,21 @@
+import 'package:crm_system/src/features/authentication/provider/signIn_provider.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:crm_system/src/utilities/common_widget/custumAppBar.dart';
 import 'package:crm_system/src/utilities/common_widget/drawer.dart';
 import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class CustumScaffold extends StatelessWidget {
   // final String? route;
-  final VoidCallback ? ontap;
+  final VoidCallback? ontap;
 
   final Widget body;
   CustumScaffold({
     super.key,
-    required this.body,  this.ontap,
+    required this.body,
+    this.ontap,
     // this.route,
   });
 
@@ -20,6 +23,7 @@ class CustumScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: AppColors.primaryBackGround,
