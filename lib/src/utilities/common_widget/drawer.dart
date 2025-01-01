@@ -1,4 +1,5 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
+import 'package:crm_system/src/features/authentication/provider/signIn_provider.dart';
 import 'package:crm_system/src/features/calendar/presentation/view/calander_page.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
 import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.dart';
@@ -343,6 +344,8 @@ class AppDrawerWidget extends StatelessWidget {
 }
 
 void showLogOutDialog(BuildContext context) {
+  final signinProvider = Provider.of<SigninProvider>(context, listen: false);
+
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -350,12 +353,16 @@ void showLogOutDialog(BuildContext context) {
       content: const Text('Are you sure you want to log out?'),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(), // Close the dialog
+          onPressed: () {
+            Navigator.of(context).pop();
+          }, // Close the dialog
           child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {
-            context.goNamed(SignIn.route);
+            signinProvider.logout(context);
+
+            // context.goNamed(SignIn.route);
           },
           child: const Text('Log Out'),
         ),
@@ -364,8 +371,3 @@ void showLogOutDialog(BuildContext context) {
   );
 }
 
-// // Use it in the logout button
-// IconButton(
-//   icon: Icon(Icons.logout),
-//   onPressed: () => showLogOutDialog(context),
-// ),

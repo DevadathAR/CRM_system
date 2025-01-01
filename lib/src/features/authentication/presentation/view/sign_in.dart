@@ -105,9 +105,13 @@ class SignIn extends StatelessWidget {
                     24.heightBox,
 
                     // Sign In Button
+                    // if (provider.isLoading)
+                    //   const Center(child: CircularProgressIndicator()),
                     PrimaryBlueButton(
-                      title: "Sign In",
-                      onPressed: () => provider.handleSignIn(context),
+                      title: provider.isLoading ? "Loading......" : "Sign In",
+                      onPressed: () => provider.isLoading
+                          ? {}
+                          : provider.handleSignIn(context),
                     ),
                     16.heightBox,
 

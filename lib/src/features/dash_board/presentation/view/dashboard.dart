@@ -1,3 +1,4 @@
+import 'package:crm_system/src/features/authentication/provider/signIn_provider.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/nearestEventsCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/projectDetailCard.dart';
 import 'package:crm_system/src/features/dash_board/presentation/widget/sampleDatalists.dart';
@@ -14,6 +15,8 @@ import 'package:crm_system/src/utilities/image_path.dart';
 import 'package:crm_system/src/utilities/text_style.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,12 @@ class DashBoard extends StatelessWidget {
   static const route = 'dashboard';
 
   const DashBoard({super.key});
+
+  // Method to get userType from SharedPreferences
+  Future<int?> getUserType() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('userType');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,129 +48,152 @@ class DashBoard extends StatelessWidget {
           content: const FAB(),
         );
       },
-      body: Expanded(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          children: [
-            "Welcome back, Evan!"
-                .text
-                .size(16)
-                .color(AppColors.textGrey1)
-                .make(),
-            "Dashboard".text.bold.size(36).make(),
-            10.heightBox,
+      body: FutureBuilder<int?>(
+        future: getUserType(), // Asynchronous call to fetch userType
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            // Date Range Section
-            Row(
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error loading user type'));
+          }
+
+          final userType = snapshot.data;
+          print("User Type----------->$userType");
+
+          return Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               children: [
-                SvgPicture.asset(calenderSvg),
-                10.widthBox,
-                Flexible(
-                  child: "$formattedDate - $formattedDate"
-                      .text
-                      .size(16)
-                      .overflow(TextOverflow.ellipsis)
-                      .make(),
-                ),
-              ],
-            ).box.rounded.p8.color(AppColors.backgroindGrey1).make(),
-            10.heightBox,
+                "Welcome back, Evan!"
+                    .text
+                    .size(16)
+                    .color(AppColors.textGrey1)
+                    .make(),
+                "Dashboard".text.bold.size(36).make(),
+                10.heightBox,
 
-            // Workload Section with GridView
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                color: Colors.white,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Workload Title Section
-                  _buildTitle(title: "Workload", onTap: () {}),
-
-                  10.heightBox,
-                  // GridView inside ListView
-                  GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisExtent: 180, // Adjusted to avoid clipping
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 1.0,
+                // Date Range Section
+                Row(
+                  children: [
+                    SvgPicture.asset(calenderSvg),
+                    10.widthBox,
+                    Flexible(
+                      child: "$formattedDate - $formattedDate"
+                          .text
+                          .size(16)
+                          .overflow(TextOverflow.ellipsis)
+                          .make(),
                     ),
-                    itemCount: 4,
-                    // itemCount: mockWorkloadList.length, // Dynamic item count
-                    itemBuilder: (context, index) {
-                      // Pass data from the list to workloadItem
-                      final item = mockWorkloadList[index];
-                      return WorkloadItem(
-                        bgColor: AppColors.backgroindGrey1,
-                        progressValue: item.progressValue,
-                        dpImage: item.dpImage,
-                        name: item.name,
-                        role: item.role,
-                        level: item.level,
-                      );
-                    },
+                  ],
+                ).box.rounded.p8.color(AppColors.backgroindGrey1).make(),
+                10.heightBox,
+
+                // Conditional content based on userType
+                if (userType == 2) ...[
+                  // Workload Section with GridView
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Workload Title Section
+                        _buildTitle(title: "Workload", onTap: () {}),
+
+                        10.heightBox,
+                        // GridView inside ListView
+                        GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisExtent: 180, // Adjusted to avoid clipping
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 1.0,
+                          ),
+                          itemCount: 4,
+                          // itemCount: mockWorkloadList.length, // Dynamic item count
+                          itemBuilder: (context, index) {
+                            // Pass data from the list to workloadItem
+                            final item = mockWorkloadList[index];
+                            return WorkloadItem(
+                              bgColor: AppColors.backgroindGrey1,
+                              progressValue: item.progressValue,
+                              dpImage: item.dpImage,
+                              name: item.name,
+                              role: item.role,
+                              level: item.level,
+                            );
+                          },
+                          shrinkWrap: true,
+                          physics:
+                              const NeverScrollableScrollPhysics(), // Grid inside ListView
+                        ),
+                      ],
+                    ),
+                  ),
+                  10.heightBox,
+                  // Project Section
+                  _buildTitle(title: "Project", onTap: () {}),
+                  ListView.builder(
+                    padding: const EdgeInsets.all(0),
                     shrinkWrap: true,
-                    physics:
-                        const NeverScrollableScrollPhysics(), // Grid inside ListView
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      final project = projects[index];
+                      return ProjectCard(
+                        projectId: project.projectId,
+                        projectName: project.projectName,
+                        creationDate: project.creationDate,
+                        priority: project.priority,
+                        allTasks: project.allTasks,
+                        activeTasks: project.activeTasks,
+                        projectIcon: project.projectIcon,
+                      ).pOnly(bottom: 10); // Adds spacing between cards
+                    },
                   ),
                 ],
-              ),
+
+                if (userType == 1) ...[
+                  // User section below
+                  _buildTitle(
+                    title: "Nearest Events",
+                    onTap: () {
+                      context.goNamed(NearesteventsPage.route);
+                    },
+                  ),
+                  SizedBox(
+                    height: 140, // Adjust to match the card's height
+                    child: PageView.builder(
+                      controller:
+                          PageController(), // Slight padding for adjacent cards
+                      itemCount: nearestEvents.length, // List of nearest events
+                      itemBuilder: (context, index) {
+                        return NearestEventsCard(
+                          isnearestEvents: false,
+                          event: nearestEvents[index],
+                        );
+                      },
+                    ),
+                  ),
+                  10.heightBox,
+                  ActivityCard(
+                    heading: "Activity Stream",
+                    headingSize: 22,
+                    onViewMoreTap: () {},
+                  ),
+                  20.heightBox,
+                ],
+              ],
             ),
-            10.heightBox,
-            // Project Section
-            _buildTitle(title: "Project", onTap: () {}),
-            ListView.builder(
-              padding: const EdgeInsets.all(0),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                final project = projects[index];
-                return ProjectCard(
-                  projectId: project.projectId,
-                  projectName: project.projectName,
-                  creationDate: project.creationDate,
-                  priority: project.priority,
-                  allTasks: project.allTasks,
-                  activeTasks: project.activeTasks,
-                  projectIcon: project.projectIcon,
-                ).pOnly(bottom: 10); // Adds spacing between cards
-              },
-            ),
-            _buildTitle(
-              title: "Nearest Events",
-              onTap: () {
-                context.goNamed(NearesteventsPage.route);
-              },
-            ),
-            SizedBox(
-              height: 140, // Adjust to match the card's height
-              child: PageView.builder(
-                controller:
-                    PageController(), // Slight padding for adjacent cards
-                itemCount: nearestEvents.length, // List of nearest events
-                itemBuilder: (context, index) {
-                  return NearestEventsCard(
-                    isnearestEvents: false,
-                    event: nearestEvents[index],
-                  );
-                },
-              ),
-            ),
-            10.heightBox,
-            ActivityCard(
-              heading: "Activity Stream",
-              headingSize: 22,
-              onViewMoreTap: () {},
-            ),
-            20.heightBox,
-          ],
-        ),
+          );
+        },
       ),
     );
   }

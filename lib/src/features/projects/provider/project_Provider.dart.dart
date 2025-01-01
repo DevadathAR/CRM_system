@@ -4,7 +4,6 @@ import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/utilities/colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProjectsProvider extends ChangeNotifier {
   int progress;

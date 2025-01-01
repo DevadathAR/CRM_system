@@ -21,9 +21,23 @@ import 'package:crm_system/src/features/projects/presentation/view/task_details.
 import 'package:crm_system/src/features/vaccations/presentation/view/vacations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final router = GoRouter(
-  initialLocation: '/sign-in', // Start with the Sign In page
+  initialLocation: '/sign-in', // Start with the Sign In page by default
+  //   redirect: (GoRouterState state) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  //   // Check if user is logged in
+  //   if (isLoggedIn) {
+  //     // Redirect to the dashboard
+  //     return '/dashboard'; // Redirect to Dashboard if logged in
+  //   } else {
+  //     // Otherwise, redirect to the sign-in page
+  //     return '/sign-in'; // Otherwise, show the sign-in page
+  //   }
+  // },
   routes: [
     GoRoute(
       path: '/sign-in',
@@ -35,13 +49,13 @@ final router = GoRouter(
           path: 'sign-up-step-1',
           name: SignupStep1.route,
           pageBuilder: (context, state) =>
-              getCustomTransition(state,  SignupStep1()),
+              getCustomTransition(state, SignupStep1()),
         ),
         GoRoute(
           path: 'sign-up-step-2',
           name: SignupStep2.route,
           pageBuilder: (context, state) =>
-              getCustomTransition(state,  SignupStep2()),
+              getCustomTransition(state, SignupStep2()),
         ),
         GoRoute(
           path: 'sign-up-step-3',
@@ -127,12 +141,6 @@ final router = GoRouter(
           pageBuilder: (context, state) =>
               getCustomTransition(state, const Settings()),
         ),
-        // GoRoute(
-        //   path: 'dummy',
-        //   name: Dummy.route,
-        //   pageBuilder: (context, state) =>
-        //       getCustomTransition(state,  const Dummy()),
-        // ),
       ],
     ),
   ],
