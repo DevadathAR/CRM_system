@@ -76,12 +76,12 @@ class ProjectsProvider extends ChangeNotifier {
         projectAttachments: selectedFiles,
       );
 
-      print('Response: $response');
+      //print('Response: $response');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Project Added Successfully!')),
       );
     } catch (e) {
-      print('Error: $e');
+      //print('Error: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to add project: $e')),
       );
@@ -102,7 +102,7 @@ class ProjectsProvider extends ChangeNotifier {
       );
       notifyListeners(); // Notify the UI to update
     } catch (e) {
-      print('Error in Provider fetchAndSetAssignees: $e');
+      //print('Error in Provider fetchAndSetAssignees: $e');
     }
   }
 

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 class SigninProvider extends ChangeNotifier {
   // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
-  final TextEditingController signInpasswordController = TextEditingController();
+  final TextEditingController signInpasswordController =
+      TextEditingController();
   bool isChecked = false;
 
   Future<void> handleSignIn(BuildContext context) async {
@@ -40,7 +41,7 @@ class SigninProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
-      print(e);
+      //print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: $e')),
       );

@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
-  static const String baseUrl = "http://10.0.2.2:8000";
+  // static const String baseUrl = "http://10.0.2.2:8000";
   // static const String baseUrl = "http://192.168.29.49";
   // static const String baseUrl = "http://127.0.0.1:8000";
+
+  static const String baseUrl = "http://192.168.29.106:8000"; // ip
 
 // AUthentication Api s
 
@@ -19,7 +22,6 @@ class ApiServices {
       final response = await http.post(
         url,
         headers: headers,
-
         body: jsonEncode({
           'email': email,
           'password': password,
@@ -71,14 +73,14 @@ class ApiServices {
         return data;
       } else {
         // Log detailed error information
-        print(
-            'Error during sign up. Status code: ${response.statusCode}, Reason: ${response.reasonPhrase}, Body: ${response.body}');
+        //print(
+        // 'Error during sign up. Status code: ${response.statusCode}, Reason: ${response.reasonPhrase}, Body: ${response.body}');
         throw Exception(
             'Failed to sign up. Status code: ${response.statusCode}, reason: ${response.reasonPhrase}');
       }
     } catch (error) {
       // Print and rethrow the error for further handling
-      print('An error occurred during signup: $error');
+      //print('An error occurred during signup: $error');
       rethrow;
     }
   }
@@ -108,7 +110,7 @@ class ApiServices {
       );
 
       if (response.statusCode == 200) {
-        print('onboarding Response :-$response.body');
+        //print('onboarding Response :-$response.body');
         return jsonDecode(response.body);
       } else {
         throw Exception(
@@ -206,4 +208,79 @@ class ApiServices {
     }
   }
   // Get requests..................................
+
+  // edit profile
+
+  Future<Map<String, dynamic>> updateProfile({
+    required String token,
+    required String name,
+    required String gender,
+    required String position,
+    required String experience,
+    required String company,
+    required String location,
+    required String birthday,
+    required String email,
+    required String mobileNumber,
+    required String skype,
+  }) async {
+    final url =
+        Uri.parse('$baseUrl/editemployee'); // Replace with the actual endpoint
+
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode({
+          'name': name,
+          'gender': gender,
+          'position': position,
+          'experience': experience,
+          'company': company,
+          'location': location,
+          'birthday': birthday,
+          'email': email,
+          'mobileNumber': mobileNumber,
+          'skype': skype,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        //print(response);
+        // log(jsonDecode(response.body));
+        return jsonDecode(response.body);
+      } else {
+        throw Exception(
+          'Failed to update profile. Status code: ${response.statusCode}, reason: ${response.reasonPhrase}',
+        );
+      }
+    } catch (e) {
+      throw Exception('An error occurred while updating the profile: $e');
+    }
+  }
+
+  // fetchProfileDetails
+
+  Future<Map<String, dynamic>> fetchProfileDetails() async {
+    //print("______________________________________________$headers");
+
+    final url = Uri.parse('$baseUrl/viewemployeeprofile');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode({'userId': ''}), // Add userId if needed
+      );
+
+      if (response.statusCode == 200) {
+        print("_________________________________________${response.body}");
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to load profile details');
+      }
+    } catch (e) {
+      throw Exception('An error occurred while feting profile details: $e');
+    }
+  }
 }

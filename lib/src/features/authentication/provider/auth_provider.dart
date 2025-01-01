@@ -113,30 +113,30 @@ class AuthProvider extends ChangeNotifier {
         password: password,
       );
 
-      print('Response from sign-up: $response');
-      print('UserType: $userType');
+      //print('Response from sign-up: $response');
+      //print('UserType: $userType');
 
       if (response['value'] == true) {
         final token = response['token'];
-        print('Sign-up successful. Token: $token');
+        //print('Sign-up successful. Token: $token');
 
         // Save the token in SharedPreferences
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', token);
 
         if (userType == 1) {
-          print('Navigating to SuccessPage.');
+          //print('Navigating to SuccessPage.');
           context.goNamed(SuccessPage.route);
         } else if (userType == 2) {
-          print('Navigating to SignUpStep3.');
+          //print('Navigating to SignUpStep3.');
           context.goNamed(SignUpStep3.route);
         }
       } else {
         final errorMessage = response['message'] ?? 'Sign-up failed.';
-        print('Sign-up failed. Message: $errorMessage');
+        //print('Sign-up failed. Message: $errorMessage');
       }
     } catch (error) {
-      print('Error occurred during sign-up: $error');
+      //print('Error occurred during sign-up: $error');
     }
   }
 
@@ -172,7 +172,7 @@ class AuthProvider extends ChangeNotifier {
         totalStrength: totalStrength,
         invitedMembers: invitedMembers,
       );
-      print('onboarding    :-$response');
+      //print('onboarding    :-$response');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Onboarding successful!')),
       );
@@ -205,4 +205,3 @@ class AuthProvider extends ChangeNotifier {
     super.dispose();
   }
 }
-
