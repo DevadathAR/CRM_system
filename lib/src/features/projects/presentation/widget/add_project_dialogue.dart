@@ -202,7 +202,7 @@ class AvatarSelection extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  print("Selected: ${svgImages[index]}");
+                  //print("Selected: ${svgImages[index]}");
                 },
                 child: SizedBox(
                   height: 25,

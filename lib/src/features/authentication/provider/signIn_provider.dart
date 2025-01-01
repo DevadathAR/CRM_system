@@ -86,7 +86,7 @@ class SigninProvider extends ChangeNotifier {
         );
       }
     } catch (e) {
-      print(e);
+      //print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: $e')),
       );

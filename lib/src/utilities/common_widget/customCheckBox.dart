@@ -17,7 +17,7 @@ class _CustomcheckboxState extends State<Customcheckbox> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque, // Ensures tap events register
       onTap: () {
-        print("Checkbox tapped!");
+        //print("Checkbox tapped!");
         widget.onChanged(!widget.value);
       },
       child: Container(
