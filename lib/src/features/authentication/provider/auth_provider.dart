@@ -39,9 +39,9 @@ class AuthProvider extends ChangeNotifier {
   int get userType {
     switch (userTypeController.text.trim()) {
       case 'Work':
-        return 1;
-      case 'Business':
         return 2;
+      case 'Business':
+        return 1;
       default:
         return 0;
     }
@@ -126,10 +126,10 @@ class AuthProvider extends ChangeNotifier {
 
         if (userType == 1) {
           //print('Navigating to SuccessPage.');
-          context.goNamed(SuccessPage.route);
+          context.goNamed(SignUpStep3.route);
         } else if (userType == 2) {
           //print('Navigating to SignUpStep3.');
-          context.goNamed(SignUpStep3.route);
+          context.goNamed(SuccessPage.route);
         }
       } else {
         final errorMessage = response['message'] ?? 'Sign-up failed.';
@@ -189,19 +189,19 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  @override
-  void dispose() {
-    // step 1
-    codeController.dispose();
-    mobileController.dispose();
-    otpController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    // step 2
-    userTypeController.dispose();
-    roleController.dispose();
-    nameController.dispose();
-    companyIdController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // step 1
+  //   codeController.dispose();
+  //   mobileController.dispose();
+  //   otpController.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   // step 2
+  //   userTypeController.dispose();
+  //   roleController.dispose();
+  //   nameController.dispose();
+  //   companyIdController.dispose();
+  //   super.dispose();
+  // }
 }

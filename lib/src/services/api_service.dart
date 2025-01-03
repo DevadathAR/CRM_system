@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'package:crm_system/src/features/employees/model/work.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
-  static const String baseUrl = "http://192.168.29.49:8000";
-    // static const String baseUrl = "http://127.0.0.1:8000";
-  // static const String baseUrl = "http://10.0.2.2:8000";
+  // static const String baseUrl = "http://192.168.29.49:8000";
+  // static const String baseUrl = "http://127.0.0.1:8000";
+  static const String baseUrl = "http://10.0.2.2:8000";
 
-  static const String baseUrl = "http://192.168.29.106:8000"; // ip
+  // static const String baseUrl = "http://192.168.29.106:8000"; // ip
 
 // AUthentication Api s
 
@@ -23,6 +24,8 @@ class ApiServices {
         url,
         headers: headers,
         body: jsonEncode({
+          // 'email': "c5@gmail.com",
+          // 'password': '121212',
           'email': email,
           'password': password,
         }),
@@ -97,10 +100,7 @@ class ApiServices {
     try {
       final response = await http.post(
         url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
+        headers: headers,
         body: jsonEncode({
           "typeOfCompany": typeOfCompany,
           "companyName": companyName,
@@ -283,4 +283,41 @@ class ApiServices {
       throw Exception('An error occurred while feting profile details: $e');
     }
   }
+
+static Future<EmployeeResponse> fetchEmployees({
+    required int limit,
+    required int page,
+  }) async {
+    final url = Uri.parse('$baseUrl/listemployeesbycompany');
+    final body = jsonEncode({
+      "limit": limit.toString(),
+      "page": page.toString(),
+    });
+
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        final int count = data['message']['company_employees_count'];
+        if (data['value'] == true) {
+          final List<EmployeeData> employees = (data['message']['company_employees'] as List)
+              .map((e) => EmployeeData.fromJson(e))
+              .toList();
+          return EmployeeResponse(employees: employees, totalCount: count);
+        } else {
+          throw Exception('Failed to fetch employees: ${data['message']}');
+        }
+      } else {
+        throw Exception('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching employees: $e');
+    }
+  }
+
 }
