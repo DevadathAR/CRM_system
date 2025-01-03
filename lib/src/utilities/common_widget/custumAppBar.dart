@@ -1,4 +1,5 @@
 import 'package:crm_system/main.dart';
+import 'package:crm_system/src/dummy.dart';
 import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
 import 'package:crm_system/src/features/employees/presentation/view/employess_profile.dart';
 import 'package:crm_system/src/features/profile/presentation/view/my_profile.dart';
@@ -40,7 +41,11 @@ class CustumAppBar extends StatelessWidget {
             IconButton(
               icon: SvgPicture.asset(searchIcon,
                   width: 24, height: 24), // Replace with your SVG path
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return UsersListPage();
+                },));
+              },
             ),
             // SVG icon for notifications
             IconButton(

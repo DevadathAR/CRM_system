@@ -10,12 +10,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SigninProvider extends ChangeNotifier {
   bool _isLoading = false;
 
+
   bool get isLoading => _isLoading;
   // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
   final TextEditingController signInpasswordController =
       TextEditingController();
   bool isChecked = false;
+
+  final ApiServices _apiService = ApiServices();
+  String? token;
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -65,6 +69,9 @@ class SigninProvider extends ChangeNotifier {
       final response = await ApiServices().signIn(email, password);
       if (response.containsKey('userType')) {
         final userType = response['userType'];
+        token = response['token'];
+
+        await _apiService.saveToken(token!);
 
         await saveUserType(userType);
         await setLoginStatus(true);
@@ -94,6 +101,12 @@ class SigninProvider extends ChangeNotifier {
       setLoading(false);
     }
   }
+
+  // Check if the user is logged in
+  Future<bool> checkLoginStatus() async {
+    return await _apiService.isLoggedIn();
+}
+
 
   void toggleCheckBox(bool? value) {
     isChecked = value ?? false;

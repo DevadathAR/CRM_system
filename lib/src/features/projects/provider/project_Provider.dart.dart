@@ -87,26 +87,27 @@ class ProjectsProvider extends ChangeNotifier {
     }
   }
 
-  List<Map<String, dynamic>> assignees = [];
-  List<String> selectedAssigneeIds = [];
+  // List<Map<String, dynamic>> assignees = [];
+  // List<String> selectedAssigneeIds = [];
 
-  Future<void> fetchAssignees({
-    required String email,
-    required String companyId,
-  }) async {
-    try {
-      assignees = await ApiServices().fetchAssignees(
-        email: email,
-        companyId: companyId,
-      );
-      notifyListeners(); // Notify the UI to update
-    } catch (e) {
-      //print('Error in Provider fetchAndSetAssignees: $e');
-    }
-  }
+  // Future<void> fetchAssignees({
+  //   required String email,
+  //   required String companyId,
+  // }) async {
+  //   // try {
+  //   //   assignees = await ApiServices().fetchAssignees(
+  //   //     email: email,
+  //   //     companyId: companyId,
+  //   //   );
+  //   //   notifyListeners(); // Notify the UI to update
+  //   // } 
+  //   // catch (e) {
+  //   //   //print('Error in Provider fetchAndSetAssignees: $e');
+  //   // }
+  // }
 
-  void setSelectedAssignees(List<String> ids) {
-    selectedAssigneeIds = ids;
-    notifyListeners();
-  }
+  // void setSelectedAssignees(List<String> ids) {
+  //   selectedAssigneeIds = ids;
+  //   notifyListeners();
+  // }
 }

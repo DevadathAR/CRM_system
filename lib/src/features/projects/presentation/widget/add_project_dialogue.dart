@@ -76,6 +76,8 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
               isDropDown: true,
               dropDownOptions: ["dev", "arjun", "Nikshay"],
             ),
+
+            /*
             provider.assignees.isEmpty
                 ? const CircularProgressIndicator()
                 : MultiSelectDialogField(
@@ -108,6 +110,8 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
                           results.map((e) => e.toString()).toList());
                     },
                   ),
+
+                  */
             8.heightBox,
             greyTitle(text: "Description"),
             8.heightBox,

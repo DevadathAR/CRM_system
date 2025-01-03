@@ -60,6 +60,7 @@ import 'package:crm_system/src/features/dash_board/provider/dashboardProvider.da
 import 'package:crm_system/src/features/employees/provider/employee_provider.dart';
 import 'package:crm_system/src/features/profile/provider/pageview_provider.dart';
 import 'package:crm_system/src/features/vaccations/provider/vacation_provider.dart';
+import 'package:crm_system/src/services/api_service.dart';
 import 'package:crm_system/src/services/routeServices.dart';
 import 'package:crm_system/src/utilities/provider/textfeild_provider.dart';
 import 'package:flutter/material.dart';
@@ -70,8 +71,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Check login status
-  final prefs = await SharedPreferences.getInstance();
+ final prefs = await SharedPreferences.getInstance();
   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  final apiService = ApiServices();
+  await apiService.initializeToken();
 
   runApp(
     MyApp(isLoggedIn: isLoggedIn),
@@ -80,6 +84,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
+
+  
 
   const MyApp({required this.isLoggedIn, Key? key}) : super(key: key);
 
