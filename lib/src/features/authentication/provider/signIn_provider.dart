@@ -9,13 +9,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninProvider extends ChangeNotifier {
   bool _isLoading = false;
+  bool isChecked = false;
 
-  bool get isLoading => _isLoading;
   // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
   final TextEditingController signInpasswordController =
       TextEditingController();
-  bool isChecked = false;
+
+  bool get isLoading => _isLoading;
+
+  final ApiServices _apiService = ApiServices();
+  String? token;
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -65,15 +69,14 @@ class SigninProvider extends ChangeNotifier {
       final response = await ApiServices().signIn(email, password);
       if (response.containsKey('userType')) {
         final userType = response['userType'];
+        token = response['token'];
 
+        await _apiService.saveToken(token!);
         await saveUserType(userType);
         await setLoginStatus(true);
+        notifyListeners();
         context.goNamed(DashBoard.route);
       }
-      // log(jsonEncode(response));
-
-      print(response);
-
       if (response['userType'] == 0) {
         context.goNamed(DashBoard.route);
       } else if (response['userType'] == 1) {
@@ -95,6 +98,11 @@ class SigninProvider extends ChangeNotifier {
     }
   }
 
+  // Check if the user is logged in
+  Future<bool> checkLoginStatus() async {
+    return await _apiService.isLoggedIn();
+  }
+
   void toggleCheckBox(bool? value) {
     isChecked = value ?? false;
     notifyListeners();
@@ -104,6 +112,8 @@ class SigninProvider extends ChangeNotifier {
   Future<void> logout(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear(); // Clear all stored preferences
+    token = null;
+
     print("logOut Successfull");
     context.goNamed(SignIn.route); // Navigate back to login
   }

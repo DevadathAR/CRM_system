@@ -1,5 +1,7 @@
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/employees/presentation/view/add_employees.dart';
+import 'package:crm_system/src/features/projects/dummy.dart';
+import 'package:crm_system/src/features/projects/presentation/view/projects_list.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/add_project_dialogue.dart';
 import 'package:crm_system/src/features/projects/presentation/widget/add_task_dialogue.dart';
 import 'package:crm_system/src/utilities/colors.dart';
@@ -22,10 +24,15 @@ class FAB extends StatelessWidget {
             title: "Project",
             imgpath: projectsIconsSvg,
             onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) => const AddProjectDialogue(),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const UsersListPage()),
               );
+              // showDialog(
+              //   context: context,
+              //   builder: (context) => const AddProjectDialogue(),
+              // );
             }),
         custumTile(
             title: "Task",

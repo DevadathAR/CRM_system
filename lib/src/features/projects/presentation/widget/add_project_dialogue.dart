@@ -76,38 +76,38 @@ class _AddProjectDialogueState extends State<AddProjectDialogue> {
               isDropDown: true,
               dropDownOptions: ["dev", "arjun", "Nikshay"],
             ),
-            provider.assignees.isEmpty
-                ? const CircularProgressIndicator()
-                : MultiSelectDialogField(
-                    items: provider.assignees
-                        .map((assignee) => MultiSelectItem(
-                              assignee['id'].toString(),
-                              assignee['name'],
-                            ))
-                        .toList(),
-                    title: const Text("Select Assignees"),
-                    selectedColor: Colors.blue,
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      border: Border.all(color: Colors.blue, width: 2),
-                    ),
-                    buttonIcon: const Icon(
-                      Icons.person_add,
-                      color: Colors.blue,
-                    ),
-                    buttonText: Text(
-                      "Select Assignees",
-                      style: TextStyle(
-                        color: Colors.blue[800],
-                        fontSize: 16,
-                      ),
-                    ),
-                    onConfirm: (results) {
-                      provider.setSelectedAssignees(
-                          results.map((e) => e.toString()).toList());
-                    },
-                  ),
+            // provider.assignees.isEmpty
+            //     ? const CircularProgressIndicator()
+            //     : MultiSelectDialogField(
+            //         items: provider.assignees
+            //             .map((assignee) => MultiSelectItem(
+            //                   assignee['id'].toString(),
+            //                   assignee['name'],
+            //                 ))
+            //             .toList(),
+            //         title: const Text("Select Assignees"),
+            //         selectedColor: Colors.blue,
+            //         decoration: BoxDecoration(
+            //           color: Colors.blue.withOpacity(0.1),
+            //           borderRadius: const BorderRadius.all(Radius.circular(10)),
+            //           border: Border.all(color: Colors.blue, width: 2),
+            //         ),
+            //         buttonIcon: const Icon(
+            //           Icons.person_add,
+            //           color: Colors.blue,
+            //         ),
+            //         buttonText: Text(
+            //           "Select Assignees",
+            //           style: TextStyle(
+            //             color: Colors.blue[800],
+            //             fontSize: 16,
+            //           ),
+            //         ),
+            //         onConfirm: (results) {
+            //           provider.setSelectedAssignees(
+            //               results.map((e) => e.toString()).toList());
+            //         },
+            //       ),
             8.heightBox,
             greyTitle(text: "Description"),
             8.heightBox,

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiServices {
   static Map<String, String> headers = {
@@ -11,9 +12,28 @@ class ApiServices {
   // static const String baseUrl = "http://192.168.29.49";
   static const String baseUrl = "http://127.0.0.1:8000";
 
-  static const String baseUrl = "http://192.168.29.106:8000"; // ip
+  // static const String baseUrl = "http://192.168.29.106:8000"; // ip
 
 // AUthentication Api s
+ Future<void> initializeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token');
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+  }
+
+  Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('auth_token', token);
+    headers['Authorization'] = 'Bearer $token';
+  }
+  // Method to check if the user is logged in
+  Future<bool> isLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token');
+    return token != null && token.isNotEmpty;
+  }
 
   Future<Map<String, dynamic>> signIn(String email, String password) async {
     final url = Uri.parse('$baseUrl/login');
@@ -110,7 +130,7 @@ class ApiServices {
       );
 
       if (response.statusCode == 200) {
-        //print('onboarding Response :-$response.body');
+        // print('onboarding Response :-$response.body');
         return jsonDecode(response.body);
       } else {
         throw Exception(
@@ -182,32 +202,40 @@ class ApiServices {
     }
   }
 
-  Future<List<Map<String, String>>> fetchAssignees({
+  Future<List<Map<String, dynamic>>> listUsers({
     required String email,
-    required String companyId,
   }) async {
     final url = Uri.parse('$baseUrl/listusers');
-    final body = jsonEncode({"email": email, "companyId": companyId});
+    print(" API service is calling");
+    print("$headers");
     try {
-      final response = await http.post(url, headers: headers, body: body);
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode({
+          'email': email,
+        }),
+      );
+
       if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.map((e) {
-          return {
-            "id": e['id'].toString(),
-            "name": e['name'].toString(),
-          };
-        }).toList();
+        print('listUser Response :-${response.body}');
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+
+        if (jsonResponse['value'] == true && jsonResponse['message'] != null) {
+          final List<dynamic> data = jsonResponse['message'];
+          return data.map((user) => user as Map<String, dynamic>).toList();
+        } else {
+          throw Exception('Invalid API response structure.');
+        }
       } else {
         throw Exception(
-          'Failed to fetch assignees: ${response.statusCode}, reason: ${response.reasonPhrase}',
+          'Failed to fetch users. Status code: ${response.statusCode}, reason: ${response.reasonPhrase}',
         );
       }
     } catch (e) {
-      throw Exception('Error fetching assignees: $e');
+      throw Exception('An error occurred while fetching the users: $e');
     }
   }
-  // Get requests..................................
 
   // edit profile
 
