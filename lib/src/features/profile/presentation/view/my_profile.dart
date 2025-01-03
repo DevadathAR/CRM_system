@@ -111,7 +111,7 @@ class MyProfile extends StatelessWidget {
         final project = mockProjects[index];
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
-          child: ProjectCard(
+          child: ProjectCard( 
             projectId: project.projectId,
             projectName: project.projectName,
             creationDate: project.creationDate,

@@ -102,7 +102,7 @@ class PersonalDataBox extends StatelessWidget {
   Widget _buildHeader(UserModel user) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: [ 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,

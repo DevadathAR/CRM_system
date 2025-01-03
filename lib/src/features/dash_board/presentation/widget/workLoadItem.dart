@@ -193,3 +193,91 @@ class workloadItem extends StatelessWidget {
     );
   }
 }
+
+
+class WorkloadItemNEW extends StatelessWidget {
+  final Color bgColor;
+  final String name;
+  final String position;
+  final String avatar;
+  final double progress; // Progress value (0.0 to 1.0)
+
+  const WorkloadItemNEW({
+    super.key,
+    required this.bgColor,
+    required this.name,
+    required this.position,
+    required this.avatar,
+    required this.progress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: VStack(
+        [
+          10.heightBox,
+
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: AppColors.white),
+                width: 70,
+                height: 70,
+                child: CircularProgressIndicator(
+                  value: progress, // Dynamic progress value
+                  strokeWidth: 4,
+                  strokeAlign: 0.5,
+                  strokeCap: StrokeCap.round,
+                  valueColor: AlwaysStoppedAnimation(AppColors.blue),
+                  backgroundColor: AppColors.textGrey1.withOpacity(0.4),
+                ),
+              ),
+              ClipOval(
+                child: Image.network(
+                  avatar, // Dynamic avatar image URL
+                  fit: BoxFit.cover,
+                  width: 60,
+                  height: 60,
+                ),
+              ),
+            ],
+          ).centered(),
+          10.heightBox,
+          name
+              .text
+              .textStyle(AppTextStyle.boldText(size: 16))
+              .make()
+              .centered(),
+          5.heightBox,
+          position
+              .text
+              .textStyle(AppTextStyle.regularText(size: 14))
+              .make()
+              .centered(),
+          5.heightBox,
+          Flexible(
+            child: "Middle"
+                .text
+                .textStyle(AppTextStyle.semiboldText(size: 12))
+                .make()
+                .box
+                .border(color: AppColors.textGrey1) // Add border
+                .withRounded(value: 4) // Set radius to 4
+                .p3 // Optional padding for spacing
+                .make()
+                .centered(),
+          ),
+        ],
+        alignment: MainAxisAlignment.center,
+      ).centered(),
+    );
+  }
+}
