@@ -39,9 +39,9 @@ class AuthProvider extends ChangeNotifier {
   int get userType {
     switch (userTypeController.text.trim()) {
       case 'Work':
-        return 2;
-      case 'Business':
         return 1;
+      case 'Business':
+        return 2;
       default:
         return 0;
     }
