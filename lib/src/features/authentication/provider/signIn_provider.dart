@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:core';
 
 import 'package:crm_system/src/features/authentication/presentation/view/sign_in.dart';
 import 'package:crm_system/src/features/dash_board/presentation/view/dashboard.dart';
@@ -9,14 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninProvider extends ChangeNotifier {
   bool _isLoading = false;
-  bool isChecked = false;
-
+  bool _ischecked = false;
+  bool get ischecked => _ischecked;
+  bool get isLoading => _isLoading;
   // SignIn feild
   final TextEditingController signInemailController = TextEditingController();
   final TextEditingController signInpasswordController =
       TextEditingController();
-
-  bool get isLoading => _isLoading;
 
   final ApiServices _apiService = ApiServices();
   String? token;
@@ -104,7 +103,7 @@ class SigninProvider extends ChangeNotifier {
   }
 
   void toggleCheckBox(bool? value) {
-    isChecked = value ?? false;
+    _ischecked = value ?? false;
     notifyListeners();
   }
 

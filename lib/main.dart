@@ -69,11 +69,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Check login status
   final prefs = await SharedPreferences.getInstance();
   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
   final apiService = ApiServices();
   await apiService.initializeToken();
+
+
 
   // final isLoggedIn = signinProvider.token != null;
   runApp(
@@ -83,6 +87,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
+
+  
 
   const MyApp({required this.isLoggedIn, super.key});
 

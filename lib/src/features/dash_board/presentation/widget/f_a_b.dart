@@ -24,15 +24,10 @@ class FAB extends StatelessWidget {
             title: "Project",
             imgpath: projectsIconsSvg,
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const UsersListPage()),
+              showDialog(
+                context: context,
+                builder: (context) => const AddProjectDialogue(),
               );
-              // showDialog(
-              //   context: context,
-              //   builder: (context) => const AddProjectDialogue(),
-              // );
             }),
         custumTile(
             title: "Task",

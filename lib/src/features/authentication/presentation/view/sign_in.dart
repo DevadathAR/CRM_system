@@ -81,7 +81,7 @@ class SignIn extends StatelessWidget {
                           runSpacing: 8.0,
                           children: [
                             Customcheckbox(
-                              value: provider.isChecked,
+                              value: provider.ischecked,
                               onChanged: provider.toggleCheckBox,
                             ),
                             10.widthBox,

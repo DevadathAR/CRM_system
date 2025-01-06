@@ -36,7 +36,9 @@ class ProjectsProvider extends ChangeNotifier {
   final TextEditingController projectDiscriptionController =
       TextEditingController();
   final TextEditingController reporterController = TextEditingController();
-
+  final TextEditingController searchAssigneesController = TextEditingController();
+ 
+  Future<List<Map<String, dynamic>>>? usersList;
   DateTime? startDate;
   DateTime? deadline;
   List<File> selectedFiles = []; // To store the selected files
@@ -51,6 +53,8 @@ class ProjectsProvider extends ChangeNotifier {
           result.paths.map((path) => File(path!)).toList(); // Convert to File
     }
   }
+//  final TextEditingController emailController = TextEditingController();
+
 
   Future<void> handleAddProject(BuildContext context) async {
     if (startDate == null || deadline == null || selectedFiles.isEmpty) {
@@ -86,6 +90,7 @@ class ProjectsProvider extends ChangeNotifier {
       );
     }
   }
+
 
 }
 
