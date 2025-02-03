@@ -26,8 +26,8 @@ class TextInputField extends StatelessWidget {
   final String? viewprefix;
   final List<String>? dropDownOptions;
   final VoidCallback? ontap;
+  final VoidCallback? suffixOnpressed;
   final dynamic validator;
-
 
   const TextInputField({
     super.key,
@@ -48,7 +48,9 @@ class TextInputField extends StatelessWidget {
     this.viewprefix,
     this.maxlines = 1,
     this.height = 50,
-    this.ontap, this.validator,
+    this.ontap,
+    this.validator,
+    this.suffixOnpressed,
   });
 
   @override
@@ -56,73 +58,72 @@ class TextInputField extends StatelessWidget {
     final provider = Provider.of<FormStateNotifier>(context);
 
     if (isDropDown) {
-  return SizedBox(
-    height: height,
-    child: DropdownButtonFormField<String>(
-      icon: Icon(
-        Icons.keyboard_arrow_down_rounded,
-        color: AppColors.textGrey1,
-      ),
-      decoration: InputDecoration(
-        prefixIcon: isPrefix
-            ? Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.asset(
-                  viewprefix.toString(),
-                  colorFilter: ColorFilter.mode(
-                      AppColors.textGrey1, BlendMode.srcIn),
-                ),
-              )
-            : null,
-        filled: true,
-        fillColor: AppColors.white,
-        labelText: labelText,
-        labelStyle:
-            AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-        enabledBorder: isBorder
-            ? OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(14)),
-                borderSide: BorderSide(color: AppColors.borderGrey),
-              )
-            : InputBorder.none,
-        focusedBorder: isBorder
-            ? OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(14)),
-                borderSide: BorderSide(color: AppColors.borderGrey),
-              )
-            : InputBorder.none,
-        border: isBorder
-            ? OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(14)),
-                borderSide: BorderSide(color: AppColors.borderGrey),
-              )
-            : InputBorder.none,
-      ),
-      value: dropcontroller?.text.isNotEmpty == true
-          ? dropcontroller?.text
-          : dropDownOptions?.first,
-      onChanged: (value) {
-        if (dropcontroller != null) {
-          dropcontroller!.text = value ?? '';
-        }
-        if (onChanged != null && value != null) {
-          onChanged!(value);
-        }
-      },
-      items: dropDownOptions
-          ?.map((option) => DropdownMenuItem(
-                value: option,
-                child: Text(
-                  option,
-                  style: AppTextStyle.mediumText(
-                      size: 14, color: AppColors.textGrey1),
-                ),
-              ))
-          .toList(),
-    ),
-  );
-}
-else {
+      return SizedBox(
+        height: height,
+        child: DropdownButtonFormField<String>(
+          icon: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: AppColors.textGrey1,
+          ),
+          decoration: InputDecoration(
+            prefixIcon: isPrefix
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      viewprefix.toString(),
+                      colorFilter: ColorFilter.mode(
+                          AppColors.textGrey1, BlendMode.srcIn),
+                    ),
+                  )
+                : null,
+            filled: true,
+            fillColor: AppColors.white,
+            labelText: labelText,
+            labelStyle:
+                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+            enabledBorder: isBorder
+                ? OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
+                  )
+                : InputBorder.none,
+            focusedBorder: isBorder
+                ? OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
+                  )
+                : InputBorder.none,
+            border: isBorder
+                ? OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(14)),
+                    borderSide: BorderSide(color: AppColors.borderGrey),
+                  )
+                : InputBorder.none,
+          ),
+          value: dropcontroller?.text.isNotEmpty == true
+              ? dropcontroller?.text
+              : dropDownOptions?.first,
+          onChanged: (value) {
+            if (dropcontroller != null) {
+              dropcontroller!.text = value ?? '';
+            }
+            if (onChanged != null && value != null) {
+              onChanged!(value);
+            }
+          },
+          items: dropDownOptions
+              ?.map((option) => DropdownMenuItem(
+                    value: option,
+                    child: Text(
+                      option,
+                      style: AppTextStyle.mediumText(
+                          size: 14, color: AppColors.textGrey1),
+                    ),
+                  ))
+              .toList(),
+        ),
+      );
+    } else {
       return SizedBox(
         height: height,
         child: TextFormField(
@@ -132,55 +133,61 @@ else {
           keyboardType: keyboardType,
           onChanged: onChanged,
           validator: validator,
-
           decoration: InputDecoration(
-            labelText: labelText,
-            labelStyle:
-                AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
-            hintText: hintText,
-            hintStyle:
-                AppTextStyle.regularText(size: 14, color: AppColors.textGrey1),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(14)),
-              borderSide: BorderSide(color: AppColors.borderGrey),
-            ),
-            border: OutlineInputBorder(
+              labelText: labelText,
+              labelStyle:
+                  AppTextStyle.mediumText(size: 14, color: AppColors.textGrey1),
+              hintText: hintText,
+              hintStyle: AppTextStyle.regularText(
+                  size: 14, color: AppColors.textGrey1),
+              enabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(14)),
-                borderSide: BorderSide(color: AppColors.borderGrey)),
-            prefixIcon: isSearch
-                ? Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SvgPicture.asset(
-                      searchIcon, // Replace with your path
-                      colorFilter: ColorFilter.mode(
-                          AppColors.textGrey1, BlendMode.srcIn),
-                    ),
-                  )
-                : null,
-            suffixIcon: obscureText
-                ? IconButton(
-                    icon: Icon(
-                      provider.isObscured
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      color: AppColors.textGrey1,
-                    ),
-                    onPressed: provider.togglePasswordVisibility,
-                  )
-                : viewIcon
-                    ? Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: InkWell(
-                          onTap: ontap,
-                          child: SvgPicture.asset(
-                            iconName.toString(),
-                            colorFilter: ColorFilter.mode(
-                                AppColors.textGrey1, BlendMode.srcIn),
+                borderSide: BorderSide(color: AppColors.borderGrey),
+              ),
+              border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(14)),
+                  borderSide: BorderSide(color: AppColors.borderGrey)),
+              prefixIcon: isSearch
+                  ? Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(
+                        searchIcon,
+                        colorFilter: ColorFilter.mode(
+                            AppColors.textGrey1, BlendMode.srcIn),
+                      ),
+                    )
+                  : null,
+              suffixIcon: obscureText
+                  ? IconButton(
+                      icon: Icon(
+                        provider.isObscured
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: AppColors.textGrey1,
+                      ),
+                      onPressed: provider.togglePasswordVisibility,
+                    )
+                  : viewIcon
+                      ? Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: InkWell(
+                            onTap: ontap,
+                            child: SvgPicture.asset(
+                              iconName.toString(),
+                              colorFilter: ColorFilter.mode(
+                                  AppColors.textGrey1, BlendMode.srcIn),
+                            ),
                           ),
-                        ),
-                      )
-                    : null,
-          ),
+                        )
+                      : null
+              // Container(
+              //     color: AppColors.blue,
+              //     child: IconButton(
+              //         color: AppColors.textGrey1,
+              //         onPressed: suffixOnpressed,
+              //         icon: const Icon(Icons.search)),
+              //   ),
+              ),
         ),
       );
     }
@@ -196,7 +203,8 @@ class CountryCodeField extends StatelessWidget {
   const CountryCodeField({
     super.key,
     required this.countryCodes,
-    this.controller, this.validator,
+    this.controller,
+    this.validator,
   });
 
   @override
@@ -248,18 +256,17 @@ class CountryCodeField extends StatelessWidget {
   }
 }
 
-
 // Phone Number feild
 class PhoneNumberField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
-    final dynamic validator;
-
+  final dynamic validator;
 
   const PhoneNumberField({
     super.key,
     this.controller,
-    this.hintText, this.validator,
+    this.hintText,
+    this.validator,
   });
 
   @override
@@ -291,14 +298,12 @@ class PhoneNumberField extends StatelessWidget {
   }
 }
 
-
-// OtP code code 
-
+// OtP code code
 
 class SMSCodeInput extends StatelessWidget {
   final ValueChanged<String>? onCodeEntered;
 
-  const SMSCodeInput({Key? key, this.onCodeEntered}) : super(key: key);
+  const SMSCodeInput({super.key, this.onCodeEntered});
 
   @override
   Widget build(BuildContext context) {

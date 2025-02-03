@@ -17,7 +17,7 @@ class ApiServices {
   // static const String baseUrl = "http://192.168.29.106:8000"; // ip
 
 // AUthentication Api s
- Future<void> initializeToken() async {
+  Future<void> initializeToken() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');
     if (token != null) {
@@ -30,6 +30,7 @@ class ApiServices {
     await prefs.setString('auth_token', token);
     headers['Authorization'] = 'Bearer $token';
   }
+
   // Method to check if the user is logged in
   Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
@@ -37,9 +38,7 @@ class ApiServices {
     return token != null && token.isNotEmpty;
   }
 
-
 // // AUthentication Api s
-
 
   Future<Map<String, dynamic>> signIn(String email, String password) async {
     final url = Uri.parse('$baseUrl/login');
@@ -156,7 +155,7 @@ class ApiServices {
     required String reporterId,
     required String projectDiscription,
     required List<String> projectLinks,
-    required List<String> projectAssaignees,
+    required List<dynamic> projectAssaignees,
     required List<File> projectAttachments, // For file uploads
   }) async {
     final url = Uri.parse('$baseUrl/addproject');
@@ -205,7 +204,7 @@ class ApiServices {
     }
   }
 
- Future<List<Map<String, dynamic>>> listUsers({
+  Future<List<Map<String, dynamic>>> listUsers({
     required String email,
   }) async {
     final url = Uri.parse('$baseUrl/listusers');
@@ -237,6 +236,59 @@ class ApiServices {
       }
     } catch (e) {
       throw Exception('An error occurred while fetching the users: $e');
+    }
+  }
+
+  // Fetch icons from backend
+  Future<List<String>> fetchIcons() async {
+    final url = Uri.parse('$baseUrl/viewIcons');
+    print("API service is calling to fetch icons");
+    // print("$headers");
+
+    try {
+      final response = await http.get(
+        url,
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        print('fetchIcons Response :- ${response.body}');
+        final List<dynamic> data = jsonDecode(response.body);
+
+        // Assuming the API returns a list of icon URLs
+        return data.map<String>((icon) => icon['url'] as String).toList();
+      } else {
+        throw Exception(
+          'Failed to fetch icons. Status code: ${response.statusCode}, reason: ${response.reasonPhrase}',
+        );
+      }
+    } catch (e) {
+      throw Exception('An error occurred while fetching icons: $e');
+    }
+  }
+
+// Upload icon to backend
+  Future<void> uploadIcon(String filePath) async {
+    final url = Uri.parse('$baseUrl/uploadIcon');
+    print("API service is calling to upload icon");
+    print("$headers");
+
+    try {
+      var request = http.MultipartRequest('POST', url);
+      request.files.add(await http.MultipartFile.fromPath('icon', filePath));
+      request.headers.addAll(headers);
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        print("Upload successful");
+      } else {
+        throw Exception(
+          'Upload failed: ${response.statusCode}, reason: ${response.reasonPhrase}',
+        );
+      }
+    } catch (e) {
+      throw Exception('An error occurred while uploading the icon: $e');
     }
   }
 
@@ -315,7 +367,7 @@ class ApiServices {
     }
   }
 
-static Future<EmployeeResponse> fetchEmployees({
+  static Future<EmployeeResponse> fetchEmployees({
     required int limit,
     required int page,
   }) async {
@@ -336,9 +388,10 @@ static Future<EmployeeResponse> fetchEmployees({
         final Map<String, dynamic> data = jsonDecode(response.body);
         final int count = data['message']['company_employees_count'];
         if (data['value'] == true) {
-          final List<EmployeeData> employees = (data['message']['company_employees'] as List)
-              .map((e) => EmployeeData.fromJson(e))
-              .toList();
+          final List<EmployeeData> employees =
+              (data['message']['company_employees'] as List)
+                  .map((e) => EmployeeData.fromJson(e))
+                  .toList();
           return EmployeeResponse(employees: employees, totalCount: count);
         } else {
           throw Exception('Failed to fetch employees: ${data['message']}');
@@ -350,5 +403,4 @@ static Future<EmployeeResponse> fetchEmployees({
       throw Exception('Error fetching employees: $e');
     }
   }
-
 }
